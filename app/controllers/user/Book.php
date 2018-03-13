@@ -128,6 +128,11 @@ class Book extends Base_Controller {
 
     public function update_book_url($book_id=NULL) {
         if(!$book_id) $this->redirect_msg('user/book', 'Invalid Book ID', 'danger');
+        if(!($book = $this->m_book->get_single_book($book_id))) $this->redirect_msg('user/book', 'Invalid Book ID', 'danger');
+
+        if($book->book_url_unlocked == 0) $this->redirect_msg('user/book', 'Online Reading URL for this book is locked', 'danger');
+
+
         //$this->printer($_POST, true);
         $status = $this->m_book->update_book_url($book_id, $_POST['book_url']);
         if($status) $this->redirect_msg('user/book', 'Successfully Updated Book URL for Book #'.$book_id, 'success');

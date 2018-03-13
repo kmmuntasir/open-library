@@ -11,6 +11,7 @@
 					<th>Publisher</th>
 					<th class="narrow_column">Stock</th>
 					<th class="narrow_column">Available</th>
+          <th class="narrow_column">Online Reading</th>
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
@@ -31,6 +32,15 @@
 					<td><a title="View All Books by this Publisher" href="<?php echo $controller.'/book_by_filter/3/'.$book->publication_id; ?>"><?php echo $book->publication_name; ?></a></td>
 					<td><?php echo $book->book_stock; ?></td>
 					<td><?php echo $book->book_available; ?></td>
+          <td>
+          <?php 
+            if($book->book_url != NULL && $book->book_url != '') {?>
+              <a target="_blank" href="<?php echo site_url('user/book/read_online/'.$book->book_id); ?>" title="<?php echo $book->book_url; ?>" class="btn btn-primary btn-xs">Open Window</a>
+            <?php } ?>
+          </td>
+
+          
+
 					<td>
             <a title="View Book Details" href="#" book_id="<?php echo $book->book_id; ?>" class="view_book btn btn-xs btn-primary">
               <i class="fa fa-eye"></i>
@@ -89,13 +99,26 @@
           <label class="col-sm-4 col-xs-12" for="book_year_of_pub">Year of Publication</label>
           <input type="number" class="col-sm-8 col-xs-12" name="book_year_of_pub" placeholder="Year of Publication" />
           <label class="col-sm-4 col-xs-12" for="book_pages">Total Pages</label>
-          <input type="text" class="col-sm-8 col-xs-12" name="book_pages" placeholder="Total Pages"/>
+          <input type="number" class="col-sm-8 col-xs-12" name="book_pages" placeholder="Total Pages"/>
           <label class="col-sm-4 col-xs-12" for="book_status">Status</label>
           <select class="col-sm-8 col-xs-12" name="book_status" required="">
             <option class="active_book" value="1">Active</option>
             <option class="inactive_book" value="0">Inactive</option>
           </select>
+
           <div class="clearfix"></div>
+
+          <br>
+          <label class="col-sm-4 col-xs-12" for="book_url">Online Reading URL</label>
+          <input type="text" class="col-sm-8 col-xs-12" name="book_url" placeholder="Online Reading URL"/>
+          <label class="col-sm-4 col-xs-12" for="book_url_unlocked">User Ability to Update Online Reading URL</label>
+          <select class="col-sm-8 col-xs-12" name="book_url_unlocked" required="">
+            <option class="active_url" value="1" checked="checked">Enabled</option>
+            <option class="inactive_url" value="0">Disabled</option>
+          </select>
+          <div class="clearfix"></div>
+
+
           <label class="col-sm-4 col-xs-12" for="book_remarks">Remarks</label>
           <textarea class="col-sm-8 col-xs-12" name="book_remarks"></textarea>
           <div class="clearfix"></div>
@@ -156,7 +179,7 @@
           <input type="number" class="col-sm-8 col-xs-12" name="book_year_of_pub" placeholder="Year of Publication" value="1998" />
           <div class="clearfix"></div>
           <label class="col-sm-4 col-xs-12" for="book_pages">Total Pages</label>
-          <input type="text" class="col-sm-8 col-xs-12" name="book_pages" placeholder="Total Pages"/>
+          <input type="number" class="col-sm-8 col-xs-12" name="book_pages" placeholder="Total Pages"/>
           <div class="clearfix"></div>
           <label class="col-sm-4 col-xs-12" for="book_status">Status</label>
           <select class="col-sm-8 col-xs-12" name="book_status" required="">
@@ -164,6 +187,17 @@
             <option class="inactive_book" value="0">Inactive</option>
           </select>
           <div class="clearfix"></div>
+
+          <br>
+          <label class="col-sm-4 col-xs-12" for="book_url">Online Reading URL</label>
+          <input type="text" class="col-sm-8 col-xs-12" name="book_url" placeholder="Online Reading URL"/>
+          <label class="col-sm-4 col-xs-12" for="book_url_unlocked">User Ability to Update Online Reading URL</label>
+          <select class="col-sm-8 col-xs-12" name="book_url_unlocked" required="">
+            <option class="active_url" value="1" checked="checked">Enabled</option>
+            <option class="inactive_url" value="0">Disabled</option>
+          </select>
+          <div class="clearfix"></div>
+
             <label class="col-sm-4 col-xs-12" for="book_remarks">Remarks</label>
             <textarea class="col-sm-8 col-xs-12" name="book_remarks"></textarea>
           <div class="clearfix"></div>
@@ -244,6 +278,14 @@
             <tr>
               <td>Available</td>
               <td class="view_available">37</td>
+            </tr>
+            <tr>
+              <td>Online Reading URL</td>
+              <td class="view_url">Book URL</td>
+            </tr>
+            <tr>
+              <td>User Ability to Update Online Reading URL</td>
+              <td class="view_url_unlocked">Enabled</td>
             </tr>
             <tr>
               <td>Remarks</td>

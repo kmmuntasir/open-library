@@ -40,8 +40,10 @@
             <a target="_blank" title="You can read this book online. Click this button to read this book in a new tab" href="<?php echo site_url($module).'/book/read_online/'.$book->book_id; ?>" book_id="<?php echo $book->book_id; ?>" class="read_book btn btn-xs btn-success"><i class="fa fa-book"></i></a>
             <?php } ?>
 
+            <?php if($book->book_url_unlocked) { ?>
             <a title="Update book url" book_url="<?php echo $book->book_url; ?>" book_id="<?php echo $book->book_id; ?>" class="update_book_url btn btn-xs btn-default">
               <i class="fa fa-refresh"></i>
+            <?php } ?>
             </a>
 					</td>
 				</tr>

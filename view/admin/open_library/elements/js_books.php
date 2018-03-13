@@ -17,6 +17,16 @@ $(document).on('click', '.view_book', function() {
 		$('.view_stock').html(book.book_stock);
 		$('.view_available').html(book.book_available);
 		$('.view_remarks').html(book.book_remarks);
+		
+		var read_button = '<a target="_blank" href="<?php echo site_url('user/book/read_online'); ?>/'+book.book_id+'" title="'+book.book_url+'" class="btn btn-primary">Open Reading Window</a>';
+	
+		if(book.book_url != '' && book.book_url != null) $('.view_url').html(read_button);
+		else $('.view_url').html('URL Not Available');
+
+		
+		if(book.book_url_unlocked == 1) $('.view_url_unlocked').html('Enabled');
+		else $('.view_url_unlocked').html('Disabled');
+
 		var authors = '';
 		var i=0;
 		while(i<book.authors.length) {
@@ -203,6 +213,13 @@ $(document).on('click', '.edit_book', function() {
 		$('.edit_form_inputs').children('input[name="book_year_of_pub"]').val(book.book_year_of_pub);
 		$('.edit_form_inputs').children('input[name="book_pages"]').val(book.book_pages);
 		$('.edit_form_inputs').children('select[name="book_status"]').children('option').removeAttr('selected');
+		$('.edit_form_inputs').children('input[name="book_url"]').val(book.book_url);
+		$('.edit_form_inputs').children('select[name="book_url_unlocked"]').children('option').removeAttr('selected');
+
+		if(book.book_url_unlocked == 1) 
+			$('.edit_form_inputs').children('select[name="book_url_unlocked"]').children('option.active_url').attr('selected', 'selected');
+		else
+			$('.edit_form_inputs').children('select[name="book_url_unlocked"]').children('option.inactive_url').attr('selected', 'selected');
 
 		if(book.book_status == 1)
 			$('.edit_form_inputs').children('select[name="book_status"]').children('option.active_book').attr('selected', 'selected');
