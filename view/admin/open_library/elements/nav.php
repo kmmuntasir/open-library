@@ -7,7 +7,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><?php echo $this->settings->institute_name; ?></a>
+      <a class="navbar-brand" href="#">
+        <img id="logo_image" src="<?php echo base_url('images/'.$this->settings->institute_logo); ?>" alt="<?php echo $this->settings->institute_name; ?>">
+        <span id="institute_name"><?php echo $this->settings->institute_name; ?></span>
+      </a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">

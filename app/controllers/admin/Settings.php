@@ -54,8 +54,8 @@ class Settings extends Base_Controller {
 
         $status = $this->m_settings->update_settings($settings, $server);
 
-        if($status) $this->redirect_msg($this->module.'/settings', 'Settings Saved Successfully', 'success', 0, true);
-        else $this->redirect_msg($this->module.'/settings', 'Something went wrong!', 'danger', 0, true);
+        if($status) $this->redirect_msg($this->module.'/settings', 'Settings Saved Successfully', 'success', 0, 1);
+        else $this->redirect_msg($this->module.'/settings', 'Something went wrong!', 'danger', 0, 1);
     }
 
     public function update_issue_settings() {

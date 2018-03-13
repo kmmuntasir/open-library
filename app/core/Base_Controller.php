@@ -119,8 +119,8 @@ class Base_Controller extends CI_Controller
 	    return $CI->config->item('branch').'_'.$new_key;
 	}
 
-    public function redirect_msg($url, $msg='', $type="success", $number=0, $prevent_logging=false) {
-    	if($prevent_logging) $this->__log();
+    public function redirect_msg($url, $msg='', $type="success", $number=0, $prevent_logging=0) {
+    	if(!$prevent_logging) $this->__log();
     	if($number==0) $this->session->set_flashdata(array('msg' => array(0=>array($msg, $type)), 'number' => 1));
     	else $this->session->set_flashdata(array('msg' => $msg, 'number' => $number));
     	redirect($url);

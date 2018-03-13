@@ -5,10 +5,13 @@
       <div class="panel-heading">Application Settings</div>
       <div class="panel-body">
         <label class="col-sm-4 col-xs-12" for="application_role">Application Role</label>
-        <select id="app_role_selection" class="col-sm-8 col-xs-12" name="application_role" required="">
-          <option <?php if($settings->application_role == 0) echo 'selected'; ?> class="" value="0">Local</option>
-          <option <?php if($settings->application_role == 1) echo 'selected'; ?> class="" value="1">Remote</option>
-        </select><div class="clearfix"></div>
+        <div class="col-sm-8 col-xs-12">
+          <select id="app_role_selection" class="form-control" name="application_role" required="">
+            <option <?php if($settings->application_role == 0) echo 'selected'; ?> class="" value="0">Local</option>
+            <option <?php if($settings->application_role == 1) echo 'selected'; ?> class="" value="1">Remote</option>
+          </select>
+        </div>
+        <div class="clearfix"></div>
         <hr>
         <div class="local_options <?php if($settings->application_role == 1) echo 'hide'; ?>">
           <label class="col-sm-4 col-xs-12" for="server_url">Remote Server URL</label>

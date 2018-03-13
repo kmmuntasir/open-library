@@ -32,6 +32,7 @@ class Sync extends Base_Controller {
     //====================================//
 
     public function index() {
+        if($this->settings->application_role) die('0');
         $data = $this->data;
         $sync_limit = 10;
         if($this->server->server_sync_status && strtotime($this->server->server_last_connection) >= time()-($this->sync_interval*3)) exit(0);
