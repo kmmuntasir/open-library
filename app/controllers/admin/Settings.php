@@ -37,7 +37,7 @@ class Settings extends Base_Controller {
         $this->load->view($this->viewpath.'v_main', $data);
     }
     
-    public function update_settings() {
+    public function update_app_settings() {
         //$this->printer($_POST);
         $server = array();
         $server['server_url'] = $_POST['server_url'];
@@ -50,9 +50,17 @@ class Settings extends Base_Controller {
         unset($settings['local_access_code']);
 
         // $this->printer($settings);
-        // $this->printer($server);
+        // $this->printer($server, true);
 
         $status = $this->m_settings->update_settings($settings, $server);
+
+        if($status) $this->redirect_msg($this->module.'/settings', 'Settings Saved Successfully', 'success', 0, true);
+        else $this->redirect_msg($this->module.'/settings', 'Something went wrong!', 'danger', 0, true);
+    }
+
+    public function update_issue_settings() {
+        //$this->printer($_POST, true);
+        $status = $this->m_settings->update_issue_settings($_POST);
 
         if($status) $this->redirect_msg($this->module.'/settings', 'Settings Saved Successfully', 'success');
         else $this->redirect_msg($this->module.'/settings', 'Something went wrong!', 'danger');

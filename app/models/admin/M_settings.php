@@ -20,6 +20,14 @@ class M_settings extends Ci_model {
         return $this->db->trans_status();
     }
 
+    public function update_issue_settings($settings) {
+        $this->db->trans_start();
+        //$this->db->where('id', 1);
+        $this->db->update('settings', $settings);
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
+
     public function update_info($settings) {
         $this->db->trans_start();
         //$this->db->where('id', 1);
