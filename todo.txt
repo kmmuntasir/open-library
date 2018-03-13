@@ -1,0 +1,36 @@
+- Import Students
+- Import Teachers
+
+- Collect currently lend information (!!! Mone nai)
+
+- Report Page
+	- Books Report
+	- Issue Report
+	- Fine Report
+
+- Fine collection amount report (from date to date)
+    - Store fines when receiving for individual issues.
+    - Seperate page for displaying total fine collected within a date range.
+
+- Let the user to reset password using email. === Remote Server Problem
+
+- Application Settings 
+    - Departments + Class 
+
+- Allow admin to merge Authors/Categories/Publication
+
+- Make Online Reading Available from google books.
+    - Let admins/users insert links ======== Users Done
+    - Let admins lock/unlock link insert mode for users. 
+
+
+- Disable Issue for Deleted Users 
+- Disable login for Deleted Users
+	- Enable feature to re-enlist a user after deleting
+- Convert every delete operation to is_deleted mark operation
+- Create Online/Offline Indicator
+
+- Write Script for importing books from old software.
+
+
+

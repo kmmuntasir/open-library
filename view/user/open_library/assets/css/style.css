@@ -1,0 +1,205 @@
+/********** General Styles **********/
+.i_placeholder {
+	width:200px;
+	height:100px;
+	text-align: center;
+	font-size:100px;
+	max-width: 100%;
+}
+
+.forgot_password {
+	display:block;
+	margin: 0 auto;
+	margin-top:50px;
+	font-style: italic;
+	text-decoration: underline;
+}
+
+/********** Table Styles ***********/
+.book_copy_details_box {
+	font-size: 12px;
+}
+
+.prop_column {
+	width: 140px;
+}
+
+.opt_column {
+	max-width: 120px;
+	min-width: 100px;
+}
+.narrow_column {
+	width: 30px;
+}
+
+.datatable tr:hover {
+	background-color: #dfdfdf !important;
+}
+
+.datatable td {
+	cursor: pointer;
+	transition: all 300ms ease;
+}
+
+.datatable td:hover {
+	color:#428bca;
+	text-shadow: 1px 1px 1px #ccc;
+}
+
+/* Sync Page Styles **/
+.sync_page_icon {
+	display: block;
+	padding: 20px;
+	background-color: #eee;
+	border-radius: 50%;
+	font-size:3em;
+	margin:0 auto;
+	width:82px;
+	height: 82px;
+	text-align: center;
+}
+.sync_page h4, .sync_page span {
+	display: block;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.sync_page button {
+	margin:0 auto;
+}
+
+/*** Modal Styles ***/
+.lib_form input {
+	margin-bottom: 1em;
+}
+.modal {
+	background: rgba(0,0,0,0.7);
+}
+.modal-body.modal-scroll {
+	max-height: 450px;
+	overflow: scroll;
+}
+.modal textarea {
+	margin-top:1em;
+	margin-bottom: 1em;
+}
+.inline_plus {
+	margin-left: 0.5em;
+}
+
+.flash_message {
+	display: none;
+	position: fixed;
+	z-index: 10000;
+	right:0;
+	top:0;
+	margin-right:100px;
+	margin-top:10px;
+}
+
+.flash_message_login {
+	display: none;
+	z-index: 10000;
+	margin-top:10px;
+	text-align: center;
+}
+
+.view_remarks {
+	font-style: italic;
+}
+
+#issue_submenu li a span{
+	padding-right: 10px;
+}
+
+#issue_submenu li:hover {
+	background-color: #eee;
+}
+
+.nav li.active > a {
+	margin-top:1px;
+	background-color: #428bca;
+	color:#fff;
+}
+
+.secret_codes td {
+	font-family: 'times';
+	font-weight: bold;
+}
+
+.fine_receive_button {
+	font-size: 12px;
+}
+
+.navbar-fixed-top {
+	border-bottom: solid 1px #ccc;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px rgba(200, 200, 200, 1);
+}
+
+.logo_img {
+	width: 100%;
+	max-width: 200px;
+	display: block;
+	height: auto;
+	margin: 0 auto;
+}
+
+/*************** Library Card CSS ******************/
+.library_card_wrap {
+	width:350px;
+	padding:10px;
+	border: solid 1px #333;
+	overflow: hidden;
+	margin:10px auto;
+	box-shadow: 0px 0px 15px #888;
+}
+.library_card_wrap > .card_head >  img.campus_logo {
+	width:40px;
+	float:left;
+}
+
+.library_card_wrap > .card_head >  h3 {
+	text-align: right;
+	font-size:13px;
+	width: 330px;
+	margin-top:5px;
+	position: absolute;
+	font-family:'times';
+	font-weight: bold;
+}
+.library_card_wrap > .card_head >  h4 {
+	font-size:12px;
+	text-align: right;
+	width: 330px;
+	margin-top:30px;
+	position: absolute;
+	font-family:'times';
+}
+
+.library_card_wrap > .user_info {
+	height: 80px;
+}
+
+.library_card_wrap > .user_info > .card_table {
+	margin-left: 10px;
+	margin-top:10px;
+	font-size:12px;
+	font-family: 'times';
+}
+
+.library_card_wrap > .user_info > .card_table td, .library_card_wrap > .user_info > .card_table th {
+	padding: 0px 5px;
+}
+td.colon-td {padding:0;}
+.library_card_wrap > .barcode {
+	padding:10px 0px;
+}
+.library_card_wrap > .barcode > img {
+	display: block;
+	margin-left: -10px;
+	width: 349px;
+	/* *
+	border: solid 1px #000;
+	/* */
+}
+/***************************************************/

@@ -1,0 +1,159 @@
+/********** General Styles **********/
+.i_placeholder {
+	width:200px;
+	height:100px;
+	text-align: center;
+	font-size:100px;
+	max-width: 100%;
+}
+
+/* .nav a {
+	color:#ccc;
+	font-size: 0.9em;
+}
+.nav a:hover {
+	color:#333;
+	font-size: 0.9em;
+}
+
+.nav li.active > a {
+	margin-top:1px;
+	background-color: #ccc;
+	color:#333;
+} */
+
+#issue_submenu li span, #users_submenu li span, #settings_submenu li span{
+	margin-right: 10px;
+    width: 15px !important;
+    display: inline-block;
+}
+#issue_submenu li a, #users_submenu li a, #settings_submenu li a{
+	padding: 3px 10px;
+}
+
+/********** Table Styles ***********/
+.book_copy_details_box {
+	font-size: 12px;
+}
+
+.prop_column {
+	width: 140px;
+}
+
+.opt_column {
+	max-width: 120px;
+	min-width: 100px;
+}
+.narrow_column {
+	width: 30px;
+}
+
+.datatable tr:hover {
+	background-color: #dfdfdf !important;
+}
+
+.datatable td {
+	cursor: pointer;
+	transition: all 300ms ease;
+}
+
+.datatable td:hover {
+	color:#428bca;
+	text-shadow: 1px 1px 1px #ccc;
+}
+
+/* Sync Page Styles **/
+.sync_page_icon {
+	display: block;
+	padding: 20px;
+	background-color: #eee;
+	border-radius: 50%;
+	font-size:3em;
+	margin:0 auto;
+	width:82px;
+	height: 82px;
+	text-align: center;
+}
+.sync_page h4, .sync_page span {
+	display: block;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.sync_page button {
+	margin:0 auto;
+}
+
+/*** Modal Styles ***/
+.lib_form input {
+	margin-bottom: 1em;
+}
+.modal {
+	background: rgba(0,0,0,0.7);
+}
+.modal-body.modal-scroll {
+	max-height: 450px;
+	overflow: scroll;
+}
+.modal textarea {
+	margin-top:1em;
+	margin-bottom: 1em;
+}
+.inline_plus {
+	margin-left: 0.5em;
+}
+
+.flash_message {
+	display: none;
+	position: fixed;
+	z-index: 10000;
+	right:0;
+	top:0;
+	margin-right:100px;
+	margin-top:10px;
+}
+
+.flash_message_login {
+	display: none;
+	z-index: 10000;
+	margin-top:10px;
+	text-align: center;
+}
+
+.view_remarks {
+	font-style: italic;
+}
+
+.secret_codes td {
+	font-family: 'times';
+	font-weight: bold;
+}
+
+.fine_receive_button {
+	font-size: 12px;
+}
+
+.logo_img {
+	width: 100%;
+	max-width: 200px;
+	display: block;
+	height: auto;
+	margin: 0 auto;
+}
+
+.pause-spinner {
+	animation-play-state: paused;
+}
+
+#footer_top {
+	height:60px;
+}
+
+/********************** Settings Page CSS *********************/
+
+.settings_table {
+	width:100%
+}
+
+.img_upload_box  {
+	border:solid #ccc 1px;
+}

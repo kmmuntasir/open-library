@@ -1,0 +1,88 @@
+- Mod Codeigniter
+	- Change default directories for application, system and views ---------- Done
+	- Create necessary base controllers ------------------------------------- Done
+	- Enable templating system ---------------------------------------------- Done
+	- Add necessary libraries
+- Integrate Templates
+
+========================== Done ============================
+
+Issue
+==========================
+- Student/Teacher can make Issue Requests =========================== Done
+	- Select Book  ================================================== Done
+		- Client side issue code (order) =========================== Done
+		- Client side return code =========================== Done
+		- Admin side return code =========================== Done
+		- Client Side fine code =========================== Done
+		- Admin side fine code  =========================== Done
+		- Client side renew code (needed for issuing renewal without making a request) ============= Done
+		- expiration_date === !!!!!!!!!!!!!!!!!!!!!!!!
+
+- Modify the View Issue Modal to show Teacher info for the issues to teachers. ============================================ Done
+
+- Manage Students =========================================================
+	- View Students
+	- Import Students -------- Will be done some days later
+- Manage Teachers =========================================================
+	- View Teachers
+	- Import Teachers -------- Will be done some days later
+
+- Enable Profile Details Feature
+	- View Own Details ====================================== Done
+		- Change Password =============================== Done
+	- View Library Card ===================================== Done
+		- Generate New Library Code ===================== Done
+
+- Set user-library-code to an unique-code of length 10. ========= Done
+
+- Fix User Dashboard ============================================ Done
+
+- Sync Controller
+    - Automatically checking and converting requested (9) issues to confirmed (0) issues. ===== Done
+    - Release book after expiration of confirmed (0) issues. ================================== Done
+    - Syncing the Log. ======================================================================== Done
+
+- Make the ID unique (with prefix)   ========================================================== Done
+
+- Collect currently lend information 
+
+
+- Call Sync controller from admin footer using jquery (ensure only one existance) ============= Done
+- Complete Sync page. ========================================================================= Done
+- Fix Admin Dashboard ========================================================================= Done
+- Enable Reference Copy Issuing only for Teachers ============================================= Done
+- No Deadline/Fine for Teachers =============================================================== Done 
+- Fine collection amount report (from date to date)
+    - Store fines when receiving for individual issues.
+    - Seperate page for displaying total fine collected within a date range.
+- Let the user to reset password using email. ========= Not Working in Remote Server ===============
+- Restrict Admin/Manager from deleting active/completed issues. =============================== Done
+- Ensure security when syncing with remote server ============================================= Done
+- Remove the dependency for lend code and renew code for issues. ============================== Done
+- Application Settings========================================================================= Done
+    - Application Role (0-Local, 1-Remote)
+    - Remote Server URL (in Case of Local Server)
+    - Access Code (in Case of Remote Server)
+    - Issue
+        - Deadline
+        - Fine per day
+    - School/College/Institute/University Name
+    - Logo
+    - Favicon
+    - Departments + Class =========================== Not Done ================================
+    - Address
+    - Email
+    - Contact No.
+- Make Admin Panel Responsive ================================================================= Done
+- Allow admin to merge Authors/Categories/Publication
+- Make Online Reading Available from google books. ============================================
+    - Let admins/users insert links ================================== Users Done
+    - Let admins lock/unlock link insert mode for users. ======================================
+- Disable Issue for Deleted Users 
+	- Enable feature to re-enlist a user after deleting
+- Convert every delete operation to is_deleted mark operation
+- Create Online/Offline Indicator
+
+- Write Script for importing books from old software.
+
