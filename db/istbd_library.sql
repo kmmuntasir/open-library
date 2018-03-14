@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-03-13 20:51:28
+Date: 2018-03-14 18:10:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -299,7 +299,8 @@ CREATE TABLE `issue` (
   `issue_fine_admin_code` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `issue_renew_user_code` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `issue_remarks` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `issue_received_fine` int(10) unsigned DEFAULT NULL,
+  `issue_total_fine` int(11) DEFAULT '0',
+  `issue_received_fine` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`,`issue_id`),
   KEY `FK1_issue_book` (`issue_book_id`),
   KEY `FK2_issue_book_copy` (`issue_book_copy_accession_no`),
@@ -309,11 +310,13 @@ CREATE TABLE `issue` (
   CONSTRAINT `FK2_issue_book_copy` FOREIGN KEY (`issue_book_copy_accession_no`) REFERENCES `book_copy` (`book_copy_accession_no`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK3_issue_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK4_issue_manager` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of issue
 -- ----------------------------
+INSERT INTO `issue` VALUES ('22', 'L_1', '2018-01-01 15:35:04', '2018-03-14 15:36:18', '2018-02-01 16:30:00', null, 'IST_3', 'IST_c_37', 'IST_1', 'IST_LIBRARY_1', '3', '#ZPReea3', 'cCLshL7s', 'mslQDI4W', 'aJMkObY$', 'IT0KX2uZ', 'V@JY9b2L', '', '820', '820');
+INSERT INTO `issue` VALUES ('23', 'L_2', '2018-01-01 15:35:04', '2018-03-14 15:36:36', '2018-02-01 16:30:00', null, 'IST_LIBRARY_2', 'IST_c_27', 'IST_1', 'IST_LIBRARY_1', '3', 'f&U#ftZ2', 'DUi8dpVJ', '$JFRZwyI', '0GhMTyuw', 'NICW5&WX', 'y7ts1HoZ', '', '82', '82');
 
 -- ----------------------------
 -- Table structure for `log`
@@ -326,11 +329,26 @@ CREATE TABLE `log` (
   `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `log_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`,`log_entry_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=216 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of log
 -- ----------------------------
+INSERT INTO `log` VALUES ('201', 'L_1', 'UPDATE `book` SET `book_available` = 14 WHERE `book_id` = \'IST_3\'', '0', '2018-03-14 15:35:04');
+INSERT INTO `log` VALUES ('202', 'L_202', 'UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'IST_c_37\'', '0', '2018-03-14 15:35:04');
+INSERT INTO `log` VALUES ('203', 'L_203', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_1\', \'2018-03-14 15:35:04\', \'2018-03-29 16:30:00\', \'IST_3\', \'IST_c_37\', \'IST_1\', \'IST_LIBRARY_1\', 1, \'#ZPReea3\', \'cCLshL7s\', \'mslQDI4W\', \'aJMkObY$\', \'IT0KX2uZ\', \'V@JY9b2L\', \'\')', '0', '2018-03-14 15:35:04');
+INSERT INTO `log` VALUES ('204', 'L_204', 'UPDATE `book` SET `book_available` = 9 WHERE `book_id` = \'IST_LIBRARY_2\'', '0', '2018-03-14 15:35:28');
+INSERT INTO `log` VALUES ('205', 'L_205', 'UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'IST_c_27\'', '0', '2018-03-14 15:35:28');
+INSERT INTO `log` VALUES ('206', 'L_206', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_2\', \'2018-03-14 15:35:28\', \'2018-03-29 16:30:00\', \'IST_LIBRARY_2\', \'IST_c_27\', \'IST_1\', \'IST_LIBRARY_1\', 1, \'f&U#ftZ2\', \'DUi8dpVJ\', \'$JFRZwyI\', \'0GhMTyuw\', \'NICW5&WX\', \'y7ts1HoZ\', \'\')', '0', '2018-03-14 15:35:28');
+INSERT INTO `log` VALUES ('207', 'L_207', 'UPDATE `settings` SET `issue_deadline` = \'15\', `issue_auto_expire_deadline` = \'2\', `issue_fine_per_day` = \'20\'', '0', '2018-03-14 15:36:10');
+INSERT INTO `log` VALUES ('208', 'L_208', 'UPDATE `book` SET `book_id` = \'IST_3\', `book_available` = 15 WHERE `book_id` = \'IST_3\'', '0', '2018-03-14 15:36:18');
+INSERT INTO `log` VALUES ('209', 'L_209', 'UPDATE `book_copy` SET `book_copy_accession_no` = \'IST_c_37\', `book_copy_status` = 1 WHERE `book_copy_accession_no` = \'IST_c_37\'', '0', '2018-03-14 15:36:18');
+INSERT INTO `log` VALUES ('210', 'L_210', 'UPDATE `issue` SET `issue_id` = \'L_1\', `issue_status` = 2, `issue_total_fine` = 820, `issue_received_fine` = 0, `issue_return_datetime` = \'2018-03-14 15:36:18\' WHERE `issue_id` = \'L_1\'', '0', '2018-03-14 15:36:18');
+INSERT INTO `log` VALUES ('211', 'L_211', 'UPDATE `settings` SET `issue_deadline` = \'15\', `issue_auto_expire_deadline` = \'2\', `issue_fine_per_day` = \'2\'', '0', '2018-03-14 15:36:28');
+INSERT INTO `log` VALUES ('212', 'L_212', 'UPDATE `book` SET `book_id` = \'IST_LIBRARY_2\', `book_available` = 10 WHERE `book_id` = \'IST_LIBRARY_2\'', '0', '2018-03-14 15:36:36');
+INSERT INTO `log` VALUES ('213', 'L_213', 'UPDATE `book_copy` SET `book_copy_accession_no` = \'IST_c_27\', `book_copy_status` = 1 WHERE `book_copy_accession_no` = \'IST_c_27\'', '0', '2018-03-14 15:36:36');
+INSERT INTO `log` VALUES ('214', 'L_214', 'UPDATE `issue` SET `issue_id` = \'L_2\', `issue_status` = 3, `issue_total_fine` = 82, `issue_received_fine` = 82, `issue_return_datetime` = \'2018-03-14 15:36:36\' WHERE `issue_id` = \'L_2\'', '0', '2018-03-14 15:36:36');
+INSERT INTO `log` VALUES ('215', 'L_215', 'UPDATE `issue` SET `issue_id` = \'L_1\', `issue_status` = 3, `issue_received_fine` = \'820\' WHERE `issue_id` = \'L_1\'', '0', '2018-03-14 15:36:43');
 
 -- ----------------------------
 -- Table structure for `manager`
@@ -398,7 +416,7 @@ CREATE TABLE `server` (
 -- ----------------------------
 -- Records of server
 -- ----------------------------
-INSERT INTO `server` VALUES ('1', 'remote', 'http://localhost/library.ist.edu.bd_online/index.php', '2018-03-13 20:51:23', '1', '0', 'HF1EBAvrgB');
+INSERT INTO `server` VALUES ('1', 'remote', 'http://localhost/library.ist.edu.bd_online/index.php', '2018-03-14 15:34:59', '1', '0', 'HF1EBAvrgB');
 
 -- ----------------------------
 -- Table structure for `settings`
