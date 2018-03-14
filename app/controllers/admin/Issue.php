@@ -47,10 +47,11 @@ class Issue extends Base_Controller {
 
                 $data['issues'][$key]->issue_overdue = $diff.' days';
 
-                $data['issues'][$key]->issue_fine = ($diff * $this->settings->issue_fine_per_day).'/=';
+                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
             else{ 
-                $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
+                if($issue->issue_status !=2) $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
+                else $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
         }
         //$this->printer($data['issues'], true);
@@ -77,7 +78,7 @@ class Issue extends Base_Controller {
 
                     $issue->issue_overdue = $diff.' days';
 
-                    $issue->issue_fine = ($diff * $this->settings->issue_fine_per_day).'/=';
+                    $issue->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
                 }
                 else if($issue->issue_status == 2) {
                     //Received without fine
@@ -90,7 +91,7 @@ class Issue extends Base_Controller {
 
                     $issue->issue_overdue = $diff.' days';
 
-                    $issue->issue_fine = ($diff * $this->settings->issue_fine_per_day).'/=';
+                    $issue->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
                 }
                 else{ 
                     $issue->issue_overdue = $issue->issue_fine = 'N/A';
@@ -128,7 +129,7 @@ class Issue extends Base_Controller {
 
                 $data['issues'][$key]->issue_overdue = $diff.' days';
 
-                $data['issues'][$key]->issue_fine = ($diff * $this->settings->issue_fine_per_day).'/=';
+                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
             else{ 
                 $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
@@ -156,7 +157,7 @@ class Issue extends Base_Controller {
 
                 $data['issues'][$key]->issue_overdue = $diff.' days';
 
-                $data['issues'][$key]->issue_fine = ($diff * $this->settings->issue_fine_per_day).'/=';
+                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
             else{ 
                 $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
@@ -184,7 +185,7 @@ class Issue extends Base_Controller {
 
                 $data['issues'][$key]->issue_overdue = $diff.' days';
 
-                $data['issues'][$key]->issue_fine = ($diff * $this->settings->issue_fine_per_day).'/=';
+                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
             else{ 
                 $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
@@ -214,10 +215,11 @@ class Issue extends Base_Controller {
 
                 $data['issues'][$key]->issue_overdue = $diff.' days';
 
-                $data['issues'][$key]->issue_fine = ($diff * $this->settings->issue_fine_per_day).'/=';
+                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
             else{ 
-                $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
+                if($issue->issue_status !=2) $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
+                else $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
         }
         $data['content'] = 'v_issue.php';
@@ -319,10 +321,11 @@ class Issue extends Base_Controller {
 
                 $data['issues'][$key]->issue_overdue = $diff.' days';
 
-                $data['issues'][$key]->issue_fine = ($diff * $this->settings->issue_fine_per_day).'/=';
+                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
             else{ 
-                $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
+                if($issue->issue_status !=2) $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
+                else $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
         }
         //$this->printer($data, true);
@@ -351,10 +354,11 @@ class Issue extends Base_Controller {
 
                 $data['issues'][$key]->issue_overdue = $diff.' days';
 
-                $data['issues'][$key]->issue_fine = ($diff * $this->settings->issue_fine_per_day).'/=';
+                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
             else{ 
-                $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
+                if($issue->issue_status !=2) $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
+                else $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
         }
         //$this->printer($data, true);
@@ -383,10 +387,11 @@ class Issue extends Base_Controller {
 
                 $data['issues'][$key]->issue_overdue = $diff.' days';
 
-                $data['issues'][$key]->issue_fine = ($diff * $this->settings->issue_fine_per_day).'/=';
+                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
             else{ 
-                $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
+                if($issue->issue_status !=2) $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
+                else $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
         }
         //$this->printer($data, true);
@@ -447,7 +452,21 @@ class Issue extends Base_Controller {
                 // Overdue Issue
                 $book = array('book_id' => $issue->book_id, 'book_available' => $issue->book_available + $deduct);
                 $book_copy = array('book_copy_accession_no' => $issue->issue_book_copy_accession_no, 'book_copy_status'=>1);
-                $issue_updated = array('issue_id'=> $issue_id ,'issue_status'=> (($fine)?3:2), 'issue_return_datetime'=>date('Y-m-d H:i:s'));
+
+                
+                $diff = ceil((time() - strtotime($issue->issue_deadline)) / (60 * 60 * 24));
+                $possible_fine = $diff * $this->settings->issue_fine_per_day;
+
+                $issue_updated = array();
+                $issue_updated['issue_id']= $issue_id;
+                $issue_updated['issue_status']= (($fine)?3:2);
+                $issue_updated['issue_total_fine']= $possible_fine;
+                
+                $issue_updated['issue_received_fine']= (($fine)?$possible_fine:0);
+                $issue_updated['issue_return_datetime'] = date('Y-m-d H:i:s');
+
+                //$this->printer($issue_updated, true);
+
                 $status = $this->m_issue->update_issue($issue_id, $issue_updated, $book, $book_copy);
 
                 // $this->printer($issue);
@@ -473,6 +492,7 @@ class Issue extends Base_Controller {
                 // Fine to receive
                 if($fine == 0) die('No Fine Provided');
                 $issue_updated = array('issue_id'=> $issue_id ,'issue_status'=> 3);
+                $issue_updated['issue_received_fine']= $issue->issue_total_fine;
                 $status = $this->m_issue->update_issue($issue_id, $issue_updated);
                 if($status) echo 'success';
                 else echo 'Failure to Process';

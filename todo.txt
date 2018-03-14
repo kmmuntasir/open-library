@@ -1,16 +1,11 @@
 - Import Students
 - Import Teachers
 
-- Collect currently lend information (!!! Mone nai)
 
 - Report Page
 	- Books Report
 	- Issue Report
 	- Fine Report
-
-- Fine collection amount report (from date to date)
-    - Store fines when receiving for individual issues.
-    - Seperate page for displaying total fine collected within a date range.
 
 - Let the user to reset password using email. === Remote Server Problem
 
