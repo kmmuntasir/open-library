@@ -22,7 +22,18 @@
 
 		var site_url = "<?php echo site_url(); ?>/";
 		// Datatables Functions
-	    $('.datatable').DataTable();
+		var datatable_source = $('.datatable').attr('data-source');
+	    $('.datatable').DataTable({
+            "ajax": datatable_source,
+            //"deferRender": true,
+            "pageLength": 10
+            //"order": [[ 2, "asc" ]],
+            //dom: 'lfrtip',
+            // initComplete: function() {
+            //     reload_action_buttions();
+            // },
+            //responsive: true
+        });
 
 	    $(document).on('click', '#add_button', function() {
 	    	$('#myModal').removeClass('hide');

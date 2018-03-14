@@ -36,7 +36,6 @@ class Book extends Base_Controller {
         $data['books'] = $this->m_book->all_books();
         foreach($data['books'] as $key => $book) {
             $data['books'][$key]->authors = $this->m_book->book_authors($book->book_id);
-            //$data['books'][$key]->categories = $this->m_book->book_categories($book->book_id);
         }
         $data['authors'] = $this->m_author->all_authors();
         $data['categories'] = $this->m_category->all_categories();
@@ -45,6 +44,58 @@ class Book extends Base_Controller {
         //$this->printer($data['books'], true);
         $this->load->view($this->viewpath.'v_main', $data);
 	}
+
+    public function all_books_json() {
+        $books = $this->m_book->all_books();
+
+        $json_data = array();
+        $json_data['data'] = array();
+        $i = 0;
+        foreach($books as $key => $book) {
+            $book->authors = $this->m_book->book_authors($book->book_id);
+            $json_data['data'][$i] = array();
+
+            array_push($json_data['data'][$i], $book->book_id);
+
+            $content = '<a style="color:#f00;" title="View Issue History for this Book" href="'.site_url().'/admin/issue/issue_by_book/'.$book->book_id.'">'.$book->book_title.'</a>';
+            array_push($json_data['data'][$i], $content);
+
+            $content = '';
+            foreach($book->authors as $a_key => $author) {
+              $content .= '<a title="View All Books by this Author" href="'.$this->data['controller'].'/book_by_filter/1/'.$author->author_id.'">'.$author->author_name.'</a><br />';
+            }
+            array_push($json_data['data'][$i], $content);
+
+            array_push($json_data['data'][$i], $book->book_edition);
+
+            array_push($json_data['data'][$i], $book->book_isbn);
+
+            $content = '<a title="View All Books by this Publisher" href="'.$this->data['controller'].'/book_by_filter/3/'.$book->publication_id.'">'.$book->publication_name.'</a>';
+            array_push($json_data['data'][$i], $content);
+
+            array_push($json_data['data'][$i], $book->book_stock);
+
+            array_push($json_data['data'][$i], $book->book_available);
+
+            $content = '';
+            if($book->book_url != NULL && $book->book_url != '') {
+              $content = '<a target="_blank" href="'.site_url('user/book/read_online/'.$book->book_id).'" title="'.$book->book_url.'" class="btn btn-primary btn-xs">Read</a>';
+            }
+            array_push($json_data['data'][$i], $content);
+
+            $content = '<a title="View Book Details" href="#" book_id="'.$book->book_id.'" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a><a title="Add Copies for this Book" href="#" book_id="'.$book->book_id.'" class="addCopy btn btn-xs btn-success"><i class="fa fa-copy"></i></a><a title="Edit Book Details" href="#" book_id="'.$book->book_id.'" class="edit edit_book btn btn-xs btn-info"><i class="fa fa-pencil"></i></a><a title="Delete Book" href="'.$this->data['controller'].'/delete/'.$book->book_id.'" class="delete btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>';
+            array_push($json_data['data'][$i], $content);
+
+
+                
+
+
+            ++$i;
+        }
+
+        $this->printer($json_data);
+        echo json_encode($json_data);
+    }
 
 
     public function book_by_filter($filter=NULL, $id=NULL) {

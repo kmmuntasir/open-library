@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-sm-12 table-responsive">
-		<table class="table table-striped datatable">
+		<table class="table table-striped datatable" data-source="<?php echo site_url('admin/book/all_books_json'); ?>">
 			<thead>
 				<tr>
           <th>#</th>
@@ -15,7 +15,10 @@
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
+
+      <!-- 
 			<tbody>
+      <?php for($cnt = 0; $cnt < 1; ++$cnt) { ?>
 				<?php foreach($books as $key => $book) { ?>
 				<tr>
           <td><?php echo $book->book_id; ?></td>
@@ -38,9 +41,6 @@
               <a target="_blank" href="<?php echo site_url('user/book/read_online/'.$book->book_id); ?>" title="<?php echo $book->book_url; ?>" class="btn btn-primary btn-xs">Open Window</a>
             <?php } ?>
           </td>
-
-          
-
 					<td>
             <a title="View Book Details" href="#" book_id="<?php echo $book->book_id; ?>" class="view_book btn btn-xs btn-primary">
               <i class="fa fa-eye"></i>
@@ -57,7 +57,9 @@
 					</td>
 				</tr>
 				<?php } ?>
+        <?php } ?>
 			</tbody>
+      -->
 		</table>
 	</div>
 </div>

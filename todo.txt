@@ -17,6 +17,7 @@
 - Disable Issue for Deleted Users 
 - Disable login for Deleted Users
 	- Enable feature to re-enlist a user after deleting
+
 - Convert every delete operation to is_deleted mark operation
 
 - Create Online/Offline Indicator + Add a Server Time Clock
