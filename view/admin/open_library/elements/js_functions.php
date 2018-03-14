@@ -23,17 +23,28 @@
 		var site_url = "<?php echo site_url(); ?>/";
 		// Datatables Functions
 		var datatable_source = $('.datatable').attr('data-source');
-	    $('.datatable').DataTable({
+		var datapage = $('.datatable').attr('data-page');
+		var post_processing_flag = true;
+		//alert(datatable_source);
+	    var dtable = $('.datatable').DataTable({
             "ajax": datatable_source,
-            //"deferRender": true,
-            "pageLength": 10
+            "deferRender": true,
+            "pageLength": 10,
+            "drawCallback": function() {
+            	post_process_datatable(datapage);
+            },
             //"order": [[ 2, "asc" ]],
             //dom: 'lfrtip',
-            // initComplete: function() {
-            //     reload_action_buttions();
-            // },
+            initComplete: function() {
+                //post_process_datatable(datapage);
+            }
             //responsive: true
         });
+
+        function post_process_datatable(page) {
+        	if(page == 'students') post_process_students_table();
+        	else if(page == 'teachers') post_process_teachers_table();
+        }
 
 	    $(document).on('click', '#add_button', function() {
 	    	$('#myModal').removeClass('hide');

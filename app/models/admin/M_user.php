@@ -10,11 +10,15 @@ class M_user extends Ci_model {
     }
 
     public function all_students() {
+        $this->db->select('user_id, user_name, user_username, user_dept, user_session, user_roll, user_email, user_phone');
+        $this->db->select('user_id as id');
     	$this->db->where('is_deleted', 0);
         $this->db->where('is_teacher', 0);
         return $this->db->get('user')->result();
     }
     public function all_teachers() {
+        $this->db->select('user_id, user_name, user_username, teacher_designation, user_dept, user_email, user_phone');
+        $this->db->select('user_id as id');
     	$this->db->where('is_deleted', 0);
         $this->db->where('is_teacher', 1);
         return $this->db->get('user')->result();

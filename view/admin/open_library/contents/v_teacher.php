@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-sm-12 table-responsive">
-		<table class="table table-striped datatable">
+		<table data-page="teachers" class="table table-striped datatable" data-source="<?php echo site_url('admin/user/all_teachers'); ?>">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -13,13 +13,14 @@
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
+			<!-- 
 			<tbody>
 				<?php
 					foreach($users as $user) {
 				?>
 				<tr>
 					<td><?php echo $user->user_id; ?></td>
-					<td><a href="<?php echo site_url().'/admin/issue/issue_by_student/'.$user->user_id; ?>" title="View All Books by this User"><?php echo $user->user_name; ?></a></td>
+					<td><a href="<?php echo site_url().'/admin/issue/issue_by_user/'.$user->user_id; ?>" title="View All Books by this User"><?php echo $user->user_name; ?></a></td>
 					<td><?php echo $user->user_username; ?></td>
 					<td><?php echo $user->teacher_designation; ?></td>
 					<td><?php echo $user->user_dept; ?></td>
@@ -36,6 +37,7 @@
 				</tr>
 				<?php } ?>
 			</tbody>
+			-->
 		</table>
 	</div>
 </div>

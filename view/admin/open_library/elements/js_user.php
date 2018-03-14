@@ -66,3 +66,49 @@ $(document).on('click', '.delete_user', function() {
 $(document).ready(function() {
 	//$('#user_submenu_button').click();
 });
+
+
+function post_process_students_table() {
+	$('.datatable tbody tr').each(function(){ 
+		var p_flag = $(this).attr('rendered');
+		if(p_flag != null) return;
+		$(this).attr('rendered', 'yes');
+
+		var id = $(this).children('td:nth-child(9)').html();
+		if(id != null) {
+			$(this).children('td:nth-child(9)').html('')
+			//alert(id);
+			var buttons = '<a href="#" user_id="'+id+'" class="edit edit_user btn btn-sm btn-info"><i class="fa fa-pencil"></i></a> <a user_id="'+id+'" href="#" class="delete_user btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>';
+			
+			$(this).children('td:nth-child(9)').html(buttons);
+		}
+
+		var name = $(this).children('td:nth-child(2)').html();
+		$(this).children('td:nth-child(2)').html('');
+		var name = '<a href="'+site_url+'/admin/issue/issue_by_user/'+id+'" title="View All Books by this User">'+name+'</a>';
+		$(this).children('td:nth-child(2)').html(name);
+	});
+}
+
+
+function post_process_teachers_table() {
+	$('.datatable tbody tr').each(function(){ 
+		var p_flag = $(this).attr('rendered');
+		if(p_flag != null) return;
+		$(this).attr('rendered', 'yes');
+
+		var id = $(this).children('td:nth-child(8)').html();
+		if(id != null) {
+			$(this).children('td:nth-child(8)').html('')
+			//alert(id);
+			var buttons = '<a href="#" user_id="'+id+'" class="edit edit_user btn btn-sm btn-info"><i class="fa fa-pencil"></i></a> <a user_id="'+id+'" href="#" class="delete_user btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>';
+			
+			$(this).children('td:nth-child(8)').html(buttons);
+		}
+
+		var name = $(this).children('td:nth-child(2)').html();
+		$(this).children('td:nth-child(2)').html('');
+		var name = '<a href="'+site_url+'/admin/issue/issue_by_user/'+id+'" title="View All Books by this User">'+name+'</a>';
+		$(this).children('td:nth-child(2)').html(name);
+	});
+}

@@ -57,7 +57,9 @@ class Book extends Base_Controller {
 
             array_push($json_data['data'][$i], $book->book_id);
 
-            $content = '<a style="color:#f00;" title="View Issue History for this Book" href="'.site_url().'/admin/issue/issue_by_book/'.$book->book_id.'">'.$book->book_title.'</a>';
+            $content = '<a ';
+            if(!$book->book_status) $content .= 'style="color:#f00;" ';
+            $content .= 'title="View Issue History for this Book" href="'.site_url().'/admin/issue/issue_by_book/'.$book->book_id.'">'.$book->book_title.'</a>';
             array_push($json_data['data'][$i], $content);
 
             $content = '';
@@ -83,17 +85,12 @@ class Book extends Base_Controller {
             }
             array_push($json_data['data'][$i], $content);
 
-            $content = '<a title="View Book Details" href="#" book_id="'.$book->book_id.'" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a><a title="Add Copies for this Book" href="#" book_id="'.$book->book_id.'" class="addCopy btn btn-xs btn-success"><i class="fa fa-copy"></i></a><a title="Edit Book Details" href="#" book_id="'.$book->book_id.'" class="edit edit_book btn btn-xs btn-info"><i class="fa fa-pencil"></i></a><a title="Delete Book" href="'.$this->data['controller'].'/delete/'.$book->book_id.'" class="delete btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>';
+            $content = '<a title="View Book Details" href="#" book_id="'.$book->book_id.'" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a> <a title="Add Copies for this Book" href="#" book_id="'.$book->book_id.'" class="addCopy btn btn-xs btn-success"><i class="fa fa-copy"></i></a> <a title="Edit Book Details" href="#" book_id="'.$book->book_id.'" class="edit edit_book btn btn-xs btn-info"><i class="fa fa-pencil"></i></a> <a title="Delete Book" href="'.$this->data['controller'].'/delete/'.$book->book_id.'" class="delete btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>';
             array_push($json_data['data'][$i], $content);
-
-
-                
-
 
             ++$i;
         }
-
-        $this->printer($json_data);
+        //$this->printer($json_data);
         echo json_encode($json_data);
     }
 

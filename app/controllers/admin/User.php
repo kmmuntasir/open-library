@@ -39,6 +39,13 @@ class User extends Base_Controller {
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 
+    public function all_students() {
+        $students = $this->m_user->all_students();
+        //$this->printer($students);
+        ini_set('memory_limit', '-1');
+        echo $students = $this->to_datatable_json_format($students, 1, 1);
+    }
+
 	public function teachers() {
         $data = $this->data;
         $data['page'] = 'user';
@@ -47,6 +54,13 @@ class User extends Base_Controller {
         $data['content'] = 'v_teacher.php';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
+
+    public function all_teachers() {
+        $teachers = $this->m_user->all_teachers();
+        //$this->printer($teachers);
+        ini_set('memory_limit', '-1');
+        echo $teachers = $this->to_datatable_json_format($teachers, 10, 1);
+    }
 
     public function add($user_type = 'students') {
     	if($_POST['user_dept'] == 'nothing') $this->redirect_msg('/admin/user/'.$user_type, 'You must select a department!', 'danger');
