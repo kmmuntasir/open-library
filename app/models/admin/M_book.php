@@ -9,6 +9,12 @@ class M_book extends Ci_model {
         return $this->db->get('book')->result();
     }
 
+    public function all_books_json() {
+        $selection = 'book_id, book_title, book_edition, book_isbn, publication.publication_id, publication_name, book_stock, book_available, book_url';
+        $this->db->select($selection)->join('publication', 'publication.publication_id = book.publication_id');
+        return $this->db->get('book')->result();
+    }
+
     public function count_books() {
         return $this->db->select('COUNT(*) as count')->get('book')->row()->count;
     }

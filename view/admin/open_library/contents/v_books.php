@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-sm-12 table-responsive">
-		<table class="table table-striped datatable" data-source="<?php echo site_url('admin/book/all_books_json'); ?>">
+		<table class="table table-striped datatable" data-source="<?php echo site_url('admin/book/all_books_json_updated'); ?>">
 			<thead>
 				<tr>
           <th>#</th>

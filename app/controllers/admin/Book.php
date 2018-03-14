@@ -94,6 +94,41 @@ class Book extends Base_Controller {
         echo json_encode($json_data);
     }
 
+    public function all_books_json_updated() {
+        $books = $this->m_book->all_books_json();
+        //$this->printer($books, true);
+        $test_multiplier=1;
+        $json_data = array('data' => array());
+        $i=0;
+
+        for($m = 0; $m < $test_multiplier; ++$m) {
+            foreach($books as $key=>$book) {
+                $json_data['data'][$i] = array();
+
+                $read_flag = ($book->book_url != NULL && $book->book_url != '')?1:0;
+                
+                array_push($json_data['data'][$i], $book->book_id);
+                array_push($json_data['data'][$i], $book->book_title);
+                array_push($json_data['data'][$i], json_encode($this->m_book->book_authors($book->book_id)));
+                array_push($json_data['data'][$i], $book->book_edition);
+                array_push($json_data['data'][$i], $book->book_isbn);
+                array_push($json_data['data'][$i], json_encode(array($book->publication_id, $book->publication_name)));
+                array_push($json_data['data'][$i], $book->book_stock);
+                array_push($json_data['data'][$i], $book->book_available);
+                array_push($json_data['data'][$i], $read_flag);
+                array_push($json_data['data'][$i], $book->book_id);
+                
+                ++$i;
+            }
+        }
+
+        //$this->printer($json_data, true);
+
+        ini_set('memory_limit', '-1');
+        //echo $this->to_datatable_json_format($books, 1, 1);
+        echo json_encode($json_data);
+    }
+
 
     public function book_by_filter($filter=NULL, $id=NULL) {
         if(!($filter && $id)) $this->redirect_msg('admin/book', 'No Filter Selected', 'danger');
