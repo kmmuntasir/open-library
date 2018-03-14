@@ -321,3 +321,52 @@ $(document).on('click', '.addCopy', function() {
 		$('#starting_accession').val(ac_no);
 	});
 });
+
+
+function post_process_books_table() {
+	$('.datatable tbody tr').each(function(){ 
+		var p_flag = $(this).attr('rendered');
+		if(p_flag != null) return;
+		$(this).attr('rendered', 'yes');
+
+		var id = $(this).children('td:nth-child(1)').html();
+
+		if(id != null && id != '#') {
+			//console.log(id);
+			var title = $(this).children('td:nth-child(2)').html();
+			title = '<a title="View Issue History for this Book" href="'+site_url+'/admin/issue/issue_by_book/'+id+'">'+title+'</a>';
+			$(this).children('td:nth-child(2)').html(title);
+
+			var authors = $(this).children('td:nth-child(3)').html();
+			if(authors != null) {
+				var authors_json = $.parseJSON(authors);
+				//console.log(authors_json);
+				var author_link = '';
+
+				$.each( authors_json, function( index, author ){
+				    author_link += '<a title="View All Books by this Author" href="'+site_url+'/admin/book/book_by_filter/1/'+author.author_id+'">'+author.author_name+'</a><br />';
+				});
+				$(this).children('td:nth-child(3)').html(author_link);
+			}
+
+			var pub = $(this).children('td:nth-child(6)').html();
+			if(pub != null) {
+				var pub_json = $.parseJSON(pub);
+				//console.log(pub_json);
+				pub = '<a title="View All Books by this Publisher" href="'+site_url+'/admin/book/book_by_filter/3/'+pub_json[0]+'">'+pub_json[1]+'</a>';
+				$(this).children('td:nth-child(6)').html(pub);
+			}
+
+			var read = $(this).children('td:nth-child(9)').html();
+			if(read == 1) {
+				button = '<a target="_blank" href="'+site_url+'/user/book/read_online/'+id+'" title="" class="btn btn-primary btn-xs">Open Window</a>';
+				$(this).children('td:nth-child(9)').html(button);
+			}
+			else $(this).children('td:nth-child(9)').html('Not Available');
+
+			var action_buttons = '<a title="View Book Details" href="#" book_id="'+id+'" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a> <a title="Add Copies for this Book" href="#" book_id="'+id+'" class="addCopy btn btn-xs btn-success"><i class="fa fa-copy"></i></a> <a title="Edit Book Details" href="#" book_id="'+id+'" class="edit edit_book btn btn-xs btn-info"><i class="fa fa-pencil"></i></a> <a title="Delete Book" href="'+site_url+'/admin/book/delete/'+id+'" class="delete btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>';
+			$(this).children('td:nth-child(10)').html(action_buttons);
+		}
+
+	});
+}

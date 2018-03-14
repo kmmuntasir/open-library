@@ -41,92 +41,29 @@ class Book extends Base_Controller {
         $data['categories'] = $this->m_category->all_categories();
         $data['publications'] = $this->m_publication->all_publications();
         $data['content'] = 'v_books.php';
+        $data['source'] = $this->data['controller'].'/all_books_json';
         //$this->printer($data['books'], true);
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 
     public function all_books_json() {
-        $books = $this->m_book->all_books();
-
-        $json_data = array();
-        $json_data['data'] = array();
-        $i = 0;
-        foreach($books as $key => $book) {
-            $book->authors = $this->m_book->book_authors($book->book_id);
-            $json_data['data'][$i] = array();
-
-            array_push($json_data['data'][$i], $book->book_id);
-
-            $content = '<a ';
-            if(!$book->book_status) $content .= 'style="color:#f00;" ';
-            $content .= 'title="View Issue History for this Book" href="'.site_url().'/admin/issue/issue_by_book/'.$book->book_id.'">'.$book->book_title.'</a>';
-            array_push($json_data['data'][$i], $content);
-
-            $content = '';
-            foreach($book->authors as $a_key => $author) {
-              $content .= '<a title="View All Books by this Author" href="'.$this->data['controller'].'/book_by_filter/1/'.$author->author_id.'">'.$author->author_name.'</a><br />';
-            }
-            array_push($json_data['data'][$i], $content);
-
-            array_push($json_data['data'][$i], $book->book_edition);
-
-            array_push($json_data['data'][$i], $book->book_isbn);
-
-            $content = '<a title="View All Books by this Publisher" href="'.$this->data['controller'].'/book_by_filter/3/'.$book->publication_id.'">'.$book->publication_name.'</a>';
-            array_push($json_data['data'][$i], $content);
-
-            array_push($json_data['data'][$i], $book->book_stock);
-
-            array_push($json_data['data'][$i], $book->book_available);
-
-            $content = '';
-            if($book->book_url != NULL && $book->book_url != '') {
-              $content = '<a target="_blank" href="'.site_url('user/book/read_online/'.$book->book_id).'" title="'.$book->book_url.'" class="btn btn-primary btn-xs">Read</a>';
-            }
-            array_push($json_data['data'][$i], $content);
-
-            $content = '<a title="View Book Details" href="#" book_id="'.$book->book_id.'" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a> <a title="Add Copies for this Book" href="#" book_id="'.$book->book_id.'" class="addCopy btn btn-xs btn-success"><i class="fa fa-copy"></i></a> <a title="Edit Book Details" href="#" book_id="'.$book->book_id.'" class="edit edit_book btn btn-xs btn-info"><i class="fa fa-pencil"></i></a> <a title="Delete Book" href="'.$this->data['controller'].'/delete/'.$book->book_id.'" class="delete btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>';
-            array_push($json_data['data'][$i], $content);
-
-            ++$i;
-        }
-        //$this->printer($json_data);
-        echo json_encode($json_data);
-    }
-
-    public function all_books_json_updated() {
         $books = $this->m_book->all_books_json();
         //$this->printer($books, true);
-        $test_multiplier=1;
-        $json_data = array('data' => array());
-        $i=0;
+        ini_set('memory_limit', '-1');
+        echo $this->book_to_datatable($books, 1, 1);
+    }
 
-        for($m = 0; $m < $test_multiplier; ++$m) {
-            foreach($books as $key=>$book) {
-                $json_data['data'][$i] = array();
+    public function book_by_filter_json($filter=NULL, $id=NULL) {
+        if($filter == 1) $books = $this->m_book->all_books_by_author($id);
+        else if($filter == 2) $books = $this->m_book->all_books_by_category($id);
+        else if($filter == 3) $books = $this->m_book->all_books_by_publication($id);
 
-                $read_flag = ($book->book_url != NULL && $book->book_url != '')?1:0;
-                
-                array_push($json_data['data'][$i], $book->book_id);
-                array_push($json_data['data'][$i], $book->book_title);
-                array_push($json_data['data'][$i], json_encode($this->m_book->book_authors($book->book_id)));
-                array_push($json_data['data'][$i], $book->book_edition);
-                array_push($json_data['data'][$i], $book->book_isbn);
-                array_push($json_data['data'][$i], json_encode(array($book->publication_id, $book->publication_name)));
-                array_push($json_data['data'][$i], $book->book_stock);
-                array_push($json_data['data'][$i], $book->book_available);
-                array_push($json_data['data'][$i], $read_flag);
-                array_push($json_data['data'][$i], $book->book_id);
-                
-                ++$i;
-            }
+        foreach($books as $key => $book) {
+            $books[$key]->authors = $this->m_book->book_authors($book->book_id);
         }
 
-        //$this->printer($json_data, true);
-
-        ini_set('memory_limit', '-1');
-        //echo $this->to_datatable_json_format($books, 1, 1);
-        echo json_encode($json_data);
+        //$this->printer($books);
+        echo $this->book_to_datatable($books, 1, 1);
     }
 
 
@@ -136,29 +73,24 @@ class Book extends Base_Controller {
         $data['page'] = 'books';
         $data['page_title'] .= 'Books by ';
         if($filter == 1) {
-            $data['books'] = $this->m_book->all_books_by_author($id);
+            //$data['books'] = $this->m_book->all_books_by_author($id);
             $data['page_title'] .= 'Author';
         }
         else if($filter == 2) {
-            $data['books'] = $this->m_book->all_books_by_category($id);
+            //$data['books'] = $this->m_book->all_books_by_category($id);
             $data['page_title'] .= 'Category';
         }
         else if($filter == 3) {
-            $data['books'] = $this->m_book->all_books_by_publication($id);
+            //$data['books'] = $this->m_book->all_books_by_publication($id);
             $data['page_title'] .= 'Publication';
         }
         else $this->redirect_msg('admin/book', 'Wrong Filter', 'danger');
-        if($data['books'] != '') {
-            foreach($data['books'] as $key => $book) {
-                $data['books'][$key]->authors = $this->m_book->book_authors($book->book_id);
-                //$data['books'][$key]->categories = $this->m_book->book_categories($book->book_id);
-            }
-        }
-        else $this->redirect_msg('admin/book', 'Invalid ID', 'danger');
+
         $data['authors'] = $this->m_author->all_authors();
         $data['categories'] = $this->m_category->all_categories();
         $data['publications'] = $this->m_publication->all_publications();
         $data['content'] = 'v_books.php';
+        $data['source'] = $this->data['controller'].'/book_by_filter_json/'.$filter.'/'.$id;
         //$this->printer($data['books'], true);
         $this->load->view($this->viewpath.'v_main', $data);
     }
@@ -337,5 +269,33 @@ class Book extends Base_Controller {
 
     public function last_accession_number() {
         echo $this->m_book->last_accession_number();
+    }
+
+    public function book_to_datatable($books, $test_multiplier=1, $json_output = false) {
+        $json_data = array('data' => array());
+        $i=0;
+
+        for($m = 0; $m < $test_multiplier; ++$m) {
+            foreach($books as $key=>$book) {
+                $json_data['data'][$i] = array();
+
+                $read_flag = ($book->book_url != NULL && $book->book_url != '')?1:0;
+                
+                array_push($json_data['data'][$i], $book->book_id);
+                array_push($json_data['data'][$i], $book->book_title);
+                array_push($json_data['data'][$i], json_encode($this->m_book->book_authors($book->book_id)));
+                array_push($json_data['data'][$i], $book->book_edition);
+                array_push($json_data['data'][$i], $book->book_isbn);
+                array_push($json_data['data'][$i], json_encode(array($book->publication_id, $book->publication_name)));
+                array_push($json_data['data'][$i], $book->book_stock);
+                array_push($json_data['data'][$i], $book->book_available);
+                array_push($json_data['data'][$i], $read_flag);
+                array_push($json_data['data'][$i], $book->book_id);
+                
+                ++$i;
+            }
+        }
+        if($json_output) return json_encode($json_data);
+        else return $json_data;
     }
 }

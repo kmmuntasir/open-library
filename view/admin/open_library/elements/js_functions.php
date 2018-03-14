@@ -25,7 +25,6 @@
 		var datatable_source = $('.datatable').attr('data-source');
 		var datapage = $('.datatable').attr('data-page');
 		var post_processing_flag = true;
-		//alert(datatable_source);
 	    var dtable = $('.datatable').DataTable({
             "ajax": datatable_source,
             "deferRender": true,
@@ -44,6 +43,7 @@
         function post_process_datatable(page) {
         	if(page == 'students') post_process_students_table();
         	else if(page == 'teachers') post_process_teachers_table();
+        	else if(page == 'books') post_process_books_table();
         }
 
 	    $(document).on('click', '#add_button', function() {
