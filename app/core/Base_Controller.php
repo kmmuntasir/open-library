@@ -222,7 +222,7 @@ class Base_Controller extends CI_Controller
         $this->email->send();
     }
 
-    public function to_datatable_json_format($data, $test_multiplier=1, $json_output = false) {
+    public function to_datatable_json_format($data, $json_output = false, $test_multiplier=1) {
         $json_data = array('data' => array());
         $i=0;
 

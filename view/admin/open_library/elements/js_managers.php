@@ -29,3 +29,24 @@ $(document).on('click', '.edit_manager', function() {
 		$('.edit_form_inputs').children('input[name="manager_user"]').val(man.manager_user);
 	});
 });
+
+
+function post_process_managers_table() {
+	$('.datatable tbody tr').each(function(){ 
+		var p_flag = $(this).attr('rendered');
+		if(p_flag != null) return;
+		$(this).attr('rendered', 'yes');
+
+		var id = $(this).children('td:nth-child(6)').html();
+		if(id != null) {
+			$(this).children('td:nth-child(6)').html('')
+			var buttons = '<a href="#" manager="'+id+'" class="edit edit_manager btn btn-sm btn-info"><i class="fa fa-pencil"></i></a> <a href="'+site_url+'/admin/manager/delete/'+id+'" class="delete btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>';
+			$(this).children('td:nth-child(6)').html(buttons);
+
+			var auth = ['Manager', 'Admin'];
+			var auth_status = $(this).children('td:nth-child(5)').html();
+			$(this).children('td:nth-child(5)').html(auth[auth_status]);
+		}
+
+	});
+}

@@ -30,14 +30,21 @@ class Manager extends Base_Controller {
 		$data = $this->data;
         $data['page'] = 'managers';
     	$data['page_title'] .= 'Managers';
+        $data['source'] = $this->data['controller'].'/all_managers_json';
 
-        $data['managers'] = $this->m_manager->all_managers();
+        //$data['managers'] = $this->m_manager->all_managers();
 
         //$this->printer($data, true);
 
     	$data['content'] = 'v_managers.php';
     	$this->load->view($this->viewpath.'v_main', $data);
 	}
+
+    public function all_managers_json() {
+        $managers = $this->m_manager->all_managers();
+        //$this->printer($managers);
+        echo $this->to_datatable_json_format($managers, 1, 1);
+    }
 
     public function single_manager($manager_id=NULL) {
         if(!$manager_id) echo false;

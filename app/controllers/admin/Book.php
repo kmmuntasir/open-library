@@ -33,10 +33,10 @@ class Book extends Base_Controller {
         $data = $this->data;
         $data['page'] = 'books';
         $data['page_title'] .= 'Books';
-        $data['books'] = $this->m_book->all_books();
-        foreach($data['books'] as $key => $book) {
-            $data['books'][$key]->authors = $this->m_book->book_authors($book->book_id);
-        }
+        //$data['books'] = $this->m_book->all_books();
+        // foreach($data['books'] as $key => $book) {
+        //     $data['books'][$key]->authors = $this->m_book->book_authors($book->book_id);
+        // }
         $data['authors'] = $this->m_author->all_authors();
         $data['categories'] = $this->m_category->all_categories();
         $data['publications'] = $this->m_publication->all_publications();
@@ -271,7 +271,7 @@ class Book extends Base_Controller {
         echo $this->m_book->last_accession_number();
     }
 
-    public function book_to_datatable($books, $test_multiplier=1, $json_output = false) {
+    public function book_to_datatable($books, $json_output = false, $test_multiplier=1) {
         $json_data = array('data' => array());
         $i=0;
 
@@ -297,5 +297,15 @@ class Book extends Base_Controller {
         }
         if($json_output) return json_encode($json_data);
         else return $json_data;
+    }
+
+    public function read_online($book_id=NULL) {
+        if(!$book_id) die('<center><h1>Sorry, Broken Link</h1></center>');
+        $data = $this->data;
+        if(!$data['book_url'] = $this->m_book->book_url($book_id)) die('<center><h1>Sorry, Invalid Book ID</h1></center>');
+        $data['page'] = 'books';
+        $data['page_title'] .= 'Read Online';
+        //$this->printer($data, true);
+        $this->load->view($this->viewpath.'/contents/v_book_read_online', $data);
     }
 }

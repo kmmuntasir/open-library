@@ -1,29 +1,14 @@
 <div class="row">
 	<div class="col-sm-12 table-responsive">
-		<table class="table table-striped datatable">
+		<table class="table table-striped datatable" data-page="categories" data-source="<?php echo $source; ?>">
 			<thead>
 				<tr>
 					<th>Category Name</th>
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
-			<tbody>
-				<?php
-					foreach($categories as $category) {
-				?>
-				<tr>
-					<td><a href="<?php echo site_url().'/admin/book/book_by_filter/2/'.$category->category_id; ?>" title="View All Books of this Category"><?php echo $category->category_name; ?></a></td>
-					<td>
-            <a href="#" category="<?php echo $category->category_name; ?>" category_id="<?php echo $category->category_id; ?>" class="edit edit_category btn btn-sm btn-info">
-              <i class="fa fa-pencil"></i>
-            </a>
-            <a href="<?php echo $controller.'/delete/'.$category->category_id; ?>" class="delete btn btn-sm btn-danger">
-              <i class="fa fa-remove"></i>
-            </a>
-					</td>
-				</tr>
-				<?php } ?>
-			</tbody>
+
+
 		</table>
 	</div>
 </div>

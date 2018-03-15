@@ -30,10 +30,16 @@ class Publication extends Base_Controller {
         $data = $this->data;
         $data['page'] = 'publications';
         $data['page_title'] .= 'Publications';
-        $data['publications'] = $this->m_publication->all_publications();
+        //$data['publications'] = $this->m_publication->all_publications();
         $data['content'] = 'v_publications.php';
+        $data['source'] = $this->data['controller'].'/all_publications_json';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
+
+    public function all_publications_json() {
+        $publications = $this->m_publication->all_publications();
+        echo $this->to_datatable_json_format($publications, 1, 1);
+    }
 
     public function add() {
         $_POST['publication_id'] = $this->m_publication->new_id('publication');

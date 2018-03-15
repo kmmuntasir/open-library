@@ -30,10 +30,16 @@ class Category extends Base_Controller {
         $data = $this->data;
         $data['page'] = 'categories';
         $data['page_title'] .= 'Categories';
-        $data['categories'] = $this->m_category->all_categories();
+        //$data['categories'] = $this->m_category->all_categories();
         $data['content'] = 'v_categories.php';
+        $data['source'] = $this->data['controller'].'/all_categories_json';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
+
+    public function all_categories_json() {
+        $categories = $this->m_category->all_categories();
+        echo $this->to_datatable_json_format($categories, 1, 1);
+    }
 
     public function add() {
         $_POST['category_id'] = $this->m_category->new_id('category');

@@ -24,7 +24,7 @@
 		// Datatables Functions
 		var datatable_source = $('.datatable').attr('data-source');
 		var datapage = $('.datatable').attr('data-page');
-		var post_processing_flag = true;
+		
 	    var dtable = $('.datatable').DataTable({
             "ajax": datatable_source,
             "deferRender": true,
@@ -44,6 +44,10 @@
         	if(page == 'students') post_process_students_table();
         	else if(page == 'teachers') post_process_teachers_table();
         	else if(page == 'books') post_process_books_table();
+        	else if(page == 'managers') post_process_managers_table();
+        	else if(page == 'categories') post_process_categories_table();
+        	else if(page == 'authors') post_process_authors_table();
+        	else if(page == 'publications') post_process_publications_table();
         }
 
 	    $(document).on('click', '#add_button', function() {

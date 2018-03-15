@@ -3,7 +3,7 @@
 ?>
 <div class="row">
 	<div class="col-sm-12 table-responsive">
-		<table class="table table-striped datatable">
+		<table class="table table-striped datatable" data-page="managers" data-source="<?php echo $source; ?>">
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -14,25 +14,7 @@
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
-			<tbody>
-				<?php foreach($managers as $manager) { ?>
-				<tr>
-					<td><?php echo $manager->manager_name; ?></td>
-					<td><?php echo $manager->manager_phone; ?></td>
-					<td><?php echo $manager->manager_email; ?></td>
-					<td><?php echo $manager->manager_user; ?></td>
-          <td><?php echo $auth[$manager->is_admin]; ?></td>
-					<td>
-						<a href="#" manager="<?php echo $manager->manager_id; ?>" class="edit edit_manager btn btn-sm btn-info">
-							<i class="fa fa-pencil"></i>
-						</a>
-						<a href="<?php echo $controller.'/delete/'.$manager->manager_id; ?>" class="delete btn btn-sm btn-danger">
-							<i class="fa fa-remove"></i>
-						</a>
-					</td>
-				</tr>
-				<?php } ?>
-			</tbody>
+
 		</table>
 	</div>
 </div>

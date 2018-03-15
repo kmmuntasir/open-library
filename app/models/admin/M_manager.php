@@ -5,6 +5,7 @@ class M_manager extends Ci_model {
     // Basic Functions
 
     public function all_managers() {
+        $this->db->select('manager_name, manager_phone, manager_email, manager_user, is_admin, manager_id');
         $this->db->where('is_deleted', 0);
         return $this->db->get('manager')->result();
     }

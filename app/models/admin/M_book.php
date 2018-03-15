@@ -327,5 +327,10 @@ class M_book extends Ci_model {
         return $new_key;
     }
 
+    public function book_url($book_id) {
+        $book = $this->db->select('book_url')->where('book_id', $book_id)->get('book')->row();
+        return ($book) ? $book->book_url: NULL;
+    }
+
 }
 ?>

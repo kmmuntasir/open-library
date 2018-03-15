@@ -1,29 +1,16 @@
 <div class="row">
 	<div class="col-sm-12 table-responsive">
-		<table class="table table-striped datatable">
+		<table class="table table-striped datatable" data-page="authors" data-source="<?php echo $source ?>">
 			<thead>
 				<tr>
 					<th>Author Name</th>
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
-			<tbody>
-				<?php
-					foreach($authors as $author) {
-				?>
-				<tr>
-					<td><a href="<?php echo site_url().'/admin/book/book_by_filter/1/'.$author->author_id; ?>" title="View All Books by this Author"><?php echo $author->author_name; ?></a></td>
-					<td>
-            <a href="#" author="<?php echo $author->author_name; ?>" author_id="<?php echo $author->author_id; ?>" class="edit edit_author btn btn-sm btn-info">
-              <i class="fa fa-pencil"></i>
-            </a>
-            <a href="<?php echo $controller.'/delete/'.$author->author_id; ?>" class="delete btn btn-sm btn-danger">
-              <i class="fa fa-remove"></i>
-            </a>
-					</td>
-				</tr>
-				<?php } ?>
-			</tbody>
+
+
+
+
 		</table>
 	</div>
 </div>

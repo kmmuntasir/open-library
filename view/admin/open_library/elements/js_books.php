@@ -359,7 +359,7 @@ function post_process_books_table() {
 
 			var read = $(this).children('td:nth-child(9)').html();
 			if(read == 1) {
-				button = '<a target="_blank" href="'+site_url+'/user/book/read_online/'+id+'" title="" class="btn btn-primary btn-xs">Read Online</a>';
+				button = '<a target="_blank" href="'+site_url+'/admin/book/read_online/'+id+'" title="" class="btn btn-primary btn-xs">Read Online</a>';
 				$(this).children('td:nth-child(9)').html(button);
 			}
 			else $(this).children('td:nth-child(9)').html('Not Available');
