@@ -44,7 +44,15 @@
         <span style="text-align:right;" class="col-sm-1 col-xs-2">Days</span><div class="clearfix"></div>
 
         <label class="col-sm-4 col-xs-12" for="issue_fine_per_day">Fine Per Day</label>
-        <input type="number" class="col-sm-8 col-xs-12" name="issue_fine_per_day" value="<?php echo $settings->issue_fine_per_day; ?>" placeholder="Fine Per Day"/><div class="clearfix"></div>
+        <input type="text" class="col-sm-3 col-xs-4" name="currency_before" value="<?php echo $settings->currency_before; ?>" placeholder="Symbol Before"/>
+        <input type="number" class="col-sm-2 col-xs-4" name="issue_fine_per_day" value="<?php echo $settings->issue_fine_per_day; ?>" placeholder="Fine Per Day"/>
+        <input type="text" class="col-sm-3 col-xs-4" name="currency_after" value="<?php echo $settings->currency_after; ?>" placeholder="Symbol After"/>
+        <div class="clearfix"></div>
+        <div class="col-sm-offset-4 col-sm-8 col-sm-12 alert alert-info">
+          <b>Example</b>
+          <p><code>$45.99</code>, <code>BDT 100.00</code> OR <code>100/=</code></p>
+        </div>
+        <div class="clearfix"></div>
       </div>
       <div class="panel-footer">
           <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-save"></i> Save</button>

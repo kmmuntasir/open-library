@@ -33,7 +33,7 @@ class Settings extends Base_Controller {
         $data['page_title'] .= 'App Settings';
         $data['settings'] = $this->m_settings->all_settings();
         $data['content'] = 'v_settings.php';
-        //$this->printer($data['settings']);
+        //$this->printer($data['settings'], true);
         $this->load->view($this->viewpath.'v_main', $data);
     }
     

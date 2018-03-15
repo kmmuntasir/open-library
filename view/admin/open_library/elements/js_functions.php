@@ -48,6 +48,9 @@
         	else if(page == 'categories') post_process_categories_table();
         	else if(page == 'authors') post_process_authors_table();
         	else if(page == 'publications') post_process_publications_table();
+        	else if(page == 'request') post_process_issue_requests_table();
+        	else if(page == 'active') post_process_active_issues_table();
+        	else if(page == 'overdue') post_process_overdue_issues_table();
         }
 
 	    $(document).on('click', '#add_button', function() {

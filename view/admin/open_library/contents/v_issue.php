@@ -9,7 +9,7 @@
   <?php if($subpage == 'issue_by_student') { ?><h3>Showing all Issue History for <?php if(isset($issues[0])) echo $issues[0]->user_name; ?></h3><?php } ?>
   <?php if($subpage == 'issue_by_book') { ?><h3>Showing all Issue History for Book <?php if(isset($issues[0])) echo '('.$issues[0]->book_id.') '.$issues[0]->book_title; ?></h3><?php } ?>
   <?php if($subpage == 'issue_by_book_copy') { ?><h3>Showing all Issue History for <?php if(isset($issues[0])) echo '('.$issues[0]->book_id.') (#'.$issues[0]->issue_book_copy_accession_no.') '.$issues[0]->book_title; ?></h3><?php } ?>
-    <table class="table table-striped datatable" style="font-size:12px;">
+    <table class="table table-striped datatable" data-page="<?php echo $data_page; ?>" data-source="<?php echo $source; ?>">
       <thead>
         <tr>
           <th>Code</th>
