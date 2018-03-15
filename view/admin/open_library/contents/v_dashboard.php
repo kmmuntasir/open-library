@@ -36,7 +36,7 @@
 <div class="row">
   <?php if(count($issues)) { ?>
   <div class="col-sm-12 table-responsive">
-    <table class="table table-striped datatable" style="font-size:12px;">
+    <table class="table table-striped datatable" data-page="<?php echo $data_page; ?>" data-source="<?php echo $source; ?>">
       <thead>
         <tr>
           <th>Code</th>
@@ -47,25 +47,6 @@
           <th class="opt_column">Options</th>
         </tr>
       </thead>
-      <tbody>
-        <?php foreach($issues as $key=> $issue) { ?>
-        <tr>
-          <td><?php echo $issue->issue_id; ?></td>
-          <td><span class="btn btn-xs btn-<?php echo $user_type_class[$issue->is_teacher]; ?>"><?php echo $user_type[$issue->is_teacher]; ?></span>  <a title="View Issue History for this User" href="<?php echo $controller.'/issue_by_user/'.$issue->user_id; ?>"><?php echo $issue->user_name; ?></a></td>
-          <td><a href="<?php echo $controller.'/issue_by_book/'.$issue->book_id; ?>" title="View History for this Book"><?php echo '('.$issue->book_id.')'.' (#'.$issue->issue_book_copy_accession_no.') '.$issue->book_title; ?></a></td>
-          <td><?php echo date('M d, Y', strtotime($issue->issue_datetime)).'<br />'.date('h:i a', strtotime($issue->issue_datetime)); ?></td>
-          <td><?php if($issue->issue_auto_expire_datetime != '') echo date('M d, Y', strtotime($issue->issue_auto_expire_datetime)).'<br />'.date('h:i a', strtotime($issue->issue_auto_expire_datetime)); ?></td>
-          <td>
-            <a href="#" title="View Issue Details" issue_id="<?php echo $issue->issue_id; ?>" class="view_issue btn btn-xs btn-primary">
-              <i class="fa fa-eye"></i>
-            </a>
-            <!--<a href="<?php echo $controller.'/delete/'.$issue->issue_id; ?>" class="delete delete_issue btn btn-xs btn-danger">
-              <i class="fa fa-remove"></i>
-            </a>-->
-          </td>
-        </tr>
-        <?php } ?>
-      </tbody>
     </table>
   </div>
   <?php } ?>

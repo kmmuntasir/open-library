@@ -33,26 +33,11 @@ class Dashboard extends Base_Controller {
 		$data = $this->data;
         $data['page'] = 'dashboard';
     	$data['page_title'] .= 'Dashboard';
+        $data['source'] = site_url().'/admin/issue/issue_json/request';
+        $data['data_page'] = 'request';
 
         $data['issues'] = $this->m_issue->all_issue_requests();
-        foreach($data['issues'] as $key=> $issue) {
-            if($issue->issue_status == 1 && strtotime($issue->issue_deadline) < time()) {
-                $data['issues'][$key]->issue_status = -1;
-
-                $now = time(); 
-                $deadline = strtotime($issue->issue_deadline);
-                $datediff = $now - $deadline;
-
-                $diff = ceil($datediff / (60 * 60 * 24));
-
-                $data['issues'][$key]->issue_overdue = $diff.' days';
-
-                $data['issues'][$key]->issue_fine = ($diff * 2).'/=';
-            }
-            else{ 
-                $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
-            }
-        }
+        
         $data['book_count'] = $this->m_book->count_books();
         $data['copy_count'] = $this->m_book->count_copies();
         $data['overdue_count'] = $this->m_issue->count_overdue_issues();

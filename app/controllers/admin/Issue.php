@@ -34,7 +34,7 @@ class Issue extends Base_Controller {
         $data['page'] = 'issue';
         $data['subpage'] = 'requests';
         $data['page_title'] .= 'Issue Requests';
-        $data['issues'] = $this->m_issue->all_issue_requests();
+        //$data['issues'] = $this->m_issue->all_issue_requests();
         $data['source'] = $this->data['controller'].'/issue_json/request';
         $data['data_page'] = 'request';
         
@@ -47,6 +47,8 @@ class Issue extends Base_Controller {
         if($data_page == 'request') $issues = $this->m_issue->all_issue_requests();
         else if($data_page == 'active') $issues = $this->m_issue->all_active_issues();
         else if($data_page == 'overdue') $issues = $this->m_issue->all_overdue_issues();
+        else if($data_page == 'completed') $issues = $this->m_issue->all_completed_issues();
+        else if($data_page == 'all_issues') $issues = $this->m_issue->all_issues();
 
         //$this->printer($issues, true);
         $json_data = array('data' => array());
@@ -54,7 +56,7 @@ class Issue extends Base_Controller {
         $test_multiplier = 1;
         for($m = 0; $m < $test_multiplier; ++$m) {
             foreach($issues as $key=>$issue) {
-                if($data_page == 'overdue') {
+                if($data_page == 'overdue' || $data_page == 'all_issues') {
                     $result = $this->calculate_fine($issue);
                     $issue->issue_overdue = $result['overdue'];
                     $issue->issue_fine = $result['fine'];
@@ -66,15 +68,29 @@ class Issue extends Base_Controller {
                 array_push($json_data['data'][$i], json_encode(array($issue->user_id, $issue->user_name, $issue->is_teacher)));
                 if($data_page == 'request')
                     array_push($json_data['data'][$i], json_encode(array($issue->book_id, $issue->book_title)));
-                if($data_page == 'active' || $data_page == 'overdue')
+                if($data_page == 'active' || $data_page == 'overdue' || $data_page == 'completed' || $data_page == 'all_issues')
                     array_push($json_data['data'][$i], json_encode(array($issue->book_id, $issue->book_title, $issue->issue_book_copy_accession_no)));
-                array_push($json_data['data'][$i], date('M d, Y h:i a', strtotime($issue->issue_datetime)));
-                if($data_page == 'request')
-                    array_push($json_data['data'][$i], date('M d, Y h:i a', strtotime($issue->issue_auto_expire_datetime)));
-                if($data_page == 'active' || $data_page == 'overdue')
-                    array_push($json_data['data'][$i], date('M d, Y h:i a', strtotime($issue->issue_deadline)));
+                array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_datetime));
+                if($data_page == 'request' || $data_page == 'all_issues') {
+                    if($issue->issue_status == 0 || $issue->issue_status == 8) array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_auto_expire_datetime));
+                    else array_push($json_data['data'][$i], '');
+                }
+                if($data_page == 'active' || $data_page == 'overdue' || $data_page == 'all_issues') {
+                    if($issue->issue_status != 0 && $issue->issue_status != 8)
+                        array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_deadline));
+                    else array_push($json_data['data'][$i], '');
+                }
+                if($data_page == 'all_issues')
+                    array_push($json_data['data'][$i], $issue->issue_fine);
+                if($data_page == 'completed' || $data_page == 'all_issues') {
+                    if($issue->issue_status == 2 || $issue->issue_status == 3)
+                        array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_return_datetime));
+                    else array_push($json_data['data'][$i], ''); 
+                }
                 if($data_page == 'overdue')
                     array_push($json_data['data'][$i], $issue->issue_fine);
+                if($data_page == 'all_issues')
+                    array_push($json_data['data'][$i], $issue->issue_status);
                 array_push($json_data['data'][$i], $issue->issue_id);
                 ++$i;
             }
@@ -140,8 +156,7 @@ class Issue extends Base_Controller {
         $data['page'] = 'issue';
         $data['subpage'] = 'active';
         $data['page_title'] .= 'Active Issues';
-        $data['issues'] = $this->m_issue->all_active_issues();
-
+        //$data['issues'] = $this->m_issue->all_active_issues();
         $data['content'] = 'v_issue.php';
         $data['source'] = $this->data['controller'].'/issue_json/active';
         $data['data_page'] = 'active';
@@ -154,12 +169,10 @@ class Issue extends Base_Controller {
         $data['page'] = 'issue';
         $data['subpage'] = 'overdue';
         $data['page_title'] .= 'Overdue Issues';
-        $data['issues'] = $this->m_issue->all_overdue_issues();
-  
-
-        $data['content'] = 'v_issue.php';
+        //$data['issues'] = $this->m_issue->all_overdue_issues();
         $data['source'] = $this->data['controller'].'/issue_json/overdue';
         $data['data_page'] = 'overdue';
+        $data['content'] = 'v_issue.php';
         $this->load->view($this->viewpath.'v_main', $data);
     }
 
@@ -168,25 +181,10 @@ class Issue extends Base_Controller {
         $data['page'] = 'issue';
         $data['subpage'] = 'completed';
         $data['page_title'] .= 'Completed Issues';
-        $data['issues'] = $this->m_issue->all_completed_issues();
-        foreach($data['issues'] as $key=> $issue) {
-            if($issue->issue_status == 1 && strtotime($issue->issue_deadline) < time()) {
-                $data['issues'][$key]->issue_status = -1;
+        //$data['issues'] = $this->m_issue->all_completed_issues();
+        $data['source'] = $this->data['controller'].'/issue_json/completed';
+        $data['data_page'] = 'completed';
 
-                $now = time(); 
-                $deadline = strtotime($issue->issue_deadline);
-                $datediff = $now - $deadline;
-
-                $diff = ceil($datediff / (60 * 60 * 24));
-
-                $data['issues'][$key]->issue_overdue = $diff.' days';
-
-                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
-            }
-            else{ 
-                $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
-            }
-        }
         $data['content'] = 'v_issue.php';
         $this->load->view($this->viewpath.'v_main', $data);
     }
@@ -197,6 +195,9 @@ class Issue extends Base_Controller {
         $data['subpage'] = 'all';
         $data['page_title'] .= 'All Issues';
         $data['issues'] = $this->m_issue->all_issues();
+        $data['source'] = $this->data['controller'].'/issue_json/all_issues';
+        $data['data_page'] = 'all_issues';
+
         foreach($data['issues'] as $key=> $issue) {
             if(($issue->issue_status == 9 || $issue->issue_status == 0) && strtotime($issue->issue_auto_expire_datetime) < time())
                 $data['issues'][$key]->issue_status = 8; // Expired
@@ -218,6 +219,7 @@ class Issue extends Base_Controller {
                 else $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
             }
         }
+
         $data['content'] = 'v_issue.php';
         $this->load->view($this->viewpath.'v_main', $data);
     }
@@ -604,5 +606,9 @@ class Issue extends Base_Controller {
         if(($issue->issue_status == 9 || $issue->issue_status == 0) && strtotime($issue->issue_auto_expire_datetime) < time()) return 8; // Expired
         else if($issue->issue_status == 1 && strtotime($issue->issue_deadline) < time() && !$issue->is_teacher) return -1; // Overdue
         else return $issue->issue_status;
+    }
+
+    public function datatables_datetime_formatter($datetime) {
+        return date('M d, Y', strtotime($datetime)).'<br>'.date('h:i a', strtotime($datetime));
     }
 }

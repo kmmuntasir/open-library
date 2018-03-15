@@ -51,6 +51,8 @@
         	else if(page == 'request') post_process_issue_requests_table();
         	else if(page == 'active') post_process_active_issues_table();
         	else if(page == 'overdue') post_process_overdue_issues_table();
+        	else if(page == 'completed') post_process_completed_issues_table();
+        	else if(page == 'all_issues') post_process_all_issues_table();
         }
 
 	    $(document).on('click', '#add_button', function() {
