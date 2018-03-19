@@ -5,6 +5,7 @@ class M_publication extends Ci_model {
     // Basic Functions
 
     public function all_publications() {
+    	$this->db->select('publication_name, publication_id');
         return $this->db->get('publication')->result();
     }
 

@@ -15,51 +15,6 @@
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
-
-      <!-- 
-			<tbody>
-      <?php for($cnt = 0; $cnt < 1; ++$cnt) { ?>
-				<?php foreach($books as $key => $book) { ?>
-				<tr>
-          <td><?php echo $book->book_id; ?></td>
-					<td <?php if(!$book->book_status) echo 'style="color:#f00;" title="Inactive"'; ?>><a title="View Issue History for this Book" href="<?php echo site_url().'/admin/issue/issue_by_book/'.$book->book_id; ?>"><?php echo $book->book_title; ?></a></td>
-					<td>
-            <?php
-              foreach($book->authors as $a_key => $author) {
-                echo '<a title="View All Books by this Author" href="'.$controller.'/book_by_filter/1/'.$author->author_id.'">'.$author->author_name.'</a><br />';
-              }
-            ?>     
-          </td>
-					<td><?php echo $book->book_edition; ?></td>
-          <td><?php echo $book->book_isbn; ?></td>
-					<td><a title="View All Books by this Publisher" href="<?php echo $controller.'/book_by_filter/3/'.$book->publication_id; ?>"><?php echo $book->publication_name; ?></a></td>
-					<td><?php echo $book->book_stock; ?></td>
-					<td><?php echo $book->book_available; ?></td>
-          <td>
-          <?php 
-            if($book->book_url != NULL && $book->book_url != '') {?>
-              <a target="_blank" href="<?php echo site_url('user/book/read_online/'.$book->book_id); ?>" title="<?php echo $book->book_url; ?>" class="btn btn-primary btn-xs">Open Window</a>
-            <?php } ?>
-          </td>
-					<td>
-            <a title="View Book Details" href="#" book_id="<?php echo $book->book_id; ?>" class="view_book btn btn-xs btn-primary">
-              <i class="fa fa-eye"></i>
-            </a>
-            <a title="Add Copies for this Book" href="#" book_id="<?php echo $book->book_id; ?>" class="addCopy btn btn-xs btn-success">
-              <i class="fa fa-copy"></i>
-            </a>
-						<a title="Edit Book Details" href="#" book_id="<?php echo $book->book_id; ?>" class="edit edit_book btn btn-xs btn-info">
-							<i class="fa fa-pencil"></i>
-						</a>
-						<a title="Delete Book" href="<?php echo $controller.'/delete/'.$book->book_id; ?>" class="delete btn btn-xs btn-danger">
-							<i class="fa fa-trash"></i>
-						</a>
-					</td>
-				</tr>
-				<?php } ?>
-        <?php } ?>
-			</tbody>
-      -->
 		</table>
 	</div>
 </div>

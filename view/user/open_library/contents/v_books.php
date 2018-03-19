@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-sm-12 table-responsive">
-		<table class="table table-striped datatable">
+		<table class="table table-striped datatable" data-page="books" data-source="<?php echo $source; ?>">
 			<thead>
 				<tr>
           <th>Code</th>
@@ -11,9 +11,11 @@
 					<th>Publisher</th>
 					<th class="narrow_column">Stock</th>
 					<th class="narrow_column">Available</th>
+          <th class="narrow_column">Online Reading</th>
 					<th class="">Options</th>
 				</tr>
 			</thead>
+      <?php if(0) { ?>
 			<tbody>
 				<?php foreach($books as $key => $book) { ?>
 				<tr>
@@ -49,6 +51,7 @@
 				</tr>
 				<?php } ?>
 			</tbody>
+      <?php } ?>
 		</table>
 	</div>
 </div>

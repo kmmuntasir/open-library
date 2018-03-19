@@ -25,17 +25,17 @@
         function post_process_datatable(page) {
         // 	if(page == 'students') post_process_students_table();
         // 	else if(page == 'teachers') post_process_teachers_table();
-        // 	else if(page == 'books') post_process_books_table();
+        if(page == 'books') post_process_books_table();
         // 	else if(page == 'managers') post_process_managers_table();
-        // 	else if(page == 'categories') post_process_categories_table();
-        // 	else if(page == 'authors') post_process_authors_table();
-        // 	else if(page == 'publications') post_process_publications_table();
+        else if(page == 'categories') post_process_categories_table();
+        else if(page == 'authors') post_process_authors_table();
+        else if(page == 'publications') post_process_publications_table();
         // 	else if(page == 'request') post_process_issue_requests_table();
         // 	else if(page == 'active') post_process_active_issues_table();
         // 	else if(page == 'overdue') post_process_overdue_issues_table();
         // 	else if(page == 'completed') post_process_completed_issues_table();
         // 	else if(page == 'all_issues') post_process_all_issues_table();
-        // }
+        }
 
 	    $(document).on('click', '#add_button', function() {
 	    	$('#myModal').removeClass('hide');
@@ -424,27 +424,133 @@
 				$('#password_reset_modal').addClass('show');
 			});
 		<?php } ?>
+
+		// ----------------------------- Post Process Datatables Functions ----------------------------- //
+
+		function post_process_categories_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(2)').html();
+				if(id != null) {
+					var category_name = $(this).children('td:nth-child(1)').html();
+					category = '<a href="'+site_url+'/user/book/book_by_filter/2/'+id+'" title="View All Books of this Category">'+category_name+'</a>';
+					$(this).children('td:nth-child(1)').html(category)
+
+					$(this).children('td:nth-child(2)').html('')
+					var buttons = '<a href="'+site_url+'/user/book/book_by_filter/2/'+id+'" title="View All Books of this Category" class=" =btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>';
+
+					$(this).children('td:nth-child(2)').html(buttons);
+
+				}
+
+			});
+		} // ============ Post Processing Function Ends
+
+		function post_process_authors_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(2)').html();
+				if(id != null) {
+					var author_name = $(this).children('td:nth-child(1)').html();
+					author = '<a href="'+site_url+'/user/book/book_by_filter/1/'+id+'" title="View All Books by this Author">'+author_name+'</a>';
+					$(this).children('td:nth-child(1)').html(author)
+
+					$(this).children('td:nth-child(2)').html('')
+					var buttons = '<a href="'+site_url+'/user/book/book_by_filter/1/'+id+'" title="View All Books by this Author" class=" =btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>';
+
+					$(this).children('td:nth-child(2)').html(buttons);
+
+				}
+
+			});
+		} // ============ Post Processing Function Ends
+
+		function post_process_publications_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(2)').html();
+				if(id != null) {
+					var publication_name = $(this).children('td:nth-child(1)').html();
+					publication = '<a href="'+site_url+'/user/book/book_by_filter/3/'+id+'" title="View All Books by this Publisher">'+publication_name+'</a>';
+					$(this).children('td:nth-child(1)').html(publication)
+
+					$(this).children('td:nth-child(2)').html('')
+					var buttons = '<a href="'+site_url+'/user/book/book_by_filter/3/'+id+'" title="View All Books by this Publisher" class=" =btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>';
+
+					$(this).children('td:nth-child(2)').html(buttons);
+
+				}
+
+			});
+		} // ============ Post Processing Function Ends
+
+
+		function post_process_books_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(1)').html();
+
+				if(id != null && id != '#') {
+					//console.log(id);
+					var title = $(this).children('td:nth-child(2)').html();
+					title = '<a title="View Issue History for this Book" href="'+site_url+'/user/issue/issue_by_book/'+id+'">'+title+'</a>';
+					$(this).children('td:nth-child(2)').html(title);
+
+					var authors = $(this).children('td:nth-child(3)').html();
+					if(authors != null) {
+						var authors_json = $.parseJSON(authors);
+						//console.log(authors_json);
+						var author_link = '';
+
+						$.each( authors_json, function( index, author ){
+						    author_link += '<a title="View All Books by this Author" href="'+site_url+'/user/book/book_by_filter/1/'+author.author_id+'">'+author.author_name+'</a><br />';
+						});
+						$(this).children('td:nth-child(3)').html(author_link);
+					}
+
+					var pub = $(this).children('td:nth-child(6)').html();
+					if(pub != null) {
+						var pub_json = $.parseJSON(pub);
+						//console.log(pub_json);
+						pub = '<a title="View All Books by this Publisher" href="'+site_url+'/user/book/book_by_filter/3/'+pub_json[0]+'">'+pub_json[1]+'</a>';
+						$(this).children('td:nth-child(6)').html(pub);
+					}
+
+					var book_url = $(this).children('td:nth-child(10)').html();
+					var book_url_unlocked = $(this).children('td:nth-child(9)').html();
+
+					if(book_url != null && book_url != '') {
+						button = '<a target="_blank" href="'+site_url+'/user/book/read_online/'+id+'" title="" class="btn btn-primary btn-xs">Read Online</a>';
+						$(this).children('td:nth-child(9)').html(button);
+					}
+					else $(this).children('td:nth-child(9)').html('Not Available');
+
+					
+
+					var action_buttons = '<a title="View Book Details" href="#" book_id="'+id+'" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a> <a title="Request for this book" href="'+site_url+'user/issue/add_issue/book_page/'+id+'" book_id="'+id+'" class="issue_book btn btn-xs btn-info"><i class="fa fa-credit-card"></i></a>';
+					if(book_url_unlocked == 1) action_buttons += ' <a title="Update Book URL" book_url="'+book_url+'" book_id="'+id+'" class="update_book_url btn btn-xs btn-default"><i class="fa fa-refresh"></i></a>';
+					$(this).children('td:nth-child(10)').html(action_buttons);
+				}
+
+			});
+		} // ============ Post Processing Function Ends
 	});
 
-// ----------------------------- Post Process Datatables Functions ----------------------------- //
 
 
-function post_process_categories_table() {
-	$('.datatable tbody tr').each(function(){ 
-		var p_flag = $(this).attr('rendered');
-		if(p_flag != null) return;
-		$(this).attr('rendered', 'yes');
 
-		var id = $(this).children('td:nth-child(2)').html();
-		if(id != null) {
-			var category_name = $(this).children('td:nth-child(1)').html();
-			category = '<a href="'+site_url+'/admin/book/book_by_filter/2/'+id+'" title="View All Books of this Category">'+category_name+'</a>';
-			$(this).children('td:nth-child(1)').html(category)
-
-		}
-
-	});
-}
 
 
 

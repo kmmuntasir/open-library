@@ -30,10 +30,17 @@ class Author extends Base_Controller {
         $data = $this->data;
         $data['page'] = 'authors';
         $data['page_title'] .= 'Authors';
-        $data['authors'] = $this->m_author->all_authors();
+        //$data['authors'] = $this->m_author->all_authors();
         $data['content'] = 'v_authors.php';
+        $data['source'] = $this->data['controller'].'/all_authors_json';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
+
+    public function all_authors_json() {
+        $authors = $this->m_author->all_authors();
+        //$this->printer($authors);
+        echo $this->to_datatable_json_format($authors, 1, 1);
+    }
 
     public function single_author($author_id=NULL) {
         if(!$author_id) echo false;

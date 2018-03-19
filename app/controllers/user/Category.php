@@ -30,8 +30,9 @@ class Category extends Base_Controller {
         $data = $this->data;
         $data['page'] = 'categories';
         $data['page_title'] .= 'Categories';
-        $data['categories'] = $this->m_category->all_categories();
+        //$data['categories'] = $this->m_category->all_categories();
         $data['content'] = 'v_categories.php';
+        $data['source'] = $this->data['controller'].'/all_categories_json';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 
