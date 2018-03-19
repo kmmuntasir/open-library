@@ -12,6 +12,7 @@
 					<th class="narrow_column">Stock</th>
 					<th class="narrow_column">Available</th>
           <th class="narrow_column">Online Reading</th>
+          <th class="narrow_column">URL Unlocked</th>
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>

@@ -290,6 +290,7 @@ class Book extends Base_Controller {
                 array_push($json_data['data'][$i], $book->book_stock);
                 array_push($json_data['data'][$i], $book->book_available);
                 array_push($json_data['data'][$i], $read_flag);
+                array_push($json_data['data'][$i], $book->book_url_unlocked);
                 array_push($json_data['data'][$i], $book->book_id);
                 
                 ++$i;

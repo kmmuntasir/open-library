@@ -364,8 +364,13 @@ function post_process_books_table() {
 			}
 			else $(this).children('td:nth-child(9)').html('Not Available');
 
+
+			var url_unlocked = $(this).children('td:nth-child(10)').html();
+			if(url_unlocked == 1) $(this).children('td:nth-child(10)').html('<code>Yes</code>');
+			else $(this).children('td:nth-child(10)').html('<code>No</code>');
+
 			var action_buttons = '<a title="View Book Details" href="#" book_id="'+id+'" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a> <a title="Add Copies for this Book" href="#" book_id="'+id+'" class="addCopy btn btn-xs btn-success"><i class="fa fa-copy"></i></a> <a title="Edit Book Details" href="#" book_id="'+id+'" class="edit edit_book btn btn-xs btn-info"><i class="fa fa-pencil"></i></a> <a title="Delete Book" href="'+site_url+'/admin/book/delete/'+id+'" class="delete btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>';
-			$(this).children('td:nth-child(10)').html(action_buttons);
+			$(this).children('td:nth-child(11)').html(action_buttons);
 		}
 
 	});
