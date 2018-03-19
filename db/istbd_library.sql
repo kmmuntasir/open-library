@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-03-20 02:34:57
+Date: 2018-03-20 04:03:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -75,12 +75,12 @@ CREATE TABLE `book` (
 -- ----------------------------
 -- Records of book
 -- ----------------------------
-INSERT INTO `book` VALUES ('34', 'IST_LIBRARY_2', '8676543234676', 'Programming in ANSI C', 'IST_LIBRARY_2', '2016-12-21 18:41:30', 'IST_LIBRARY_1', '4th', 'Delhi, India', '2011', '245', '1', '', '11', '9', 'https://books.google.com.bd/books?id=AokcsKn-1iIC&lpg=PP1&pg=PP1&output=embed', '1');
-INSERT INTO `book` VALUES ('35', 'IST_3', '12345', 'Art of Programming Contest', 'IST_LIBRARY_4', '2016-12-21 20:11:47', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2009', '195', '1', '', '16', '15', 'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf', '0');
+INSERT INTO `book` VALUES ('34', 'IST_LIBRARY_2', '8676543234676', 'Programming in ANSI C', 'IST_LIBRARY_2', '2016-12-21 18:41:30', 'IST_LIBRARY_1', '4th', 'Delhi, India', '2011', '245', '1', '', '11', '10', 'https://books.google.com.bd/books?id=AokcsKn-1iIC&lpg=PP1&pg=PP1&output=embed', '1');
+INSERT INTO `book` VALUES ('35', 'IST_3', '12345', 'Art of Programming Contest', 'IST_LIBRARY_4', '2016-12-21 20:11:47', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2009', '195', '1', '', '16', '14', 'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf', '0');
 INSERT INTO `book` VALUES ('36', 'L_4', '2358094', 'টাইট্রন একটি গ্রহের নাম', 'L_5', '2016-12-21 23:48:54', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2001', '68', '1', '', '7', '6', 'http://download848.mediafire.com/mnocrzt5i9zg/bdoj3r01q09db5k/Titron+Ekti+Groher+Naam+%28allbdbooks.com%29.PDF', '1');
 INSERT INTO `book` VALUES ('37', 'L_5', 'uiy6756gh', 'উচ্চ মাধ্যমিক জ্যামিতি ও ক্যালকুলাস', 'L_5', '2016-12-21 23:50:17', 'IST_LIBRARY_1', '2nd', 'Dhaka, Bangladesh', '2011', '298', '1', '', '6', '5', null, '1');
 INSERT INTO `book` VALUES ('38', 'L_6', 'jkluio789023jod', 'The 8088 and 8086 Microprocessor System', 'IST_LIBRARY_3', '2016-12-21 23:52:48', 'IST_LIBRARY_1', '3rd', 'New Delhi', '2004', '593', '1', '', '10', '9', null, '1');
-INSERT INTO `book` VALUES ('39', 'L_7', '39dkdk', 'Bangla Grammar', 'L_6', '2016-12-21 23:54:28', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2000', '198', '1', '', '10', '8', null, '1');
+INSERT INTO `book` VALUES ('39', 'L_7', '39dkdk', 'Bangla Grammar', 'L_6', '2016-12-21 23:54:28', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2000', '198', '1', '', '10', '9', null, '1');
 INSERT INTO `book` VALUES ('43', 'L_8', '978-0073523323', 'Database System Concepts', 'L_7', '2017-12-23 13:07:08', 'IST_LIBRARY_1', '6th', 'Yale', '2006', '678', '1', '', '1', '0', null, '1');
 
 -- ----------------------------
@@ -97,7 +97,7 @@ CREATE TABLE `book_author` (
   KEY `FK2_book_author_book` (`book_id`),
   CONSTRAINT `FK1_book_author_author` FOREIGN KEY (`author_id`) REFERENCES `author` (`author_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK2_book_author_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of book_author
@@ -111,7 +111,7 @@ INSERT INTO `book_author` VALUES ('47', '', 'L_7', 'L_10');
 INSERT INTO `book_author` VALUES ('49', '', 'L_8', 'L_11');
 INSERT INTO `book_author` VALUES ('50', '', 'L_8', 'L_12');
 INSERT INTO `book_author` VALUES ('51', '', 'L_8', 'L_13');
-INSERT INTO `book_author` VALUES ('52', '', 'IST_3', 'IST_LIBRARY_5');
+INSERT INTO `book_author` VALUES ('54', '', 'IST_3', 'IST_LIBRARY_5');
 
 -- ----------------------------
 -- Table structure for `book_category`
@@ -127,7 +127,7 @@ CREATE TABLE `book_category` (
   KEY `FK2_book_category_book` (`book_id`),
   CONSTRAINT `FK1_book_category_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK2_book_category_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of book_category
@@ -146,8 +146,8 @@ INSERT INTO `book_category` VALUES ('92', '', 'L_7', 'L_11');
 INSERT INTO `book_category` VALUES ('94', '', 'L_8', 'L_12');
 INSERT INTO `book_category` VALUES ('95', '', 'L_8', 'IST_LIBRARY_4');
 INSERT INTO `book_category` VALUES ('96', '', 'L_8', 'IST_LIBRARY_1');
-INSERT INTO `book_category` VALUES ('97', '', 'IST_3', 'IST_LIBRARY_1');
-INSERT INTO `book_category` VALUES ('98', '', 'IST_3', 'IST_LIBRARY_2');
+INSERT INTO `book_category` VALUES ('101', '', 'IST_3', 'IST_LIBRARY_1');
+INSERT INTO `book_category` VALUES ('102', '', 'IST_3', 'IST_LIBRARY_2');
 
 -- ----------------------------
 -- Table structure for `book_copy`
@@ -177,8 +177,8 @@ CREATE TABLE `book_copy` (
 -- Records of book_copy
 -- ----------------------------
 INSERT INTO `book_copy` VALUES ('5', 'IST_LIBRARY_2', 'IST_c_5', '1', '0', '2016-12-21', '93', '1', '', 'IST_LIBRARY_1', '0');
-INSERT INTO `book_copy` VALUES ('26', 'IST_LIBRARY_2', 'IST_c_26', '0', '1', '2016-12-21', '75', '1', '', 'IST_LIBRARY_1', '0');
-INSERT INTO `book_copy` VALUES ('27', 'IST_LIBRARY_2', 'IST_c_27', '0', '1', '2016-12-21', '75', '1', '', 'IST_LIBRARY_1', '0');
+INSERT INTO `book_copy` VALUES ('26', 'IST_LIBRARY_2', 'IST_c_26', '1', '1', '2016-12-21', '75', '1', '', 'IST_LIBRARY_1', '0');
+INSERT INTO `book_copy` VALUES ('27', 'IST_LIBRARY_2', 'IST_c_27', '1', '1', '2016-12-21', '75', '1', '', 'IST_LIBRARY_1', '0');
 INSERT INTO `book_copy` VALUES ('28', 'IST_LIBRARY_2', 'IST_c_28', '1', '1', '2016-12-21', '75', '1', '', 'IST_LIBRARY_1', '0');
 INSERT INTO `book_copy` VALUES ('29', 'IST_LIBRARY_2', 'IST_c_29', '1', '1', '2016-12-21', '75', '1', '', 'IST_LIBRARY_1', '0');
 INSERT INTO `book_copy` VALUES ('30', 'IST_LIBRARY_2', 'IST_c_30', '1', '1', '2016-12-21', '75', '1', '', 'IST_LIBRARY_1', '0');
@@ -232,7 +232,7 @@ INSERT INTO `book_copy` VALUES ('87', 'L_7', 'L_c_87', '1', '1', '2016-12-22', '
 INSERT INTO `book_copy` VALUES ('88', 'L_7', 'L_c_88', '1', '1', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0');
 INSERT INTO `book_copy` VALUES ('89', 'L_7', 'L_c_89', '1', '1', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0');
 INSERT INTO `book_copy` VALUES ('90', 'L_7', 'L_c_90', '1', '1', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0');
-INSERT INTO `book_copy` VALUES ('91', 'L_7', 'L_c_91', '0', '1', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0');
+INSERT INTO `book_copy` VALUES ('91', 'L_7', 'L_c_91', '1', '1', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0');
 INSERT INTO `book_copy` VALUES ('92', 'L_7', 'L_c_92', '1', '1', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0');
 INSERT INTO `book_copy` VALUES ('93', 'L_7', 'L_c_93', '1', '1', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0');
 INSERT INTO `book_copy` VALUES ('94', 'L_7', 'L_c_94', '1', '1', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0');
@@ -310,7 +310,7 @@ CREATE TABLE `issue` (
   CONSTRAINT `FK2_issue_book_copy` FOREIGN KEY (`issue_book_copy_accession_no`) REFERENCES `book_copy` (`book_copy_accession_no`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK3_issue_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK4_issue_manager` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of issue
@@ -319,10 +319,13 @@ INSERT INTO `issue` VALUES ('22', 'L_1', '2018-01-01 15:35:04', '2018-03-14 15:3
 INSERT INTO `issue` VALUES ('23', 'L_2', '2018-01-01 15:35:04', '2018-03-14 15:36:36', '2018-02-01 16:30:00', null, 'IST_LIBRARY_2', 'IST_c_27', 'IST_1', 'IST_LIBRARY_1', '3', 'f&U#ftZ2', 'DUi8dpVJ', '$JFRZwyI', '0GhMTyuw', 'NICW5&WX', 'y7ts1HoZ', '', '82', '82');
 INSERT INTO `issue` VALUES ('24', 'L_3', '2018-03-01 13:03:25', null, null, '2018-03-05 16:30:00', 'IST_3', null, 'IST_1', null, '8', 'ibVRONu#', 'MPEMADPu', '$#BdY0Je', 'nfTEeMnv', 'ZfuEtpfR', 'zvlqnqc0', '', '0', '0');
 INSERT INTO `issue` VALUES ('25', 'L_4', '2018-03-15 13:03:36', null, null, '2018-03-17 16:30:00', 'L_5', null, 'IST_1', null, '8', 'UhMhXK@s', 'aUAVUxZj', 'SVdp3$aI', 'QlSNAdWw', 'Fj2rGiRP', '6knQFOul', '', '0', '0');
-INSERT INTO `issue` VALUES ('26', 'L_5', '2018-03-15 13:08:03', null, '2018-03-30 16:30:00', null, 'IST_LIBRARY_2', 'IST_c_27', 'IST_1', 'IST_LIBRARY_1', '1', 'M@hoC8NW', 'GBnN274D', 'KauFTsmR', 'KUrRPa59', 'MhZey44&', 'QaqqOw3G', '', '0', '0');
-INSERT INTO `issue` VALUES ('27', 'L_6', '2018-01-01 13:08:30', '2018-03-15 13:10:29', '2018-02-01 16:30:00', null, 'L_4', 'L_c_57', 'IST_1', 'IST_LIBRARY_1', '2', 'TvBcwlAY', 'rJIGEhT$', 'w$X3obxR', 'B%Yn95#L', 't$3dK0oi', 'U&YMVlYK', '', '84', '0');
-INSERT INTO `issue` VALUES ('28', 'L_7', '2018-01-01 13:08:30', null, '2018-02-01 16:30:00', null, 'L_7', 'L_c_91', 'IST_1', 'IST_LIBRARY_1', '1', '071tC1s#', 'YgwAbYat', 'PPnnKRlV', 'Kvw19jA2', 'LzYuh%L%', 'xu6tQZHx', '', '0', '0');
+INSERT INTO `issue` VALUES ('26', 'L_5', '2018-03-15 13:08:03', '2018-03-20 03:33:32', '2018-03-30 16:30:00', null, 'IST_LIBRARY_2', 'IST_c_27', 'IST_1', 'IST_LIBRARY_1', '3', 'M@hoC8NW', 'GBnN274D', 'KauFTsmR', 'KUrRPa59', 'MhZey44&', 'QaqqOw3G', '', '0', '0');
+INSERT INTO `issue` VALUES ('27', 'L_6', '2018-01-01 13:08:30', '2018-03-15 13:10:29', '2018-02-01 16:30:00', null, 'L_4', 'L_c_57', 'IST_1', 'IST_LIBRARY_1', '3', 'TvBcwlAY', 'rJIGEhT$', 'w$X3obxR', 'B%Yn95#L', 't$3dK0oi', 'U&YMVlYK', '', '84', '84');
+INSERT INTO `issue` VALUES ('28', 'L_7', '2018-01-01 13:08:30', '2018-03-20 03:33:46', '2018-02-01 16:30:00', null, 'L_7', 'L_c_91', 'IST_1', 'IST_LIBRARY_1', '3', '071tC1s#', 'YgwAbYat', 'PPnnKRlV', 'Kvw19jA2', 'LzYuh%L%', 'xu6tQZHx', '', '94', '94');
 INSERT INTO `issue` VALUES ('29', 'L_8', '2018-03-15 14:51:28', null, null, '2018-03-17 16:30:00', 'L_6', null, 'IST_1', null, '8', 'MfE$Ga4#', 'eXpPZxnX', 'ICb&hwu9', 'bgiO4EVV', 'L2Czy3Q#', 'ZC0WAeou', '', '0', '0');
+INSERT INTO `issue` VALUES ('31', 'L_9', '2018-03-20 03:33:15', '2018-03-20 03:33:27', '2018-04-04 16:30:00', '2018-03-22 16:30:00', 'L_5', 'L_c_61', 'IST_1', 'IST_LIBRARY_1', '3', 'eLHAqFlz', '%k6sv3%&', '79EHielX', 'BfFDzlj9', 'pW6&WKM1', 'oab0NgcS', '', '0', '0');
+INSERT INTO `issue` VALUES ('32', 'L_10', '2018-03-20 03:52:24', null, null, '2018-03-22 16:30:00', 'IST_3', null, 'IST_1', null, '0', 'gqga9HPe', 'SZ3aB#b%', 'ndXXk61F', 'A1WHFvi#', 'k3bdjwrr', 'Wz9LkkB9', '', '0', '0');
+INSERT INTO `issue` VALUES ('33', 'L_11', '2018-03-20 03:58:09', '2018-03-20 04:02:24', '2018-04-04 16:30:00', null, 'L_5', 'L_c_61', 'IST_1', 'IST_LIBRARY_1', '3', 'lup0tDIT', 'MFw#ghE9', 'bCjMmna&', '%hW#U6s#', 'WRtT1JmV', 'RPqXK@eo', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `log`
@@ -335,67 +338,30 @@ CREATE TABLE `log` (
   `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `log_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`,`log_entry_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=257 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=296 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of log
 -- ----------------------------
-INSERT INTO `log` VALUES ('201', 'L_1', 'UPDATE `book` SET `book_available` = 14 WHERE `book_id` = \'IST_3\'', '0', '2018-03-14 15:35:04');
-INSERT INTO `log` VALUES ('202', 'L_202', 'UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'IST_c_37\'', '0', '2018-03-14 15:35:04');
-INSERT INTO `log` VALUES ('203', 'L_203', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_1\', \'2018-03-14 15:35:04\', \'2018-03-29 16:30:00\', \'IST_3\', \'IST_c_37\', \'IST_1\', \'IST_LIBRARY_1\', 1, \'#ZPReea3\', \'cCLshL7s\', \'mslQDI4W\', \'aJMkObY$\', \'IT0KX2uZ\', \'V@JY9b2L\', \'\')', '0', '2018-03-14 15:35:04');
-INSERT INTO `log` VALUES ('204', 'L_204', 'UPDATE `book` SET `book_available` = 9 WHERE `book_id` = \'IST_LIBRARY_2\'', '0', '2018-03-14 15:35:28');
-INSERT INTO `log` VALUES ('205', 'L_205', 'UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'IST_c_27\'', '0', '2018-03-14 15:35:28');
-INSERT INTO `log` VALUES ('206', 'L_206', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_2\', \'2018-03-14 15:35:28\', \'2018-03-29 16:30:00\', \'IST_LIBRARY_2\', \'IST_c_27\', \'IST_1\', \'IST_LIBRARY_1\', 1, \'f&U#ftZ2\', \'DUi8dpVJ\', \'$JFRZwyI\', \'0GhMTyuw\', \'NICW5&WX\', \'y7ts1HoZ\', \'\')', '0', '2018-03-14 15:35:28');
-INSERT INTO `log` VALUES ('207', 'L_207', 'UPDATE `settings` SET `issue_deadline` = \'15\', `issue_auto_expire_deadline` = \'2\', `issue_fine_per_day` = \'20\'', '0', '2018-03-14 15:36:10');
-INSERT INTO `log` VALUES ('208', 'L_208', 'UPDATE `book` SET `book_id` = \'IST_3\', `book_available` = 15 WHERE `book_id` = \'IST_3\'', '0', '2018-03-14 15:36:18');
-INSERT INTO `log` VALUES ('209', 'L_209', 'UPDATE `book_copy` SET `book_copy_accession_no` = \'IST_c_37\', `book_copy_status` = 1 WHERE `book_copy_accession_no` = \'IST_c_37\'', '0', '2018-03-14 15:36:18');
-INSERT INTO `log` VALUES ('210', 'L_210', 'UPDATE `issue` SET `issue_id` = \'L_1\', `issue_status` = 2, `issue_total_fine` = 820, `issue_received_fine` = 0, `issue_return_datetime` = \'2018-03-14 15:36:18\' WHERE `issue_id` = \'L_1\'', '0', '2018-03-14 15:36:18');
-INSERT INTO `log` VALUES ('211', 'L_211', 'UPDATE `settings` SET `issue_deadline` = \'15\', `issue_auto_expire_deadline` = \'2\', `issue_fine_per_day` = \'2\'', '0', '2018-03-14 15:36:28');
-INSERT INTO `log` VALUES ('212', 'L_212', 'UPDATE `book` SET `book_id` = \'IST_LIBRARY_2\', `book_available` = 10 WHERE `book_id` = \'IST_LIBRARY_2\'', '0', '2018-03-14 15:36:36');
-INSERT INTO `log` VALUES ('213', 'L_213', 'UPDATE `book_copy` SET `book_copy_accession_no` = \'IST_c_27\', `book_copy_status` = 1 WHERE `book_copy_accession_no` = \'IST_c_27\'', '0', '2018-03-14 15:36:36');
-INSERT INTO `log` VALUES ('214', 'L_214', 'UPDATE `issue` SET `issue_id` = \'L_2\', `issue_status` = 3, `issue_total_fine` = 82, `issue_received_fine` = 82, `issue_return_datetime` = \'2018-03-14 15:36:36\' WHERE `issue_id` = \'L_2\'', '0', '2018-03-14 15:36:36');
-INSERT INTO `log` VALUES ('215', 'L_215', 'UPDATE `issue` SET `issue_id` = \'L_1\', `issue_status` = 3, `issue_received_fine` = \'820\' WHERE `issue_id` = \'L_1\'', '0', '2018-03-14 15:36:43');
-INSERT INTO `log` VALUES ('216', 'L_216', 'INSERT INTO `manager` (`manager_name`, `manager_phone`, `manager_email`, `manager_user`, `manager_id`, `manager_pass`) VALUES (\'test\', \'ieeri\', \'lkasd@gm.com\', \'32jsd\', \'L_4\', \'202cb962ac59075b964b07152d234b70\')', '0', '2018-03-15 12:06:30');
-INSERT INTO `log` VALUES ('217', 'L_217', 'UPDATE `manager` SET `is_deleted` = 1, `manager_user` = \'\' WHERE `manager_id` = \'L_4\'', '0', '2018-03-15 12:06:46');
-INSERT INTO `log` VALUES ('218', 'L_218', 'DELETE FROM `author` WHERE `author_id` = \'L_9\'', '0', '2018-03-15 12:49:15');
-INSERT INTO `log` VALUES ('219', 'L_219', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_auto_expire_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_3\', \'2018-03-15 13:03:25\', \'2018-03-17 16:30:00\', \'IST_3\', \'IST_1\', 9, \'ibVRONu#\', \'MPEMADPu\', \'$#BdY0Je\', \'nfTEeMnv\', \'ZfuEtpfR\', \'zvlqnqc0\', \'\')', '0', '2018-03-15 13:03:25');
-INSERT INTO `log` VALUES ('220', 'L_220', 'UPDATE `book` SET `book_id` = \'IST_3\', `book_available` = 14 WHERE `book_id` = \'IST_3\'', '0', '2018-03-15 13:03:31');
-INSERT INTO `log` VALUES ('221', 'L_221', 'UPDATE `issue` SET `issue_id` = \'L_3\', `issue_status` = 0 WHERE `issue_id` = \'L_3\'', '0', '2018-03-15 13:03:31');
-INSERT INTO `log` VALUES ('222', 'L_222', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_auto_expire_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_4\', \'2018-03-15 13:03:36\', \'2018-03-17 16:30:00\', \'L_5\', \'IST_1\', 9, \'UhMhXK@s\', \'aUAVUxZj\', \'SVdp3$aI\', \'QlSNAdWw\', \'Fj2rGiRP\', \'6knQFOul\', \'\')', '0', '2018-03-15 13:03:36');
-INSERT INTO `log` VALUES ('223', 'L_223', 'UPDATE `book` SET `book_id` = \'L_5\', `book_available` = 4 WHERE `book_id` = \'L_5\'', '0', '2018-03-15 13:03:38');
-INSERT INTO `log` VALUES ('224', 'L_224', 'UPDATE `issue` SET `issue_id` = \'L_4\', `issue_status` = 0 WHERE `issue_id` = \'L_4\'', '0', '2018-03-15 13:03:38');
-INSERT INTO `log` VALUES ('225', 'L_225', 'UPDATE `book` SET `book_available` = 9 WHERE `book_id` = \'IST_LIBRARY_2\'', '0', '2018-03-15 13:08:03');
-INSERT INTO `log` VALUES ('226', 'L_226', 'UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'IST_c_27\'', '0', '2018-03-15 13:08:03');
-INSERT INTO `log` VALUES ('227', 'L_227', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_5\', \'2018-03-15 13:08:03\', \'2018-03-30 16:30:00\', \'IST_LIBRARY_2\', \'IST_c_27\', \'IST_1\', \'IST_LIBRARY_1\', 1, \'M@hoC8NW\', \'GBnN274D\', \'KauFTsmR\', \'KUrRPa59\', \'MhZey44&\', \'QaqqOw3G\', \'\')', '0', '2018-03-15 13:08:03');
-INSERT INTO `log` VALUES ('228', 'L_228', 'UPDATE `book` SET `book_available` = 5 WHERE `book_id` = \'L_4\'', '0', '2018-03-15 13:08:30');
-INSERT INTO `log` VALUES ('229', 'L_229', 'UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'L_c_57\'', '0', '2018-03-15 13:08:30');
-INSERT INTO `log` VALUES ('230', 'L_230', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_6\', \'2018-03-15 13:08:30\', \'2018-03-30 16:30:00\', \'L_4\', \'L_c_57\', \'IST_1\', \'IST_LIBRARY_1\', 1, \'TvBcwlAY\', \'rJIGEhT$\', \'w$X3obxR\', \'B%Yn95#L\', \'t$3dK0oi\', \'U&YMVlYK\', \'\')', '0', '2018-03-15 13:08:30');
-INSERT INTO `log` VALUES ('231', 'L_231', 'UPDATE `book` SET `book_available` = 8 WHERE `book_id` = \'L_7\'', '0', '2018-03-15 13:09:24');
-INSERT INTO `log` VALUES ('232', 'L_232', 'UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'L_c_91\'', '0', '2018-03-15 13:09:24');
-INSERT INTO `log` VALUES ('233', 'L_233', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_7\', \'2018-03-15 13:09:24\', \'2018-03-30 16:30:00\', \'L_7\', \'L_c_91\', \'IST_1\', \'IST_LIBRARY_1\', 1, \'071tC1s#\', \'YgwAbYat\', \'PPnnKRlV\', \'Kvw19jA2\', \'LzYuh%L%\', \'xu6tQZHx\', \'\')', '0', '2018-03-15 13:09:24');
-INSERT INTO `log` VALUES ('234', 'L_234', 'UPDATE `book` SET `book_id` = \'L_4\', `book_available` = 6 WHERE `book_id` = \'L_4\'', '0', '2018-03-15 13:10:29');
-INSERT INTO `log` VALUES ('235', 'L_235', 'UPDATE `book_copy` SET `book_copy_accession_no` = \'L_c_57\', `book_copy_status` = 1 WHERE `book_copy_accession_no` = \'L_c_57\'', '0', '2018-03-15 13:10:29');
-INSERT INTO `log` VALUES ('236', 'L_236', 'UPDATE `issue` SET `issue_id` = \'L_6\', `issue_status` = 2, `issue_total_fine` = 84, `issue_received_fine` = 0, `issue_return_datetime` = \'2018-03-15 13:10:29\' WHERE `issue_id` = \'L_6\'', '0', '2018-03-15 13:10:29');
-INSERT INTO `log` VALUES ('237', 'L_237', 'UPDATE `settings` SET `issue_deadline` = \'15\', `issue_auto_expire_deadline` = \'2\', `issue_fine_per_day` = \'20\'', '0', '2018-03-15 13:11:34');
-INSERT INTO `log` VALUES ('238', 'L_238', 'UPDATE `settings` SET `issue_deadline` = \'15\', `issue_auto_expire_deadline` = \'2\', `issue_fine_per_day` = \'2\'', '0', '2018-03-15 13:11:44');
-INSERT INTO `log` VALUES ('239', 'L_239', 'UPDATE `book` SET `book_title` = \'Art of Programming Contest\', `book_isbn` = \'12345\', `publication_id` = \'IST_LIBRARY_4\', `book_edition` = \'1st\', `book_place_of_pub` = \'Dhaka, Bangladesh\', `book_year_of_pub` = \'2009\', `book_pages` = \'195\', `book_status` = \'1\', `book_url` = \'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'IST_3\'', '0', '2018-03-15 14:38:20');
-INSERT INTO `log` VALUES ('240', 'L_240', 'DELETE FROM `book_author` WHERE `book_id` = \'IST_3\'', '0', '2018-03-15 14:38:20');
-INSERT INTO `log` VALUES ('241', 'L_241', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'IST_LIBRARY_5\',\'IST_3\')', '0', '2018-03-15 14:38:20');
-INSERT INTO `log` VALUES ('242', 'L_242', 'DELETE FROM `book_category` WHERE `book_id` = \'IST_3\'', '0', '2018-03-15 14:38:20');
-INSERT INTO `log` VALUES ('243', 'L_243', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'IST_3\',\'IST_LIBRARY_1\'), (\'IST_3\',\'IST_LIBRARY_2\')', '0', '2018-03-15 14:38:20');
-INSERT INTO `log` VALUES ('244', 'L_244', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_auto_expire_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_8\', \'2018-03-15 14:51:28\', \'2018-03-17 16:30:00\', \'L_6\', \'IST_1\', 9, \'MfE$Ga4#\', \'eXpPZxnX\', \'ICb&hwu9\', \'bgiO4EVV\', \'L2Czy3Q#\', \'ZC0WAeou\', \'\')', '0', '2018-03-15 14:51:28');
-INSERT INTO `log` VALUES ('245', 'L_245', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 8 WHERE `book_id` = \'L_6\'', '0', '2018-03-15 14:51:30');
-INSERT INTO `log` VALUES ('246', 'L_246', 'UPDATE `issue` SET `issue_id` = \'L_8\', `issue_status` = 0 WHERE `issue_id` = \'L_8\'', '0', '2018-03-15 14:51:30');
-INSERT INTO `log` VALUES ('247', 'L_247', 'INSERT INTO `book_copy` (`book_copy_accession_no`, `book_copy_date`, `book_copy_manager_id`, `book_copy_price`, `book_copy_remarks`, `book_copy_source`, `book_copy_status`, `book_copy_type`, `book_id`) VALUES (\'L_c_105\',\'2018-03-15\',\'IST_LIBRARY_1\',\'120\',\'\',\'1\',1,\'0\',\'L_4\')', '0', '2018-03-15 14:55:01');
-INSERT INTO `log` VALUES ('248', 'L_248', 'UPDATE `book` SET `book_stock` = 7 WHERE `book_id` = \'L_4\'', '0', '2018-03-15 14:55:01');
-INSERT INTO `log` VALUES ('249', 'L_249', 'UPDATE `settings` SET `issue_deadline` = \'15\', `issue_auto_expire_deadline` = \'2\', `currency_before` = \'BDT\', `issue_fine_per_day` = \'2\', `currency_after` = \'/=\'', '0', '2018-03-16 02:30:35');
-INSERT INTO `log` VALUES ('250', 'L_250', 'UPDATE `settings` SET `issue_deadline` = \'15\', `issue_auto_expire_deadline` = \'2\', `currency_before` = \'BDT \', `issue_fine_per_day` = \'2\', `currency_after` = \'/=\'', '0', '2018-03-16 02:30:43');
-INSERT INTO `log` VALUES ('251', 'L_251', 'UPDATE `book` SET `book_id` = \'IST_3\', `book_available` = 15 WHERE `book_id` = \'IST_3\'', '0', '2018-03-19 13:07:20');
-INSERT INTO `log` VALUES ('252', 'L_252', 'UPDATE `issue` SET `issue_id` = \'L_3\', `issue_status` = 8 WHERE `issue_id` = \'L_3\'', '0', '2018-03-19 13:07:20');
-INSERT INTO `log` VALUES ('253', 'L_253', 'UPDATE `book` SET `book_id` = \'L_5\', `book_available` = 5 WHERE `book_id` = \'L_5\'', '0', '2018-03-19 13:07:20');
-INSERT INTO `log` VALUES ('254', 'L_254', 'UPDATE `issue` SET `issue_id` = \'L_4\', `issue_status` = 8 WHERE `issue_id` = \'L_4\'', '0', '2018-03-19 13:07:20');
-INSERT INTO `log` VALUES ('255', 'L_255', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 9 WHERE `book_id` = \'L_6\'', '0', '2018-03-19 13:07:20');
-INSERT INTO `log` VALUES ('256', 'L_256', 'UPDATE `issue` SET `issue_id` = \'L_8\', `issue_status` = 8 WHERE `issue_id` = \'L_8\'', '0', '2018-03-19 13:07:20');
+INSERT INTO `log` VALUES ('277', 'L_1', 'UPDATE `book` SET `book_title` = \'Art of Programming Contestt\', `book_isbn` = \'12345\', `publication_id` = \'IST_LIBRARY_4\', `book_edition` = \'1st\', `book_place_of_pub` = \'Dhaka, Bangladesh\', `book_year_of_pub` = \'2009\', `book_pages` = \'195\', `book_status` = \'1\', `book_url` = \'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'IST_3\'', '1', '2018-03-20 03:51:37');
+INSERT INTO `log` VALUES ('278', 'L_278', 'DELETE FROM `book_author` WHERE `book_id` = \'IST_3\'', '1', '2018-03-20 03:51:37');
+INSERT INTO `log` VALUES ('279', 'L_279', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'IST_LIBRARY_5\',\'IST_3\')', '1', '2018-03-20 03:51:37');
+INSERT INTO `log` VALUES ('280', 'L_280', 'DELETE FROM `book_category` WHERE `book_id` = \'IST_3\'', '1', '2018-03-20 03:51:37');
+INSERT INTO `log` VALUES ('281', 'L_281', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'IST_3\',\'IST_LIBRARY_1\'), (\'IST_3\',\'IST_LIBRARY_2\')', '1', '2018-03-20 03:51:37');
+INSERT INTO `log` VALUES ('282', 'L_282', 'UPDATE `book` SET `book_title` = \'Art of Programming Contest\', `book_isbn` = \'12345\', `publication_id` = \'IST_LIBRARY_4\', `book_edition` = \'1st\', `book_place_of_pub` = \'Dhaka, Bangladesh\', `book_year_of_pub` = \'2009\', `book_pages` = \'195\', `book_status` = \'1\', `book_url` = \'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'IST_3\'', '1', '2018-03-20 03:51:58');
+INSERT INTO `log` VALUES ('283', 'L_283', 'DELETE FROM `book_author` WHERE `book_id` = \'IST_3\'', '1', '2018-03-20 03:51:58');
+INSERT INTO `log` VALUES ('284', 'L_284', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'IST_LIBRARY_5\',\'IST_3\')', '1', '2018-03-20 03:51:58');
+INSERT INTO `log` VALUES ('285', 'L_285', 'DELETE FROM `book_category` WHERE `book_id` = \'IST_3\'', '1', '2018-03-20 03:51:58');
+INSERT INTO `log` VALUES ('286', 'L_286', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'IST_3\',\'IST_LIBRARY_1\'), (\'IST_3\',\'IST_LIBRARY_2\')', '1', '2018-03-20 03:51:58');
+INSERT INTO `log` VALUES ('287', 'L_287', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_auto_expire_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_10\', \'2018-03-20 03:52:24\', \'2018-03-22 16:30:00\', \'IST_3\', \'IST_1\', 9, \'gqga9HPe\', \'SZ3aB#b%\', \'ndXXk61F\', \'A1WHFvi#\', \'k3bdjwrr\', \'Wz9LkkB9\', \'\')', '1', '2018-03-20 03:52:24');
+INSERT INTO `log` VALUES ('288', 'L_288', 'UPDATE `book` SET `book_id` = \'IST_3\', `book_available` = 14 WHERE `book_id` = \'IST_3\'', '1', '2018-03-20 03:52:26');
+INSERT INTO `log` VALUES ('289', 'L_289', 'UPDATE `issue` SET `issue_id` = \'L_10\', `issue_status` = 0 WHERE `issue_id` = \'L_10\'', '1', '2018-03-20 03:52:26');
+INSERT INTO `log` VALUES ('290', 'L_290', 'UPDATE `book` SET `book_available` = 4 WHERE `book_id` = \'L_5\'', '1', '2018-03-20 03:58:09');
+INSERT INTO `log` VALUES ('291', 'L_291', 'UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'L_c_61\'', '1', '2018-03-20 03:58:09');
+INSERT INTO `log` VALUES ('292', 'L_292', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_11\', \'2018-03-20 03:58:09\', \'2018-04-04 16:30:00\', \'L_5\', \'L_c_61\', \'IST_1\', \'IST_LIBRARY_1\', 1, \'lup0tDIT\', \'MFw#ghE9\', \'bCjMmna&\', \'%hW#U6s#\', \'WRtT1JmV\', \'RPqXK@eo\', \'\')', '1', '2018-03-20 03:58:10');
+INSERT INTO `log` VALUES ('293', 'L_293', 'UPDATE `book` SET `book_id` = \'L_5\', `book_available` = 5 WHERE `book_id` = \'L_5\'', '1', '2018-03-20 04:02:24');
+INSERT INTO `log` VALUES ('294', 'L_294', 'UPDATE `book_copy` SET `book_copy_accession_no` = \'L_c_61\', `book_copy_status` = 1 WHERE `book_copy_accession_no` = \'L_c_61\'', '1', '2018-03-20 04:02:24');
+INSERT INTO `log` VALUES ('295', 'L_295', 'UPDATE `issue` SET `issue_id` = \'L_11\', `issue_status` = 3, `issue_return_datetime` = \'2018-03-20 04:02:24\' WHERE `issue_id` = \'L_11\'', '1', '2018-03-20 04:02:24');
 
 -- ----------------------------
 -- Table structure for `manager`
@@ -464,7 +430,7 @@ CREATE TABLE `server` (
 -- ----------------------------
 -- Records of server
 -- ----------------------------
-INSERT INTO `server` VALUES ('1', 'remote', 'http://localhost/library.ist.edu.bd_online/index.php', '2018-03-14 15:34:59', '1', '0', 'HF1EBAvrgB');
+INSERT INTO `server` VALUES ('1', 'remote', 'http://library.ist.edu.bd/index.php', '2018-03-20 04:03:29', '1', '0', 'HF1EBAvrgB');
 
 -- ----------------------------
 -- Table structure for `settings`

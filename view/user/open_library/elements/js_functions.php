@@ -568,10 +568,14 @@
 						book = '<a href="'+site_url+'user/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') '+book_json[1]+'</a>';
 						$(this).children('td:nth-child(2)').html(book);
 					}
+					var stat = $(this).children('td:nth-child(5)').html();
+
+					var status_button = '<button type="button" class="btn btn-xs btn-'+issue_status_class(stat)+'">'+issue_status(stat)+'</button>';
+					$(this).children('td:nth-child(5)').html(status_button);	
 
 					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
 
-					$(this).children('td:nth-child(5)').html(action_buttons);
+					$(this).children('td:nth-child(6)').html(action_buttons);
 				}
 
 			});

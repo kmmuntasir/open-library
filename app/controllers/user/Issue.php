@@ -91,7 +91,7 @@ class Issue extends Base_Controller {
                 }
                 if($data_page == 'overdue')
                     array_push($json_data['data'][$i], $issue->issue_fine);
-                if($data_page == 'all_issues' || $data_page == 'issue_by_user' || $data_page == 'issue_by_book' || $data_page == 'issue_by_book_copy')
+                if($data_page == 'request' || $data_page == 'all_issues' || $data_page == 'issue_by_user' || $data_page == 'issue_by_book' || $data_page == 'issue_by_book_copy')
                     array_push($json_data['data'][$i], $issue->issue_status);
                 array_push($json_data['data'][$i], $issue->issue_id);
                 ++$i;
