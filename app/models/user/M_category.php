@@ -5,6 +5,7 @@ class M_category extends Ci_model {
     // Basic Functions
 
     public function all_categories() {
+        $this->db->select('category_name, category_id');
         return $this->db->get('category')->result();
     }
 

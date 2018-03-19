@@ -35,6 +35,12 @@ class Category extends Base_Controller {
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 
+
+    public function all_categories_json() {
+        $categories = $this->m_category->all_categories();
+        echo $this->to_datatable_json_format($categories, 1, 1);
+    }
+
     public function single_category($category_id=NULL) {
         if(!$category_id) echo false;
         echo json_encode($this->m_category->get_single_category($category_id));

@@ -1,8 +1,41 @@
 <script>
 	$(document).ready(function(){
 		var site_url = "<?php echo site_url(); ?>/";
+		
+
 		// Datatables Functions
-	    $('.datatable').DataTable();
+		var datatable_source = $('.datatable').attr('data-source');
+		var datapage = $('.datatable').attr('data-page');
+		
+	    var dtable = $('.datatable').DataTable({
+            "ajax": datatable_source,
+            "deferRender": true,
+            "pageLength": 10,
+            "drawCallback": function() {
+            	post_process_datatable(datapage);
+            },
+            //"order": [[ 2, "asc" ]],
+            //dom: 'lfrtip',
+            initComplete: function() {
+                //post_process_datatable(datapage);
+            }
+            //responsive: true
+        });
+
+        function post_process_datatable(page) {
+        // 	if(page == 'students') post_process_students_table();
+        // 	else if(page == 'teachers') post_process_teachers_table();
+        // 	else if(page == 'books') post_process_books_table();
+        // 	else if(page == 'managers') post_process_managers_table();
+        // 	else if(page == 'categories') post_process_categories_table();
+        // 	else if(page == 'authors') post_process_authors_table();
+        // 	else if(page == 'publications') post_process_publications_table();
+        // 	else if(page == 'request') post_process_issue_requests_table();
+        // 	else if(page == 'active') post_process_active_issues_table();
+        // 	else if(page == 'overdue') post_process_overdue_issues_table();
+        // 	else if(page == 'completed') post_process_completed_issues_table();
+        // 	else if(page == 'all_issues') post_process_all_issues_table();
+        // }
 
 	    $(document).on('click', '#add_button', function() {
 	    	$('#myModal').removeClass('hide');
@@ -392,4 +425,27 @@
 			});
 		<?php } ?>
 	});
+
+// ----------------------------- Post Process Datatables Functions ----------------------------- //
+
+
+function post_process_categories_table() {
+	$('.datatable tbody tr').each(function(){ 
+		var p_flag = $(this).attr('rendered');
+		if(p_flag != null) return;
+		$(this).attr('rendered', 'yes');
+
+		var id = $(this).children('td:nth-child(2)').html();
+		if(id != null) {
+			var category_name = $(this).children('td:nth-child(1)').html();
+			category = '<a href="'+site_url+'/admin/book/book_by_filter/2/'+id+'" title="View All Books of this Category">'+category_name+'</a>';
+			$(this).children('td:nth-child(1)').html(category)
+
+		}
+
+	});
+}
+
+
+
 </script>
