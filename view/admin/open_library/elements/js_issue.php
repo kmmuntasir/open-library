@@ -423,3 +423,94 @@ function post_process_all_issues_table() {
 
 	});
 }
+
+
+function post_process_issue_by_user_table() {
+	$('.datatable tbody tr').each(function(){ 
+		var p_flag = $(this).attr('rendered');
+		if(p_flag != null) return;
+		$(this).attr('rendered', 'yes');
+
+		var id = $(this).children('td:nth-child(1)').html();
+
+		if(id != null) {
+			var book = $(this).children('td:nth-child(2)').html();
+			if(book != null) {
+				var book_json = $.parseJSON(book);
+				//console.log(book_json);
+				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+				$(this).children('td:nth-child(2)').html(book);
+			}
+
+			var stat = $(this).children('td:nth-child(8)').html();
+
+			var status_button = '<button type="button" class="btn btn-xs btn-'+issue_status_class(stat)+'">'+issue_status(stat)+'</button>';
+			$(this).children('td:nth-child(8)').html(status_button);			
+
+			var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
+
+			$(this).children('td:nth-child(9)').html(action_buttons);
+		}
+
+	});
+}
+
+
+function post_process_issue_by_book_table() {
+	$('.datatable tbody tr').each(function(){ 
+		var p_flag = $(this).attr('rendered');
+		if(p_flag != null) return;
+		$(this).attr('rendered', 'yes');
+
+		var id = $(this).children('td:nth-child(1)').html();
+
+		if(id != null) {
+			var user = $(this).children('td:nth-child(2)').html();
+			if(user != null) {
+				var user_json = $.parseJSON(user);
+				//console.log(user_json);
+				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+				$(this).children('td:nth-child(2)').html(user);
+			}
+			var stat = $(this).children('td:nth-child(8)').html();
+
+			var status_button = '<button type="button" class="btn btn-xs btn-'+issue_status_class(stat)+'">'+issue_status(stat)+'</button>';
+			$(this).children('td:nth-child(8)').html(status_button);			
+
+			var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
+
+			$(this).children('td:nth-child(9)').html(action_buttons);
+		}
+
+	});
+}
+
+
+function post_process_issue_by_book_copy_table() {
+	$('.datatable tbody tr').each(function(){ 
+		var p_flag = $(this).attr('rendered');
+		if(p_flag != null) return;
+		$(this).attr('rendered', 'yes');
+
+		var id = $(this).children('td:nth-child(1)').html();
+
+		if(id != null) {
+			var user = $(this).children('td:nth-child(2)').html();
+			if(user != null) {
+				var user_json = $.parseJSON(user);
+				//console.log(user_json);
+				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+				$(this).children('td:nth-child(2)').html(user);
+			}
+			var stat = $(this).children('td:nth-child(8)').html();
+
+			var status_button = '<button type="button" class="btn btn-xs btn-'+issue_status_class(stat)+'">'+issue_status(stat)+'</button>';
+			$(this).children('td:nth-child(8)').html(status_button);			
+
+			var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
+
+			$(this).children('td:nth-child(9)').html(action_buttons);
+		}
+
+	});
+}

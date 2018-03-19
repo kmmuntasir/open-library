@@ -53,6 +53,9 @@
         	else if(page == 'overdue') post_process_overdue_issues_table();
         	else if(page == 'completed') post_process_completed_issues_table();
         	else if(page == 'all_issues') post_process_all_issues_table();
+        	else if(page == 'issue_by_user') post_process_issue_by_user_table();
+        	else if(page == 'issue_by_book') post_process_issue_by_book_table();
+        	else if(page == 'issue_by_book_copy') post_process_issue_by_book_copy_table();
         }
 
 	    $(document).on('click', '#add_button', function() {

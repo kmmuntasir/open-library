@@ -35,6 +35,9 @@ class Issue extends Base_Controller {
         $data['page'] = 'issue';
         $data['subpage'] = 'requests';
         $data['page_title'] .= 'Issue Requests';
+        $data['source'] = $this->data['controller'].'/issue_json/request';
+        $data['data_page'] = 'request';
+        
         $data['issues'] = $this->m_issue->all_issue_requests();
         foreach($data['issues'] as $key=> $issue) {
             if(($issue->issue_status == 9 || $issue->issue_status == 0) && strtotime($issue->issue_auto_expire_datetime) < time())
@@ -63,6 +66,62 @@ class Issue extends Base_Controller {
         $data['content'] = 'v_issue.php';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
+
+    public function issue_json($data_page = 'request') {
+        if($data_page == 'request') $issues = $this->m_issue->all_issue_requests();
+        else if($data_page == 'active') $issues = $this->m_issue->all_active_issues();
+        else if($data_page == 'overdue') $issues = $this->m_issue->all_overdue_issues();
+        else if($data_page == 'completed') $issues = $this->m_issue->all_completed_issues();
+        else if($data_page == 'all_issues') $issues = $this->m_issue->all_issues();
+
+        //$this->printer($issues, true);
+        $json_data = array('data' => array());
+        $i=0;
+        $test_multiplier = 1;
+        for($m = 0; $m < $test_multiplier; ++$m) {
+            foreach($issues as $key=>$issue) {
+                if($data_page == 'overdue' || $data_page == 'all_issues') {
+                    $result = $this->calculate_fine($issue);
+                    $issue->issue_overdue = $result['overdue'];
+                    $issue->issue_fine = $result['fine'];
+                    $issue->issue_status = $this->check_issue_status($issue);
+                }
+                $json_data['data'][$i] = array();
+                
+                array_push($json_data['data'][$i], $issue->issue_id);
+                array_push($json_data['data'][$i], json_encode(array($issue->user_id, $issue->user_name, $issue->is_teacher)));
+                if($data_page == 'request')
+                    array_push($json_data['data'][$i], json_encode(array($issue->book_id, $issue->book_title)));
+                if($data_page == 'active' || $data_page == 'overdue' || $data_page == 'completed' || $data_page == 'all_issues')
+                    array_push($json_data['data'][$i], json_encode(array($issue->book_id, $issue->book_title, $issue->issue_book_copy_accession_no)));
+                array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_datetime));
+                if($data_page == 'request' || $data_page == 'all_issues') {
+                    if($issue->issue_status == 0 || $issue->issue_status == 8) array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_auto_expire_datetime));
+                    else array_push($json_data['data'][$i], '');
+                }
+                if($data_page == 'active' || $data_page == 'overdue' || $data_page == 'all_issues') {
+                    if($issue->issue_status != 0 && $issue->issue_status != 8)
+                        array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_deadline));
+                    else array_push($json_data['data'][$i], '');
+                }
+                if($data_page == 'all_issues')
+                    array_push($json_data['data'][$i], $issue->issue_fine);
+                if($data_page == 'completed' || $data_page == 'all_issues') {
+                    if($issue->issue_status == 2 || $issue->issue_status == 3)
+                        array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_return_datetime));
+                    else array_push($json_data['data'][$i], ''); 
+                }
+                if($data_page == 'overdue')
+                    array_push($json_data['data'][$i], $issue->issue_fine);
+                if($data_page == 'all_issues')
+                    array_push($json_data['data'][$i], $issue->issue_status);
+                array_push($json_data['data'][$i], $issue->issue_id);
+                ++$i;
+            }
+        }
+        //$this->printer($json_data);
+        echo json_encode($json_data);
+    }
 
     public function single_issue_details($issue_id=NULL) {
         if(!$issue_id) echo '';

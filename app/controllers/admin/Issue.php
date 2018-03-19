@@ -43,12 +43,16 @@ class Issue extends Base_Controller {
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 
-    public function issue_json($data_page = 'request') {
+    public function issue_json($data_page = 'request', $id=NULL) {
         if($data_page == 'request') $issues = $this->m_issue->all_issue_requests();
         else if($data_page == 'active') $issues = $this->m_issue->all_active_issues();
         else if($data_page == 'overdue') $issues = $this->m_issue->all_overdue_issues();
         else if($data_page == 'completed') $issues = $this->m_issue->all_completed_issues();
         else if($data_page == 'all_issues') $issues = $this->m_issue->all_issues();
+        else if($data_page == 'issue_by_user' && $id != NULL) $issues = $this->m_issue->all_issue_by_user($id);
+        else if($data_page == 'issue_by_book' && $id != NULL) $issues = $this->m_issue->all_issue_by_book($id);
+        else if($data_page == 'issue_by_book_copy' && $id != NULL) $issues = $this->m_issue->all_issue_by_book_copy($id);
+        else $this->redirect_msg('/admin/issue', 'Something Went Wrong', 'danger');
 
         //$this->printer($issues, true);
         $json_data = array('data' => array());
@@ -56,7 +60,7 @@ class Issue extends Base_Controller {
         $test_multiplier = 1;
         for($m = 0; $m < $test_multiplier; ++$m) {
             foreach($issues as $key=>$issue) {
-                if($data_page == 'overdue' || $data_page == 'all_issues') {
+                if($data_page == 'overdue' || $data_page == 'all_issues' || $data_page == 'issue_by_user' || $data_page == 'issue_by_book' || $data_page == 'issue_by_book_copy') {
                     $result = $this->calculate_fine($issue);
                     $issue->issue_overdue = $result['overdue'];
                     $issue->issue_fine = $result['fine'];
@@ -65,37 +69,37 @@ class Issue extends Base_Controller {
                 $json_data['data'][$i] = array();
                 
                 array_push($json_data['data'][$i], $issue->issue_id);
-                array_push($json_data['data'][$i], json_encode(array($issue->user_id, $issue->user_name, $issue->is_teacher)));
+                if($data_page != 'issue_by_user') array_push($json_data['data'][$i], json_encode(array($issue->user_id, $issue->user_name, $issue->is_teacher)));
                 if($data_page == 'request')
                     array_push($json_data['data'][$i], json_encode(array($issue->book_id, $issue->book_title)));
-                if($data_page == 'active' || $data_page == 'overdue' || $data_page == 'completed' || $data_page == 'all_issues')
+                if($data_page == 'active' || $data_page == 'overdue' || $data_page == 'completed' || $data_page == 'all_issues' || $data_page == 'issue_by_user')
                     array_push($json_data['data'][$i], json_encode(array($issue->book_id, $issue->book_title, $issue->issue_book_copy_accession_no)));
                 array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_datetime));
-                if($data_page == 'request' || $data_page == 'all_issues') {
+                if($data_page == 'request' || $data_page == 'all_issues' || $data_page == 'issue_by_user' || $data_page == 'issue_by_book' || $data_page == 'issue_by_book_copy') {
                     if($issue->issue_status == 0 || $issue->issue_status == 8) array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_auto_expire_datetime));
                     else array_push($json_data['data'][$i], '');
                 }
-                if($data_page == 'active' || $data_page == 'overdue' || $data_page == 'all_issues') {
+                if($data_page == 'active' || $data_page == 'overdue' || $data_page == 'all_issues' || $data_page == 'issue_by_user' || $data_page == 'issue_by_book' || $data_page == 'issue_by_book_copy') {
                     if($issue->issue_status != 0 && $issue->issue_status != 8)
                         array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_deadline));
                     else array_push($json_data['data'][$i], '');
                 }
-                if($data_page == 'all_issues')
+                if($data_page == 'all_issues' || $data_page == 'issue_by_user' || $data_page == 'issue_by_book' || $data_page == 'issue_by_book_copy')
                     array_push($json_data['data'][$i], $issue->issue_fine);
-                if($data_page == 'completed' || $data_page == 'all_issues') {
+                if($data_page == 'completed' || $data_page == 'all_issues' || $data_page == 'issue_by_user' || $data_page == 'issue_by_book' || $data_page == 'issue_by_book_copy') {
                     if($issue->issue_status == 2 || $issue->issue_status == 3)
                         array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_return_datetime));
                     else array_push($json_data['data'][$i], ''); 
                 }
                 if($data_page == 'overdue')
                     array_push($json_data['data'][$i], $issue->issue_fine);
-                if($data_page == 'all_issues')
+                if($data_page == 'all_issues' || $data_page == 'issue_by_user' || $data_page == 'issue_by_book' || $data_page == 'issue_by_book_copy')
                     array_push($json_data['data'][$i], $issue->issue_status);
                 array_push($json_data['data'][$i], $issue->issue_id);
                 ++$i;
             }
         }
-        //$this->printer($json_data);
+        //$this->printer($json_data, true);
         echo json_encode($json_data);
     }
 
@@ -194,32 +198,8 @@ class Issue extends Base_Controller {
         $data['page'] = 'issue';
         $data['subpage'] = 'all';
         $data['page_title'] .= 'All Issues';
-        $data['issues'] = $this->m_issue->all_issues();
         $data['source'] = $this->data['controller'].'/issue_json/all_issues';
         $data['data_page'] = 'all_issues';
-
-        foreach($data['issues'] as $key=> $issue) {
-            if(($issue->issue_status == 9 || $issue->issue_status == 0) && strtotime($issue->issue_auto_expire_datetime) < time())
-                $data['issues'][$key]->issue_status = 8; // Expired
-            if($issue->issue_status == 1 && strtotime($issue->issue_deadline) < time() && !$issue->is_teacher) {
-                $data['issues'][$key]->issue_status = -1;
-
-                $now = time(); 
-                $deadline = strtotime($issue->issue_deadline);
-                $datediff = $now - $deadline;
-
-                $diff = ceil($datediff / (60 * 60 * 24));
-
-                $data['issues'][$key]->issue_overdue = $diff.' days';
-
-                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
-            }
-            else{ 
-                if($issue->issue_status !=2) $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
-                else $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
-            }
-        }
-
         $data['content'] = 'v_issue.php';
         $this->load->view($this->viewpath.'v_main', $data);
     }
@@ -302,30 +282,13 @@ class Issue extends Base_Controller {
         $user_type = ($user->is_teacher)?'Teacher':'Student';
         $data = $this->data;
         $data['page'] = 'issue';
-        $data['subpage'] = 'issue_by_student';
+        $data['subpage'] = 'issue_by_user';
         $data['page_title'] .= $user_type.' Issue History';
-        $data['issues'] = $this->m_issue->all_issue_by_user($user_id);
-        foreach($data['issues'] as $key=> $issue) {
-            if(($issue->issue_status == 9 || $issue->issue_status == 0) && strtotime($issue->issue_auto_expire_datetime) < time())
-                $data['issues'][$key]->issue_status = 8; // Expired
-            if($issue->issue_status == 1 && strtotime($issue->issue_deadline) < time()) {
-                $data['issues'][$key]->issue_status = -1;
+        //$data['issues'] = $this->m_issue->all_issue_by_user($user_id);
+        $data['user'] = $user->user_name.' (ID: '.$user_id.')';
+        $data['source'] = $this->data['controller'].'/issue_json/issue_by_user/'.$user_id;
+        $data['data_page'] = 'issue_by_user';
 
-                $now = time(); 
-                $deadline = strtotime($issue->issue_deadline);
-                $datediff = $now - $deadline;
-
-                $diff = ceil($datediff / (60 * 60 * 24));
-
-                $data['issues'][$key]->issue_overdue = $diff.' days';
-
-                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
-            }
-            else{ 
-                if($issue->issue_status !=2) $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
-                else $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
-            }
-        }
         //$this->printer($data, true);
         $data['content'] = 'v_issue.php';
         $this->load->view($this->viewpath.'v_main', $data);
@@ -333,32 +296,15 @@ class Issue extends Base_Controller {
 
     public function issue_by_book($book_id=NULL) {
         if(!$book_id) $this->redirect_msg('/admin/issue', 'Please Click on a Book name to get the issues', 'danger');
+        
         $data = $this->data;
         $data['page'] = 'issue';
         $data['subpage'] = 'issue_by_book';
         $data['page_title'] .= 'Book Issue History';
-        $data['issues'] = $this->m_issue->all_issue_by_book($book_id);
-        foreach($data['issues'] as $key=> $issue) {
-            if(($issue->issue_status == 9 || $issue->issue_status == 0) && strtotime($issue->issue_auto_expire_datetime) < time())
-                $data['issues'][$key]->issue_status = 8; // Expired
-            if($issue->issue_status == 1 && strtotime($issue->issue_deadline) < time()) {
-                $data['issues'][$key]->issue_status = -1;
-
-                $now = time(); 
-                $deadline = strtotime($issue->issue_deadline);
-                $datediff = $now - $deadline;
-
-                $diff = ceil($datediff / (60 * 60 * 24));
-
-                $data['issues'][$key]->issue_overdue = $diff.' days';
-
-                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
-            }
-            else{ 
-                if($issue->issue_status !=2) $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
-                else $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
-            }
-        }
+        $data['book_title'] = $this->m_book->get_single_book($book_id)->book_title;
+        $data['source'] = $this->data['controller'].'/issue_json/issue_by_book/'.$book_id;
+        $data['data_page'] = 'issue_by_book';
+        
         //$this->printer($data, true);
         $data['content'] = 'v_issue.php';
         $this->load->view($this->viewpath.'v_main', $data);
@@ -366,32 +312,16 @@ class Issue extends Base_Controller {
 
     public function issue_by_book_copy($book_copy_accession_no=NULL) {
         if(!$book_copy_accession_no) $this->redirect_msg('/admin/issue', 'Please Click on an Accession No. name to get the issues', 'danger');
+
         $data = $this->data;
         $data['page'] = 'issue';
         $data['subpage'] = 'issue_by_book_copy';
         $data['page_title'] .= 'Book Copy Issue History';
-        $data['issues'] = $this->m_issue->all_issue_by_book_copy($book_copy_accession_no);
-        foreach($data['issues'] as $key=> $issue) {
-            if(($issue->issue_status == 9 || $issue->issue_status == 0) && strtotime($issue->issue_auto_expire_datetime) < time())
-                $data['issues'][$key]->issue_status = 8; // Expired
-            if($issue->issue_status == 1 && strtotime($issue->issue_deadline) < time()) {
-                $data['issues'][$key]->issue_status = -1;
-
-                $now = time(); 
-                $deadline = strtotime($issue->issue_deadline);
-                $datediff = $now - $deadline;
-
-                $diff = ceil($datediff / (60 * 60 * 24));
-
-                $data['issues'][$key]->issue_overdue = $diff.' days';
-
-                $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
-            }
-            else{ 
-                if($issue->issue_status !=2) $data['issues'][$key]->issue_overdue = $data['issues'][$key]->issue_fine = 'N/A';
-                else $data['issues'][$key]->issue_fine = ($issue->issue_total_fine > 0) ? $issue->issue_total_fine.'/=' : ($diff * $this->settings->issue_fine_per_day).'/=';
-            }
-        }
+        $data['source'] = $this->data['controller'].'/issue_json/issue_by_book_copy/'.$book_copy_accession_no;
+        $data['data_page'] = 'issue_by_book_copy';
+        $book = $this->m_book->get_single_book_by_accession_no($book_copy_accession_no);
+        $data['book'] = $book_copy_accession_no.' (#'.$book->book_id.' - '.$book->book_title.')';
+        
         //$this->printer($data, true);
         $data['content'] = 'v_issue.php';
         $this->load->view($this->viewpath.'v_main', $data);

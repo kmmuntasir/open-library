@@ -546,6 +546,198 @@
 
 			});
 		} // ============ Post Processing Function Ends
+
+		//-------------------------- Issue Post Processing Functions --------------------------//
+		
+		var user_type_class = ['info', 'danger'];
+		var user_type = ['Student', 'Teacher'];
+
+		function post_process_issue_requests_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(1)').html();
+
+				if(id != null) {
+					var user = $(this).children('td:nth-child(2)').html();
+					if(user != null) {
+						var user_json = $.parseJSON(user);
+						//console.log(user_json);
+						user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+						$(this).children('td:nth-child(2)').html(user);
+					}
+					var book = $(this).children('td:nth-child(3)').html();
+					if(book != null) {
+						var book_json = $.parseJSON(book);
+						//console.log(book_json);
+						book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') '+book_json[1]+'</a>';
+						$(this).children('td:nth-child(3)').html(book);
+					}
+
+					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
+
+					$(this).children('td:nth-child(6)').html(action_buttons);
+				}
+
+			});
+		}
+
+		function post_process_active_issues_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(1)').html();
+
+				if(id != null) {
+					var user = $(this).children('td:nth-child(2)').html();
+					if(user != null) {
+						var user_json = $.parseJSON(user);
+						//console.log(user_json);
+						user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+						$(this).children('td:nth-child(2)').html(user);
+					}
+					var book = $(this).children('td:nth-child(3)').html();
+					if(book != null) {
+						var book_json = $.parseJSON(book);
+						//console.log(book_json);
+						book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+						$(this).children('td:nth-child(3)').html(book);
+					}
+
+					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
+
+					$(this).children('td:nth-child(6)').html(action_buttons);
+				}
+
+			});
+		}
+
+
+		function post_process_overdue_issues_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(1)').html();
+
+				if(id != null) {
+					var user = $(this).children('td:nth-child(2)').html();
+					if(user != null) {
+						var user_json = $.parseJSON(user);
+						//console.log(user_json);
+						user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+						$(this).children('td:nth-child(2)').html(user);
+					}
+					var book = $(this).children('td:nth-child(3)').html();
+					if(book != null) {
+						var book_json = $.parseJSON(book);
+						//console.log(book_json);
+						book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+						$(this).children('td:nth-child(3)').html(book);
+					}
+
+					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
+
+					$(this).children('td:nth-child(7)').html(action_buttons);
+				}
+
+			});
+		}
+
+		function post_process_completed_issues_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(1)').html();
+
+				if(id != null) {
+					var user = $(this).children('td:nth-child(2)').html();
+					if(user != null) {
+						var user_json = $.parseJSON(user);
+						//console.log(user_json);
+						user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+						$(this).children('td:nth-child(2)').html(user);
+					}
+					var book = $(this).children('td:nth-child(3)').html();
+					if(book != null) {
+						var book_json = $.parseJSON(book);
+						//console.log(book_json);
+						book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+						$(this).children('td:nth-child(3)').html(book);
+					}
+
+					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
+
+					$(this).children('td:nth-child(6)').html(action_buttons);
+				}
+
+			});
+		}
+
+
+		function issue_status(stat) {
+			if		(stat == 0) 	return 'Confirmed';
+			else if (stat == 1) 	return 'Active';
+			else if (stat == 2)		return 'Fine Due';
+			else if (stat == 3) 	return 'Completed';
+			else if (stat == 8)		return 'Expired';
+			else if (stat == 9) 	return 'Requested';
+			else if (stat == -1)	return 'Overdue';
+		}
+		function issue_status_class(stat) {
+			if		(stat == 0) 	return 'primary';
+			else if (stat == 1) 	return 'warning';
+			else if (stat == 2)		return 'info';
+			else if (stat == 3) 	return 'success';
+			else if (stat == 8)		return 'default';
+			else if (stat == 9) 	return 'info';
+			else if (stat == -1)	return 'danger';
+		}
+
+		function post_process_all_issues_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(1)').html();
+
+				if(id != null) {
+					var user = $(this).children('td:nth-child(2)').html();
+					if(user != null) {
+						var user_json = $.parseJSON(user);
+						//console.log(user_json);
+						user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+						$(this).children('td:nth-child(2)').html(user);
+					}
+					var book = $(this).children('td:nth-child(3)').html();
+					if(book != null) {
+						var book_json = $.parseJSON(book);
+						//console.log(book_json);
+						book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+						$(this).children('td:nth-child(3)').html(book);
+					}
+
+					var stat = $(this).children('td:nth-child(9)').html();
+
+					var status_button = '<button type="button" class="btn btn-xs btn-'+issue_status_class(stat)+'">'+issue_status(stat)+'</button>';
+					$(this).children('td:nth-child(9)').html(status_button);			
+
+					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
+
+					$(this).children('td:nth-child(10)').html(action_buttons);
+				}
+
+			});
+		}
+
 	});
 
 

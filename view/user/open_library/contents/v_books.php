@@ -15,43 +15,6 @@
 					<th class="">Options</th>
 				</tr>
 			</thead>
-      <?php if(0) { ?>
-			<tbody>
-				<?php foreach($books as $key => $book) { ?>
-				<tr>
-          <td><?php echo $book->book_id; ?></td>
-					<td <?php if(!$book->book_status) echo 'style="color:#f00;" title="Inactive"'; ?>><a title="View Issue History for this Book" href="<?php echo site_url().'/user/issue/issue_by_book/'.$book->book_id; ?>"><?php echo $book->book_title; ?></a></td>
-					<td>
-            <?php
-              foreach($book->authors as $a_key => $author) {
-                echo '<a title="View All Books by this Author" href="'.$controller.'/book_by_filter/1/'.$author->author_id.'">'.$author->author_name.'</a><br />';
-              }
-            ?>     
-          </td>
-					<td><?php echo $book->book_edition; ?></td>
-          <td><?php echo $book->book_isbn; ?></td>
-					<td><a title="View All Books by this Publisher" href="<?php echo $controller.'/book_by_filter/3/'.$book->publication_id; ?>"><?php echo $book->publication_name; ?></a></td>
-					<td><?php echo $book->book_stock; ?></td>
-					<td><?php echo $book->book_available; ?></td>
-					<td>
-            <a title="View Book Details" href="#" book_id="<?php echo $book->book_id; ?>" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
-
-            <a title="Request for this book" href="<?php echo site_url($module).'/issue/add_issue/book_page/'.$book->book_id; ?>" book_id="<?php echo $book->book_id; ?>" class="issue_book btn btn-xs btn-info"><i class="fa fa-credit-card"></i></a>
-
-            <?php if($book->book_url != NULL) { ?>
-            <a target="_blank" title="You can read this book online. Click this button to read this book in a new tab" href="<?php echo site_url($module).'/book/read_online/'.$book->book_id; ?>" book_id="<?php echo $book->book_id; ?>" class="read_book btn btn-xs btn-success"><i class="fa fa-book"></i></a>
-            <?php } ?>
-
-            <?php if($book->book_url_unlocked) { ?>
-            <a title="Update book url" book_url="<?php echo $book->book_url; ?>" book_id="<?php echo $book->book_id; ?>" class="update_book_url btn btn-xs btn-default">
-              <i class="fa fa-refresh"></i>
-            <?php } ?>
-            </a>
-					</td>
-				</tr>
-				<?php } ?>
-			</tbody>
-      <?php } ?>
 		</table>
 	</div>
 </div>
