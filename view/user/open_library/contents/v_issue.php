@@ -1,53 +1,22 @@
-<?php
-  $status = array(8=>'Expired', -1=>'Overdue', 0=>'Confirmed', 1=>'Active', 2=>'Fine Due', 3=>'Completed', 9=>'Requested');
-  $status_class = array(8=>'default', -1=>'danger', 0=>'primary', 1=>'warning', 2=>'info', 3=>'success', 9=>'info');
-?>
 <div class="row">
   <div class="col-sm-12 table-responsive">
-  <?php if($subpage == 'issue_by_student') { ?><h3>Showing all Issue History for <?php if(isset($issues[0])) echo $issues[0]->user_name; ?></h3><?php } ?>
-  <?php if($subpage == 'issue_by_book') { ?><h3>Showing all Issue History for Book <?php if(isset($issues[0])) echo '('.$issues[0]->book_id.') '.$issues[0]->book_title; ?></h3><?php } ?>
-  <?php if($subpage == 'issue_by_book_copy') { ?><h3>Showing all Issue History for <?php if(isset($issues[0])) echo '('.$issues[0]->book_id.') (#'.$issues[0]->issue_book_copy_accession_no.') '.$issues[0]->book_title; ?></h3><?php } ?>
-    <table class="table table-striped datatable" style="font-size:12px;">
+  <?php if($subpage == 'issue_by_user') { ?><h3>Showing all Issue History for "<?php echo $user; ?>"</h3><?php } ?>
+  <?php if($subpage == 'issue_by_book') { ?><h3>Showing all Issue History for Book "<?php echo $book_title; ?>"</h3><?php } ?>
+  <?php if($subpage == 'issue_by_book_copy') { ?><h3>Showing all Issue History for "<?php echo $book; ?>"</h3><?php } ?>
+    <table class="table table-striped datatable" data-page="<?php echo $data_page; ?>" data-source="<?php echo $source; ?>">
       <thead>
         <tr>
           <th>Code</th>
-          <?php if($subpage != 'issue_by_student') { ?><th>Student</th><?php } ?>
           <?php if($subpage != 'issue_by_book' && $subpage != 'issue_by_book_copy') { ?><th>Book</th><?php } ?>
           <th class="issue_datetime_th">Date</th>
-          <?php if($subpage == 'requests' || $subpage == 'all' || $subpage == 'issue_by_student' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Auto Expire</th> <?php } ?>
-          <?php if($subpage == 'active' || $subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_student' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Deadline</th> <?php } ?>
-          <?php if($subpage == 'overdue' || $subpage == 'all') { ?><th>Fine</th><?php } ?>
-          <?php if($subpage == 'completed' || $subpage == 'all' || $subpage == 'issue_by_student' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Returned</th> <?php } ?>
-          <?php if($subpage == 'all' || $subpage == 'issue_by_student' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy' || $subpage == 'requests') { ?><th>Status</th> <?php } ?>
+          <?php if($subpage == 'requests' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Auto Expire</th> <?php } ?>
+          <?php if($subpage == 'active' || $subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Deadline</th> <?php } ?>
+          <?php if($subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Fine</th><?php } ?>
+          <?php if($subpage == 'completed' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Returned</th> <?php } ?>
+          <?php if($subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Status</th> <?php } ?>
           <th class="opt_column">Options</th>
         </tr>
       </thead>
-      <tbody>
-        <?php foreach($issues as $key=> $issue) { ?>
-        <tr>
-          <td><?php echo $issue->issue_id; ?></td>
-          <?php if($subpage != 'issue_by_student') { ?><td><a title="View Issue History for this Student" href="<?php echo $controller.'/issue_by_student/'.$issue->user_id; ?>"><?php echo $issue->user_name; ?></a></td><?php } ?>
-          <?php if($subpage != 'issue_by_book' && $subpage != 'issue_by_book_copy') { ?><td><a href="<?php echo $controller.'/issue_by_book/'.$issue->book_id; ?>" title="View History for this Book"><?php echo '('.$issue->book_id.')'.' (#'.$issue->issue_book_copy_accession_no.') '.$issue->book_title; ?></a></td><?php } ?>
-          <td><?php echo date('M d, Y', strtotime($issue->issue_datetime)).'<br />'.date('h:i a', strtotime($issue->issue_datetime)); ?></td>
-          <?php if($subpage == 'requests' || $subpage == 'all' || $subpage == 'issue_by_student' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><td><?php if($issue->issue_auto_expire_datetime != '') echo date('M d, Y', strtotime($issue->issue_auto_expire_datetime)).'<br />'.date('h:i a', strtotime($issue->issue_auto_expire_datetime)); ?></td> <?php } ?>
-          <?php if($subpage == 'active' || $subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><td><?php if($issue->issue_deadline != '' && !$issue->is_teacher) echo date('M d, Y', strtotime($issue->issue_deadline)).'<br />'.date('h:i a', strtotime($issue->issue_deadline)); ?></td> <?php } ?>
-          <?php if($subpage == 'overdue' || $subpage == 'all') { ?><td><?php echo $issue->issue_fine; ?></td><?php } ?>
-          <?php if($subpage == 'completed' || $subpage == 'all' || $subpage == 'issue_by_student' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><td><?php if($issue->issue_return_datetime != '') echo date('M d, Y', strtotime($issue->issue_return_datetime)).'<br />'.date('h:i a', strtotime($issue->issue_return_datetime)); ?></td> <?php } ?>
-          <?php if($subpage == 'all' || $subpage == 'issue_by_student' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy' || $subpage == 'requests') { ?>
-            <td>
-              <button type="button" class="btn btn-xs btn-<?php echo $status_class[$issue->issue_status]; ?>">
-                <?php echo $status[$issue->issue_status]; ?>
-              </button>
-            </td>
-          <?php } ?>
-          <td>
-            <a href="#" title="View Issue Details" issue_id="<?php echo $issue->issue_id; ?>" class="view_issue btn btn-xs btn-primary">
-              <i class="fa fa-eye"></i>
-            </a>
-          </td>
-        </tr>
-        <?php } ?>
-      </tbody>
     </table>
   </div>
 </div>
@@ -207,17 +176,3 @@
     </div>
   </div>
 </div>
-
-<datalist id="booklist">
-  <?php
-    foreach($books as $book) {
-      $seperator = ' ';
-      $book_description = $book->book_id.'-'.$book->book_title.' ('.$book->book_edition.') -';
-      foreach($book->authors as $author) {
-        $book_description .= $seperator.$author->author_name;
-        $seperator = ', ';
-      }
-  ?>
-    <option value="<?php echo $book_description; ?>">
-  <?php } ?>
-</datalist>

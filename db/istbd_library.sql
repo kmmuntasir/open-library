@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-03-16 02:32:37
+Date: 2018-03-20 02:34:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -76,10 +76,10 @@ CREATE TABLE `book` (
 -- Records of book
 -- ----------------------------
 INSERT INTO `book` VALUES ('34', 'IST_LIBRARY_2', '8676543234676', 'Programming in ANSI C', 'IST_LIBRARY_2', '2016-12-21 18:41:30', 'IST_LIBRARY_1', '4th', 'Delhi, India', '2011', '245', '1', '', '11', '9', 'https://books.google.com.bd/books?id=AokcsKn-1iIC&lpg=PP1&pg=PP1&output=embed', '1');
-INSERT INTO `book` VALUES ('35', 'IST_3', '12345', 'Art of Programming Contest', 'IST_LIBRARY_4', '2016-12-21 20:11:47', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2009', '195', '1', '', '16', '14', 'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf', '0');
+INSERT INTO `book` VALUES ('35', 'IST_3', '12345', 'Art of Programming Contest', 'IST_LIBRARY_4', '2016-12-21 20:11:47', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2009', '195', '1', '', '16', '15', 'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf', '0');
 INSERT INTO `book` VALUES ('36', 'L_4', '2358094', 'টাইট্রন একটি গ্রহের নাম', 'L_5', '2016-12-21 23:48:54', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2001', '68', '1', '', '7', '6', 'http://download848.mediafire.com/mnocrzt5i9zg/bdoj3r01q09db5k/Titron+Ekti+Groher+Naam+%28allbdbooks.com%29.PDF', '1');
-INSERT INTO `book` VALUES ('37', 'L_5', 'uiy6756gh', 'উচ্চ মাধ্যমিক জ্যামিতি ও ক্যালকুলাস', 'L_5', '2016-12-21 23:50:17', 'IST_LIBRARY_1', '2nd', 'Dhaka, Bangladesh', '2011', '298', '1', '', '6', '4', null, '1');
-INSERT INTO `book` VALUES ('38', 'L_6', 'jkluio789023jod', 'The 8088 and 8086 Microprocessor System', 'IST_LIBRARY_3', '2016-12-21 23:52:48', 'IST_LIBRARY_1', '3rd', 'New Delhi', '2004', '593', '1', '', '10', '8', null, '1');
+INSERT INTO `book` VALUES ('37', 'L_5', 'uiy6756gh', 'উচ্চ মাধ্যমিক জ্যামিতি ও ক্যালকুলাস', 'L_5', '2016-12-21 23:50:17', 'IST_LIBRARY_1', '2nd', 'Dhaka, Bangladesh', '2011', '298', '1', '', '6', '5', null, '1');
+INSERT INTO `book` VALUES ('38', 'L_6', 'jkluio789023jod', 'The 8088 and 8086 Microprocessor System', 'IST_LIBRARY_3', '2016-12-21 23:52:48', 'IST_LIBRARY_1', '3rd', 'New Delhi', '2004', '593', '1', '', '10', '9', null, '1');
 INSERT INTO `book` VALUES ('39', 'L_7', '39dkdk', 'Bangla Grammar', 'L_6', '2016-12-21 23:54:28', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2000', '198', '1', '', '10', '8', null, '1');
 INSERT INTO `book` VALUES ('43', 'L_8', '978-0073523323', 'Database System Concepts', 'L_7', '2017-12-23 13:07:08', 'IST_LIBRARY_1', '6th', 'Yale', '2006', '678', '1', '', '1', '0', null, '1');
 
@@ -317,12 +317,12 @@ CREATE TABLE `issue` (
 -- ----------------------------
 INSERT INTO `issue` VALUES ('22', 'L_1', '2018-01-01 15:35:04', '2018-03-14 15:36:18', '2018-02-01 16:30:00', null, 'IST_3', 'IST_c_37', 'IST_1', 'IST_LIBRARY_1', '3', '#ZPReea3', 'cCLshL7s', 'mslQDI4W', 'aJMkObY$', 'IT0KX2uZ', 'V@JY9b2L', '', '820', '820');
 INSERT INTO `issue` VALUES ('23', 'L_2', '2018-01-01 15:35:04', '2018-03-14 15:36:36', '2018-02-01 16:30:00', null, 'IST_LIBRARY_2', 'IST_c_27', 'IST_1', 'IST_LIBRARY_1', '3', 'f&U#ftZ2', 'DUi8dpVJ', '$JFRZwyI', '0GhMTyuw', 'NICW5&WX', 'y7ts1HoZ', '', '82', '82');
-INSERT INTO `issue` VALUES ('24', 'L_3', '2018-03-15 13:03:25', null, null, '2018-03-17 16:30:00', 'IST_3', null, 'IST_1', null, '0', 'ibVRONu#', 'MPEMADPu', '$#BdY0Je', 'nfTEeMnv', 'ZfuEtpfR', 'zvlqnqc0', '', '0', '0');
-INSERT INTO `issue` VALUES ('25', 'L_4', '2018-03-15 13:03:36', null, null, '2018-03-17 16:30:00', 'L_5', null, 'IST_1', null, '0', 'UhMhXK@s', 'aUAVUxZj', 'SVdp3$aI', 'QlSNAdWw', 'Fj2rGiRP', '6knQFOul', '', '0', '0');
+INSERT INTO `issue` VALUES ('24', 'L_3', '2018-03-01 13:03:25', null, null, '2018-03-05 16:30:00', 'IST_3', null, 'IST_1', null, '8', 'ibVRONu#', 'MPEMADPu', '$#BdY0Je', 'nfTEeMnv', 'ZfuEtpfR', 'zvlqnqc0', '', '0', '0');
+INSERT INTO `issue` VALUES ('25', 'L_4', '2018-03-15 13:03:36', null, null, '2018-03-17 16:30:00', 'L_5', null, 'IST_1', null, '8', 'UhMhXK@s', 'aUAVUxZj', 'SVdp3$aI', 'QlSNAdWw', 'Fj2rGiRP', '6knQFOul', '', '0', '0');
 INSERT INTO `issue` VALUES ('26', 'L_5', '2018-03-15 13:08:03', null, '2018-03-30 16:30:00', null, 'IST_LIBRARY_2', 'IST_c_27', 'IST_1', 'IST_LIBRARY_1', '1', 'M@hoC8NW', 'GBnN274D', 'KauFTsmR', 'KUrRPa59', 'MhZey44&', 'QaqqOw3G', '', '0', '0');
 INSERT INTO `issue` VALUES ('27', 'L_6', '2018-01-01 13:08:30', '2018-03-15 13:10:29', '2018-02-01 16:30:00', null, 'L_4', 'L_c_57', 'IST_1', 'IST_LIBRARY_1', '2', 'TvBcwlAY', 'rJIGEhT$', 'w$X3obxR', 'B%Yn95#L', 't$3dK0oi', 'U&YMVlYK', '', '84', '0');
 INSERT INTO `issue` VALUES ('28', 'L_7', '2018-01-01 13:08:30', null, '2018-02-01 16:30:00', null, 'L_7', 'L_c_91', 'IST_1', 'IST_LIBRARY_1', '1', '071tC1s#', 'YgwAbYat', 'PPnnKRlV', 'Kvw19jA2', 'LzYuh%L%', 'xu6tQZHx', '', '0', '0');
-INSERT INTO `issue` VALUES ('29', 'L_8', '2018-03-15 14:51:28', null, null, '2018-03-17 16:30:00', 'L_6', null, 'IST_1', null, '0', 'MfE$Ga4#', 'eXpPZxnX', 'ICb&hwu9', 'bgiO4EVV', 'L2Czy3Q#', 'ZC0WAeou', '', '0', '0');
+INSERT INTO `issue` VALUES ('29', 'L_8', '2018-03-15 14:51:28', null, null, '2018-03-17 16:30:00', 'L_6', null, 'IST_1', null, '8', 'MfE$Ga4#', 'eXpPZxnX', 'ICb&hwu9', 'bgiO4EVV', 'L2Czy3Q#', 'ZC0WAeou', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `log`
@@ -335,7 +335,7 @@ CREATE TABLE `log` (
   `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `log_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`,`log_entry_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=257 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of log
@@ -390,6 +390,12 @@ INSERT INTO `log` VALUES ('247', 'L_247', 'INSERT INTO `book_copy` (`book_copy_a
 INSERT INTO `log` VALUES ('248', 'L_248', 'UPDATE `book` SET `book_stock` = 7 WHERE `book_id` = \'L_4\'', '0', '2018-03-15 14:55:01');
 INSERT INTO `log` VALUES ('249', 'L_249', 'UPDATE `settings` SET `issue_deadline` = \'15\', `issue_auto_expire_deadline` = \'2\', `currency_before` = \'BDT\', `issue_fine_per_day` = \'2\', `currency_after` = \'/=\'', '0', '2018-03-16 02:30:35');
 INSERT INTO `log` VALUES ('250', 'L_250', 'UPDATE `settings` SET `issue_deadline` = \'15\', `issue_auto_expire_deadline` = \'2\', `currency_before` = \'BDT \', `issue_fine_per_day` = \'2\', `currency_after` = \'/=\'', '0', '2018-03-16 02:30:43');
+INSERT INTO `log` VALUES ('251', 'L_251', 'UPDATE `book` SET `book_id` = \'IST_3\', `book_available` = 15 WHERE `book_id` = \'IST_3\'', '0', '2018-03-19 13:07:20');
+INSERT INTO `log` VALUES ('252', 'L_252', 'UPDATE `issue` SET `issue_id` = \'L_3\', `issue_status` = 8 WHERE `issue_id` = \'L_3\'', '0', '2018-03-19 13:07:20');
+INSERT INTO `log` VALUES ('253', 'L_253', 'UPDATE `book` SET `book_id` = \'L_5\', `book_available` = 5 WHERE `book_id` = \'L_5\'', '0', '2018-03-19 13:07:20');
+INSERT INTO `log` VALUES ('254', 'L_254', 'UPDATE `issue` SET `issue_id` = \'L_4\', `issue_status` = 8 WHERE `issue_id` = \'L_4\'', '0', '2018-03-19 13:07:20');
+INSERT INTO `log` VALUES ('255', 'L_255', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 9 WHERE `book_id` = \'L_6\'', '0', '2018-03-19 13:07:20');
+INSERT INTO `log` VALUES ('256', 'L_256', 'UPDATE `issue` SET `issue_id` = \'L_8\', `issue_status` = 8 WHERE `issue_id` = \'L_8\'', '0', '2018-03-19 13:07:20');
 
 -- ----------------------------
 -- Table structure for `manager`

@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-sm-12 table-responsive">
-  <?php if($subpage == 'issue_by_user') { ?><h3>Showing all Issue History for <?php echo $user; ?></h3><?php } ?>
+  <?php if($subpage == 'issue_by_user') { ?><h3>Showing all Issue History for "<?php echo $user; ?>"</h3><?php } ?>
   <?php if($subpage == 'issue_by_book') { ?><h3>Showing all Issue History for Book "<?php echo $book_title; ?>"</h3><?php } ?>
-  <?php if($subpage == 'issue_by_book_copy') { ?><h3>Showing all Issue History for <?php echo $book; ?></h3><?php } ?>
+  <?php if($subpage == 'issue_by_book_copy') { ?><h3>Showing all Issue History for "<?php echo $book; ?>"</h3><?php } ?>
     <table class="table table-striped datatable" data-page="<?php echo $data_page; ?>" data-source="<?php echo $source; ?>">
       <thead>
         <tr>
@@ -12,9 +12,7 @@
           <th class="issue_datetime_th">Date</th>
           <?php if($subpage == 'requests' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Auto Expire</th> <?php } ?>
           <?php if($subpage == 'active' || $subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Deadline</th> <?php } ?>
-          <?php if($subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?>
-          <th>Fine</th>
-          <?php } ?>
+          <?php if($subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Fine</th><?php } ?>
           <?php if($subpage == 'completed' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Returned</th> <?php } ?>
           <?php if($subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Status</th> <?php } ?>
           <th class="opt_column">Options</th>

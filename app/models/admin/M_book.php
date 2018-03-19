@@ -34,8 +34,6 @@ class M_book extends Ci_model {
         $this->db->join('book_copy', 'book.book_id = book_copy.book_id');
         $this->db->where('book_copy_accession_no', $book_copy_accession_no);
         return $this->db->get('book')->row();
-        // $result = $this->db->get('book');
-        // echo $this->db->last_query();
     }
 
     public function book_authors($book_id) {

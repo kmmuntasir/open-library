@@ -95,39 +95,6 @@ class Book extends Base_Controller {
         $this->load->view($this->viewpath.'v_main', $data);
     }
 
-    public function book_by_filter_old($filter=NULL, $id=NULL) {
-        if(!($filter && $id)) $this->redirect_msg('user/book', 'No Filter Selected', 'danger');
-        $data = $this->data;
-        $data['page'] = 'books';
-        $data['page_title'] .= 'Books by ';
-        if($filter == 1) {
-            $data['books'] = $this->m_book->all_books_by_author($id);
-            $data['page_title'] .= 'Author';
-        }
-        else if($filter == 2) {
-            $data['books'] = $this->m_book->all_books_by_category($id);
-            $data['page_title'] .= 'Category';
-        }
-        else if($filter == 3) {
-            $data['books'] = $this->m_book->all_books_by_publication($id);
-            $data['page_title'] .= 'Publication';
-        }
-        else $this->redirect_msg('user/book', 'Wrong Filter', 'danger');
-        if($data['books'] != '') {
-            foreach($data['books'] as $key => $book) {
-                $data['books'][$key]->authors = $this->m_book->book_authors($book->book_id);
-                //$data['books'][$key]->categories = $this->m_book->book_categories($book->book_id);
-            }
-        }
-        else $this->redirect_msg('user/book', 'Invalid ID', 'danger');
-        $data['authors'] = $this->m_author->all_authors();
-        $data['categories'] = $this->m_category->all_categories();
-        $data['publications'] = $this->m_publication->all_publications();
-        $data['content'] = 'v_books.php';
-        //$this->printer($data['books'], true);
-        $this->load->view($this->viewpath.'v_main', $data);
-    }
-
     public function single_book($book_id=NULL) {
         if(!$book_id) echo false;
         $book = $this->m_book->get_single_book($book_id);

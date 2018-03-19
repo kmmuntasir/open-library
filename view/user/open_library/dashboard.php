@@ -13,9 +13,6 @@
       <h1 class="page-header">
         <?php echo $page_title; ?>
         <!-- Trigger the modal with a button -->
-        <?php if($page == 'issue') { ?>
-        <button id="add_button" type="button" class="btn btn-info btn-md pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Request a New Issue</button>
-        <?php } ?>
       </h1>
       
       <?php require('contents/'.$content); ?>

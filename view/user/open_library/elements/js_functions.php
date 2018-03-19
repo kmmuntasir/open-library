@@ -23,18 +23,18 @@
         });
 
         function post_process_datatable(page) {
-        // 	if(page == 'students') post_process_students_table();
-        // 	else if(page == 'teachers') post_process_teachers_table();
-        if(page == 'books') post_process_books_table();
-        // 	else if(page == 'managers') post_process_managers_table();
-        else if(page == 'categories') post_process_categories_table();
-        else if(page == 'authors') post_process_authors_table();
-        else if(page == 'publications') post_process_publications_table();
-        // 	else if(page == 'request') post_process_issue_requests_table();
-        // 	else if(page == 'active') post_process_active_issues_table();
-        // 	else if(page == 'overdue') post_process_overdue_issues_table();
-        // 	else if(page == 'completed') post_process_completed_issues_table();
-        // 	else if(page == 'all_issues') post_process_all_issues_table();
+	        if(page == 'books') post_process_books_table();
+	        else if(page == 'categories') post_process_categories_table();
+	        else if(page == 'authors') post_process_authors_table();
+	        else if(page == 'publications') post_process_publications_table();
+	    	else if(page == 'request') post_process_issue_requests_table();
+	    	else if(page == 'active') post_process_active_issues_table();
+	    	else if(page == 'overdue') post_process_overdue_issues_table();
+	    	else if(page == 'completed') post_process_completed_issues_table();
+	    	else if(page == 'all_issues') post_process_all_issues_table();
+	    	else if(page == 'issue_by_user') post_process_issue_by_user_table();
+	    	else if(page == 'issue_by_book') post_process_issue_by_book_table();
+	    	else if(page == 'issue_by_book_copy') post_process_issue_by_book_copy_table();
         }
 
 	    $(document).on('click', '#add_button', function() {
@@ -561,24 +561,17 @@
 				var id = $(this).children('td:nth-child(1)').html();
 
 				if(id != null) {
-					var user = $(this).children('td:nth-child(2)').html();
-					if(user != null) {
-						var user_json = $.parseJSON(user);
-						//console.log(user_json);
-						user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
-						$(this).children('td:nth-child(2)').html(user);
-					}
-					var book = $(this).children('td:nth-child(3)').html();
+					var book = $(this).children('td:nth-child(2)').html();
 					if(book != null) {
 						var book_json = $.parseJSON(book);
 						//console.log(book_json);
-						book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') '+book_json[1]+'</a>';
-						$(this).children('td:nth-child(3)').html(book);
+						book = '<a href="'+site_url+'user/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') '+book_json[1]+'</a>';
+						$(this).children('td:nth-child(2)').html(book);
 					}
 
 					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
 
-					$(this).children('td:nth-child(6)').html(action_buttons);
+					$(this).children('td:nth-child(5)').html(action_buttons);
 				}
 
 			});
@@ -593,24 +586,17 @@
 				var id = $(this).children('td:nth-child(1)').html();
 
 				if(id != null) {
-					var user = $(this).children('td:nth-child(2)').html();
-					if(user != null) {
-						var user_json = $.parseJSON(user);
-						//console.log(user_json);
-						user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
-						$(this).children('td:nth-child(2)').html(user);
-					}
-					var book = $(this).children('td:nth-child(3)').html();
+					var book = $(this).children('td:nth-child(2)').html();
 					if(book != null) {
 						var book_json = $.parseJSON(book);
 						//console.log(book_json);
-						book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
-						$(this).children('td:nth-child(3)').html(book);
+						book = '<a href="'+site_url+'user/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+						$(this).children('td:nth-child(2)').html(book);
 					}
 
 					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
 
-					$(this).children('td:nth-child(6)').html(action_buttons);
+					$(this).children('td:nth-child(5)').html(action_buttons);
 				}
 
 			});
@@ -626,24 +612,17 @@
 				var id = $(this).children('td:nth-child(1)').html();
 
 				if(id != null) {
-					var user = $(this).children('td:nth-child(2)').html();
-					if(user != null) {
-						var user_json = $.parseJSON(user);
-						//console.log(user_json);
-						user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
-						$(this).children('td:nth-child(2)').html(user);
-					}
-					var book = $(this).children('td:nth-child(3)').html();
+					var book = $(this).children('td:nth-child(2)').html();
 					if(book != null) {
 						var book_json = $.parseJSON(book);
 						//console.log(book_json);
-						book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
-						$(this).children('td:nth-child(3)').html(book);
+						book = '<a href="'+site_url+'user/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+						$(this).children('td:nth-child(2)').html(book);
 					}
 
 					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
 
-					$(this).children('td:nth-child(7)').html(action_buttons);
+					$(this).children('td:nth-child(6)').html(action_buttons);
 				}
 
 			});
@@ -658,24 +637,17 @@
 				var id = $(this).children('td:nth-child(1)').html();
 
 				if(id != null) {
-					var user = $(this).children('td:nth-child(2)').html();
-					if(user != null) {
-						var user_json = $.parseJSON(user);
-						//console.log(user_json);
-						user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
-						$(this).children('td:nth-child(2)').html(user);
-					}
-					var book = $(this).children('td:nth-child(3)').html();
+					var book = $(this).children('td:nth-child(2)').html();
 					if(book != null) {
 						var book_json = $.parseJSON(book);
 						//console.log(book_json);
-						book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
-						$(this).children('td:nth-child(3)').html(book);
+						book = '<a href="'+site_url+'user/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+						$(this).children('td:nth-child(2)').html(book);
 					}
 
 					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
 
-					$(this).children('td:nth-child(6)').html(action_buttons);
+					$(this).children('td:nth-child(5)').html(action_buttons);
 				}
 
 			});
@@ -710,33 +682,73 @@
 				var id = $(this).children('td:nth-child(1)').html();
 
 				if(id != null) {
-					var user = $(this).children('td:nth-child(2)').html();
-					if(user != null) {
-						var user_json = $.parseJSON(user);
-						//console.log(user_json);
-						user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
-						$(this).children('td:nth-child(2)').html(user);
-					}
-					var book = $(this).children('td:nth-child(3)').html();
+					var book = $(this).children('td:nth-child(2)').html();
 					if(book != null) {
 						var book_json = $.parseJSON(book);
 						//console.log(book_json);
-						book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
-						$(this).children('td:nth-child(3)').html(book);
+						book = '<a href="'+site_url+'user/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+						$(this).children('td:nth-child(2)').html(book);
 					}
 
-					var stat = $(this).children('td:nth-child(9)').html();
+					var stat = $(this).children('td:nth-child(8)').html();
 
 					var status_button = '<button type="button" class="btn btn-xs btn-'+issue_status_class(stat)+'">'+issue_status(stat)+'</button>';
-					$(this).children('td:nth-child(9)').html(status_button);			
+					$(this).children('td:nth-child(8)').html(status_button);			
 
 					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
 
-					$(this).children('td:nth-child(10)').html(action_buttons);
+					$(this).children('td:nth-child(9)').html(action_buttons);
 				}
 
 			});
-		}
+		} // ------------- Post Process Ends --------------
+
+
+		function post_process_issue_by_book_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(1)').html();
+
+				if(id != null) {
+					var stat = $(this).children('td:nth-child(7)').html();
+
+					var status_button = '<button type="button" class="btn btn-xs btn-'+issue_status_class(stat)+'">'+issue_status(stat)+'</button>';
+					$(this).children('td:nth-child(7)').html(status_button);			
+
+					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
+
+					$(this).children('td:nth-child(8)').html(action_buttons);
+				}
+
+			});
+		} // ------------- Post Process Ends --------------
+
+
+		function post_process_issue_by_book_copy_table() {
+			$('.datatable tbody tr').each(function(){ 
+				var p_flag = $(this).attr('rendered');
+				if(p_flag != null) return;
+				$(this).attr('rendered', 'yes');
+
+				var id = $(this).children('td:nth-child(1)').html();
+
+				if(id != null) {
+					var stat = $(this).children('td:nth-child(7)').html();
+
+					var status_button = '<button type="button" class="btn btn-xs btn-'+issue_status_class(stat)+'">'+issue_status(stat)+'</button>';
+					$(this).children('td:nth-child(7)').html(status_button);			
+
+					var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
+
+					$(this).children('td:nth-child(8)').html(action_buttons);
+				}
+
+			});
+		} // ------------- Post Process Ends --------------
+
 
 	});
 

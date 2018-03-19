@@ -500,6 +500,11 @@ class Issue extends Base_Controller {
             $result['fine'] = 'N/A';
             //echo 'Requested';
         }
+        else if($issue->issue_status == 8) {
+            $result['overdue'] = 'N/A';         // Expired
+            $result['fine'] = 'N/A';
+            //echo 'Expired';
+        }
         else if($issue->issue_status == 0) {
             $result['overdue'] = 'N/A';         // Confirmed
             $result['fine'] = 'N/A';
