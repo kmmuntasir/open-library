@@ -181,3 +181,8 @@
 	color: #fff;
 	font-size: 10px;
 }
+
+#main_nav {
+	border-bottom: solid 1px #ddd;
+	transition: all 500ms ease;
+}

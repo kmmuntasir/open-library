@@ -29,9 +29,9 @@
 		    $.post( status_url, function( data ) { 
 		        if(data) {
 		        	var indicator = '';
-		        	if(data > 10) indicator = 'Offline';
-		        	else indicator = 'Online';
-		            $('#online_status').html(indicator);
+		        	if(data > <?php echo $this->sync_interval*1.4; ?>) $('#main_nav').addClass('navbar-inverse');
+		        	else $('#main_nav').removeClass('navbar-inverse');
+		            //$('#online_status').html(indicator);
 		        }
 		    });
 		}
