@@ -207,6 +207,10 @@ class Base_Controller extends CI_Controller
         return $string ? implode(' ', $string) . ' Ago' : 'Just now';
     }
 
+    public function time_elapsed_in_seconds($datetime) {
+        return (time() - strtotime($datetime));
+    }
+
     public function __mail($from, $to, $subject, $message, $cc=NULL, $bcc=NULL) {
         $this->load->library('email');
 

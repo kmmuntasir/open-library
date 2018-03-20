@@ -187,8 +187,10 @@ class Sync extends Base_Controller {
 
     public function update_server_connection_time($server_id) {return $this->m_sync->update_server_connection_time($server_id);}
 
-    public function last_sync_time() {
-        echo $this->time_elapsed_string($this->server->server_last_connection, true);
+    public function last_sync_time($seconds = 0) {
+        //echo $this->server->server_last_connection.'<br>';
+        if($seconds) echo $this->time_elapsed_in_seconds($this->server->server_last_connection);
+        else echo $this->time_elapsed_string($this->server->server_last_connection, true);
     }
 
     public function authenticate($access_code) {

@@ -173,3 +173,11 @@
 .img_upload_box  {
 	border:solid #ccc 1px;
 }
+
+/**************************************************************/
+
+#footer_bar {
+	padding: 5px;
+	color: #fff;
+	font-size: 10px;
+}
