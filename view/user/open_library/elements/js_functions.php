@@ -560,7 +560,7 @@
 
 					var action_buttons = '<a title="View Book Details" href="#" book_id="'+id+'" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a> <a title="Request for this book" href="'+site_url+'user/issue/add_issue/book_page/'+id+'" book_id="'+id+'" class="issue_book btn btn-xs btn-info"><i class="fa fa-credit-card"></i></a>';
 					if(book_url_unlocked == 1) action_buttons += ' <a title="Update Book URL" book_url="'+book_url+'" book_id="'+id+'" class="update_book_url btn btn-xs btn-default"><i class="fa fa-refresh"></i></a>';
-					$(this).children('td:nth-child(10)').html(action_buttons);
+					$(this).children('td:nth-child(11)').html(action_buttons);
 				}
 
 			});

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-03-27 22:29:29
+Date: 2018-03-27 23:55:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -64,6 +64,7 @@ CREATE TABLE `book` (
   `book_available` int(11) NOT NULL DEFAULT '0',
   `book_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `book_url_unlocked` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `is_deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`,`book_id`,`book_isbn`),
   KEY `book_id` (`book_id`),
   KEY `FK1_book_publication` (`publication_id`),
@@ -75,13 +76,13 @@ CREATE TABLE `book` (
 -- ----------------------------
 -- Records of book
 -- ----------------------------
-INSERT INTO `book` VALUES ('34', 'IST_LIBRARY_2', '8676543234676', 'Programming in ANSI C', 'IST_LIBRARY_2', '2016-12-21 18:41:30', 'IST_LIBRARY_1', '4th', 'Delhi, India', '2011', '245', '1', '', '11', '10', 'https://books.google.com.bd/books?id=AokcsKn-1iIC&lpg=PP1&pg=PP1&output=embed', '1');
-INSERT INTO `book` VALUES ('35', 'IST_3', '12345', 'Art of Programming Contest', 'IST_LIBRARY_4', '2016-12-21 20:11:47', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2009', '195', '1', '', '16', '15', 'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf', '0');
-INSERT INTO `book` VALUES ('36', 'L_4', '2358094', 'টাইট্রন একটি গ্রহের নাম', 'L_5', '2016-12-21 23:48:54', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2001', '68', '1', '', '7', '6', 'http://download848.mediafire.com/mnocrzt5i9zg/bdoj3r01q09db5k/Titron+Ekti+Groher+Naam+%28allbdbooks.com%29.PDF', '1');
-INSERT INTO `book` VALUES ('37', 'L_5', 'uiy6756gh', 'উচ্চ মাধ্যমিক জ্যামিতি ও ক্যালকুলাস', 'L_5', '2016-12-21 23:50:17', 'IST_LIBRARY_1', '2nd', 'Dhaka, Bangladesh', '2011', '298', '1', '', '6', '5', null, '1');
-INSERT INTO `book` VALUES ('38', 'L_6', 'jkluio789023jod', 'The 8088 and 8086 Microprocessor System', 'IST_LIBRARY_3', '2016-12-21 23:52:48', 'IST_LIBRARY_1', '3rd', 'New Delhi', '2004', '593', '1', '', '10', '9', null, '1');
-INSERT INTO `book` VALUES ('39', 'L_7', '39dkdk', 'Bangla Grammar', 'L_6', '2016-12-21 23:54:28', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2000', '198', '1', '', '10', '9', null, '1');
-INSERT INTO `book` VALUES ('43', 'L_8', '978-0073523323', 'Database System Concepts', 'L_7', '2017-12-23 13:07:08', 'IST_LIBRARY_1', '6th', 'Yale', '2006', '678', '1', '', '1', '0', null, '1');
+INSERT INTO `book` VALUES ('34', 'IST_LIBRARY_2', '8676543234676', 'Programming in ANSI C', 'IST_LIBRARY_2', '2016-12-21 18:41:30', 'IST_LIBRARY_1', '4th', 'Delhi, India', '2011', '245', '1', '', '11', '10', 'https://books.google.com.bd/books?id=AokcsKn-1iIC&lpg=PP1&pg=PP1&output=embed', '0', '');
+INSERT INTO `book` VALUES ('35', 'IST_3', '12345', 'Art of Programming Contest', 'IST_LIBRARY_4', '2016-12-21 20:11:47', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2009', '195', '1', '', '16', '15', 'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf', '0', '');
+INSERT INTO `book` VALUES ('36', 'L_4', '2358094', 'টাইট্রন একটি গ্রহের নাম', 'L_5', '2016-12-21 23:48:54', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2001', '68', '1', '', '7', '6', 'http://download848.mediafire.com/mnocrzt5i9zg/bdoj3r01q09db5k/Titron+Ekti+Groher+Naam+%28allbdbooks.com%29.PDF', '0', '');
+INSERT INTO `book` VALUES ('37', 'L_5', 'uiy6756gh', 'উচ্চ মাধ্যমিক জ্যামিতি ও ক্যালকুলাস', 'L_5', '2016-12-21 23:50:17', 'IST_LIBRARY_1', '2nd', 'Dhaka, Bangladesh', '2011', '298', '1', '', '6', '5', null, '1', '');
+INSERT INTO `book` VALUES ('38', 'L_6', 'jkluio789023jod', 'The 8088 and 8086 Microprocessor System', 'IST_LIBRARY_3', '2016-12-21 23:52:48', 'IST_LIBRARY_1', '3rd', 'New Delhi', '2004', '593', '1', '', '10', '9', null, '1', '');
+INSERT INTO `book` VALUES ('39', 'L_7', '39dkdk', 'Bangla Grammar', 'L_6', '2016-12-21 23:54:28', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2000', '198', '1', '', '10', '9', null, '1', '');
+INSERT INTO `book` VALUES ('43', 'L_8', '978-0073523323', 'Database System Concepts', 'L_7', '2017-12-23 13:07:08', 'IST_LIBRARY_1', '6th', 'Yale', '2006', '678', '1', '', '1', '0', null, '1', '');
 
 -- ----------------------------
 -- Table structure for `book_author`
@@ -97,13 +98,11 @@ CREATE TABLE `book_author` (
   KEY `FK2_book_author_book` (`book_id`),
   CONSTRAINT `FK1_book_author_author` FOREIGN KEY (`author_id`) REFERENCES `author` (`author_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK2_book_author_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of book_author
 -- ----------------------------
-INSERT INTO `book_author` VALUES ('35', '', 'IST_LIBRARY_2', 'IST_LIBRARY_3');
-INSERT INTO `book_author` VALUES ('38', '', 'L_4', 'L_6');
 INSERT INTO `book_author` VALUES ('39', '', 'L_5', 'L_7');
 INSERT INTO `book_author` VALUES ('40', '', 'L_6', 'IST_LIBRARY_2');
 INSERT INTO `book_author` VALUES ('41', '', 'L_6', 'L_8');
@@ -112,6 +111,8 @@ INSERT INTO `book_author` VALUES ('49', '', 'L_8', 'L_11');
 INSERT INTO `book_author` VALUES ('50', '', 'L_8', 'L_12');
 INSERT INTO `book_author` VALUES ('51', '', 'L_8', 'L_13');
 INSERT INTO `book_author` VALUES ('54', '', 'IST_3', 'IST_LIBRARY_5');
+INSERT INTO `book_author` VALUES ('55', '', 'IST_LIBRARY_2', 'IST_LIBRARY_3');
+INSERT INTO `book_author` VALUES ('57', '', 'L_4', 'L_6');
 
 -- ----------------------------
 -- Table structure for `book_category`
@@ -127,16 +128,11 @@ CREATE TABLE `book_category` (
   KEY `FK2_book_category_book` (`book_id`),
   CONSTRAINT `FK1_book_category_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK2_book_category_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of book_category
 -- ----------------------------
-INSERT INTO `book_category` VALUES ('71', '', 'IST_LIBRARY_2', 'IST_LIBRARY_1');
-INSERT INTO `book_category` VALUES ('72', '', 'IST_LIBRARY_2', 'IST_LIBRARY_2');
-INSERT INTO `book_category` VALUES ('73', '', 'IST_LIBRARY_2', 'IST_LIBRARY_4');
-INSERT INTO `book_category` VALUES ('80', '', 'L_4', 'L_6');
-INSERT INTO `book_category` VALUES ('81', '', 'L_4', 'L_7');
 INSERT INTO `book_category` VALUES ('82', '', 'L_5', 'L_8');
 INSERT INTO `book_category` VALUES ('83', '', 'L_5', 'L_9');
 INSERT INTO `book_category` VALUES ('84', '', 'L_6', 'L_10');
@@ -148,6 +144,11 @@ INSERT INTO `book_category` VALUES ('95', '', 'L_8', 'IST_LIBRARY_4');
 INSERT INTO `book_category` VALUES ('96', '', 'L_8', 'IST_LIBRARY_1');
 INSERT INTO `book_category` VALUES ('101', '', 'IST_3', 'IST_LIBRARY_1');
 INSERT INTO `book_category` VALUES ('102', '', 'IST_3', 'IST_LIBRARY_2');
+INSERT INTO `book_category` VALUES ('103', '', 'IST_LIBRARY_2', 'IST_LIBRARY_1');
+INSERT INTO `book_category` VALUES ('104', '', 'IST_LIBRARY_2', 'IST_LIBRARY_2');
+INSERT INTO `book_category` VALUES ('105', '', 'IST_LIBRARY_2', 'IST_LIBRARY_4');
+INSERT INTO `book_category` VALUES ('108', '', 'L_4', 'L_6');
+INSERT INTO `book_category` VALUES ('109', '', 'L_4', 'L_7');
 
 -- ----------------------------
 -- Table structure for `book_copy`
@@ -258,7 +259,7 @@ CREATE TABLE `category` (
   `category_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`,`category_id`,`category_name`),
   KEY `category_id` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of category
@@ -338,7 +339,7 @@ CREATE TABLE `log` (
   `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `log_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`,`log_entry_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=298 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=326 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of log
@@ -364,6 +365,34 @@ INSERT INTO `log` VALUES ('294', 'L_294', 'UPDATE `book_copy` SET `book_copy_acc
 INSERT INTO `log` VALUES ('295', 'L_295', 'UPDATE `issue` SET `issue_id` = \'L_11\', `issue_status` = 3, `issue_return_datetime` = \'2018-03-20 04:02:24\' WHERE `issue_id` = \'L_11\'', '1', '2018-03-20 04:02:24');
 INSERT INTO `log` VALUES ('296', 'L_296', 'UPDATE `book` SET `book_id` = \'IST_3\', `book_available` = 15 WHERE `book_id` = \'IST_3\'', '1', '2018-03-27 21:11:55');
 INSERT INTO `log` VALUES ('297', 'L_297', 'UPDATE `issue` SET `issue_id` = \'L_10\', `issue_status` = 8 WHERE `issue_id` = \'L_10\'', '1', '2018-03-27 21:11:55');
+INSERT INTO `log` VALUES ('298', 'L_298', 'INSERT INTO `manager` (`manager_name`, `manager_phone`, `manager_email`, `manager_user`, `manager_id`, `manager_pass`) VALUES (\'Farjana Boby\', \'123465789\', \'boby@bob.com\', \'boby\', \'L_5\', \'202cb962ac59075b964b07152d234b70\')', '1', '2018-03-27 22:36:58');
+INSERT INTO `log` VALUES ('299', 'L_299', 'UPDATE `manager` SET `is_deleted` = 1, `manager_user` = \'\' WHERE `manager_id` = \'L_5\'', '1', '2018-03-27 22:38:36');
+INSERT INTO `log` VALUES ('300', 'L_300', 'UPDATE `manager` SET `is_deleted` = 1 WHERE `manager_id` = \'L_5\'', '1', '2018-03-27 22:42:54');
+INSERT INTO `log` VALUES ('301', 'L_301', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'Databasee\', \'L_13\')', '1', '2018-03-27 23:16:41');
+INSERT INTO `log` VALUES ('302', 'L_302', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-27 23:16:51');
+INSERT INTO `log` VALUES ('303', 'L_303', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'Databasee\', \'L_13\')', '1', '2018-03-27 23:17:06');
+INSERT INTO `log` VALUES ('304', 'L_304', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'\', \'L_14\')', '1', '2018-03-27 23:18:17');
+INSERT INTO `log` VALUES ('305', 'L_305', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-27 23:18:22');
+INSERT INTO `log` VALUES ('306', 'L_306', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-27 23:19:10');
+INSERT INTO `log` VALUES ('307', 'L_307', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'fasdf\', \'L_13\')', '1', '2018-03-27 23:19:14');
+INSERT INTO `log` VALUES ('308', 'L_308', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-27 23:19:18');
+INSERT INTO `log` VALUES ('309', 'L_309', 'UPDATE `book` SET `book_title` = \'Programming in ANSI C\', `book_isbn` = \'8676543234676\', `publication_id` = \'IST_LIBRARY_2\', `book_edition` = \'4th\', `book_place_of_pub` = \'Delhi, India\', `book_year_of_pub` = \'2011\', `book_pages` = \'245\', `book_status` = \'1\', `book_url` = \'https://books.google.com.bd/books?id=AokcsKn-1iIC&lpg=PP1&pg=PP1&output=embed\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'IST_LIBRARY_2\'', '1', '2018-03-27 23:28:14');
+INSERT INTO `log` VALUES ('310', 'L_310', 'DELETE FROM `book_author` WHERE `book_id` = \'IST_LIBRARY_2\'', '1', '2018-03-27 23:28:14');
+INSERT INTO `log` VALUES ('311', 'L_311', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'IST_LIBRARY_3\',\'IST_LIBRARY_2\')', '1', '2018-03-27 23:28:14');
+INSERT INTO `log` VALUES ('312', 'L_312', 'DELETE FROM `book_category` WHERE `book_id` = \'IST_LIBRARY_2\'', '1', '2018-03-27 23:28:14');
+INSERT INTO `log` VALUES ('313', 'L_313', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'IST_LIBRARY_2\',\'IST_LIBRARY_1\'), (\'IST_LIBRARY_2\',\'IST_LIBRARY_2\'), (\'IST_LIBRARY_2\',\'IST_LIBRARY_4\')', '1', '2018-03-27 23:28:14');
+INSERT INTO `log` VALUES ('314', 'L_314', 'UPDATE `book` SET `book_title` = \'টাইট্রন একটি গ্রহের নাম\', `book_isbn` = \'2358094\', `publication_id` = \'L_5\', `book_edition` = \'1st\', `book_place_of_pub` = \'Dhaka, Bangladesh\', `book_year_of_pub` = \'2001\', `book_pages` = \'68\', `book_status` = \'1\', `book_url` = \'http://download848.mediafire.com/mnocrzt5i9zg/bdoj3r01q09db5k/Titron+Ekti+Groher+Naam+%28allbdbooks.com%29.PDF\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'L_4\'', '1', '2018-03-27 23:28:23');
+INSERT INTO `log` VALUES ('315', 'L_315', 'DELETE FROM `book_author` WHERE `book_id` = \'L_4\'', '1', '2018-03-27 23:28:23');
+INSERT INTO `log` VALUES ('316', 'L_316', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'L_6\',\'L_4\')', '1', '2018-03-27 23:28:23');
+INSERT INTO `log` VALUES ('317', 'L_317', 'DELETE FROM `book_category` WHERE `book_id` = \'L_4\'', '1', '2018-03-27 23:28:23');
+INSERT INTO `log` VALUES ('318', 'L_318', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'L_4\',\'L_6\'), (\'L_4\',\'L_7\')', '1', '2018-03-27 23:28:23');
+INSERT INTO `log` VALUES ('319', 'L_319', 'UPDATE `book` SET `book_title` = \'টাইট্রন একটি গ্রহের নাম\', `book_isbn` = \'2358094\', `publication_id` = \'L_5\', `book_edition` = \'1st\', `book_place_of_pub` = \'Dhaka, Bangladesh\', `book_year_of_pub` = \'2001\', `book_pages` = \'68\', `book_status` = \'1\', `book_url` = \'http://download848.mediafire.com/mnocrzt5i9zg/bdoj3r01q09db5k/Titron+Ekti+Groher+Naam+%28allbdbooks.com%29.PDF\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'L_4\'', '1', '2018-03-27 23:28:24');
+INSERT INTO `log` VALUES ('320', 'L_320', 'DELETE FROM `book_author` WHERE `book_id` = \'L_4\'', '1', '2018-03-27 23:28:24');
+INSERT INTO `log` VALUES ('321', 'L_321', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'L_6\',\'L_4\')', '1', '2018-03-27 23:28:24');
+INSERT INTO `log` VALUES ('322', 'L_322', 'DELETE FROM `book_category` WHERE `book_id` = \'L_4\'', '1', '2018-03-27 23:28:24');
+INSERT INTO `log` VALUES ('323', 'L_323', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'L_4\',\'L_6\'), (\'L_4\',\'L_7\')', '1', '2018-03-27 23:28:24');
+INSERT INTO `log` VALUES ('324', 'L_324', 'INSERT INTO `publication` (`publication_name`, `publication_id`) VALUES (\'Test Publisherr\', \'L_8\')', '1', '2018-03-27 23:31:20');
+INSERT INTO `log` VALUES ('325', 'L_325', 'DELETE FROM `publication` WHERE `publication_id` = \'L_8\'', '1', '2018-03-27 23:31:24');
 
 -- ----------------------------
 -- Table structure for `manager`
@@ -381,15 +410,15 @@ CREATE TABLE `manager` (
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`,`manager_id`,`manager_user`,`manager_phone`,`manager_email`),
   KEY `manager_id` (`manager_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of manager
 -- ----------------------------
 INSERT INTO `manager` VALUES ('1', 'IST_LIBRARY_1', 'munna_library', '827ccb0eea8a706c4c34a16891f84e7b', 'Muntasir Billah Munna', '01516180603', 'kmmuntasir@gmail.com', '1', '0');
-INSERT INTO `manager` VALUES ('3', 'L_2', 'khalil', 'c4ca4238a0b923820dcc509a6f75849b', 'Khalilullah', '234567', 'khalil@mia.com', '0', '0');
-INSERT INTO `manager` VALUES ('4', 'L_3', 'salma', '202cb962ac59075b964b07152d234b70', 'Salma', '23455', 'sal@ma.com', '0', '1');
-INSERT INTO `manager` VALUES ('5', 'L_4', '', '202cb962ac59075b964b07152d234b70', 'test', 'ieeri', 'lkasd@gm.com', '0', '1');
+INSERT INTO `manager` VALUES ('3', 'L_2', 'khalil', '827ccb0eea8a706c4c34a16891f84e7b', 'Khalilullah', '234567', 'khalil@mia.com', '0', '0');
+INSERT INTO `manager` VALUES ('4', 'L_3', 'salma', '827ccb0eea8a706c4c34a16891f84e7b', 'Salma', '23455', 'sal@ma.com', '0', '0');
+INSERT INTO `manager` VALUES ('6', 'L_5', 'boby', '827ccb0eea8a706c4c34a16891f84e7b', 'Farjana Boby', '123465789', 'boby@bob.com', '0', '1');
 
 -- ----------------------------
 -- Table structure for `publication`
@@ -401,7 +430,7 @@ CREATE TABLE `publication` (
   `publication_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`,`publication_id`,`publication_name`),
   KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of publication
@@ -432,7 +461,7 @@ CREATE TABLE `server` (
 -- ----------------------------
 -- Records of server
 -- ----------------------------
-INSERT INTO `server` VALUES ('1', 'remote', 'http://library.ist.edu.bd/index.php', '2018-03-27 22:29:25', '1', '1', 'HF1EBAvrgB');
+INSERT INTO `server` VALUES ('1', 'remote', 'http://library.ist.edu.bd/index.php', '2018-03-27 23:55:18', '1', '0', 'HF1EBAvrgB');
 
 -- ----------------------------
 -- Table structure for `settings`

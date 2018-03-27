@@ -176,13 +176,29 @@ class Book extends Base_Controller {
                 array_push($json_data['data'][$i], $book->book_stock);
                 array_push($json_data['data'][$i], $book->book_available);
                 array_push($json_data['data'][$i], $book->book_url_unlocked);
+
+                $issue_stat = $this->m_book->check_user_book_active_issue($book->book_id);
+                if($issue_stat == NULL) $issue_stat = 100; // No Current Issue Active
+                else $issue_stat = $issue_stat->issue_status;
+
+                $issue_stat_text = array('9'=>'Requested', '0'=>'Confirmed', '1'=>'Active', '100'=>'');
+
+                array_push($json_data['data'][$i], $issue_stat_text[$issue_stat]);
+
                 array_push($json_data['data'][$i], $book->book_url);
                 
                 ++$i;
             }
         }
+        //$this->printer($json_data, true);
         if($json_output) return json_encode($json_data);
         else return $json_data;
     }
+
+    // public function test() {
+    //     $stat = $this->m_book->check_user_book_active_issue('IST_3');
+    //     echo $this->db->last_query();
+    //     $this->printer($stat);
+    // }
 
 }

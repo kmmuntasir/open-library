@@ -193,5 +193,17 @@ class M_book extends Ci_model {
         return $this->db->trans_status();
     }
 
+    public function check_user_book_active_issue($book_id) {
+        $this->db->select('issue_status');
+        $this->db->where('issue_book_id', $book_id);
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+        $this->db->group_start();
+        $this->db->where('issue_status', 9);
+        $this->db->or_where('issue_status', 0);
+        $this->db->or_where('issue_status', 1);
+        $this->db->group_end();
+        return $this->db->get('issue')->row();
+    }
+
 }
 ?>

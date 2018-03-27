@@ -12,6 +12,7 @@
 					<th class="narrow_column">Stock</th>
 					<th class="narrow_column">Available</th>
           <th class="narrow_column">Online Reading</th>
+          <th class="narrow_column">My Current Issue Status</th>
 					<th class="">Options</th>
 				</tr>
 			</thead>

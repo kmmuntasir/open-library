@@ -5,22 +5,22 @@ class M_book extends Ci_model {
     // Basic Functions
 
     public function all_books() {
-        $this->db->select('*')->join('publication', 'publication.publication_id = book.publication_id');
+        $this->db->select('*')->where('is_deleted', 0)->join('publication', 'publication.publication_id = book.publication_id');
         return $this->db->get('book')->result();
     }
 
     public function all_books_json() {
         $selection = 'book_id, book_title, book_edition, book_isbn, publication.publication_id, publication_name, book_stock, book_available, book_url, book_url_unlocked';
-        $this->db->select($selection)->join('publication', 'publication.publication_id = book.publication_id');
+        $this->db->select($selection)->where('is_deleted', 0)->join('publication', 'publication.publication_id = book.publication_id');
         return $this->db->get('book')->result();
     }
 
     public function count_books() {
-        return $this->db->select('COUNT(*) as count')->get('book')->row()->count;
+        return $this->db->select('COUNT(*) as count')->where('is_deleted', 0)->get('book')->row()->count;
     }
 
     public function count_copies() {
-        return $this->db->select('COUNT(*) as count')->get('book_copy')->row()->count;
+        return $this->db->select('COUNT(*) as count')->where('book_copy_is_deleted', 0)->get('book_copy')->row()->count;
     }
 
     public function get_single_book($book_id) {
@@ -210,9 +210,12 @@ class M_book extends Ci_model {
     }
 
     public function delete_book($book_id) {
-        $this->db->where('book_id', $book_id);
-        $this->db->delete('book');
-        return $this->db->affected_rows();
+        $this->db->trans_start();
+        //$this->db->where('book_id', $book_id)->update('book_copy', array('book_copy_is_deleted'=>1));
+        //$this->db->where('book_id', $book_id)->update('book', array('is_deleted'=>1, 'book_stock'=>0, 'book_available'=>0));
+        $this->db->where('book_id', $book_id)->update('book', array('is_deleted'=>1));
+        $this->db->trans_complete();
+        return $this->db->trans_status();
     }
 
     public function get_all_copies($book_id) {
