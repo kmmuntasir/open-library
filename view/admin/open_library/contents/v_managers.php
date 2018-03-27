@@ -14,7 +14,6 @@
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
-
 		</table>
 	</div>
 </div>

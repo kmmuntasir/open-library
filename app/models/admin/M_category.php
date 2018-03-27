@@ -36,5 +36,10 @@ class M_category extends Ci_model {
         return $this->db->count_all_results('book_category');
     }
 
+    public function check_for_existing_category($category_name) {
+        $this->db->where('category_name', $category_name);
+        return $this->db->count_all_results('category');
+    }
+
 }
 ?>

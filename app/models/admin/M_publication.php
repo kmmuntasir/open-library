@@ -36,5 +36,9 @@ class M_publication extends Ci_model {
         return $this->db->count_all_results('book');
     }
 
+    public function check_for_existing_publication($publication_name) {
+        $this->db->where('publication_name', $publication_name);
+        return $this->db->count_all_results('publication');
+    }
 }
 ?>

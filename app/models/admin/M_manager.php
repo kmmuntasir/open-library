@@ -38,7 +38,7 @@ class M_manager extends Ci_model {
     }
 
     public function delete_manager($manager_id) {
-        $this->db->where('manager_id', $manager_id)->update('manager', array('is_deleted'=>1, 'manager_user'=>''));
+        $this->db->where('manager_id', $manager_id)->update('manager', array('is_deleted'=>1));
         return $this->db->affected_rows();
     }
     

@@ -35,5 +35,10 @@ class M_author extends Ci_model {
         $this->db->where('author_id', $author_id);
         return $this->db->count_all_results('book_author');
     }
+
+    public function check_for_existing_author($author_name) {
+        $this->db->where('author_name', $author_name);
+        return $this->db->count_all_results('author');
+    }
 }
 ?>

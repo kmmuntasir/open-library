@@ -42,6 +42,9 @@ class Category extends Base_Controller {
     }
 
     public function add() {
+        if($_POST['category_name'] == '') $this->redirect_msg('/admin/category', 'Pleae input a category name', 'danger');
+        if($this->m_category->check_for_existing_category($_POST['category_name'])) $this->redirect_msg('/admin/category', 'Same Category Already Exists', 'danger');
+
         $_POST['category_id'] = $this->m_category->new_id('category');
         $insert_id = $this->m_category->add_category($_POST);
         if($insert_id) $this->redirect_msg('/admin/category', 'Category Added Successfully', 'success');
@@ -62,8 +65,10 @@ class Category extends Base_Controller {
 
     public function delete($category_id=NULL) {
         if(!$category_id) redirect_msg('/admin/category');
+
         $count = $this->m_category->check_category($category_id);
         if($count > 0) $this->redirect_msg('/admin/category', 'There are existing books from this category', 'danger');
+
         $aff = $this->m_category->delete_category($category_id);
         if($aff) $this->redirect_msg('/admin/category', 'Category Deleted Successfully', 'success');
         else $this->redirect_msg('/admin/category', 'Something went wrong!', 'danger');

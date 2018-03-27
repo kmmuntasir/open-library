@@ -34,7 +34,6 @@ class User extends Base_Controller {
         $data = $this->data;
         $data['page'] = 'user';
         $data['page_title'] .= 'Students';
-        $data['users'] = $this->m_user->all_students();
         $data['content'] = 'v_student.php';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
@@ -50,7 +49,6 @@ class User extends Base_Controller {
         $data = $this->data;
         $data['page'] = 'user';
         $data['page_title'] .= 'Teachers';
-        $data['users'] = $this->m_user->all_teachers();
         $data['content'] = 'v_teacher.php';
         $this->load->view($this->viewpath.'v_main', $data);
 	}

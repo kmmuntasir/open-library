@@ -83,8 +83,9 @@ class Manager extends Base_Controller {
 
     public function delete($manager_id=NULL) {
         if(!$manager_id) redirect_msg('/admin/manager');
-        $count = $this->m_manager->check_manager($manager_id);
-        if($count > 0) $this->redirect_msg('/admin/manager', 'There are existing books from this manager', 'danger');
+        if($manager_id == $this->session->userdata('admin_id')) $this->redirect_msg('/admin/manager', 'This is the current logged in manager account', 'danger');
+        // $count = $this->m_manager->check_manager($manager_id);
+        // if($count > 0) $this->redirect_msg('/admin/manager', 'There are existing books from this manager', 'danger');
         $aff = $this->m_manager->delete_manager($manager_id);
         if($aff) $this->redirect_msg('/admin/manager', 'Manager Deleted Successfully', 'success');
         else $this->redirect_msg('/admin/manager', 'Something went wrong!', 'danger');

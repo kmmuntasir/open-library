@@ -20,6 +20,7 @@ class M_user extends Ci_model {
     public function login_check_user($username, $password) {
     	$this->db->where('user_username', $username);
     	$this->db->where('user_pass', $password);
+        $this->db->where('is_deleted', 0);
     	return $this->db->get('user')->row();
     }
 

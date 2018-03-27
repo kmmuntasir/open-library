@@ -46,7 +46,7 @@ class M_user extends Ci_model {
 
     public function delete_user($user_id) {
     	$this->db->trans_start();
-        $this->db->where('user_id', $user_id)->update('user', array('is_deleted'=>1, 'user_username'=>''));
+        $this->db->where('user_id', $user_id)->update('user', array('is_deleted'=>1));
         $this->db->trans_complete();
         return $this->db->trans_status();
     }

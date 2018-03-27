@@ -42,6 +42,9 @@ class Author extends Base_Controller {
     }
 
     public function add() {
+        if($_POST['author_name'] == '') $this->redirect_msg('/admin/author', 'Pleae input an Author name', 'danger');
+        if($this->m_author->check_for_existing_author($_POST['author_name'])) $this->redirect_msg('/admin/author', 'Same Author Already Exists', 'danger');
+
         $_POST['author_id'] = $this->m_author->new_id('author');
         $insert_id = $this->m_author->add_author($_POST);
         if($insert_id) $this->redirect_msg('/admin/author', 'Author Added Successfully', 'success');

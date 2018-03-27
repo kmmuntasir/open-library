@@ -20,6 +20,7 @@ class M_admin extends Ci_model {
     public function login_check_manager($username, $password) {
     	$this->db->where('manager_user', $username);
     	$this->db->where('manager_pass', $password);
+        $this->db->where('is_deleted', 0);
     	return $this->db->get('manager')->row();
     }
 

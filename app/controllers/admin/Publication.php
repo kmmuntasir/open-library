@@ -42,6 +42,9 @@ class Publication extends Base_Controller {
     }
 
     public function add() {
+        if($_POST['publication_name'] == '') $this->redirect_msg('/admin/publication', 'Pleae input a publication name', 'danger');
+        if($this->m_publication->check_for_existing_publication($_POST['publication_name'])) $this->redirect_msg('/admin/publication', 'Same Publication Already Exists', 'danger');
+
         $_POST['publication_id'] = $this->m_publication->new_id('publication');
         $insert_id = $this->m_publication->add_publication($_POST);
         if($insert_id) $this->redirect_msg('/admin/publication', 'Publication Added Successfully', 'success');
