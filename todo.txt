@@ -19,8 +19,6 @@
 
 - Convert every delete operation to is_deleted mark operation + Add DateTimeStamp on everything
 
-- Create Online/Offline Indicator + Add a Server Time Clock
-
 - Let the user to reset password using email. === Remote Server Problem
 
 - Write Script for importing books from old software.

@@ -3,6 +3,25 @@
 		var site_url = "<?php echo site_url(); ?>/";
 		
 
+		// Function for Changing the online_offline indicator
+		function online_status() {
+			//alert("Status Checker");
+		    var status_url = "<?php echo site_url('user/sync/last_sync_time/1') ?>";
+		    $.post( status_url, function( data ) { 
+		        if(data) {
+		        	var indicator = '';
+		        	if(data > <?php echo $this->sync_interval*1.4; ?>) $('#main_nav').addClass('user_navbar');
+		        	else $('#main_nav').removeClass('user_navbar');
+		            //$('#online_status').html(indicator);
+		        }
+		    });
+		}
+		var stat_time = function() {online_status();};
+		var stat_check_interval = <?php echo $this->sync_interval*1500; ?>;
+		online_status();
+		setInterval(stat_time, stat_check_interval);
+
+		
 		// Datatables Functions
 		var datatable_source = $('.datatable').attr('data-source');
 		var datapage = $('.datatable').attr('data-page');
