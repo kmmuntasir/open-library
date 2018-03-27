@@ -37,22 +37,44 @@ class Sync extends Base_Controller {
         $sync_limit = 10;
         if($this->server->server_sync_status && strtotime($this->server->server_last_connection) >= time()-($this->sync_interval*3)) exit(0);
 
-        if(!$this->lock_server($this->server->server_id)) exit();
+        if($this->check_server_connection() == false) exit(0);
+
+        if(!$this->lock_server($this->server->server_id)) exit(0);
         
         $ret = $this->fetch_queries($sync_limit);
+        
         $ret &= $this->release();
+        
         $ret &= $this->confirm();
+        
         $ret &= $this->push_queries($sync_limit);
+        
         if($ret) $this->update_server_connection_time($this->server->server_id);
         $this->unlock_server($this->server->server_id);
 
-        echo '<br>'.$ret.'<br>';
+        echo $ret;
+    }
+
+    public function check_server_connection() {
+        $response = $this->my_curl($this->server_url.'confirm_server_connection', array('access_code'=>$this->server->server_access_code));
+        if($response == hash('sha512', $this->server->server_access_code)) return true;
+        return false;
+    }
+
+    public function confirm_server_connection() {
+        $curl_data  = json_decode($_POST['curl_data'], true);
+        $access_code = $curl_data['access_code'];
+        if(!$this->authenticate($access_code)) die('Invalid Access Code');
+        echo hash('sha512', $access_code);
+
+        
     }
 
     public function fetch_queries($sync_limit=0) {
         if($sync_limit == 0) return false;
         // Fetching remote log and syncing
         $queries = $this->my_curl($this->server_url.'feed_queries/'.$sync_limit, array('access_code'=>$this->server->server_access_code));
+        if($queries == false) return false; // No Server Connection
         if($queries == 'Invalid Access Code') return false;
         $queries = json_decode($queries, true);   // Fetching unsynced log entries
         if(count($queries) == 0) {
