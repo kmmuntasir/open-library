@@ -26,6 +26,7 @@ class M_book extends Ci_model {
     public function get_single_book($book_id) {
         $this->db->select('*');
         $this->db->join('publication', 'publication.publication_id = book.publication_id');
+        $this->db->join('manager', 'manager.manager_id = book.manager_id');
         $this->db->where('book_id', $book_id);
         return $this->db->get('book')->row();
     }

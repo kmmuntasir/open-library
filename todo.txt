@@ -16,8 +16,6 @@
 - Disable login for Deleted Users
 	- Enable feature to re-enlist a user after deleting
 
-- Convert every delete operation to is_deleted mark operation + Add DateTimeStamp on everything
-
 - Let the user to reset password using email. === Remote Server Problem
 
 - Backup/Restore System

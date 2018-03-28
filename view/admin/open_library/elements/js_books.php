@@ -17,6 +17,9 @@ $(document).on('click', '.view_book', function() {
 		$('.view_stock').html(book.book_stock);
 		$('.view_available').html(book.book_available);
 		$('.view_remarks').html(book.book_remarks);
+		$('.view_book_add_date').html(book.book_add_date);
+		$('.view_book_last_updated').html(book.timestamp);
+		$('.view_book_manager').html(book.manager_name);
 		
 		var read_button = '<a target="_blank" href="<?php echo site_url('user/book/read_online'); ?>/'+book.book_id+'" title="'+book.book_url+'" class="btn btn-primary">Open Reading Window</a>';
 	

@@ -238,6 +238,18 @@
               <td class="view_available">37</td>
             </tr>
             <tr>
+              <td>Added By</td>
+              <td class="view_book_manager">40</td>
+            </tr>
+            <tr>
+              <td>Date Added</td>
+              <td class="view_book_add_date">40</td>
+            </tr>
+            <tr>
+              <td>Date Last Updated</td>
+              <td class="view_book_last_updated">37</td>
+            </tr>
+            <tr>
               <td>Online Reading URL</td>
               <td class="view_url">Book URL</td>
             </tr>

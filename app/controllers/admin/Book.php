@@ -102,6 +102,8 @@ class Book extends Base_Controller {
             $book->authors = $this->m_book->book_authors($book->book_id);
             $book->categories = $this->m_book->book_categories($book->book_id);
             $book->book_copies = $this->m_book->get_all_copies($book_id);
+            $book->book_add_date = date('M d, Y', strtotime($book->book_add_date));
+            $book->timestamp = date('M d, Y', strtotime($book->timestamp));
             foreach($book->book_copies as $key => $copy) $book->book_copies[$key]->book_copy_date = date('M d, Y', strtotime($copy->book_copy_date));
             //$this->printer($book, true);
             echo json_encode($book);
