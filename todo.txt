@@ -9,10 +9,7 @@
 - Application Settings 
     - Departments + Class 
 
-- Allow admin to merge Authors/Categories/Publication
-
 - Disable Issue for Deleted Users 
-- Disable login for Deleted Users
 	- Enable feature to re-enlist a user after deleting
 
 - Let the user to reset password using email. === Remote Server Problem
