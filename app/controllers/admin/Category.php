@@ -81,10 +81,6 @@ class Category extends Base_Controller {
         $items = $_POST['merge_items'];
         $items = json_decode($items);
 
-        //echo $target_id.'<br>';
-
-        //$this->printer($items);
-
         $status = $this->m_category->merge($target_id, $items);
         if($status) echo 'success';
         else echo 'failed';

@@ -40,5 +40,15 @@ class M_publication extends Ci_model {
         $this->db->where('publication_name', $publication_name);
         return $this->db->count_all_results('publication');
     }
+
+    public function merge($target_id, $items) {
+        $this->db->trans_start();
+        foreach($items as $item) {
+            $this->db->where('publication_id', $item)->update('book', array('publication_id'=>$target_id));
+            $this->db->where('publication_id', $item)->delete('publication');
+        }
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
 }
 ?>

@@ -40,5 +40,15 @@ class M_author extends Ci_model {
         $this->db->where('author_name', $author_name);
         return $this->db->count_all_results('author');
     }
+
+    public function merge($target_id, $items) {
+        $this->db->trans_start();
+        foreach($items as $item) {
+            $this->db->where('author_id', $item)->update('book_author', array('author_id'=>$target_id));
+            $this->db->where('author_id', $item)->delete('author');
+        }
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
 }
 ?>

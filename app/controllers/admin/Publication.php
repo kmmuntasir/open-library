@@ -71,4 +71,16 @@ class Publication extends Base_Controller {
         if($aff) $this->redirect_msg('/admin/publication', 'Publication Deleted Successfully', 'success');
         else $this->redirect_msg('/admin/publication', 'Something went wrong!', 'danger');
     }
+    
+    public function merge($target_id=NULL) {
+        if(!$target_id) die('No Target');
+        if(!isset($_POST['merge_items'])) die('Invalid Data');
+
+        $items = $_POST['merge_items'];
+        $items = json_decode($items);
+
+        $status = $this->m_publication->merge($target_id, $items);
+        if($status) echo 'success';
+        else echo 'failed';
+    }
 }
