@@ -41,5 +41,15 @@ class M_category extends Ci_model {
         return $this->db->count_all_results('category');
     }
 
+    public function merge($target_id, $items) {
+        $this->db->trans_start();
+        foreach($items as $item) {
+            $this->db->where('category_id', $item)->update('book_category', array('category_id'=>$target_id));
+            $this->db->where('category_id', $item)->delete('category');
+        }
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
+
 }
 ?>

@@ -6,7 +6,6 @@
 	- Issue Report
 	- Fine Report
 
-
 - Application Settings 
     - Departments + Class 
 
