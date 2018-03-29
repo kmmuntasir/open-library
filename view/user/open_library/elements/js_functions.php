@@ -547,7 +547,7 @@
 						$(this).children('td:nth-child(6)').html(pub);
 					}
 
-					var book_url = $(this).children('td:nth-child(10)').html();
+					var book_url = $(this).children('td:nth-child(11)').html();
 					var book_url_unlocked = $(this).children('td:nth-child(9)').html();
 
 					if(book_url != null && book_url != '') {

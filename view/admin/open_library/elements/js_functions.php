@@ -18,6 +18,7 @@
 		var sync = function() {if(!busy) sync_trigger();};
 		var interval = <?php echo $this->sync_interval*1000; ?>;
 		<?php if($this->settings->application_role == 0) { ?>
+		sync_trigger();
 		setInterval(sync, interval);
 		<?php } ?>
 

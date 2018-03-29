@@ -226,8 +226,8 @@
       </div>
       <div class="modal-body modal-scroll add_form_inputs">
         <div class="col-sm-12">
-          <label class="col-sm-4" for="user_roll">Issue Lend Code</label>
-          <input required="" id="lend_code_input" type="text" class="col-sm-8" name="issue_lend_user_code" placeholder="Issue Lend Code (Example: 41@CN#iR)"/>
+          <label class="col-sm-4" for="user_library_code">User Library Code</label>
+          <input required="" id="user_library_code_input" type="password" class="col-sm-8" name="user_library_code" placeholder="User Library Code (use barcode machine)"/>
         </div>
         <div class="col-sm-12">
           <br />
