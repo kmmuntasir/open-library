@@ -43,6 +43,19 @@
               <span class="nav_icon"><i class="fa fa-users"></i></span>Teachers
               </a>
             </li>
+            <li>
+              <hr>
+            </li>
+            <li class="">
+              <a href="<?php echo site_url($module.'/user/students/1'); ?>">
+              <span class="nav_icon"><i class="fa fa-users"></i></span>Deactivated Students
+              </a>
+            </li>
+            <li class="">
+              <a href="<?php echo site_url($module.'/user/teachers/1'); ?>">
+              <span class="nav_icon"><i class="fa fa-users"></i></span>Deactivated Teachers
+              </a>
+            </li>
           </ul>
         </li>
         <?php } ?>

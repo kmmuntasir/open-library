@@ -1,6 +1,10 @@
+<?php
+	$data_source = site_url('admin/user/all_teachers');
+	if($page_title == 'Deactivated Teachers') $data_source .= '/1';
+?>
 <div class="row">
 	<div class="col-sm-12 table-responsive">
-		<table data-page="teachers" class="table table-striped datatable" data-source="<?php echo site_url('admin/user/all_teachers'); ?>">
+		<table data-page="teachers" class="table table-striped datatable" data-source="<?php echo $data_source; ?>">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -13,31 +17,6 @@
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
-			<!-- 
-			<tbody>
-				<?php
-					foreach($users as $user) {
-				?>
-				<tr>
-					<td><?php echo $user->user_id; ?></td>
-					<td><a href="<?php echo site_url().'/admin/issue/issue_by_user/'.$user->user_id; ?>" title="View All Books by this User"><?php echo $user->user_name; ?></a></td>
-					<td><?php echo $user->user_username; ?></td>
-					<td><?php echo $user->teacher_designation; ?></td>
-					<td><?php echo $user->user_dept; ?></td>
-					<td><?php echo $user->user_email; ?></td>
-					<td><?php echo $user->user_phone; ?></td>
-					<td>
-			            <a href="#" user="<?php echo $user->user_name; ?>" user_id="<?php echo $user->user_id; ?>" class="edit edit_user btn btn-sm btn-info">
-			              <i class="fa fa-pencil"></i>
-			            </a>
-			            <a user_id="<?php echo $user->user_id; ?>" href="#" class="delete_user btn btn-sm btn-danger">
-			              <i class="fa fa-remove"></i>
-			            </a>
-					</td>
-				</tr>
-				<?php } ?>
-			</tbody>
-			-->
 		</table>
 	</div>
 </div>

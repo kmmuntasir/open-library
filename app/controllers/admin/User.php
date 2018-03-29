@@ -30,31 +30,31 @@ class User extends Base_Controller {
         $this->students();
 	}
 
-	public function students() {
+	public function students($deleted=0) {
         $data = $this->data;
         $data['page'] = 'user';
-        $data['page_title'] .= 'Students';
+        $data['page_title'] .= ($deleted) ? 'Deactivated Students' : 'Students';
         $data['content'] = 'v_student.php';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 
-    public function all_students() {
-        $students = $this->m_user->all_students();
+    public function all_students($deleted=0) {
+        $students = $this->m_user->all_students($deleted);
         //$this->printer($students);
         ini_set('memory_limit', '-1');
         echo $students = $this->to_datatable_json_format($students, 1, 1);
     }
 
-	public function teachers() {
+	public function teachers($deleted=0) {
         $data = $this->data;
         $data['page'] = 'user';
-        $data['page_title'] .= 'Teachers';
+        $data['page_title'] .= ($deleted) ? 'Deactivated Teachers' : 'Teachers';
         $data['content'] = 'v_teacher.php';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 
-    public function all_teachers() {
-        $teachers = $this->m_user->all_teachers();
+    public function all_teachers($deleted=0) {
+        $teachers = $this->m_user->all_teachers($deleted);
         //$this->printer($teachers);
         ini_set('memory_limit', '-1');
         echo $teachers = $this->to_datatable_json_format($teachers, 10, 1);
@@ -113,6 +113,13 @@ class User extends Base_Controller {
         if($count > 0) $this->redirect_msg('/admin/user', 'There are incomplete issues from this user', 'danger');
         if($status = $this->m_user->delete_user($user_id)) 
         	$this->redirect_msg('/admin/user', 'User Deleted Successfully', 'success');
+        else $this->redirect_msg('/admin/user', 'Something went wrong!', 'danger');
+    }
+
+    public function reactivate($user_id=NULL) {
+        if(!$user_id) redirect_msg('/admin/user');
+        if($status = $this->m_user->reactivate_user($user_id)) 
+            $this->redirect_msg('/admin/user', 'User Reactivated Successfully', 'success');
         else $this->redirect_msg('/admin/user', 'Something went wrong!', 'danger');
     }
 }

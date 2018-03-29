@@ -9,17 +9,17 @@ class M_user extends Ci_model {
         return $this->db->get('user')->result();
     }
 
-    public function all_students() {
+    public function all_students($deleted=0) {
         $this->db->select('user_id, user_name, user_username, user_dept, user_session, user_roll, user_email, user_phone');
         $this->db->select('user_id as id');
-    	$this->db->where('is_deleted', 0);
+    	$this->db->where('is_deleted', $deleted);
         $this->db->where('is_teacher', 0);
         return $this->db->get('user')->result();
     }
-    public function all_teachers() {
+    public function all_teachers($deleted=0) {
         $this->db->select('user_id, user_name, user_username, teacher_designation, user_dept, user_email, user_phone');
         $this->db->select('user_id as id');
-    	$this->db->where('is_deleted', 0);
+    	$this->db->where('is_deleted', $deleted);
         $this->db->where('is_teacher', 1);
         return $this->db->get('user')->result();
     }
@@ -47,6 +47,13 @@ class M_user extends Ci_model {
     public function delete_user($user_id) {
     	$this->db->trans_start();
         $this->db->where('user_id', $user_id)->update('user', array('is_deleted'=>1));
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
+
+    public function reactivate_user($user_id) {
+        $this->db->trans_start();
+        $this->db->where('user_id', $user_id)->update('user', array('is_deleted'=>0));
         $this->db->trans_complete();
         return $this->db->trans_status();
     }

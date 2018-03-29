@@ -58,13 +58,16 @@ $(document).on('click', '.edit_user', function() {
 $(document).on('click', '.delete_user', function() {
 	var user_id = $(this).attr('user_id');
 	var url = '<?php echo $controller; ?>' + '/delete/' + user_id;
-	if(!confirm("Are you sure to delete?")) return false;
+	if(!confirm("Are you sure to deactivate this user?")) return false;
 	window.location.replace(url);
 });
 
-// Function for Expanding the menu
-$(document).ready(function() {
-	//$('#user_submenu_button').click();
+
+$(document).on('click', '.reactivate_user', function() {
+	var user_id = $(this).attr('user_id');
+	var url = '<?php echo $controller; ?>' + '/reactivate/' + user_id;
+	if(!confirm("Are you sure to reactivate this user?")) return false;
+	window.location.replace(url);
 });
 
 
@@ -78,7 +81,13 @@ function post_process_students_table() {
 		if(id != null) {
 			$(this).children('td:nth-child(9)').html('')
 			//alert(id);
-			var buttons = '<a href="#" user_id="'+id+'" class="edit edit_user btn btn-sm btn-info"><i class="fa fa-pencil"></i></a> <a user_id="'+id+'" href="#" class="delete_user btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>';
+			var buttons = '<a title="Edit" href="#" user_id="'+id+'" class="edit edit_user btn btn-sm btn-info"><i class="fa fa-pencil"></i></a> ';
+
+			<?php if($page_title != 'Deactivated Students') { ?>
+				buttons += '<a title="Deactivate" user_id="'+id+'" href="#" class="delete_user btn btn-sm btn-danger"><i class="fa fa-ban"></i></a>';
+			<?php } else { ?>
+				buttons += '<a title="Reactivate" user_id="'+id+'" href="#" class="reactivate_user btn btn-sm btn-success"><i class="fa fa-check"></i></a>';
+			<?php } ?>
 			
 			$(this).children('td:nth-child(9)').html(buttons);
 		}
@@ -101,7 +110,13 @@ function post_process_teachers_table() {
 		if(id != null) {
 			$(this).children('td:nth-child(8)').html('')
 			//alert(id);
-			var buttons = '<a href="#" user_id="'+id+'" class="edit edit_user btn btn-sm btn-info"><i class="fa fa-pencil"></i></a> <a user_id="'+id+'" href="#" class="delete_user btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>';
+			var buttons = '<a title="Edit" href="#" user_id="'+id+'" class="edit edit_user btn btn-sm btn-info"><i class="fa fa-pencil"></i></a> ';
+
+			<?php if($page_title != 'Deactivated Teachers') { ?>
+				buttons += '<a title="Deactivate" user_id="'+id+'" href="#" class="delete_user btn btn-sm btn-danger"><i class="fa fa-ban"></i></a>';
+			<?php } else { ?>
+				buttons += '<a title="Reactivate" user_id="'+id+'" href="#" class="reactivate_user btn btn-sm btn-success"><i class="fa fa-check"></i></a>';
+			<?php } ?>
 			
 			$(this).children('td:nth-child(8)').html(buttons);
 		}

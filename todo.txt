@@ -8,9 +8,11 @@
 
 - Application Settings 
     - Departments + Class 
-
-- Disable Issue for Deleted Users 
-	- Enable feature to re-enlist a user after deleting
+    
+- Convert unsuccessful requests to demands
+    - Convert demands into confirmed requests when the book is available
+	
+- Merge all sync/update/online indicator into one ajax call
 
 - Let the user to reset password using email. === Remote Server Problem
 

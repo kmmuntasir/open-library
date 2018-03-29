@@ -1,6 +1,10 @@
+<?php
+	$data_source = site_url('admin/user/all_students');
+	if($page_title == 'Deactivated Students') $data_source .= '/1';
+?>
 <div class="row">
 	<div class="col-sm-12 table-responsive">
-		<table data-page="students" class="table table-striped datatable" data-source="<?php echo site_url('admin/user/all_students'); ?>">
+		<table data-page="students" class="table table-striped datatable" data-source="<?php echo $data_source; ?>">
 			<thead>
 				<tr>
 					<th>ID</th>

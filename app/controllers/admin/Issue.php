@@ -210,6 +210,7 @@ class Issue extends Base_Controller {
         // Getting user by user library code
         $user = $this->m_issue->get_user_by_user_library_code($user_library_code);
         if(!$user) $this->redirect_msg('/admin/issue', 'Invalid Library Code', 'danger');
+        if($user->is_deleted) $this->redirect_msg('/admin/issue', 'This user is deactivated', 'danger');
         $msg = array();
         for($i=1; $i<=$_POST['num_of_books']; ++$i) {
             $field = 'book_'.$i;
