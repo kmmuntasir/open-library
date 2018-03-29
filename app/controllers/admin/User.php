@@ -112,7 +112,7 @@ class User extends Base_Controller {
         $count = $this->m_user->check_user_for_issue($user_id);
         if($count > 0) $this->redirect_msg('/admin/user', 'There are incomplete issues from this user', 'danger');
         if($status = $this->m_user->delete_user($user_id)) 
-        	$this->redirect_msg('/admin/user', 'User Deleted Successfully', 'success');
+        	$this->redirect_msg('/admin/user', 'User Deactivated Successfully', 'success');
         else $this->redirect_msg('/admin/user', 'Something went wrong!', 'danger');
     }
 

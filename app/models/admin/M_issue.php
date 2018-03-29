@@ -21,7 +21,9 @@ class M_issue extends Ci_model {
         $selection = 'issue_id, user.user_id, user.user_name, user.is_teacher, book.book_id, book.book_title, issue_datetime, issue_auto_expire_datetime, issue_id as ID, issue_status';
         $this->db->select($selection);
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
-        return $this->db->where('issue_auto_expire_datetime >', $now)->where('issue_status', 0)->get('issue')->result();
+        $this->db->group_start()->where('issue_auto_expire_datetime >', $now)->where('issue_status', 0)->group_end();
+        $this->db->or_where('issue_status', 6);
+        return $this->db->get('issue')->result();
     }
 
     public function all_active_issues() {

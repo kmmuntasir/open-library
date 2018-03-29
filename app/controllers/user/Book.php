@@ -34,12 +34,6 @@ class Book extends Base_Controller {
         $data['page'] = 'books';
         $data['page_title'] .= 'Books';
         $data['source'] = $this->data['controller'].'/all_books_json';
-        // $data['books'] = $this->m_book->all_books();
-        // foreach($data['books'] as $key => $book) {
-        //     $data['books'][$key]->authors = $this->m_book->book_authors($book->book_id);
-        //     //$data['books'][$key]->categories = $this->m_book->book_categories($book->book_id);
-        // }
-        
         $data['content'] = 'v_books.php';
         //$this->printer($data['books'], true);
         $this->load->view($this->viewpath.'v_main', $data);
@@ -181,7 +175,7 @@ class Book extends Base_Controller {
                 if($issue_stat == NULL) $issue_stat = 100; // No Current Issue Active
                 else $issue_stat = $issue_stat->issue_status;
 
-                $issue_stat_text = array('9'=>'Requested', '0'=>'Confirmed', '1'=>'Active', '100'=>'');
+                $issue_stat_text = array('9'=>'Requested', '6'=>'Demanded', '0'=>'Confirmed', '1'=>'Active', '100'=>'');
 
                 array_push($json_data['data'][$i], $issue_stat_text[$issue_stat]);
 

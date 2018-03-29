@@ -44,6 +44,7 @@
           <th>Book</th>
           <th>Date</th>
           <th>Auto Expire</th>
+          <th>Status</th>
           <th class="opt_column">Options</th>
         </tr>
       </thead>

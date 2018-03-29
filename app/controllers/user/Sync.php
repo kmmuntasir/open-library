@@ -184,6 +184,7 @@ class Sync extends Base_Controller {
 
     public function confirm() {
         $issues = $this->m_issue->all_new_issue_requests();
+        //$this->printer($issues);
         if(count($issues) == 0) {
             //echo 'No Unconfirmed Issues<br>';
             return true;
@@ -194,7 +195,7 @@ class Sync extends Base_Controller {
                 $new['book'] = array('book_id' => $issue->book_id, 'book_available' => $issue->book_available-1);
             }
             else {
-                $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 8);
+                $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 6); // Converting into Demands
                 $new['book'] = array('book_id' => $issue->book_id);
             }
             $reply = $this->my_curl($this->local_url.'update_issue', $new); // Updating issue through a different controller.

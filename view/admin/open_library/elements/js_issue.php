@@ -262,9 +262,14 @@ function post_process_issue_requests_table() {
 				$(this).children('td:nth-child(3)').html(book);
 			}
 
+			var stat = $(this).children('td:nth-child(6)').html();
+
+			var status_button = '<button type="button" class="btn btn-xs btn-'+issue_status_class(stat)+'">'+issue_status(stat)+'</button>';
+			$(this).children('td:nth-child(6)').html(status_button);
+
 			var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
 
-			$(this).children('td:nth-child(6)').html(action_buttons);
+			$(this).children('td:nth-child(7)').html(action_buttons);
 		}
 
 	});
@@ -373,6 +378,7 @@ function issue_status(stat) {
 	else if (stat == 1) 	return 'Active';
 	else if (stat == 2)		return 'Fine Due';
 	else if (stat == 3) 	return 'Completed';
+	else if (stat == 6)		return 'Demanded';
 	else if (stat == 8)		return 'Expired';
 	else if (stat == 9) 	return 'Requested';
 	else if (stat == -1)	return 'Overdue';
@@ -382,6 +388,7 @@ function issue_status_class(stat) {
 	else if (stat == 1) 	return 'warning';
 	else if (stat == 2)		return 'info';
 	else if (stat == 3) 	return 'success';
+	else if (stat == 6)		return 'danger';
 	else if (stat == 8)		return 'default';
 	else if (stat == 9) 	return 'info';
 	else if (stat == -1)	return 'danger';
@@ -414,7 +421,7 @@ function post_process_all_issues_table() {
 			var stat = $(this).children('td:nth-child(9)').html();
 
 			var status_button = '<button type="button" class="btn btn-xs btn-'+issue_status_class(stat)+'">'+issue_status(stat)+'</button>';
-			$(this).children('td:nth-child(9)').html(status_button);			
+			$(this).children('td:nth-child(9)').html(status_button);		
 
 			var action_buttons = '<a href="#" title="View Issue Details" issue_id="'+id+'" class="view_issue btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>';
 

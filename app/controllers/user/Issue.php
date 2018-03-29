@@ -58,6 +58,8 @@ class Issue extends Base_Controller {
         $test_multiplier = 1;
         for($m = 0; $m < $test_multiplier; ++$m) {
             foreach($issues as $key=>$issue) {
+                // $this->printer($issue);
+                // echo $this->db->last_query();
                 if($data_page == 'overdue' || $data_page == 'all_issues' || $data_page == 'issue_by_user' || $data_page == 'issue_by_book' || $data_page == 'issue_by_book_copy') {
                     $result = $this->calculate_fine($issue);
                     $issue->issue_overdue = $result['overdue'];
@@ -201,11 +203,29 @@ class Issue extends Base_Controller {
             $book_id =($code)? $code : strtok($_POST[$field], '-');
             $book = $this->m_book->get_single_book($book_id);
             if(!$book) array_push($msg, array("Book ID #$book_id Doesn't Exist)", "danger"));
-            else if($book->book_available == 0)
-                array_push($msg, array("Book No. #$book_id ($book->book_title) is Not Available right now (All copies are lent out)", "danger"));
             //Check if another copy of this book is already issued to this student;
             else if($this->m_issue->check_book_duplicate_issue($this->session->user_id, $book_id))
                 array_push($msg, array("A copy of Book No. #$book_id ($book->book_title) is currently Issued to/Requested by you", "danger"));
+            else if($book->book_available == 0) { // Book Not Available. Creating a Demand
+                // Enter the issue
+                $issue = array();
+                $issue['issue_id'] = $this->m_issue->new_id('issue');
+                $issue['issue_datetime'] = date('Y-m-d H:i:s');
+                //$issue['issue_auto_expire_datetime'] = date('Y-m-d 16:30:00', strtotime("+".$this->settings->issue_auto_expire_deadline." days"));
+                $issue['issue_book_id'] = $book_id;
+                $issue['user_id'] = $this->session->user_id;
+                // issue_status (0-confirmed (but not issued), 1-issued and Active, 2-returned (but not cleared fine, 3-completed, 6-Demanded, 8-expired, 9-requested )
+                $issue['issue_status'] = 6;
+                $issue['issue_lend_user_code'] = $this->__unique_code();
+                $issue['issue_receive_user_code'] = $this->__unique_code();
+                $issue['issue_receive_admin_code'] = $this->__unique_code();
+                $issue['issue_fine_user_code'] = $this->__unique_code();
+                $issue['issue_fine_admin_code'] = $this->__unique_code();
+                $issue['issue_renew_user_code'] = $this->__unique_code();
+                $issue['issue_remarks'] = '';
+                if($status = $this->m_issue->add_issue($issue))
+                    array_push($msg, array("Book No. #$book_id ($book->book_title) is not available right now. A Demand has been created for you (Issue #".$issue['issue_id'].").", "warning"));
+            }
             else { // Everything Clear, Proceed to issue the book
                 // Enter the issue
                 $issue = array();
@@ -271,7 +291,7 @@ class Issue extends Base_Controller {
                 $book = array('book_id' => $issue->book_id, 'book_available' => $issue->book_available + 1);
                 $status = $this->m_issue->delete_issue($issue_id, $book);
             }
-            else if($issue->issue_status == 9) $status = $this->m_issue->delete_issue($issue_id); // Just delete the issue
+            else if($issue->issue_status == 9 || $issue->issue_status == 6) $status = $this->m_issue->delete_issue($issue_id); // Just delete the issue
             else $this->redirect_msg('user/issue/all', 'You can\'t Delete An Issue History', 'danger');
             if($status) $this->redirect_msg('user/issue/all', 'Successfully Deleted the Issue', 'success');
             else echo $this->redirect_msg('user/issue/all', 'Something Went Wrong', 'danger');
@@ -285,6 +305,11 @@ class Issue extends Base_Controller {
             $result['overdue'] = 'N/A';         // Expired
             $result['fine'] = 'N/A';
             //echo 'Expired';
+        }
+        else if($issue->issue_status == 6) {
+            $result['overdue'] = 'N/A';         // Demanded
+            $result['fine'] = 'N/A';
+            //echo 'Demanded';
         }
         else if($issue->issue_status == 9) {
             $result['overdue'] = 'N/A';         // Requested

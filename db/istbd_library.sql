@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-03-28 20:01:08
+Date: 2018-03-29 23:22:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -82,9 +82,9 @@ INSERT INTO `book` VALUES ('34', 'IST_LIBRARY_2', '8676543234676', 'Programming 
 INSERT INTO `book` VALUES ('35', 'IST_3', '12345', 'Art of Programming Contest', 'IST_LIBRARY_4', '2016-12-21 20:11:47', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2009', '195', '1', '', '16', '15', 'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf', '0', '', '2018-03-28 19:42:17');
 INSERT INTO `book` VALUES ('36', 'L_4', '2358094', 'টাইট্রন একটি গ্রহের নাম', 'L_5', '2016-12-21 23:48:54', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2001', '68', '1', '', '7', '6', 'http://download848.mediafire.com/mnocrzt5i9zg/bdoj3r01q09db5k/Titron+Ekti+Groher+Naam+%28allbdbooks.com%29.PDF', '0', '', '2018-03-28 19:42:17');
 INSERT INTO `book` VALUES ('37', 'L_5', 'uiy6756gh', 'উচ্চ মাধ্যমিক জ্যামিতি ও ক্যালকুলাস', 'L_5', '2016-12-21 23:50:17', 'IST_LIBRARY_1', '2nd', 'Dhaka, Bangladesh', '2011', '298', '1', '', '6', '5', null, '1', '', '2018-03-28 19:42:17');
-INSERT INTO `book` VALUES ('38', 'L_6', 'jkluio789023jod', 'The 8088 and 8086 Microprocessor System', 'IST_LIBRARY_3', '2016-12-21 23:52:48', 'IST_LIBRARY_1', '3rd', 'New Delhi', '2004', '593', '1', '', '10', '9', null, '1', '', '2018-03-28 19:42:17');
-INSERT INTO `book` VALUES ('39', 'L_7', '39dkdk', 'Bangla Grammar', 'L_6', '2016-12-21 23:54:28', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2000', '198', '1', '', '10', '9', null, '1', '', '2018-03-28 19:42:17');
-INSERT INTO `book` VALUES ('43', 'L_8', '978-0073523323', 'Database System Concepts', 'L_7', '2017-12-23 13:07:08', 'IST_LIBRARY_1', '6th', 'Yale', '2006', '678', '1', '', '1', '0', null, '1', '', '2018-03-28 19:42:17');
+INSERT INTO `book` VALUES ('38', 'L_6', 'jkluio789023jod', 'The 8088 and 8086 Microprocessor System', 'IST_LIBRARY_3', '2016-12-21 23:52:48', 'IST_LIBRARY_1', '3rd', 'New Delhi', '2004', '593', '1', '', '3', '2', null, '1', '', '2018-03-29 23:20:42');
+INSERT INTO `book` VALUES ('39', 'L_7', '39dkdk', 'Bangla Grammar', 'L_7', '2016-12-21 23:54:28', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2000', '198', '1', '', '10', '9', null, '1', '', '2018-03-29 02:38:24');
+INSERT INTO `book` VALUES ('43', 'L_8', '978-0073523323', 'Database System Concepts', 'L_7', '2017-12-23 13:07:08', 'IST_LIBRARY_1', '6th', 'Yale', '2006', '678', '1', '', '1', '0', '', '1', '', '2018-03-28 23:13:47');
 
 -- ----------------------------
 -- Table structure for `book_author`
@@ -100,7 +100,7 @@ CREATE TABLE `book_author` (
   KEY `FK2_book_author_book` (`book_id`),
   CONSTRAINT `FK1_book_author_author` FOREIGN KEY (`author_id`) REFERENCES `author` (`author_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK2_book_author_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of book_author
@@ -109,12 +109,13 @@ INSERT INTO `book_author` VALUES ('39', '', 'L_5', 'L_7');
 INSERT INTO `book_author` VALUES ('40', '', 'L_6', 'IST_LIBRARY_2');
 INSERT INTO `book_author` VALUES ('41', '', 'L_6', 'L_8');
 INSERT INTO `book_author` VALUES ('47', '', 'L_7', 'L_10');
-INSERT INTO `book_author` VALUES ('49', '', 'L_8', 'L_11');
-INSERT INTO `book_author` VALUES ('50', '', 'L_8', 'L_12');
-INSERT INTO `book_author` VALUES ('51', '', 'L_8', 'L_13');
-INSERT INTO `book_author` VALUES ('54', '', 'IST_3', 'IST_LIBRARY_5');
-INSERT INTO `book_author` VALUES ('55', '', 'IST_LIBRARY_2', 'IST_LIBRARY_3');
-INSERT INTO `book_author` VALUES ('57', '', 'L_4', 'L_6');
+INSERT INTO `book_author` VALUES ('64', '', 'IST_LIBRARY_2', 'IST_LIBRARY_3');
+INSERT INTO `book_author` VALUES ('65', '', 'L_4', 'L_6');
+INSERT INTO `book_author` VALUES ('66', '', 'L_8', 'L_11');
+INSERT INTO `book_author` VALUES ('67', '', 'L_8', 'L_12');
+INSERT INTO `book_author` VALUES ('68', '', 'L_8', 'L_13');
+INSERT INTO `book_author` VALUES ('69', '', 'IST_3', 'IST_LIBRARY_5');
+INSERT INTO `book_author` VALUES ('70', '', 'IST_3', 'L_10');
 
 -- ----------------------------
 -- Table structure for `book_category`
@@ -130,7 +131,7 @@ CREATE TABLE `book_category` (
   KEY `FK2_book_category_book` (`book_id`),
   CONSTRAINT `FK1_book_category_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK2_book_category_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of book_category
@@ -141,16 +142,20 @@ INSERT INTO `book_category` VALUES ('84', '', 'L_6', 'L_10');
 INSERT INTO `book_category` VALUES ('85', '', 'L_6', 'IST_LIBRARY_2');
 INSERT INTO `book_category` VALUES ('86', '', 'L_6', 'IST_LIBRARY_1');
 INSERT INTO `book_category` VALUES ('92', '', 'L_7', 'L_11');
-INSERT INTO `book_category` VALUES ('94', '', 'L_8', 'L_12');
-INSERT INTO `book_category` VALUES ('95', '', 'L_8', 'IST_LIBRARY_4');
-INSERT INTO `book_category` VALUES ('96', '', 'L_8', 'IST_LIBRARY_1');
-INSERT INTO `book_category` VALUES ('101', '', 'IST_3', 'IST_LIBRARY_1');
-INSERT INTO `book_category` VALUES ('102', '', 'IST_3', 'IST_LIBRARY_2');
-INSERT INTO `book_category` VALUES ('103', '', 'IST_LIBRARY_2', 'IST_LIBRARY_1');
-INSERT INTO `book_category` VALUES ('104', '', 'IST_LIBRARY_2', 'IST_LIBRARY_2');
-INSERT INTO `book_category` VALUES ('105', '', 'IST_LIBRARY_2', 'IST_LIBRARY_4');
-INSERT INTO `book_category` VALUES ('108', '', 'L_4', 'L_6');
-INSERT INTO `book_category` VALUES ('109', '', 'L_4', 'L_7');
+INSERT INTO `book_category` VALUES ('124', '', 'IST_LIBRARY_2', 'IST_LIBRARY_1');
+INSERT INTO `book_category` VALUES ('125', '', 'IST_LIBRARY_2', 'IST_LIBRARY_2');
+INSERT INTO `book_category` VALUES ('126', '', 'IST_LIBRARY_2', 'IST_LIBRARY_4');
+INSERT INTO `book_category` VALUES ('127', '', 'IST_LIBRARY_2', 'L_15');
+INSERT INTO `book_category` VALUES ('128', '', 'L_4', 'L_6');
+INSERT INTO `book_category` VALUES ('129', '', 'L_4', 'L_7');
+INSERT INTO `book_category` VALUES ('130', '', 'L_4', 'L_15');
+INSERT INTO `book_category` VALUES ('131', '', 'L_8', 'L_12');
+INSERT INTO `book_category` VALUES ('132', '', 'L_8', 'IST_LIBRARY_4');
+INSERT INTO `book_category` VALUES ('133', '', 'L_8', 'IST_LIBRARY_1');
+INSERT INTO `book_category` VALUES ('134', '', 'L_8', 'L_15');
+INSERT INTO `book_category` VALUES ('135', '', 'IST_3', 'IST_LIBRARY_1');
+INSERT INTO `book_category` VALUES ('136', '', 'IST_3', 'IST_LIBRARY_2');
+INSERT INTO `book_category` VALUES ('137', '', 'IST_3', 'L_15');
 
 -- ----------------------------
 -- Table structure for `book_copy`
@@ -224,13 +229,13 @@ INSERT INTO `book_copy` VALUES ('65', 'L_5', 'L_c_65', '1', '1', '2016-12-21', '
 INSERT INTO `book_copy` VALUES ('66', 'L_6', 'L_c_66', '1', '0', '2016-12-21', '430', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
 INSERT INTO `book_copy` VALUES ('67', 'L_6', 'L_c_67', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
 INSERT INTO `book_copy` VALUES ('68', 'L_6', 'L_c_68', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
-INSERT INTO `book_copy` VALUES ('69', 'L_6', 'L_c_69', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
-INSERT INTO `book_copy` VALUES ('70', 'L_6', 'L_c_70', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
-INSERT INTO `book_copy` VALUES ('71', 'L_6', 'L_c_71', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
-INSERT INTO `book_copy` VALUES ('72', 'L_6', 'L_c_72', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
-INSERT INTO `book_copy` VALUES ('73', 'L_6', 'L_c_73', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
-INSERT INTO `book_copy` VALUES ('74', 'L_6', 'L_c_74', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
-INSERT INTO `book_copy` VALUES ('75', 'L_6', 'L_c_75', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
+INSERT INTO `book_copy` VALUES ('69', 'L_6', 'L_c_69', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '1', '2018-03-29 18:58:36');
+INSERT INTO `book_copy` VALUES ('70', 'L_6', 'L_c_70', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '1', '2018-03-29 18:58:36');
+INSERT INTO `book_copy` VALUES ('71', 'L_6', 'L_c_71', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '1', '2018-03-29 18:58:36');
+INSERT INTO `book_copy` VALUES ('72', 'L_6', 'L_c_72', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '1', '2018-03-29 18:58:36');
+INSERT INTO `book_copy` VALUES ('73', 'L_6', 'L_c_73', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '1', '2018-03-29 18:58:36');
+INSERT INTO `book_copy` VALUES ('74', 'L_6', 'L_c_74', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '1', '2018-03-29 18:58:36');
+INSERT INTO `book_copy` VALUES ('75', 'L_6', 'L_c_75', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '1', '2018-03-29 18:58:36');
 INSERT INTO `book_copy` VALUES ('86', 'L_7', 'L_c_86', '1', '0', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
 INSERT INTO `book_copy` VALUES ('87', 'L_7', 'L_c_87', '1', '1', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
 INSERT INTO `book_copy` VALUES ('88', 'L_7', 'L_c_88', '1', '1', '2016-12-22', '187', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
@@ -263,7 +268,7 @@ CREATE TABLE `category` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`category_id`,`category_name`),
   KEY `category_id` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of category
@@ -280,6 +285,7 @@ INSERT INTO `category` VALUES ('11', 'L_9', 'H.S.C Books', '2018-03-28 19:38:16'
 INSERT INTO `category` VALUES ('12', 'L_10', 'Microprocessor', '2018-03-28 19:38:16');
 INSERT INTO `category` VALUES ('13', 'L_11', 'Test Category', '2018-03-28 19:38:16');
 INSERT INTO `category` VALUES ('14', 'L_12', 'Database', '2018-03-28 19:38:16');
+INSERT INTO `category` VALUES ('24', 'L_15', 'Merge Category 3', '2018-03-29 01:56:28');
 
 -- ----------------------------
 -- Table structure for `issue`
@@ -315,7 +321,7 @@ CREATE TABLE `issue` (
   CONSTRAINT `FK2_issue_book_copy` FOREIGN KEY (`issue_book_copy_accession_no`) REFERENCES `book_copy` (`book_copy_accession_no`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK3_issue_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK4_issue_manager` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of issue
@@ -343,7 +349,7 @@ CREATE TABLE `log` (
   `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `log_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`,`log_entry_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=327 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=561 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of log
@@ -398,6 +404,240 @@ INSERT INTO `log` VALUES ('323', 'L_323', 'INSERT INTO `book_category` (`book_id
 INSERT INTO `log` VALUES ('324', 'L_324', 'INSERT INTO `publication` (`publication_name`, `publication_id`) VALUES (\'Test Publisherr\', \'L_8\')', '1', '2018-03-27 23:31:20');
 INSERT INTO `log` VALUES ('325', 'L_325', 'DELETE FROM `publication` WHERE `publication_id` = \'L_8\'', '1', '2018-03-27 23:31:24');
 INSERT INTO `log` VALUES ('326', 'L_326', 'UPDATE `book_copy` SET `book_copy_type` = \'0\', `book_copy_remarks` = \'Original Copy from the Publisher, Hard Cover Binding\' WHERE `book_copy_accession_no` = \'IST_c_36\'', '1', '2018-03-28 19:50:47');
+INSERT INTO `log` VALUES ('327', 'L_327', 'UPDATE `book` SET `book_title` = \'Art of Programming Contest\', `book_isbn` = \'12345\', `publication_id` = \'IST_LIBRARY_4\', `book_edition` = \'1st\', `book_place_of_pub` = \'Dhaka, Bangladesh\', `book_year_of_pub` = \'2009\', `book_pages` = \'195\', `book_status` = \'1\', `book_url` = \'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'IST_3\'', '1', '2018-03-28 23:13:25');
+INSERT INTO `log` VALUES ('328', 'L_328', 'DELETE FROM `book_author` WHERE `book_id` = \'IST_3\'', '1', '2018-03-28 23:13:25');
+INSERT INTO `log` VALUES ('329', 'L_329', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'IST_LIBRARY_5\',\'IST_3\')', '1', '2018-03-28 23:13:25');
+INSERT INTO `log` VALUES ('330', 'L_330', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'Merge Category 1\', \'L_13\')', '1', '2018-03-28 23:13:25');
+INSERT INTO `log` VALUES ('331', 'L_331', 'DELETE FROM `book_category` WHERE `book_id` = \'IST_3\'', '1', '2018-03-28 23:13:25');
+INSERT INTO `log` VALUES ('332', 'L_332', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'IST_3\',\'IST_LIBRARY_1\'), (\'IST_3\',\'IST_LIBRARY_2\'), (\'IST_3\',\'L_13\')', '1', '2018-03-28 23:13:25');
+INSERT INTO `log` VALUES ('333', 'L_333', 'UPDATE `book` SET `book_title` = \'Programming in ANSI C\', `book_isbn` = \'8676543234676\', `publication_id` = \'IST_LIBRARY_2\', `book_edition` = \'4th\', `book_place_of_pub` = \'Delhi, India\', `book_year_of_pub` = \'2011\', `book_pages` = \'245\', `book_status` = \'1\', `book_url` = \'https://books.google.com.bd/books?id=AokcsKn-1iIC&lpg=PP1&pg=PP1&output=embed\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'IST_LIBRARY_2\'', '1', '2018-03-28 23:13:31');
+INSERT INTO `log` VALUES ('334', 'L_334', 'DELETE FROM `book_author` WHERE `book_id` = \'IST_LIBRARY_2\'', '1', '2018-03-28 23:13:31');
+INSERT INTO `log` VALUES ('335', 'L_335', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'IST_LIBRARY_3\',\'IST_LIBRARY_2\')', '1', '2018-03-28 23:13:32');
+INSERT INTO `log` VALUES ('336', 'L_336', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'Merge Category 2\', \'L_14\')', '1', '2018-03-28 23:13:32');
+INSERT INTO `log` VALUES ('337', 'L_337', 'DELETE FROM `book_category` WHERE `book_id` = \'IST_LIBRARY_2\'', '1', '2018-03-28 23:13:32');
+INSERT INTO `log` VALUES ('338', 'L_338', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'IST_LIBRARY_2\',\'IST_LIBRARY_1\'), (\'IST_LIBRARY_2\',\'IST_LIBRARY_2\'), (\'IST_LIBRARY_2\',\'IST_LIBRARY_4\'), (\'IST_LIBRARY_2\',\'L_14\')', '1', '2018-03-28 23:13:32');
+INSERT INTO `log` VALUES ('339', 'L_339', 'UPDATE `book` SET `book_title` = \'টাইট্রন একটি গ্রহের নাম\', `book_isbn` = \'2358094\', `publication_id` = \'L_5\', `book_edition` = \'1st\', `book_place_of_pub` = \'Dhaka, Bangladesh\', `book_year_of_pub` = \'2001\', `book_pages` = \'68\', `book_status` = \'1\', `book_url` = \'http://download848.mediafire.com/mnocrzt5i9zg/bdoj3r01q09db5k/Titron+Ekti+Groher+Naam+%28allbdbooks.com%29.PDF\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'L_4\'', '1', '2018-03-28 23:13:38');
+INSERT INTO `log` VALUES ('340', 'L_340', 'DELETE FROM `book_author` WHERE `book_id` = \'L_4\'', '1', '2018-03-28 23:13:38');
+INSERT INTO `log` VALUES ('341', 'L_341', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'L_6\',\'L_4\')', '1', '2018-03-28 23:13:38');
+INSERT INTO `log` VALUES ('342', 'L_342', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'Merge Category 3\', \'L_15\')', '1', '2018-03-28 23:13:38');
+INSERT INTO `log` VALUES ('343', 'L_343', 'DELETE FROM `book_category` WHERE `book_id` = \'L_4\'', '1', '2018-03-28 23:13:38');
+INSERT INTO `log` VALUES ('344', 'L_344', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'L_4\',\'L_6\'), (\'L_4\',\'L_7\'), (\'L_4\',\'L_15\')', '1', '2018-03-28 23:13:38');
+INSERT INTO `log` VALUES ('345', 'L_345', 'UPDATE `book` SET `book_title` = \'Database System Concepts\', `book_isbn` = \'978-0073523323\', `publication_id` = \'L_7\', `book_edition` = \'6th\', `book_place_of_pub` = \'Yale\', `book_year_of_pub` = \'2006\', `book_pages` = \'678\', `book_status` = \'1\', `book_url` = \'\', `book_url_unlocked` = \'1\', `book_remarks` = \'\' WHERE `book_id` = \'L_8\'', '1', '2018-03-28 23:13:47');
+INSERT INTO `log` VALUES ('346', 'L_346', 'DELETE FROM `book_author` WHERE `book_id` = \'L_8\'', '1', '2018-03-28 23:13:47');
+INSERT INTO `log` VALUES ('347', 'L_347', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'L_11\',\'L_8\'), (\'L_12\',\'L_8\'), (\'L_13\',\'L_8\')', '1', '2018-03-28 23:13:47');
+INSERT INTO `log` VALUES ('348', 'L_348', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'Merge Category 4\', \'L_16\')', '1', '2018-03-28 23:13:47');
+INSERT INTO `log` VALUES ('349', 'L_349', 'DELETE FROM `book_category` WHERE `book_id` = \'L_8\'', '1', '2018-03-28 23:13:48');
+INSERT INTO `log` VALUES ('350', 'L_350', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'L_8\',\'L_12\'), (\'L_8\',\'IST_LIBRARY_4\'), (\'L_8\',\'IST_LIBRARY_1\'), (\'L_8\',\'L_16\')', '1', '2018-03-28 23:13:48');
+INSERT INTO `log` VALUES ('351', 'L_351', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:46:48');
+INSERT INTO `log` VALUES ('352', 'L_352', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:46:48');
+INSERT INTO `log` VALUES ('353', 'L_353', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:46:48');
+INSERT INTO `log` VALUES ('354', 'L_354', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:46:48');
+INSERT INTO `log` VALUES ('355', 'L_355', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:46:48');
+INSERT INTO `log` VALUES ('356', 'L_356', 'DELETE FROM `category` WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:46:48');
+INSERT INTO `log` VALUES ('357', 'L_357', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:47:13');
+INSERT INTO `log` VALUES ('358', 'L_358', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:47:13');
+INSERT INTO `log` VALUES ('359', 'L_359', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:47:13');
+INSERT INTO `log` VALUES ('360', 'L_360', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:47:13');
+INSERT INTO `log` VALUES ('361', 'L_361', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:47:13');
+INSERT INTO `log` VALUES ('362', 'L_362', 'DELETE FROM `category` WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:47:13');
+INSERT INTO `log` VALUES ('363', 'L_363', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('364', 'L_364', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('365', 'L_365', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_4\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('366', 'L_366', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_4\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('367', 'L_367', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('368', 'L_368', 'DELETE FROM `category` WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('369', 'L_369', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('370', 'L_370', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('371', 'L_371', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_4\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('372', 'L_372', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_4\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('373', 'L_373', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('374', 'L_374', 'DELETE FROM `category` WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:48:15');
+INSERT INTO `log` VALUES ('375', 'L_375', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:48:39');
+INSERT INTO `log` VALUES ('376', 'L_376', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:48:39');
+INSERT INTO `log` VALUES ('377', 'L_377', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_4\'', '1', '2018-03-29 01:48:39');
+INSERT INTO `log` VALUES ('378', 'L_378', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_4\'', '1', '2018-03-29 01:48:39');
+INSERT INTO `log` VALUES ('379', 'L_379', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:48:39');
+INSERT INTO `log` VALUES ('380', 'L_380', 'DELETE FROM `category` WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:48:39');
+INSERT INTO `log` VALUES ('381', 'L_381', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:49:34');
+INSERT INTO `log` VALUES ('382', 'L_382', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:49:34');
+INSERT INTO `log` VALUES ('383', 'L_383', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_4\'', '1', '2018-03-29 01:49:34');
+INSERT INTO `log` VALUES ('384', 'L_384', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_4\'', '1', '2018-03-29 01:49:34');
+INSERT INTO `log` VALUES ('385', 'L_385', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:49:34');
+INSERT INTO `log` VALUES ('386', 'L_386', 'DELETE FROM `category` WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:49:34');
+INSERT INTO `log` VALUES ('387', 'L_387', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:49:35');
+INSERT INTO `log` VALUES ('388', 'L_388', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:49:36');
+INSERT INTO `log` VALUES ('389', 'L_389', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'IST_LIBRARY_4\'', '1', '2018-03-29 01:49:36');
+INSERT INTO `log` VALUES ('390', 'L_390', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_4\'', '1', '2018-03-29 01:49:36');
+INSERT INTO `log` VALUES ('391', 'L_391', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_1\' WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:49:36');
+INSERT INTO `log` VALUES ('392', 'L_392', 'DELETE FROM `category` WHERE `category_id` = \'L_12\'', '1', '2018-03-29 01:49:36');
+INSERT INTO `log` VALUES ('393', 'L_393', 'UPDATE `book_category` SET `category_id` = \'L_12\' WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:50:51');
+INSERT INTO `log` VALUES ('394', 'L_394', 'DELETE FROM `category` WHERE `category_id` = \'IST_LIBRARY_1\'', '1', '2018-03-29 01:50:51');
+INSERT INTO `log` VALUES ('395', 'L_395', 'UPDATE `book_category` SET `category_id` = \'L_12\' WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:50:51');
+INSERT INTO `log` VALUES ('396', 'L_396', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:50:51');
+INSERT INTO `log` VALUES ('397', 'L_397', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:51:28');
+INSERT INTO `log` VALUES ('398', 'L_398', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:51:28');
+INSERT INTO `log` VALUES ('399', 'L_399', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_15\'', '1', '2018-03-29 01:51:28');
+INSERT INTO `log` VALUES ('400', 'L_400', 'DELETE FROM `category` WHERE `category_id` = \'L_15\'', '1', '2018-03-29 01:51:28');
+INSERT INTO `log` VALUES ('401', 'L_401', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:51:28');
+INSERT INTO `log` VALUES ('402', 'L_402', 'DELETE FROM `category` WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:51:28');
+INSERT INTO `log` VALUES ('403', 'L_403', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:52:22');
+INSERT INTO `log` VALUES ('404', 'L_404', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:52:22');
+INSERT INTO `log` VALUES ('405', 'L_405', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_15\'', '1', '2018-03-29 01:52:22');
+INSERT INTO `log` VALUES ('406', 'L_406', 'DELETE FROM `category` WHERE `category_id` = \'L_15\'', '1', '2018-03-29 01:52:22');
+INSERT INTO `log` VALUES ('407', 'L_407', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:52:23');
+INSERT INTO `log` VALUES ('408', 'L_408', 'DELETE FROM `category` WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:52:23');
+INSERT INTO `log` VALUES ('409', 'L_409', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:52:48');
+INSERT INTO `log` VALUES ('410', 'L_410', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:52:48');
+INSERT INTO `log` VALUES ('411', 'L_411', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_15\'', '1', '2018-03-29 01:52:48');
+INSERT INTO `log` VALUES ('412', 'L_412', 'DELETE FROM `category` WHERE `category_id` = \'L_15\'', '1', '2018-03-29 01:52:48');
+INSERT INTO `log` VALUES ('413', 'L_413', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:52:48');
+INSERT INTO `log` VALUES ('414', 'L_414', 'DELETE FROM `category` WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:52:48');
+INSERT INTO `log` VALUES ('415', 'L_415', 'UPDATE `book` SET `book_title` = \'Programming in ANSI C\', `book_isbn` = \'8676543234676\', `publication_id` = \'IST_LIBRARY_2\', `book_edition` = \'4th\', `book_place_of_pub` = \'Delhi, India\', `book_year_of_pub` = \'2011\', `book_pages` = \'245\', `book_status` = \'1\', `book_url` = \'https://books.google.com.bd/books?id=AokcsKn-1iIC&lpg=PP1&pg=PP1&output=embed\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'IST_LIBRARY_2\'', '1', '2018-03-29 01:56:23');
+INSERT INTO `log` VALUES ('416', 'L_416', 'DELETE FROM `book_author` WHERE `book_id` = \'IST_LIBRARY_2\'', '1', '2018-03-29 01:56:23');
+INSERT INTO `log` VALUES ('417', 'L_417', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'IST_LIBRARY_3\',\'IST_LIBRARY_2\')', '1', '2018-03-29 01:56:23');
+INSERT INTO `log` VALUES ('418', 'L_418', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'Merge Category 2\', \'L_14\')', '1', '2018-03-29 01:56:24');
+INSERT INTO `log` VALUES ('419', 'L_419', 'DELETE FROM `book_category` WHERE `book_id` = \'IST_LIBRARY_2\'', '1', '2018-03-29 01:56:24');
+INSERT INTO `log` VALUES ('420', 'L_420', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'IST_LIBRARY_2\',\'IST_LIBRARY_1\'), (\'IST_LIBRARY_2\',\'IST_LIBRARY_2\'), (\'IST_LIBRARY_2\',\'IST_LIBRARY_4\'), (\'IST_LIBRARY_2\',\'L_14\')', '1', '2018-03-29 01:56:24');
+INSERT INTO `log` VALUES ('421', 'L_421', 'UPDATE `book` SET `book_title` = \'টাইট্রন একটি গ্রহের নাম\', `book_isbn` = \'2358094\', `publication_id` = \'L_5\', `book_edition` = \'1st\', `book_place_of_pub` = \'Dhaka, Bangladesh\', `book_year_of_pub` = \'2001\', `book_pages` = \'68\', `book_status` = \'1\', `book_url` = \'http://download848.mediafire.com/mnocrzt5i9zg/bdoj3r01q09db5k/Titron+Ekti+Groher+Naam+%28allbdbooks.com%29.PDF\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'L_4\'', '1', '2018-03-29 01:56:28');
+INSERT INTO `log` VALUES ('422', 'L_422', 'DELETE FROM `book_author` WHERE `book_id` = \'L_4\'', '1', '2018-03-29 01:56:28');
+INSERT INTO `log` VALUES ('423', 'L_423', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'L_6\',\'L_4\')', '1', '2018-03-29 01:56:28');
+INSERT INTO `log` VALUES ('424', 'L_424', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'Merge Category 3\', \'L_15\')', '1', '2018-03-29 01:56:28');
+INSERT INTO `log` VALUES ('425', 'L_425', 'DELETE FROM `book_category` WHERE `book_id` = \'L_4\'', '1', '2018-03-29 01:56:28');
+INSERT INTO `log` VALUES ('426', 'L_426', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'L_4\',\'L_6\'), (\'L_4\',\'L_7\'), (\'L_4\',\'L_15\')', '1', '2018-03-29 01:56:28');
+INSERT INTO `log` VALUES ('427', 'L_427', 'UPDATE `book` SET `book_title` = \'Database System Concepts\', `book_isbn` = \'978-0073523323\', `publication_id` = \'L_7\', `book_edition` = \'6th\', `book_place_of_pub` = \'Yale\', `book_year_of_pub` = \'2006\', `book_pages` = \'678\', `book_status` = \'1\', `book_url` = \'\', `book_url_unlocked` = \'1\', `book_remarks` = \'\' WHERE `book_id` = \'L_8\'', '1', '2018-03-29 01:56:42');
+INSERT INTO `log` VALUES ('428', 'L_428', 'DELETE FROM `book_author` WHERE `book_id` = \'L_8\'', '1', '2018-03-29 01:56:42');
+INSERT INTO `log` VALUES ('429', 'L_429', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'L_11\',\'L_8\'), (\'L_12\',\'L_8\'), (\'L_13\',\'L_8\')', '1', '2018-03-29 01:56:42');
+INSERT INTO `log` VALUES ('430', 'L_430', 'INSERT INTO `category` (`category_name`, `category_id`) VALUES (\'Merge Category 4\', \'L_16\')', '1', '2018-03-29 01:56:42');
+INSERT INTO `log` VALUES ('431', 'L_431', 'DELETE FROM `book_category` WHERE `book_id` = \'L_8\'', '1', '2018-03-29 01:56:42');
+INSERT INTO `log` VALUES ('432', 'L_432', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'L_8\',\'L_12\'), (\'L_8\',\'IST_LIBRARY_4\'), (\'L_8\',\'IST_LIBRARY_1\'), (\'L_8\',\'L_16\')', '1', '2018-03-29 01:56:42');
+INSERT INTO `log` VALUES ('433', 'L_433', 'UPDATE `book_category` SET `category_id` = \'L_16\' WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:57:34');
+INSERT INTO `log` VALUES ('434', 'L_434', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:57:34');
+INSERT INTO `log` VALUES ('435', 'L_435', 'UPDATE `book_category` SET `category_id` = \'L_16\' WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:57:34');
+INSERT INTO `log` VALUES ('436', 'L_436', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:57:34');
+INSERT INTO `log` VALUES ('437', 'L_437', 'UPDATE `book_category` SET `category_id` = \'L_16\' WHERE `category_id` = \'L_15\'', '1', '2018-03-29 01:57:34');
+INSERT INTO `log` VALUES ('438', 'L_438', 'DELETE FROM `category` WHERE `category_id` = \'L_15\'', '1', '2018-03-29 01:57:34');
+INSERT INTO `log` VALUES ('439', 'L_439', 'UPDATE `book_category` SET `category_id` = \'L_15\' WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:58:10');
+INSERT INTO `log` VALUES ('440', 'L_440', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:58:10');
+INSERT INTO `log` VALUES ('441', 'L_441', 'UPDATE `book_category` SET `category_id` = \'L_15\' WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:58:10');
+INSERT INTO `log` VALUES ('442', 'L_442', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:58:10');
+INSERT INTO `log` VALUES ('443', 'L_443', 'UPDATE `book_category` SET `category_id` = \'L_15\' WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:58:10');
+INSERT INTO `log` VALUES ('444', 'L_444', 'DELETE FROM `category` WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:58:10');
+INSERT INTO `log` VALUES ('445', 'L_445', 'UPDATE `book_category` SET `category_id` = \'L_15\' WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:59:08');
+INSERT INTO `log` VALUES ('446', 'L_446', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:59:08');
+INSERT INTO `log` VALUES ('447', 'L_447', 'UPDATE `book_category` SET `category_id` = \'L_15\' WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:59:08');
+INSERT INTO `log` VALUES ('448', 'L_448', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:59:08');
+INSERT INTO `log` VALUES ('449', 'L_449', 'UPDATE `book_category` SET `category_id` = \'L_15\' WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:59:08');
+INSERT INTO `log` VALUES ('450', 'L_450', 'DELETE FROM `category` WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:59:08');
+INSERT INTO `log` VALUES ('451', 'L_451', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_4\' WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:59:37');
+INSERT INTO `log` VALUES ('452', 'L_452', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-29 01:59:37');
+INSERT INTO `log` VALUES ('453', 'L_453', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_4\' WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:59:37');
+INSERT INTO `log` VALUES ('454', 'L_454', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-29 01:59:37');
+INSERT INTO `log` VALUES ('455', 'L_455', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_4\' WHERE `category_id` = \'L_15\'', '1', '2018-03-29 01:59:37');
+INSERT INTO `log` VALUES ('456', 'L_456', 'DELETE FROM `category` WHERE `category_id` = \'L_15\'', '1', '2018-03-29 01:59:37');
+INSERT INTO `log` VALUES ('457', 'L_457', 'UPDATE `book_category` SET `category_id` = \'IST_LIBRARY_4\' WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:59:37');
+INSERT INTO `log` VALUES ('458', 'L_458', 'DELETE FROM `category` WHERE `category_id` = \'L_16\'', '1', '2018-03-29 01:59:37');
+INSERT INTO `log` VALUES ('459', 'L_459', 'UPDATE `book_category` SET `category_id` = \'L_9\' WHERE `category_id` = \'L_8\'', '1', '2018-03-29 02:00:09');
+INSERT INTO `log` VALUES ('460', 'L_460', 'DELETE FROM `category` WHERE `category_id` = \'L_8\'', '1', '2018-03-29 02:00:09');
+INSERT INTO `log` VALUES ('461', 'L_461', 'UPDATE `book_category` SET `category_id` = \'L_9\' WHERE `category_id` = \'L_15\'', '1', '2018-03-29 02:00:09');
+INSERT INTO `log` VALUES ('462', 'L_462', 'DELETE FROM `category` WHERE `category_id` = \'L_15\'', '1', '2018-03-29 02:00:09');
+INSERT INTO `log` VALUES ('463', 'L_463', 'UPDATE `book_category` SET `category_id` = \'L_8\' WHERE `category_id` = \'L_13\'', '1', '2018-03-29 02:00:46');
+INSERT INTO `log` VALUES ('464', 'L_464', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-29 02:00:46');
+INSERT INTO `log` VALUES ('465', 'L_465', 'UPDATE `book_category` SET `category_id` = \'L_8\' WHERE `category_id` = \'L_15\'', '1', '2018-03-29 02:00:46');
+INSERT INTO `log` VALUES ('466', 'L_466', 'DELETE FROM `category` WHERE `category_id` = \'L_15\'', '1', '2018-03-29 02:00:46');
+INSERT INTO `log` VALUES ('467', 'L_467', 'UPDATE `book_category` SET `category_id` = \'L_8\' WHERE `category_id` = \'L_14\'', '1', '2018-03-29 02:01:57');
+INSERT INTO `log` VALUES ('468', 'L_468', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-29 02:01:57');
+INSERT INTO `log` VALUES ('469', 'L_469', 'UPDATE `book_category` SET `category_id` = \'L_8\' WHERE `category_id` = \'L_16\'', '1', '2018-03-29 02:01:57');
+INSERT INTO `log` VALUES ('470', 'L_470', 'DELETE FROM `category` WHERE `category_id` = \'L_16\'', '1', '2018-03-29 02:01:57');
+INSERT INTO `log` VALUES ('471', 'L_471', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_15\'', '1', '2018-03-29 02:02:46');
+INSERT INTO `log` VALUES ('472', 'L_472', 'DELETE FROM `category` WHERE `category_id` = \'L_15\'', '1', '2018-03-29 02:02:46');
+INSERT INTO `log` VALUES ('473', 'L_473', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_14\'', '1', '2018-03-29 02:02:46');
+INSERT INTO `log` VALUES ('474', 'L_474', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-29 02:02:46');
+INSERT INTO `log` VALUES ('475', 'L_475', 'UPDATE `book_category` SET `category_id` = \'L_13\' WHERE `category_id` = \'L_16\'', '1', '2018-03-29 02:03:03');
+INSERT INTO `log` VALUES ('476', 'L_476', 'DELETE FROM `category` WHERE `category_id` = \'L_16\'', '1', '2018-03-29 02:03:03');
+INSERT INTO `log` VALUES ('477', 'L_477', 'UPDATE `book_category` SET `category_id` = \'L_15\' WHERE `category_id` = \'L_13\'', '1', '2018-03-29 02:03:32');
+INSERT INTO `log` VALUES ('478', 'L_478', 'DELETE FROM `category` WHERE `category_id` = \'L_13\'', '1', '2018-03-29 02:03:32');
+INSERT INTO `log` VALUES ('479', 'L_479', 'UPDATE `book_category` SET `category_id` = \'L_15\' WHERE `category_id` = \'L_14\'', '1', '2018-03-29 02:03:32');
+INSERT INTO `log` VALUES ('480', 'L_480', 'DELETE FROM `category` WHERE `category_id` = \'L_14\'', '1', '2018-03-29 02:03:32');
+INSERT INTO `log` VALUES ('481', 'L_481', 'UPDATE `book_category` SET `category_id` = \'L_15\' WHERE `category_id` = \'L_16\'', '1', '2018-03-29 02:03:32');
+INSERT INTO `log` VALUES ('482', 'L_482', 'DELETE FROM `category` WHERE `category_id` = \'L_16\'', '1', '2018-03-29 02:03:32');
+INSERT INTO `log` VALUES ('483', 'L_483', 'UPDATE `book_author` SET `author_id` = \'L_12\' WHERE `author_id` = \'L_8\'', '1', '2018-03-29 02:10:14');
+INSERT INTO `log` VALUES ('484', 'L_484', 'DELETE FROM `author` WHERE `author_id` = \'L_8\'', '1', '2018-03-29 02:10:14');
+INSERT INTO `log` VALUES ('485', 'L_485', 'UPDATE `book_author` SET `author_id` = \'L_12\' WHERE `author_id` = \'L_10\'', '1', '2018-03-29 02:10:14');
+INSERT INTO `log` VALUES ('486', 'L_486', 'DELETE FROM `author` WHERE `author_id` = \'L_10\'', '1', '2018-03-29 02:10:14');
+INSERT INTO `log` VALUES ('487', 'L_487', 'UPDATE `book_author` SET `author_id` = \'L_12\' WHERE `author_id` = \'L_8\'', '1', '2018-03-29 02:10:17');
+INSERT INTO `log` VALUES ('488', 'L_488', 'DELETE FROM `author` WHERE `author_id` = \'L_8\'', '1', '2018-03-29 02:10:17');
+INSERT INTO `log` VALUES ('489', 'L_489', 'UPDATE `book_author` SET `author_id` = \'L_12\' WHERE `author_id` = \'L_10\'', '1', '2018-03-29 02:10:17');
+INSERT INTO `log` VALUES ('490', 'L_490', 'DELETE FROM `author` WHERE `author_id` = \'L_10\'', '1', '2018-03-29 02:10:17');
+INSERT INTO `log` VALUES ('491', 'L_491', 'UPDATE `book_author` SET `author_id` = \'L_13\' WHERE `author_id` = \'L_8\'', '1', '2018-03-29 02:10:42');
+INSERT INTO `log` VALUES ('492', 'L_492', 'DELETE FROM `author` WHERE `author_id` = \'L_8\'', '1', '2018-03-29 02:10:42');
+INSERT INTO `log` VALUES ('493', 'L_493', 'UPDATE `book_author` SET `author_id` = \'L_13\' WHERE `author_id` = \'L_7\'', '1', '2018-03-29 02:10:42');
+INSERT INTO `log` VALUES ('494', 'L_494', 'DELETE FROM `author` WHERE `author_id` = \'L_7\'', '1', '2018-03-29 02:10:42');
+INSERT INTO `log` VALUES ('495', 'L_495', 'UPDATE `book` SET `book_title` = \'Art of Programming Contest\', `book_isbn` = \'12345\', `publication_id` = \'IST_LIBRARY_4\', `book_edition` = \'1st\', `book_place_of_pub` = \'Dhaka, Bangladesh\', `book_year_of_pub` = \'2009\', `book_pages` = \'195\', `book_status` = \'1\', `book_url` = \'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf\', `book_url_unlocked` = \'0\', `book_remarks` = \'\' WHERE `book_id` = \'IST_3\'', '1', '2018-03-29 02:11:55');
+INSERT INTO `log` VALUES ('496', 'L_496', 'INSERT INTO `author` (`author_name`, `author_id`) VALUES (\'U. Acharya\', \'L_14\')', '1', '2018-03-29 02:11:55');
+INSERT INTO `log` VALUES ('497', 'L_497', 'DELETE FROM `book_author` WHERE `book_id` = \'IST_3\'', '1', '2018-03-29 02:11:56');
+INSERT INTO `log` VALUES ('498', 'L_498', 'INSERT INTO `book_author` (`author_id`, `book_id`) VALUES (\'IST_LIBRARY_5\',\'IST_3\'), (\'L_14\',\'IST_3\')', '1', '2018-03-29 02:11:56');
+INSERT INTO `log` VALUES ('499', 'L_499', 'DELETE FROM `book_category` WHERE `book_id` = \'IST_3\'', '1', '2018-03-29 02:11:56');
+INSERT INTO `log` VALUES ('500', 'L_500', 'INSERT INTO `book_category` (`book_id`, `category_id`) VALUES (\'IST_3\',\'IST_LIBRARY_1\'), (\'IST_3\',\'IST_LIBRARY_2\'), (\'IST_3\',\'L_15\')', '1', '2018-03-29 02:11:56');
+INSERT INTO `log` VALUES ('501', 'L_501', 'UPDATE `book_author` SET `author_id` = \'L_10\' WHERE `author_id` = \'L_14\'', '1', '2018-03-29 02:12:23');
+INSERT INTO `log` VALUES ('502', 'L_502', 'DELETE FROM `author` WHERE `author_id` = \'L_14\'', '1', '2018-03-29 02:12:23');
+INSERT INTO `log` VALUES ('503', 'L_503', 'UPDATE `book` SET `publication_id` = \'IST_LIBRARY_1\' WHERE `publication_id` = \'L_7\'', '1', '2018-03-29 02:37:04');
+INSERT INTO `log` VALUES ('504', 'L_504', 'DELETE FROM `publication` WHERE `publication_id` = \'L_7\'', '1', '2018-03-29 02:37:04');
+INSERT INTO `log` VALUES ('505', 'L_505', 'UPDATE `book` SET `publication_id` = \'IST_LIBRARY_2\' WHERE `publication_id` = \'IST_LIBRARY_3\'', '1', '2018-03-29 02:37:25');
+INSERT INTO `log` VALUES ('506', 'L_506', 'DELETE FROM `publication` WHERE `publication_id` = \'IST_LIBRARY_3\'', '1', '2018-03-29 02:37:25');
+INSERT INTO `log` VALUES ('507', 'L_507', 'UPDATE `book` SET `publication_id` = \'IST_LIBRARY_2\' WHERE `publication_id` = \'L_7\'', '1', '2018-03-29 02:37:25');
+INSERT INTO `log` VALUES ('508', 'L_508', 'DELETE FROM `publication` WHERE `publication_id` = \'L_7\'', '1', '2018-03-29 02:37:25');
+INSERT INTO `log` VALUES ('509', 'L_509', 'UPDATE `book` SET `publication_id` = \'IST_LIBRARY_1\' WHERE `publication_id` = \'L_7\'', '1', '2018-03-29 02:37:42');
+INSERT INTO `log` VALUES ('510', 'L_510', 'DELETE FROM `publication` WHERE `publication_id` = \'L_7\'', '1', '2018-03-29 02:37:42');
+INSERT INTO `log` VALUES ('511', 'L_511', 'UPDATE `book` SET `publication_id` = \'IST_LIBRARY_1\' WHERE `publication_id` = \'IST_LIBRARY_3\'', '1', '2018-03-29 02:37:42');
+INSERT INTO `log` VALUES ('512', 'L_512', 'DELETE FROM `publication` WHERE `publication_id` = \'IST_LIBRARY_3\'', '1', '2018-03-29 02:37:42');
+INSERT INTO `log` VALUES ('513', 'L_513', 'UPDATE `book` SET `publication_id` = \'L_7\' WHERE `publication_id` = \'L_6\'', '1', '2018-03-29 02:38:24');
+INSERT INTO `log` VALUES ('514', 'L_514', 'DELETE FROM `publication` WHERE `publication_id` = \'L_6\'', '1', '2018-03-29 02:38:24');
+INSERT INTO `log` VALUES ('515', 'L_515', 'UPDATE `user` SET `is_deleted` = 1 WHERE `user_id` = \'IST_2\'', '1', '2018-03-29 18:41:36');
+INSERT INTO `log` VALUES ('516', 'L_516', 'UPDATE `user` SET `is_deleted` = 1 WHERE `user_id` = \'IST_1\'', '1', '2018-03-29 18:44:31');
+INSERT INTO `log` VALUES ('517', 'L_517', 'UPDATE `user` SET `is_deleted` = 0 WHERE `user_id` = \'IST_2\'', '1', '2018-03-29 18:44:46');
+INSERT INTO `log` VALUES ('518', 'L_518', 'UPDATE `user` SET `is_deleted` = 0 WHERE `user_id` = \'IST_1\'', '1', '2018-03-29 18:44:51');
+INSERT INTO `log` VALUES ('519', 'L_519', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_auto_expire_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_12\', \'2018-03-29 18:46:14\', \'2018-03-31 16:30:00\', \'IST_3\', \'IST_1\', 9, \'dya1gkQq\', \'xSoeGq#A\', \'Tg6Ud0LK\', \'H1nCExFG\', \'TwsOadzb\', \'jiFVNlJT\', \'\')', '1', '2018-03-29 18:46:14');
+INSERT INTO `log` VALUES ('520', 'L_520', 'UPDATE `user` SET `is_deleted` = 1 WHERE `user_id` = \'IST_1\'', '1', '2018-03-29 18:46:28');
+INSERT INTO `log` VALUES ('521', 'L_521', 'UPDATE `user` SET `is_deleted` = 0 WHERE `user_id` = \'IST_1\'', '1', '2018-03-29 18:50:46');
+INSERT INTO `log` VALUES ('522', 'L_522', 'DELETE FROM `issue` WHERE `issue_id` = \'L_12\'', '1', '2018-03-29 18:51:57');
+INSERT INTO `log` VALUES ('523', 'L_523', 'UPDATE `user` SET `is_deleted` = 1 WHERE `user_id` = \'IST_1\'', '1', '2018-03-29 18:52:07');
+INSERT INTO `log` VALUES ('524', 'L_524', 'UPDATE `user` SET `is_deleted` = 0 WHERE `user_id` = \'IST_1\'', '1', '2018-03-29 18:52:12');
+INSERT INTO `log` VALUES ('525', 'L_525', 'UPDATE `user` SET `user_name` = \'Md. Moyeenul Hasan Durjoy\', `user_dept` = \'CSE\', `user_session` = \'2017\', `user_roll` = \'1036\', `user_phone` = \'12355677888\', `user_email` = \'durjoy@mail.com\', `user_username` = \'durjoy\', `user_pass` = \'202cb962ac59075b964b07152d234b70\' WHERE `user_id` = \'L_7\'', '1', '2018-03-29 18:57:20');
+INSERT INTO `log` VALUES ('526', 'L_526', 'UPDATE `book_copy` SET `book_copy_is_deleted` = 1 WHERE `book_id` = \'L_6\' AND `book_copy_id` >= \'69\' AND `book_copy_id` <= \'75\' AND `book_copy_type` = 1 AND `book_copy_is_deleted` =0', '1', '2018-03-29 18:58:36');
+INSERT INTO `log` VALUES ('527', 'L_527', 'UPDATE `book` SET `book_stock` = 3, `book_available` = 2 WHERE `book_id` = \'L_6\'', '1', '2018-03-29 18:58:36');
+INSERT INTO `log` VALUES ('528', 'L_528', 'UPDATE `book_copy` SET `book_copy_is_deleted` = 1 WHERE `book_id` = \'L_6\' AND `book_copy_id` >= \'69\' AND `book_copy_id` <= \'75\' AND `book_copy_is_deleted` =0', '1', '2018-03-29 18:58:36');
+INSERT INTO `log` VALUES ('529', 'L_529', 'UPDATE `user` SET `user_name` = \'Aftabul Islam Himel\', `user_dept` = \'CSE\', `user_session` = \'2012\', `user_roll` = \'1243\', `user_phone` = \'01677181006\', `user_email` = \'toaihimel@gmail.com\', `user_username` = \'himel\', `user_pass` = \'202cb962ac59075b964b07152d234b70\' WHERE `user_id` = \'L_9\'', '1', '2018-03-29 18:59:24');
+INSERT INTO `log` VALUES ('530', 'L_530', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_auto_expire_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_12\', \'2018-03-29 18:59:32\', \'2018-03-31 16:30:00\', \'L_6\', \'L_7\', 9, \'k%efwcHr\', \'6Lx101oc\', \'fAh5AIcX\', \'&v3y%$dm\', \'qhRgg&9i\', \'Q7K#Bo5r\', \'\')', '1', '2018-03-29 18:59:32');
+INSERT INTO `log` VALUES ('531', 'L_531', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_auto_expire_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_13\', \'2018-03-29 19:00:19\', \'2018-03-31 16:30:00\', \'L_6\', \'L_9\', 9, \'9BK&Uoau\', \'BbrddaV5\', \'CDVBmyhm\', \'&3pzIdej\', \'uc3HgKkU\', \'S5dO1wwO\', \'\')', '1', '2018-03-29 19:00:19');
+INSERT INTO `log` VALUES ('532', 'L_532', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 1 WHERE `book_id` = \'L_6\'', '1', '2018-03-29 19:00:29');
+INSERT INTO `log` VALUES ('533', 'L_533', 'UPDATE `issue` SET `issue_id` = \'L_13\', `issue_status` = 0 WHERE `issue_id` = \'L_13\'', '1', '2018-03-29 19:00:29');
+INSERT INTO `log` VALUES ('534', 'L_534', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 0 WHERE `book_id` = \'L_6\'', '1', '2018-03-29 19:01:03');
+INSERT INTO `log` VALUES ('535', 'L_535', 'UPDATE `issue` SET `issue_id` = \'L_12\', `issue_status` = 0 WHERE `issue_id` = \'L_12\'', '1', '2018-03-29 19:01:03');
+INSERT INTO `log` VALUES ('536', 'L_536', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_14\', \'2018-03-29 19:07:38\', \'L_6\', \'IST_1\', 6, \'FStQbl0v\', \'EfODvsuL\', \'emHu0rO0\', \'hnP1FLwE\', \'niRTVrod\', \'cNnOqsbr\', \'\')', '1', '2018-03-29 19:07:38');
+INSERT INTO `log` VALUES ('537', 'L_537', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_14\', \'2018-03-29 19:08:06\', \'L_6\', \'IST_1\', 6, \'O3NXdjta\', \'PjBYFOCT\', \'XsZd&SXc\', \'eeZP13%G\', \'PL3kXH4B\', \'4VTIdFQw\', \'\')', '1', '2018-03-29 19:08:06');
+INSERT INTO `log` VALUES ('538', 'L_538', 'DELETE FROM `issue` WHERE `issue_id` = \'L_14\'', '1', '2018-03-29 19:56:33');
+INSERT INTO `log` VALUES ('539', 'L_539', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_14\', \'2018-03-29 19:56:44\', \'L_6\', \'IST_1\', 6, \'@nbGfRK4\', \'RSX9iKw9\', \'G7FLOUAu\', \'Wg7AR%WZ\', \'cVC85Lkj\', \'6x5vr@dN\', \'\')', '1', '2018-03-29 19:56:44');
+INSERT INTO `log` VALUES ('540', 'L_540', 'DELETE FROM `issue` WHERE `issue_id` = \'L_14\'', '1', '2018-03-29 20:01:49');
+INSERT INTO `log` VALUES ('541', 'L_541', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_14\', \'2018-03-29 20:02:46\', \'L_6\', \'IST_1\', 6, \'LFYn#rN#\', \'ne2@mHpm\', \'fo#IDeNL\', \'svwNLnmA\', \'mqDKt%s@\', \'HDi4FJTC\', \'\')', '1', '2018-03-29 20:02:47');
+INSERT INTO `log` VALUES ('542', 'L_542', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 1 WHERE `book_id` = \'L_6\'', '1', '2018-03-29 20:06:50');
+INSERT INTO `log` VALUES ('543', 'L_543', 'DELETE FROM `issue` WHERE `issue_id` = \'L_13\'', '1', '2018-03-29 20:06:50');
+INSERT INTO `log` VALUES ('544', 'L_544', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 2 WHERE `book_id` = \'L_6\'', '1', '2018-03-29 20:07:02');
+INSERT INTO `log` VALUES ('545', 'L_545', 'DELETE FROM `issue` WHERE `issue_id` = \'L_12\'', '1', '2018-03-29 20:07:02');
+INSERT INTO `log` VALUES ('546', 'L_546', 'DELETE FROM `issue` WHERE `issue_id` = \'L_14\'', '1', '2018-03-29 20:07:27');
+INSERT INTO `log` VALUES ('547', 'L_547', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_auto_expire_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_12\', \'2018-03-29 23:01:51\', \'2018-03-31 16:30:00\', \'L_6\', \'IST_1\', 9, \'&1tL%zq$\', \'x#9YyKp3\', \'j3#SAAQe\', \'nPUSd@D2\', \'e@D6932b\', \'Y7MB#58h\', \'\')', '1', '2018-03-29 23:01:52');
+INSERT INTO `log` VALUES ('548', 'L_548', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_auto_expire_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_13\', \'2018-03-29 23:02:00\', \'2018-03-31 16:30:00\', \'L_6\', \'L_7\', 9, \'sYyydBrK\', \'Epe@7ZGT\', \'6j@evEH9\', \'aCfWAQ5D\', \'zbUr#gRx\', \'5D9464x5\', \'\')', '1', '2018-03-29 23:02:00');
+INSERT INTO `log` VALUES ('549', 'L_549', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 1 WHERE `book_id` = \'L_6\'', '1', '2018-03-29 23:02:11');
+INSERT INTO `log` VALUES ('550', 'L_550', 'UPDATE `issue` SET `issue_id` = \'L_12\', `issue_status` = 0 WHERE `issue_id` = \'L_12\'', '1', '2018-03-29 23:02:11');
+INSERT INTO `log` VALUES ('551', 'L_551', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_auto_expire_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_14\', \'2018-03-29 23:02:54\', \'2018-03-31 16:30:00\', \'L_6\', \'L_9\', 9, \'I8BJM7JC\', \'xeQthcSE\', \'LJgfCDWj\', \'3&PL%L4W\', \'9dOZYpcT\', \'VQvA2se%\', \'\')', '1', '2018-03-29 23:02:54');
+INSERT INTO `log` VALUES ('552', 'L_552', 'DELETE FROM `issue` WHERE `issue_id` = \'L_14\'', '1', '2018-03-29 23:03:14');
+INSERT INTO `log` VALUES ('553', 'L_553', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 0 WHERE `book_id` = \'L_6\'', '1', '2018-03-29 23:19:50');
+INSERT INTO `log` VALUES ('554', 'L_554', 'UPDATE `issue` SET `issue_id` = \'L_13\', `issue_status` = 0 WHERE `issue_id` = \'L_13\'', '1', '2018-03-29 23:19:50');
+INSERT INTO `log` VALUES ('555', 'L_555', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_book_id`, `user_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_14\', \'2018-03-29 23:20:17\', \'L_6\', \'L_9\', 6, \'0UfgIWQg\', \'Va6rM@eC\', \'aZ#j$UfG\', \'IfghaWH5\', \'$EPUKYxE\', \'AljKLMZX\', \'\')', '1', '2018-03-29 23:20:17');
+INSERT INTO `log` VALUES ('556', 'L_556', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 1 WHERE `book_id` = \'L_6\'', '1', '2018-03-29 23:20:36');
+INSERT INTO `log` VALUES ('557', 'L_557', 'DELETE FROM `issue` WHERE `issue_id` = \'L_12\'', '1', '2018-03-29 23:20:36');
+INSERT INTO `log` VALUES ('558', 'L_558', 'UPDATE `book` SET `book_id` = \'L_6\', `book_available` = 2 WHERE `book_id` = \'L_6\'', '1', '2018-03-29 23:20:43');
+INSERT INTO `log` VALUES ('559', 'L_559', 'DELETE FROM `issue` WHERE `issue_id` = \'L_13\'', '1', '2018-03-29 23:20:43');
+INSERT INTO `log` VALUES ('560', 'L_560', 'DELETE FROM `issue` WHERE `issue_id` = \'L_14\'', '1', '2018-03-29 23:20:49');
 
 -- ----------------------------
 -- Table structure for `manager`
@@ -437,7 +677,7 @@ CREATE TABLE `publication` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`publication_id`,`publication_name`),
   KEY `publication_id` (`publication_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of publication
@@ -447,7 +687,6 @@ INSERT INTO `publication` VALUES ('2', 'IST_LIBRARY_2', 'TATA mCGRAW Hills', '20
 INSERT INTO `publication` VALUES ('3', 'IST_LIBRARY_3', 'Prentice-Hall India', '2018-03-28 19:37:55');
 INSERT INTO `publication` VALUES ('35', 'IST_LIBRARY_4', 'শিখা প্রকাশনী', '2018-03-28 19:37:55');
 INSERT INTO `publication` VALUES ('37', 'L_5', 'Gyankosh Prokashoni, Bangladesh', '2018-03-28 19:37:55');
-INSERT INTO `publication` VALUES ('38', 'L_6', 'Test Publisher', '2018-03-28 19:37:55');
 INSERT INTO `publication` VALUES ('39', 'L_7', 'Yale Publishers', '2018-03-28 19:37:55');
 
 -- ----------------------------
@@ -468,7 +707,7 @@ CREATE TABLE `server` (
 -- ----------------------------
 -- Records of server
 -- ----------------------------
-INSERT INTO `server` VALUES ('1', 'remote', 'http://library.ist.edu.bd/index.php', '2018-03-28 20:01:08', '1', '0', 'HF1EBAvrgB');
+INSERT INTO `server` VALUES ('1', 'remote', 'http://library.ist.edu.bd/index.php', '2018-03-29 23:22:01', '1', '0', 'HF1EBAvrgB');
 
 -- ----------------------------
 -- Table structure for `settings`
@@ -527,11 +766,11 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'IST_1', 'munna', '202cb962ac59075b964b07152d234b70', 'Muntasir Billah', '1234567890', 'mun@na.com', 'bBz7L@3WiW', 'CSE', '1057', '2009', '0', '0', null, '0', '', '2018-03-28 19:34:31');
-INSERT INTO `user` VALUES ('2', 'IST_2', 'rubayet33', '81dc9bdb52d04dc20036dbd8313ed055', 'Rubayet Hossain', '0987654345678', 'rub@ayet.com', '123', 'CSE', '1014', '2009', '0', '0', null, '0', '', '2018-03-28 19:34:31');
+INSERT INTO `user` VALUES ('1', 'IST_1', 'munna', '202cb962ac59075b964b07152d234b70', 'Muntasir Billah', '1234567890', 'mun@na.com', 'bBz7L@3WiW', 'CSE', '1057', '2009', '0', '0', null, '0', '', '2018-03-29 18:52:12');
+INSERT INTO `user` VALUES ('2', 'IST_2', 'rubayet33', '81dc9bdb52d04dc20036dbd8313ed055', 'Rubayet Hossain', '0987654345678', 'rub@ayet.com', '123', 'CSE', '1014', '2009', '0', '0', null, '0', '', '2018-03-29 18:44:46');
 INSERT INTO `user` VALUES ('3', 'IST_3', 'muntasir', '81dc9bdb52d04dc20036dbd8313ed055', 'K. M. Muntasir Billah Munna', '01516180603', 'kmmuntasir@gmail.com', 'HF1EBAvrgB', 'CSE', '', '0000', '1', '21', 'Faculty Member', '0', '', '2018-03-28 19:34:31');
 INSERT INTO `user` VALUES ('6', 'L_5', 'rakib', '202cb962ac59075b964b07152d234b70', 'Md. Rakib Hossain', '12345678904845', 'rakib@gmail.com', 'E2971AAC8809C0E0232FAEC1924D1176', 'ECE', '', '0000', '1', '0', 'Faculty Member', '0', '', '2018-03-28 19:34:31');
 INSERT INTO `user` VALUES ('7', 'L_6', 'taniasultana', '202cb962ac59075b964b07152d234b70', 'Mrs. Tania Sultana', '0984323456787', 'tania@gmail.com', '943BF7D405B44375372A221F669A261A', 'CSE', '', '0000', '1', '0', 'Faculty Member', '0', '', '2018-03-28 19:34:31');
-INSERT INTO `user` VALUES ('8', 'L_7', 'durjoy', 'c4ca4238a0b923820dcc509a6f75849b', 'Md. Moyeenul Hasan Durjoy', '12355677888', 'kmmuntasir@gmail.com', 'yWd0ehWofG', 'CSE', '1036', '2017', '0', '0', null, '0', 'GPKRbsUWVZF8yFGYbOLl', '2018-03-28 19:34:31');
+INSERT INTO `user` VALUES ('8', 'L_7', 'durjoy', '202cb962ac59075b964b07152d234b70', 'Md. Moyeenul Hasan Durjoy', '12355677888', 'durjoy@mail.com', 'yWd0ehWofG', 'CSE', '1036', '2017', '0', '0', null, '0', 'GPKRbsUWVZF8yFGYbOLl', '2018-03-29 18:57:20');
 INSERT INTO `user` VALUES ('9', 'L_8', 'srafique', 'e5a93371cfc7eab4a88221dd1f6c1a3c', 'Prof. Dr. Shahida Rafique', '01819256950', 'srafique@univdhaka.edu', 'wNl5bpp', 'ECE', '', '0000', '1', '0', 'Professor', '0', '', '2018-03-28 19:34:31');
 INSERT INTO `user` VALUES ('10', 'L_9', 'himel', '202cb962ac59075b964b07152d234b70', 'Aftabul Islam Himel', '01677181006', 'toaihimel@gmail.com', 'zzZTjMvKJi', 'CSE', '1243', '2012', '0', '0', null, '0', '', '2018-03-28 19:34:31');

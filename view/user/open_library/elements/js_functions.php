@@ -379,6 +379,9 @@
 	    			else if(i_status == 9) {
 	    				issue_status = '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-hand-paper-o"></i> Requested</button>';
 	    			}
+	    			else if(i_status == 6) {
+	    				issue_status = '<button type="button" class="btn btn-danger btn-sm"><i class="fa fa-hand-paper-o"></i> Demanded</button>';
+	    			}
 	    			else if(i_status == -3) {
 	    				issue_status = '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-hand-paper-o"></i> Expired</button>';
 	    			}
@@ -394,7 +397,7 @@
 	    			else if(i_status == 0) {
 	    				issue_status = '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-thumbs-up"></i> Confirmed but not Issued</button>';
 	    			}
-	    			if(i_status == 0 || i_status == 9)
+	    			if(i_status == 0 || i_status == 9 || i_status == 6)
 	    				options = '<a href="'+ site_url +'user/issue/delete/'+ issue_id +'" class="delete btn btn-sm btn-danger pull-right"><i class="fa fa-trash"></i> Delete</a><div class="clearfix"></div>';
 	    			$('#issue_status').html(issue_status);
 	    			$('#issue_fine').html(issue.issue_fine);
@@ -682,6 +685,7 @@
 			else if (stat == 1) 	return 'Active';
 			else if (stat == 2)		return 'Fine Due';
 			else if (stat == 3) 	return 'Completed';
+			else if (stat == 6)		return 'Demanded';
 			else if (stat == 8)		return 'Expired';
 			else if (stat == 9) 	return 'Requested';
 			else if (stat == -1)	return 'Overdue';
@@ -691,6 +695,7 @@
 			else if (stat == 1) 	return 'warning';
 			else if (stat == 2)		return 'info';
 			else if (stat == 3) 	return 'success';
+			else if (stat == 6)		return 'danger';
 			else if (stat == 8)		return 'default';
 			else if (stat == 9) 	return 'info';
 			else if (stat == -1)	return 'danger';

@@ -16,27 +16,28 @@ class M_issue extends Ci_model {
         $this->db->select($selection);
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
         $this->db->where('issue.user_id', $this->session->user_id);
-        return $this->db->where('issue_auto_expire_datetime >', $now)->where('(issue_status = 0 OR issue_status = 9)')->get('issue')->result();
+        $this->db->group_start();
+        $this->db->group_start()->where('issue_auto_expire_datetime >', $now)->where('issue_status', 0)->group_end();
+        $this->db->or_where('issue_status', 9)->or_where('issue_status', 6);
+        $this->db->group_end();
+        return $this->db->get('issue')->result();
     }
     
     public function all_new_issue_requests() {
         $now = date('Y-m-d H:i:s');
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
-        $this->db->where('issue.user_id', $this->session->user_id);
         return $this->db->where('issue_auto_expire_datetime >', $now)->where('(issue_status = 9)')->get('issue')->result();
     }
 
     public function all_confirmed_issue_requests() {
         $now = date('Y-m-d H:i:s');
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
-        $this->db->where('issue.user_id', $this->session->user_id);
         return $this->db->where('issue_auto_expire_datetime >', $now)->where('(issue_status = 0)')->get('issue')->result();
     }
 
     public function all_expired_confirmed_issue_requests() {
         $now = date('Y-m-d H:i:s');
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
-        $this->db->where('issue.user_id', $this->session->user_id);
         return $this->db->where('issue_auto_expire_datetime <', $now)->where('(issue_status = 0)')->get('issue')->result();
     }
 

@@ -1,20 +1,22 @@
+- Convert unsuccessful requests to demands
+    - Convert demands into confirmed requests when the book is available (Bug Fix)
+        - Copy Add
+        - Receive Book
+        - Releasing Expired Confirmed Issue
+
+- Report Page
+    - Books Report
+    - Issue Report
+    - Fine Report
+
+- Merge all sync/update/online indicator into one ajax call
+
 - Import Students
 - Import Teachers
 
-- Report Page
-	- Books Report
-	- Issue Report
-	- Fine Report
-
-- Application Settings 
-    - Departments + Class 
-    
-- Convert unsuccessful requests to demands
-    - Convert demands into confirmed requests when the book is available
-	
-- Merge all sync/update/online indicator into one ajax call
-
 - Let the user to reset password using email. === Remote Server Problem
+
+- Fix Library Card Design
 
 - Backup/Restore System
 

@@ -70,7 +70,7 @@ class M_user extends Ci_model {
     }
 
     public function check_user_for_issue($user_id) {
-    	$this->db->where('user_id', $user_id)->where('issue_status <', 3)->where('issue_status !=', 0);
+    	$this->db->where('user_id', $user_id)->where('issue_status !=', 3)->where('issue_status !=', 8);
     	return $this->db->get('issue')->num_rows();
     }
     

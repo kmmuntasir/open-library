@@ -199,6 +199,7 @@ class M_book extends Ci_model {
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->group_start();
         $this->db->where('issue_status', 9);
+        $this->db->or_where('issue_status', 6);
         $this->db->or_where('issue_status', 0);
         $this->db->or_where('issue_status', 1);
         $this->db->group_end();
