@@ -6,6 +6,7 @@
 
 - Report Page
     - Books Report
+        - Online Reading Report
     - Issue Report
     - Fine Report
 

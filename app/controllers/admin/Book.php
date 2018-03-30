@@ -19,6 +19,7 @@ class Book extends Base_Controller {
         $this->load->model($this->module."/m_author");
         $this->load->model($this->module."/m_category");
         $this->load->model($this->module."/m_publication");
+        $this->load->model($this->module."/m_issue");
 
         $this->viewpath = $this->module.'/'.$this->template.'/';	// Creating the Path
         $this->data['fullpath'] = base_url().'view/'.$this->viewpath;;

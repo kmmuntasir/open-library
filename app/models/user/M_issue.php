@@ -28,6 +28,16 @@ class M_issue extends Ci_model {
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
         return $this->db->where('issue_auto_expire_datetime >', $now)->where('(issue_status = 9)')->get('issue')->result();
     }
+    
+    public function all_demands() {
+        $now = date('Y-m-d H:i:s');
+        // $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
+        return $this->db->where('issue_status', 6)->get('issue')->result();
+    }
+
+    public function book_availibility($book_id) {
+        return $this->db->select('book_available')->where('book_id', $book_id)->get('book')->row()->book_available;
+    }
 
     public function all_confirmed_issue_requests() {
         $now = date('Y-m-d H:i:s');

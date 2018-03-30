@@ -187,27 +187,42 @@ class Sync extends Base_Controller {
     }
 
     public function confirm() {
-        $issues = $this->m_issue->all_new_issue_requests();
-        // Fetched
-        // echo 'Confirmed<br>';
-        // $this->printer($issues);
-        if(count($issues) == 0) {
-            //echo 'No Unconfirmed Issues<br>';
-            return true;
+        // Check demands for availibility of books and confirming them
+        $issues = $this->m_issue->all_demands();
+        //$this->printer($issues);
+        if(count($issues) > 0) {
+            foreach($issues as $key=>$issue) {
+                $book_available = $this->m_issue->book_availibility($issue->issue_book_id);
+                if($book_available > 0) {
+                    $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 0);
+                    $new['book'] = array('book_id' => $issue->issue_book_id, 'book_available' => $book_available-1);
+
+                    $reply = $this->my_curl($this->local_url.'update_issue', $new); // Updating issue through a different controller.
+                    // if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
+                    // else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
+                }
+                else {
+                    //echo 'Book still unavailable for issue '. $issue->issue_id.'<br>';
+                }
+            }
         }
-        foreach($issues as $key=>$issue) {
-            if($issue->book_available > 0) {
-                $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 0);
-                $new['book'] = array('book_id' => $issue->book_id, 'book_available' => $issue->book_available-1);
+
+        // Check new requests to confirm them or converting them into demands
+        $issues = $this->m_issue->all_new_issue_requests();
+        if(count($issues) > 0) {
+            foreach($issues as $key=>$issue) {
+                if($issue->book_available > 0) {
+                    $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 0);
+                    $new['book'] = array('book_id' => $issue->book_id, 'book_available' => $issue->book_available-1);
+                }
+                else {
+                    $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 6); // Converting into Demands
+                    $new['book'] = array('book_id' => $issue->book_id);
+                }
+                $reply = $this->my_curl($this->local_url.'update_issue', $new); // Updating issue through a different controller.
+                // if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
+                // else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
             }
-            else {
-                $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 6); // Converting into Demands
-                $new['book'] = array('book_id' => $issue->book_id);
-            }
-            //$this->printer($new);
-            $reply = $this->my_curl($this->local_url.'update_issue', $new); // Updating issue through a different controller.
-            // if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
-            // else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
         }
         return true;
     }
