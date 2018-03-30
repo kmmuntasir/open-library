@@ -10,7 +10,8 @@ class M_issue extends Ci_model {
         $this->db->select($selection);
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
         //return $this->db->where('issue_auto_expire_datetime >', $now)->or_where('issue_status !=', 8)->get('issue')->result();
-        $result = $this->db->where('issue_auto_expire_datetime >', $now)->or_where('issue_status !=', 8)->get('issue')->result();
+        $this->db->where('issue_status !=', 8);
+        $result = $this->db->get('issue')->result();
         // echo $this->db->last_query();
         // exit();
         return $result;

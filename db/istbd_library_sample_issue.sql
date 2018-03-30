@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-03-30 21:23:51
+Date: 2018-03-30 21:44:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -82,7 +82,7 @@ INSERT INTO `book` VALUES ('34', 'IST_LIBRARY_2', '8676543234676', 'Programming 
 INSERT INTO `book` VALUES ('35', 'IST_3', '12345', 'Art of Programming Contest', 'IST_LIBRARY_4', '2016-12-21 20:11:47', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2009', '195', '1', '', '16', '15', 'https://www.comp.nus.edu.sg/~stevenha/database/Art_of_Programming_Contest_SE_for_uva.pdf', '0', '', '2018-03-28 19:42:17');
 INSERT INTO `book` VALUES ('36', 'L_4', '2358094', 'টাইট্রন একটি গ্রহের নাম', 'L_5', '2016-12-21 23:48:54', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2001', '68', '1', '', '7', '6', 'http://download848.mediafire.com/mnocrzt5i9zg/bdoj3r01q09db5k/Titron+Ekti+Groher+Naam+%28allbdbooks.com%29.PDF', '0', '', '2018-03-28 19:42:17');
 INSERT INTO `book` VALUES ('37', 'L_5', 'uiy6756gh', 'উচ্চ মাধ্যমিক জ্যামিতি ও ক্যালকুলাস', 'L_5', '2016-12-21 23:50:17', 'IST_LIBRARY_1', '2nd', 'Dhaka, Bangladesh', '2011', '298', '1', '', '6', '5', null, '1', '', '2018-03-28 19:42:17');
-INSERT INTO `book` VALUES ('38', 'L_6', 'jkluio789023jod', 'The 8088 and 8086 Microprocessor System', 'IST_LIBRARY_3', '2016-12-21 23:52:48', 'IST_LIBRARY_1', '3rd', 'New Delhi', '2004', '593', '1', '', '3', '2', null, '1', '', '2018-03-30 00:20:10');
+INSERT INTO `book` VALUES ('38', 'L_6', 'jkluio789023jod', 'The 8088 and 8086 Microprocessor System', 'IST_LIBRARY_3', '2016-12-21 23:52:48', 'IST_LIBRARY_1', '3rd', 'New Delhi', '2004', '593', '1', '', '3', '0', null, '1', '', '2018-03-30 21:43:28');
 INSERT INTO `book` VALUES ('39', 'L_7', '39dkdk', 'Bangla Grammar', 'L_7', '2016-12-21 23:54:28', 'IST_LIBRARY_1', '1st', 'Dhaka, Bangladesh', '2000', '198', '1', '', '10', '9', null, '1', '', '2018-03-29 02:38:24');
 INSERT INTO `book` VALUES ('43', 'L_8', '978-0073523323', 'Database System Concepts', 'L_7', '2017-12-23 13:07:08', 'IST_LIBRARY_1', '6th', 'Yale', '2006', '678', '1', '', '1', '0', '', '1', '', '2018-03-28 23:13:47');
 
@@ -227,8 +227,8 @@ INSERT INTO `book_copy` VALUES ('63', 'L_5', 'L_c_63', '1', '1', '2016-12-21', '
 INSERT INTO `book_copy` VALUES ('64', 'L_5', 'L_c_64', '1', '1', '2016-12-21', '72', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
 INSERT INTO `book_copy` VALUES ('65', 'L_5', 'L_c_65', '1', '1', '2016-12-21', '72', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
 INSERT INTO `book_copy` VALUES ('66', 'L_6', 'L_c_66', '1', '0', '2016-12-21', '430', '1', '', 'IST_LIBRARY_1', '0', '2018-03-28 19:35:15');
-INSERT INTO `book_copy` VALUES ('67', 'L_6', 'L_c_67', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-30 00:20:06');
-INSERT INTO `book_copy` VALUES ('68', 'L_6', 'L_c_68', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-30 00:20:10');
+INSERT INTO `book_copy` VALUES ('67', 'L_6', 'L_c_67', '0', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-30 21:43:14');
+INSERT INTO `book_copy` VALUES ('68', 'L_6', 'L_c_68', '0', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '0', '2018-03-30 21:43:28');
 INSERT INTO `book_copy` VALUES ('69', 'L_6', 'L_c_69', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '1', '2018-03-29 18:58:36');
 INSERT INTO `book_copy` VALUES ('70', 'L_6', 'L_c_70', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '1', '2018-03-29 18:58:36');
 INSERT INTO `book_copy` VALUES ('71', 'L_6', 'L_c_71', '1', '1', '2016-12-21', '450', '1', '', 'IST_LIBRARY_1', '1', '2018-03-29 18:58:36');
@@ -321,11 +321,13 @@ CREATE TABLE `issue` (
   CONSTRAINT `FK2_issue_book_copy` FOREIGN KEY (`issue_book_copy_accession_no`) REFERENCES `book_copy` (`book_copy_accession_no`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK3_issue_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK4_issue_manager` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of issue
 -- ----------------------------
+INSERT INTO `issue` VALUES ('52', 'L_1', '2018-03-30 21:43:14', null, '2018-04-14 16:30:00', null, 'L_6', 'L_c_67', 'L_7', 'IST_LIBRARY_1', '1', 'oCPJW7V&', 'I3e63uVr', '%z2wuOwV', 'TwzDY9ZQ', 'UmMsXTmg', '#@NVR7jh', '', '0', '0');
+INSERT INTO `issue` VALUES ('53', 'L_2', '2018-03-30 21:43:28', null, '2018-04-14 16:30:00', null, 'L_6', 'L_c_68', 'L_9', 'IST_LIBRARY_1', '1', 'I3#H5&ic', '0QwEH43Y', 'T6wqaH&R', 'Tk31QQO2', 'gjJulfeI', 'UmEmZgif', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `log`
@@ -338,11 +340,17 @@ CREATE TABLE `log` (
   `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `log_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`,`log_entry_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=599 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=605 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of log
 -- ----------------------------
+INSERT INTO `log` VALUES ('599', 'L_1', 'UPDATE `book` SET `book_available` = 1 WHERE `book_id` = \'L_6\'', '0', '2018-03-30 21:43:14');
+INSERT INTO `log` VALUES ('600', 'L_600', 'UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'L_c_67\'', '0', '2018-03-30 21:43:15');
+INSERT INTO `log` VALUES ('601', 'L_601', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_1\', \'2018-03-30 21:43:14\', \'2018-04-14 16:30:00\', \'L_6\', \'L_c_67\', \'L_7\', \'IST_LIBRARY_1\', 1, \'oCPJW7V&\', \'I3e63uVr\', \'%z2wuOwV\', \'TwzDY9ZQ\', \'UmMsXTmg\', \'#@NVR7jh\', \'\')', '0', '2018-03-30 21:43:15');
+INSERT INTO `log` VALUES ('602', 'L_602', 'UPDATE `book` SET `book_available` = 0 WHERE `book_id` = \'L_6\'', '0', '2018-03-30 21:43:28');
+INSERT INTO `log` VALUES ('603', 'L_603', 'UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'L_c_68\'', '0', '2018-03-30 21:43:28');
+INSERT INTO `log` VALUES ('604', 'L_604', 'INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'L_2\', \'2018-03-30 21:43:28\', \'2018-04-14 16:30:00\', \'L_6\', \'L_c_68\', \'L_9\', \'IST_LIBRARY_1\', 1, \'I3#H5&ic\', \'0QwEH43Y\', \'T6wqaH&R\', \'Tk31QQO2\', \'gjJulfeI\', \'UmEmZgif\', \'\')', '0', '2018-03-30 21:43:28');
 
 -- ----------------------------
 -- Table structure for `manager`
@@ -412,7 +420,7 @@ CREATE TABLE `server` (
 -- ----------------------------
 -- Records of server
 -- ----------------------------
-INSERT INTO `server` VALUES ('1', 'remote', 'http://library.ist.edu.bd/index.php', '2018-03-30 00:12:17', '1', '0', 'HF1EBAvrgB');
+INSERT INTO `server` VALUES ('1', 'remote', 'http://library.ist.edu.bd/index.php', '2018-03-30 21:39:59', '1', '0', 'HF1EBAvrgB');
 
 -- ----------------------------
 -- Table structure for `settings`

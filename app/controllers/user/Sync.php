@@ -66,8 +66,6 @@ class Sync extends Base_Controller {
         $access_code = $curl_data['access_code'];
         if(!$this->authenticate($access_code)) die('Invalid Access Code');
         echo hash('sha512', $access_code);
-
-        
     }
 
     public function fetch_queries($sync_limit=0) {
@@ -81,6 +79,9 @@ class Sync extends Base_Controller {
             //echo 'Nothing new to fetch from the remote server<br>';
             return true;
         }
+        // // Fetched
+        // echo 'Fetched<br>';
+        // $this->printer($queries);
         $entry_ids = array();
         foreach($queries as $key=>$query) {
             array_push($entry_ids, $queries[$key]['log_entry_id']);
@@ -106,6 +107,9 @@ class Sync extends Base_Controller {
             //echo 'Nothing new to push to the remote server<br>';
             return true;
         }
+        // // Pushed
+        // echo 'Pushed<br>';
+        // $this->printer($queries);
         $entry_ids = array();
         foreach($queries as $key=>$query) {
             array_push($entry_ids, $queries[$key]['log_entry_id']);
@@ -184,7 +188,9 @@ class Sync extends Base_Controller {
 
     public function confirm() {
         $issues = $this->m_issue->all_new_issue_requests();
-        //$this->printer($issues);
+        // Fetched
+        // echo 'Confirmed<br>';
+        // $this->printer($issues);
         if(count($issues) == 0) {
             //echo 'No Unconfirmed Issues<br>';
             return true;
@@ -198,6 +204,7 @@ class Sync extends Base_Controller {
                 $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 6); // Converting into Demands
                 $new['book'] = array('book_id' => $issue->book_id);
             }
+            //$this->printer($new);
             $reply = $this->my_curl($this->local_url.'update_issue', $new); // Updating issue through a different controller.
             // if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
             // else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';

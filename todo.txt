@@ -1,5 +1,5 @@
 - Convert unsuccessful requests to demands
-    - Convert demands into confirmed requests when the book is available (Bug Fix)
+    - Convert demands into confirmed requests when the book is available
         - Copy Add
         - Receive Book
         - Releasing Expired Confirmed Issue

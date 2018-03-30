@@ -206,6 +206,7 @@ class Issue extends Base_Controller {
             //Check if another copy of this book is already issued to this student;
             else if($this->m_issue->check_book_duplicate_issue($this->session->user_id, $book_id))
                 array_push($msg, array("A copy of Book No. #$book_id ($book->book_title) is currently Issued to/Requested by you", "danger"));
+            /*
             else if($book->book_available == 0) { // Book Not Available. Creating a Demand
                 // Enter the issue
                 $issue = array();
@@ -226,6 +227,7 @@ class Issue extends Base_Controller {
                 if($status = $this->m_issue->add_issue($issue))
                     array_push($msg, array("Book No. #$book_id ($book->book_title) is not available right now. A Demand has been created for you (Issue #".$issue['issue_id'].").", "warning"));
             }
+            */
             else { // Everything Clear, Proceed to issue the book
                 // Enter the issue
                 $issue = array();
