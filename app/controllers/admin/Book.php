@@ -188,8 +188,8 @@ class Book extends Base_Controller {
     }
 
     public function delete($book_id=NULL) {
-        if(!$book_id) redirect_msg('/admin/book', 'Invalid Book ID', 'danger');
-        if($this->m_book->check_book_for_issue($book_id)) redirect_msg('/admin/book', 'This book has incomplete issues with it.', 'danger');
+        if(!$book_id) $this->redirect_msg('/admin/book', 'Invalid Book ID', 'danger');
+        if($this->m_book->check_book_for_issue($book_id)) $this->redirect_msg('/admin/book', 'This book has incomplete issues with it.', 'danger');
         $aff = $this->m_book->delete_book($book_id);
         if($aff) $this->redirect_msg('/admin/book', 'Book Deleted Successfully', 'success');
         else $this->redirect_msg('/admin/book', 'Something went wrong!', 'danger');

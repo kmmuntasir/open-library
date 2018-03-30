@@ -1,8 +1,4 @@
-- Convert unsuccessful requests to demands
-    - Convert demands into confirmed requests when the book is available
-        - Copy Add
-        - Receive Book
-        - Releasing Expired Confirmed Issue
+- Check book/book_copy/book_copy_range deletion whether there are active issues with those copies.
 
 - Report Page
     - Books Report

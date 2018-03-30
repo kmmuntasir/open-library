@@ -37,9 +37,9 @@ class Sync extends Base_Controller {
         $sync_limit = 10;
         if($this->server->server_sync_status && strtotime($this->server->server_last_connection) >= time()-($this->sync_interval*3)) exit(0);
 
-        if($this->check_server_connection() == false) exit(0);
+        if($this->check_server_connection() == false) exit('0');
 
-        if(!$this->lock_server($this->server->server_id)) exit(0);
+        if(!$this->lock_server($this->server->server_id)) exit('0');
         
         $ret = $this->fetch_queries($sync_limit);
         
@@ -198,11 +198,11 @@ class Sync extends Base_Controller {
                     $new['book'] = array('book_id' => $issue->issue_book_id, 'book_available' => $book_available-1);
 
                     $reply = $this->my_curl($this->local_url.'update_issue', $new); // Updating issue through a different controller.
-                    // if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
-                    // else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
+                    if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
+                    else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
                 }
                 else {
-                    //echo 'Book still unavailable for issue '. $issue->issue_id.'<br>';
+                    echo 'Book still unavailable for issue '. $issue->issue_id.'<br>';
                 }
             }
         }

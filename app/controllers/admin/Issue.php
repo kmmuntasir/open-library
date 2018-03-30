@@ -80,7 +80,7 @@ class Issue extends Base_Controller {
                     else array_push($json_data['data'][$i], '');
                 }
                 if($data_page == 'active' || $data_page == 'overdue' || $data_page == 'all_issues' || $data_page == 'issue_by_user' || $data_page == 'issue_by_book' || $data_page == 'issue_by_book_copy') {
-                    if($issue->issue_status != 0 && $issue->issue_status != 8)
+                    if($issue->issue_status != 0 && $issue->issue_status != 8 && $issue->issue_status != 6)
                         array_push($json_data['data'][$i], $this->datatables_datetime_formatter($issue->issue_deadline));
                     else array_push($json_data['data'][$i], '');
                 }
