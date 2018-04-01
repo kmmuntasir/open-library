@@ -1,3 +1,5 @@
+- Fix security bug in issue view API (all secret codes are shown through the API, visibility is being controlled only in frontend)
+
 - Report Page
     - Books Report
         - Online Reading Report
