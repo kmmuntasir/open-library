@@ -1,5 +1,3 @@
-- Check book/book_copy/book_copy_range deletion whether there are active issues with those copies.
-
 - Report Page
     - Books Report
         - Online Reading Report

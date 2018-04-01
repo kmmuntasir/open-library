@@ -305,17 +305,24 @@ class M_book extends Ci_model {
         $this->db->where('book_copy_id >=', $id_1);
         $this->db->where('book_copy_id <=', $id_2);
         $this->db->where('book_copy_type', 1);
+        $this->db->where('book_copy_status', 1);
         $this->db->where('book_copy_is_deleted', 0);
         $this->db->update('book_copy', array('book_copy_is_deleted'=>1));
         $aff = $this->db->affected_rows();
-        $this->db->where('book_id', $book_id)->update('book', array('book_stock'=>$book->book_stock-$aff, 'book_available'=>$book->book_available-$aff));
+        $last_available = $book->book_stock-$aff;
+        $this->db->where('book_id', $book_id)->update('book', array('book_stock'=>$last_available, 'book_available'=>$book->book_available-$aff));
 
         // Deleting reference copies
         $this->db->where('book_id', $book_id);
         $this->db->where('book_copy_id >=', $id_1);
         $this->db->where('book_copy_id <=', $id_2);
+        $this->db->where('book_copy_type', 0);
+        $this->db->where('book_copy_status', 1);
         $this->db->where('book_copy_is_deleted', 0);
         $this->db->update('book_copy', array('book_copy_is_deleted'=>1));
+
+        $aff = $this->db->affected_rows();
+        $this->db->where('book_id', $book_id)->update('book', array('book_stock'=>$last_available-$aff));
 
         $this->db->trans_complete();
         return $this->db->trans_status();

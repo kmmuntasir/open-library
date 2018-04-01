@@ -266,6 +266,7 @@ class Book extends Base_Controller {
 
     public function delete_copy_range() {
         $aff = $this->m_book->delete_copy_range($_POST['book_id'], $_POST['book_copy_accession_no_1'], $_POST['book_copy_accession_no_2']);
+        
         if($aff) $this->redirect_msg('/admin/book/copy', 'Copies Deleted Successfully', 'success');
         else $this->redirect_msg('/admin/book/copy', 'Something went wrong!', 'danger');
     }
