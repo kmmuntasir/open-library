@@ -1,12 +1,9 @@
 ===================================================================
 Current Issues
 ===================================================================
-- Import Students
-- Import Teachers
+- Fix Library Card Design
 
 - Let the user to reset password using email. === Remote Server Problem
-
-- Fix Library Card Design
 
 - Write Script for importing books from old software.
 

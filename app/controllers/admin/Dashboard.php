@@ -155,7 +155,6 @@ class Dashboard extends Base_Controller {
     }
 
     function append($string, $filename) {
-        // $this->printer($string);
         $handle = fopen($filename,'a+');
         fwrite($handle, $string);
         fclose($handle);

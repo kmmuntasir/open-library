@@ -1,4 +1,9 @@
+$(document).on('submit', '#importform', function() {
+	if(!confirm("Are you sure?")) 
+		event.preventDefault();
 
+	return;
+});
 
 $(document).on('click', '#import_user', function() {
     $('#importModal').removeClass('hide');

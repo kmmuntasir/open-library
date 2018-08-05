@@ -29,16 +29,21 @@ class Db_log {
     }
 
 
-	public function new_id($table) {
+    public function new_id($table) {
         $CI = & get_instance();
-	    $primary_key = $table.'_id';
+
+        if($table == 'log') $primary_key = $table.'_id';
+        else $primary_key = 'id';
+
         $result = $CI->db->select($primary_key)->order_by($primary_key, 'DESC')->limit(1)->get($table)->row();
-	    if($result) {
-	    	$arr = explode('_', $result->$primary_key);
-	    	$new_key = $arr[count($arr)-1] + 1;
-	    }
-	    else $new_key = 1;
-	    return $CI->config->item('branch').'_'.$new_key;
-	}
+        // $this->printer($result);
+        if($result) {
+            // $arr = explode('_', $result->$primary_key);
+            // $new_key = $arr[count($arr)-1] + 1;
+            $new_key = $result->$primary_key + 1;
+        }
+        else $new_key = 1;
+        return $CI->config->item('branch').'_'.$new_key;
+    }
  
 }

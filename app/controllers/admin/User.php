@@ -32,78 +32,15 @@ class User extends Base_Controller {
         $this->students();
 	}
 
-    public function import($is_teacher = 0) {
-        echo "Please wait, importing ...<br>";
-        // $this->printer($_FILES, true);
+    public function append($string, $filename) {
+        $handle = fopen($filename,'a+');
+        fwrite($handle, $string);
+        fclose($handle);
+    }
 
-        $flag = false;
-        $total_error = '';
-        $file_name = '';
-
-        //=====================================================
-        // Configuration for Backup File Upload
-        $config['upload_path']          = $this->upload_dir;
-        $config['allowed_types']        = 'csv';
-        $config['max_size']             = 10240; // 10 Megabytes
-
-        // Uploading Backup File
-        if($_FILES['csv_file']['error'] == 0) {
-            $upload = $this->__do_upload('csv_file', $config);
-
-            if(!$upload['error']) {
-                $file_name = $upload['success']['file_name'];
-                $flag = true;
-            }
-            else $total_error .= 'File Upload Error<br>'.$upload['error'];
-        }
-
-        //======== Upload Done, Start Importing Process =========
-
-        $filepath  = $this->upload_dir.$file_name;
-
-        // exit($filepath);
-
-        $users_arr = array();
-        $file = fopen($filepath, "r");
-        if($file) {
-            if (!feof ($file)) {
-                $str = fgets($file);
-            }
-            while (!feof ($file)){
-
-                $str = fgets($file);
-                $str_exp = explode(",", $str);
-
-                if(count($str_exp) == 6) {
-                    // $this->printer($str_exp);
-                    $single_user = array();
-
-                    $single_user['user_name']            = $str_exp[0];
-                    $single_user['user_phone']           = $str_exp[1];
-                    $single_user['user_email']           = $str_exp[2];
-                    $single_user['user_dept']            = $str_exp[3];
-                    $single_user['user_roll']            = (int)$str_exp[4];
-                    $single_user['user_session']         = (int)$str_exp[5];
-
-                    $single_user['user_username']        = $str_exp[3].$str_exp[4];
-                    $single_user['user_pass']            = $this->__unique_code();
-
-                    $single_user['user_id']              = $this->new_id('user');
-                    $single_user['user_library_code']    = substr(md5($single_user['user_id']), 16);
-
-                    $status = $this->m_user->add_user($single_user);
-
-                    array_push($users_arr, $single_user);
-                }
-
-            }
-
-            $this->printer($users_arr);
-
-
-            fclose($file);
-        }
-        else echo 'Invalid Path';
+    public function clear_backup_dir($backup_dir) {
+        $this->load->helper('file');
+        delete_files($backup_dir, TRUE);
     }
 
 	public function students($deleted=0) {
@@ -111,8 +48,10 @@ class User extends Base_Controller {
         $data['page'] = 'user';
         $data['page_title'] .= ($deleted) ? 'Deactivated Students' : 'Students';
         $data['content'] = 'v_student.php';
+
         $data['import_action'] = $this->data['controller'].'/import/0';
         $data['sample_file_link'] = $this->data['controller'].'/download_sample_file/0';
+
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 
@@ -135,7 +74,11 @@ class User extends Base_Controller {
         $data['page'] = 'user';
         $data['page_title'] .= ($deleted) ? 'Deactivated Teachers' : 'Teachers';
         $data['content'] = 'v_teacher.php';
+
+
         $data['import_action'] = $this->data['controller'].'/import/1';
+        $data['sample_file_link'] = $this->data['controller'].'/download_sample_file/1';
+
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 
@@ -144,6 +87,128 @@ class User extends Base_Controller {
         //$this->printer($teachers);
         ini_set('memory_limit', '-1');
         echo $teachers = $this->to_datatable_json_format($teachers, 10, 1);
+    }
+
+    public function import($is_teacher = 0) {
+        echo "Please wait, importing ...<br>";
+
+        // $this->printer($_FILES, true);
+
+        $user_type = array('students', 'teachers');
+
+        $flag = false;
+        $total_error = '';
+        $file_name = '';
+
+        $this->clear_backup_dir($this->upload_dir);
+
+        //=====================================================
+        // Configuration for Backup File Upload
+        $config['upload_path']          = $this->upload_dir;
+        $config['allowed_types']        = 'csv';
+        $config['max_size']             = 10240; // 10 Megabytes
+
+        // Uploading Backup File
+        if($_FILES['csv_file']['error'] == 0) {
+            $upload = $this->__do_upload('csv_file', $config);
+
+            if(!$upload['error']) {
+                $file_name = $upload['success']['file_name'];
+                $flag = true;
+            }
+            else $total_error .= 'File Upload Error<br>'.$upload['error'];
+        }
+
+        //======== Upload Done, Start Importing Process =========
+
+        $filepath  = $this->upload_dir.$file_name;
+        $success_count = 0;
+        $fail_count = 0;
+
+        // exit($filepath);
+
+        $users_arr = array();
+        $file = fopen($filepath, "r");
+        $fail_file_path = $this->upload_dir.'failed.csv';
+        $fail_file = fopen($fail_file_path, "w");
+        fclose($fail_file);
+        if($file) {
+            if (!feof ($file)) {
+                $str = fgets($file);
+                $this->append($str, $fail_file_path);
+            }
+            while (!feof ($file)){
+
+                $str = fgets($file);
+                $str_exp = explode(",", $str);
+
+                if(count($str_exp) == 6) {
+                    // $this->printer($str_exp);
+                    $single_user = array();
+                    
+                    $single_user['is_teacher']   = $is_teacher;
+
+                    $single_user['user_name']            = $str_exp[0];
+                    $single_user['user_phone']           = $str_exp[1];
+                    $single_user['user_email']           = $str_exp[2];
+                    $single_user['user_dept']            = $str_exp[3];
+
+                    if($is_teacher) {
+                        $single_user['teacher_id']            = $str_exp[4];
+                        $single_user['teacher_designation']   = $str_exp[5];
+                    }
+                    else {
+                        $single_user['user_roll']            = $str_exp[4];
+                        $single_user['user_session']         = (int)$str_exp[5];
+                    }
+
+                    $single_user['user_pass']            = $this->__unique_code();
+
+                    $single_user['user_id']              = $this->new_id('user');
+                    $single_user['user_username']        = $str_exp[3].$str_exp[4].'_'.$single_user['user_id'];
+                    $single_user['user_library_code']    = substr(md5($single_user['user_id']), 16);
+
+                    $status = $this->m_user->add_user($single_user);
+                    // $this->printer($this->db->last_query());
+
+                    if($status) $success_count++;
+                    else {
+                        $this->append($str, $fail_file_path);
+                        $fail_count++;
+                    }
+
+                    // $this->printer($single_user);
+
+                    // array_push($users_arr, $single_user);
+                }
+
+            }
+            // $this->printer($users_arr);
+            fclose($file);
+            echo "Fail: ". $fail_count.'<br>';
+            echo "Success: ". $success_count.'<br>';
+
+            unlink($filepath);
+
+            if($fail_count == 0) {
+                echo "Import Success";
+                unlink($fail_file_path);
+                $this->redirect_msg('/admin/user/'.$user_type[$is_teacher], 'Imported Successfully', 'success');
+            }
+            else {
+                if($success_count == 0) {
+                    echo "Import Failed";
+                    unlink($fail_file_path);
+                    $this->redirect_msg('/admin/user/'.$user_type[$is_teacher], 'Import Failed', 'danger');
+                }
+                else {
+                    $status_msg = "Import Partially Succeeded<br>Success Count: ".$success_count.'<br>';
+                    $status_msg .= "Downloading the failed user list...<br>";
+                    $this->__download($fail_file);
+                }
+            }
+        }
+        else echo 'Invalid Path';
     }
 
     public function add($user_type = 'students') {

@@ -78,14 +78,20 @@ class CI_Model {
 	}
 
 	public function new_id($table) {
-	    $primary_key = $table.'_id';
-	    $result = $this->db->select($primary_key)->order_by('id', 'DESC')->limit(1)->get($table)->row();
+        $CI = & get_instance();
+
+	    if($table == 'log') $primary_key = $table.'_id';
+        else $primary_key = 'id';
+
+        $result = $CI->db->select($primary_key)->order_by($primary_key, 'DESC')->limit(1)->get($table)->row();
+        // $this->printer($result);
 	    if($result) {
-	    	$arr = explode('_', $result->$primary_key);
-	    	$new_key = $arr[count($arr)-1] + 1;
+	    	// $arr = explode('_', $result->$primary_key);
+	    	// $new_key = $arr[count($arr)-1] + 1;
+            $new_key = $result->$primary_key + 1;
 	    }
 	    else $new_key = 1;
-	    return $this->config->item('branch').'_'.$new_key;
+	    return $CI->config->item('branch').'_'.$new_key;
 	}
 
 	public function printer($arr, $exit_flag = false) { // for debug purpose

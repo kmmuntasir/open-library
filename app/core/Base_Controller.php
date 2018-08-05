@@ -115,11 +115,16 @@ class Base_Controller extends CI_Controller
 
 	public function new_id($table) {
         $CI = & get_instance();
-	    $primary_key = $table.'_id';
+
+	    if($table == 'log') $primary_key = $table.'_id';
+        else $primary_key = 'id';
+
         $result = $CI->db->select($primary_key)->order_by($primary_key, 'DESC')->limit(1)->get($table)->row();
+        // $this->printer($result);
 	    if($result) {
-	    	$arr = explode('_', $result->$primary_key);
-	    	$new_key = $arr[count($arr)-1] + 1;
+	    	// $arr = explode('_', $result->$primary_key);
+	    	// $new_key = $arr[count($arr)-1] + 1;
+            $new_key = $result->$primary_key + 1;
 	    }
 	    else $new_key = 1;
 	    return $CI->config->item('branch').'_'.$new_key;

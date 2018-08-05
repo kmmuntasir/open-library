@@ -113,3 +113,39 @@
     </form>
   </div>
 </div>
+
+
+<!-- --------------------------- Import Modal ------------------------------ -->
+<div class="modal" id="importModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form id="importform" action="<?php echo $import_action; ?>" method="post" enctype="multipart/form-data" class="was-validated">
+            <div class="modal-header">
+
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Upload Your CSV file.</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="alert bg-warning h3">
+                    Please note that the import file should be <span class="text-danger">EXACTLY</span> in the format shown in the sample file.
+                    <br><br>
+                    <a class="btn btn-sm btn-danger pull-right" href="<?php echo $sample_file_link; ?>">Download Sample File</a>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="csv_file" id="csv_file" required>
+                        <label class="custom-file-label" for="csv_file">Please select your import file and click Import</label>
+                    </div>
+                </div>
+
+                <br>
+
+                <button type="submit" class="float-right btn btn-primary btn-sm" ><i class="fa fa-upload"></i> Import</button>
+                <div class="clearfix"></div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
