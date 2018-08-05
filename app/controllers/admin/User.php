@@ -6,6 +6,8 @@ class User extends Base_Controller {
 	public $module = 'admin';	// defines the module
 	public $template = 'open_library';	// Current Template Name
 	public $viewpath = '';
+
+    public $upload_dir = 'uploads/';
 	//========================
 	public $data = array();
 
@@ -30,13 +32,96 @@ class User extends Base_Controller {
         $this->students();
 	}
 
+    public function import($is_teacher = 0) {
+        echo "Please wait, importing ...<br>";
+        // $this->printer($_FILES, true);
+
+        $flag = false;
+        $total_error = '';
+        $file_name = '';
+
+        //=====================================================
+        // Configuration for Backup File Upload
+        $config['upload_path']          = $this->upload_dir;
+        $config['allowed_types']        = 'csv';
+        $config['max_size']             = 10240; // 10 Megabytes
+
+        // Uploading Backup File
+        if($_FILES['csv_file']['error'] == 0) {
+            $upload = $this->__do_upload('csv_file', $config);
+
+            if(!$upload['error']) {
+                $file_name = $upload['success']['file_name'];
+                $flag = true;
+            }
+            else $total_error .= 'File Upload Error<br>'.$upload['error'];
+        }
+
+        //======== Upload Done, Start Importing Process =========
+
+        $filepath  = $this->upload_dir.$file_name;
+
+        // exit($filepath);
+
+        $users_arr = array();
+        $file = fopen($filepath, "r");
+        if($file) {
+            if (!feof ($file)) {
+                $str = fgets($file);
+            }
+            while (!feof ($file)){
+
+                $str = fgets($file);
+                $str_exp = explode(",", $str);
+
+                if(count($str_exp) == 6) {
+                    // $this->printer($str_exp);
+                    $single_user = array();
+
+                    $single_user['user_name']            = $str_exp[0];
+                    $single_user['user_phone']           = $str_exp[1];
+                    $single_user['user_email']           = $str_exp[2];
+                    $single_user['user_dept']            = $str_exp[3];
+                    $single_user['user_roll']            = (int)$str_exp[4];
+                    $single_user['user_session']         = (int)$str_exp[5];
+
+                    $single_user['user_username']        = $str_exp[3].$str_exp[4];
+                    $single_user['user_pass']            = $this->__unique_code();
+
+                    $single_user['user_id']              = $this->new_id('user');
+                    $single_user['user_library_code']    = substr(md5($single_user['user_id']), 16);
+
+                    $status = $this->m_user->add_user($single_user);
+
+                    array_push($users_arr, $single_user);
+                }
+
+            }
+
+            $this->printer($users_arr);
+
+
+            fclose($file);
+        }
+        else echo 'Invalid Path';
+    }
+
 	public function students($deleted=0) {
         $data = $this->data;
         $data['page'] = 'user';
         $data['page_title'] .= ($deleted) ? 'Deactivated Students' : 'Students';
         $data['content'] = 'v_student.php';
+        $data['import_action'] = $this->data['controller'].'/import/0';
+        $data['sample_file_link'] = $this->data['controller'].'/download_sample_file/0';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
+
+    public function download_sample_file($is_teacher=0) {
+        if($is_teacher != 0 && $is_teacher != 1) exit('Invalid Type');
+        $filename = array('students', 'teachers');
+        $file_absolute_url = 'docs/'.$filename[$is_teacher].'_list_sample.csv';
+        $this->__download($file_absolute_url);
+    }
 
     public function all_students($deleted=0) {
         $students = $this->m_user->all_students($deleted);
@@ -50,6 +135,7 @@ class User extends Base_Controller {
         $data['page'] = 'user';
         $data['page_title'] .= ($deleted) ? 'Deactivated Teachers' : 'Teachers';
         $data['content'] = 'v_teacher.php';
+        $data['import_action'] = $this->data['controller'].'/import/1';
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 

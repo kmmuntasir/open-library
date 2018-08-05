@@ -132,22 +132,22 @@
 
             </div>
             <div class="modal-body">
-                <div class="alert bg-warning h5">
-                    Please note that restoring a backup file will replace and delete all your system data. We suggest you to please take a new backup first before uploading a backup file, in case anything goes wrong.
-                </div>
-                <div class="alert bg-danger text-white h6">
-                    You will be logged out after restoration. So please ensure that you know the username/password of an admin account which exists in the backup.
+                <div class="alert bg-warning h3">
+                    Please note that the import file should be <span class="text-danger">EXACTLY</span> in the format shown in the sample file.
+                    <br><br>
+                    <a class="btn btn-sm btn-danger pull-right" href="<?php echo $sample_file_link; ?>">Download Sample File</a>
+                    <div class="clearfix"></div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="backup_file" id="backup_file" required>
-                        <label class="custom-file-label" for="backup_file">Please select your backup file and click Restore</label>
+                        <input type="file" class="custom-file-input" name="csv_file" id="csv_file" required>
+                        <label class="custom-file-label" for="csv_file">Please select your import file and click Import</label>
                     </div>
                 </div>
 
                 <br>
 
-                <button type="submit" class="float-right btn btn-primary btn-sm" ><i class="fa fa-upload"></i> Restore</button>
+                <button type="submit" class="float-right btn btn-primary btn-sm" ><i class="fa fa-upload"></i> Import</button>
                 <div class="clearfix"></div>
             </div>
         </form>

@@ -1,5 +1,10 @@
 
 
+$(document).on('click', '#import_user', function() {
+    $('#importModal').removeClass('hide');
+    $('#importModal').addClass('show');
+});
+
 $('.user_addform').submit(function() {
 	var pass_1 = $('input.add_pass_1').val();
 	var pass_2 = $('input.add_pass_2').val();

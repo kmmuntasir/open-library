@@ -21,6 +21,12 @@ class Base_Controller extends CI_Controller
 	 	$this->load->library('session');
 	 }
 
+     public function __download($file_absolute_path=NULL) {
+        if(!$file_absolute_path) exit('No Path Found');
+        $this->load->helper('download');
+        force_download($file_absolute_path, NULL);
+     }
+
 	 public function __is_logged_in($module) {
 	 	if($module == 'user') return (($user_id = $this->session->user_id) == NULL) ? false : true;
 	 	else return (($admin_id = $this->session->admin_id) == NULL) ? false : true;
