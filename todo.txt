@@ -1,13 +1,6 @@
-- Fix security bug in issue view API (all secret codes are shown through the API, visibility is being controlled only in frontend)
-
-- Report Page
-    - Books Report
-        - Online Reading Report
-    - Issue Report
-    - Fine Report
-
-- Merge all sync/update/online indicator into one ajax call
-
+===================================================================
+Current Issues
+===================================================================
 - Import Students
 - Import Teachers
 
@@ -15,11 +8,20 @@
 
 - Fix Library Card Design
 
-- Backup/Restore System
-
 - Write Script for importing books from old software.
 
 - Write A Documentation + User Manual
+===================================================================
+
+===================================================================
+Will be done later
+===================================================================
+- Report Page                           |
+    - Books Report                      |
+        - Online Reading Report         | 
+    - Issue Report                      |
+    - Fine Report                       |
 
 
-
+- Merge all sync/update/online indicator into one ajax call
+====================================================================

@@ -17,3 +17,8 @@ $(document).ready(function() {
     var sync_time_interval = <?php echo $this->sync_interval*1500; ?>;
     setInterval(sync_time, sync_time_interval);
 });
+
+$(document).on('click', '#restore_backup', function() {
+    $('#restoreModal').removeClass('hide');
+    $('#restoreModal').addClass('show');
+});

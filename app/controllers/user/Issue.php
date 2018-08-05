@@ -108,6 +108,10 @@ class Issue extends Base_Controller {
         else {
             $issue = $this->m_issue->get_single_issue($issue_id);
             if($issue){
+                if($issue->issue_status == 9 || $issue->issue_status == 0 || $issue->issue_status == 6) {
+                    $issue->issue_receive_admin_code = $issue->issue_fine_admin_code = '';
+                }
+
                 if(($issue->issue_status == 9 || $issue->issue_status == 0) && strtotime($issue->issue_auto_expire_datetime) < time())
                     $issue->issue_status = 8; // Expired
 
@@ -136,6 +140,7 @@ class Issue extends Base_Controller {
                 if($issue->issue_deadline)
                     $issue->issue_deadline = date('M d, Y, H:i a', strtotime($issue->issue_deadline));
 
+                // $this->printer($issue, true);
                 echo json_encode($issue);
             }
             else echo '';

@@ -108,8 +108,12 @@ class Issue extends Base_Controller {
         else {
             $issue = $this->m_issue->get_single_issue($issue_id);
             if($issue){
-                if(($issue->issue_status == 9 || $issue->issue_status == 0) && strtotime($issue->issue_auto_expire_datetime) < time())
-                $issue->issue_status = 8; // Expired
+                if($issue->issue_status == 9 || $issue->issue_status == 0 || $issue->issue_status == 6) {
+                    $issue->issue_lend_user_code = $issue->issue_receive_user_code = $issue->issue_fine_user_code = $issue->issue_renew_user_code = '';
+                }
+                if(($issue->issue_status == 9 || $issue->issue_status == 0) && strtotime($issue->issue_auto_expire_datetime) < time()) {
+                    $issue->issue_status = 8; // Expired
+                }
 
                 else if($issue->issue_status == 1 && strtotime($issue->issue_deadline) < time() && !$issue->is_teacher) {
                     $issue->issue_status = -1; // Overdue
@@ -148,7 +152,7 @@ class Issue extends Base_Controller {
                     $issue->issue_auto_expire_datetime = date('M d, Y, H:i a', strtotime($issue->issue_auto_expire_datetime));
                 if($issue->issue_deadline)
                     $issue->issue_deadline = date('M d, Y, H:i a', strtotime($issue->issue_deadline));
-                //$this->printer($issue, true);
+                // $this->printer($issue, true);
                 echo json_encode($issue);
             }
             else echo '';

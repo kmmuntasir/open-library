@@ -73,6 +73,9 @@ $(document).on('click', '.view_issue', function() {
 			else if(i_status == 9) {
 				issue_status = '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-hand-paper-o"></i> Requested</button>';
 			}
+			else if(i_status == 6) {
+				issue_status = '<button type="button" class="btn btn-danger btn-sm"><i class="fa fa-hand-paper-o"></i> Demanded</button>';
+			}
 			else if(i_status == -3) {
 				issue_status = '<button type="button" class="btn btn-default btn-sm"><i class="fa fa-hand-paper-o"></i> Expired</button>';
 			}
@@ -103,7 +106,7 @@ $(document).on('click', '.view_issue', function() {
 			$('#issue_fine_user_code').html('N/A');
 			$('#issue_renew_user_code').html('N/A');
 
-			if(i_status != 9 && i_status != 0) {
+			if(i_status != 9 && i_status != 0 && i_status != 6) {
 				if(i_status > 0 || i_status == -1) 
 	    			$('#issue_lend_user_code').html(issue.issue_lend_user_code);
 	    		if(i_status > 1)
