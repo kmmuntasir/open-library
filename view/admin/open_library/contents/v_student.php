@@ -7,17 +7,30 @@
 		<table data-page="students" class="table table-striped datatable" data-source="<?php echo $data_source; ?>">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th class="dt_xs">ID</th>
 					<th>Name</th>
-					<th>Username</th>
-					<th>Dept</th>
-					<th>Session</th>
-					<th>Roll</th>
-					<th>Email</th>
-					<th>Phone</th>
+					<th class="dt_sm">Username</th>
+					<th class="dt_xs">Dept</th>
+					<th class="dt_xs">Session</th>
+					<th class="dt_xs">Roll</th>
+					<th class="dt_md">Email</th>
+					<th class="dt_sm">Phone</th>
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
+      <tfoot>
+        <tr>
+          <td>ID</td>
+          <td>Name</td>
+          <td>Username</td>
+          <td>Dept</td>
+          <td>Session</td>
+          <td>Roll</td>
+          <td>Email</td>
+          <td>Phone</td>
+          <td class="opt_column">Options</td>
+        </tr>
+      </tfoot>
 		</table>
 	</div>
 </div>

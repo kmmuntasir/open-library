@@ -22,6 +22,8 @@
 	color:#333;
 } */
 
+
+
 #logo_image {
 	width: 40px;
 	margin: 5px 0 0 15px;
@@ -186,3 +188,4 @@
 	border-bottom: solid 1px #ddd;
 	transition: all 500ms ease;
 }
+

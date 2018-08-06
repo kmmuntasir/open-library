@@ -1,21 +1,36 @@
 <div class="row">
 	<div class="col-sm-12 table-responsive">
-		<table data-page="books" class="table table-striped datatable" data-source="<?php echo $source; ?>">
+		<table data-page="books" class="table table-striped datatable " data-source="<?php echo $source; ?>">
 			<thead>
 				<tr>
-          <th>#</th>
+          <th class="dt_xs">#</th>
 					<th>Title</th>
 					<th>Author(s)</th>
-					<th class="narrow_column">Edition</th>
-          <th>ISBN</th>
-					<th>Publisher</th>
-					<th class="narrow_column">Stock</th>
-					<th class="narrow_column">Available</th>
-          <th class="narrow_column">Online Reading</th>
-          <th class="narrow_column">URL Unlocked</th>
+					<th class="dt_xs">Edition</th>
+          <th class="dt_xs">ISBN</th>
+					<th class="dt_xs">Publisher</th>
+					<th class="dt_xs">Stock</th>
+					<th class="dt_xs">Available</th>
+          <th class="dt_xs">Online Reading</th>
+          <th class="dt_xs">URL Unlocked</th>
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
+      <tfoot>
+        <tr>
+          <td>#</td>
+          <td>Title</td>
+          <td>Author(s)</td>
+          <td>Edition</td>
+          <td>ISBN</td>
+          <td>Publisher</td>
+          <td>Stock</td>
+          <td>Available</td>
+          <td>Online Reading</td>
+          <td>URL Unlocked</td>
+          <td class="opt_column">Options</td>
+        </tr>
+      </tfoot>
 		</table>
 	</div>
 </div>

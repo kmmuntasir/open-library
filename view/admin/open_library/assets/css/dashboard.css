@@ -107,3 +107,77 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+
+
+/******************* Datatable Styles **************************/
+
+.datatable {
+  border-top: solid 1px #ccc;
+  border-bottom: solid 1px #ccc;
+}
+
+.datatable tfoot .opt_column input {
+  display: none;
+}
+
+.datatable tfoot input {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 5px;
+  border-radius: 0px;
+  line-height: 12pt;
+  height: 25px;
+}
+
+.dt_xs {
+  width: 50px !important;
+}
+
+.dt_sm {
+  width: 100px !important;
+}
+
+.dt_md {
+  width: 150px !important;
+}
+
+.dt_lg {
+  width: 200px !important;
+}
+
+.dt_xl {
+  width: 250px !important;
+}
+
+.dataTables_info, .dataTables_paginate, .dataTables_length, .dataTables_filter {
+  display: inline-block;
+}
+
+.dataTables_length {
+  float: left;
+  width: 200px !important;
+}
+
+.dataTables_info {
+  float: left;
+  margin-top: 0px !important;
+  background-color: #fdd;
+  padding: 4px 9px 4px 9px !important;
+  border-radius: 5px;
+}
+
+.dataTables_paginate {
+  float:right;
+  margin-top: -2px !important;
+}
+
+.dataTables_filter {
+  float:right;
+  width: 250px !important;
+}
+
+
+.pagination > li > a {
+  padding: 5px 9px;
+}

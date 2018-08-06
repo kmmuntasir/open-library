@@ -7,6 +7,12 @@
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
+      <tfoot>
+        <tr>
+          <td>Author Name</td>
+          <td class="opt_column">Options</td>
+        </tr>
+      </tfoot>
 		</table>
 	</div>
   <div class="col-sm-6">

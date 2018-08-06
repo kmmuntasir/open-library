@@ -1,13 +1,23 @@
 ===================================================================
 Current Issues
 ===================================================================
+- Add Buttons and Footer search boxes in datatables footer
+
+- Enable managing the authorization level of Managers (Admin/Manager)
+    - Control sensitive sections from only Admin user, not from manager.
+
+- Re-inspect book deletion mechanism
+- Recheck the book lending process and issue status scenario
+
 - Fix Library Card Design
 
-- Let the user to reset password using email. === Remote Server Problem
+- Consider SMS sending feature for issues
 
 - Write Script for importing books from old software.
 
 - Write A Documentation + User Manual
+
+- Let the user to reset password using email. === Remote Server Problem
 ===================================================================
 
 ===================================================================

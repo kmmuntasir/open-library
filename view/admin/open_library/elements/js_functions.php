@@ -45,6 +45,15 @@
 		// Datatables Functions
 		var datatable_source = $('.datatable').attr('data-source');
 		var datapage = $('.datatable').attr('data-page');
+	    var buttons = ['colvis', 'csv','excel', 'print', 'refresh'];
+
+
+	    
+	    // Enabling Individual Column Search
+	    $('.datatable tfoot td').each( function () {
+	        var title = $(this).text();
+	        $(this).html( '<input type="text" placeholder="Search '+title+'" class="form-control datatable-tfoot-input">' );
+	    });
 		
 	    var dtable = $('.datatable').DataTable({
             "ajax": datatable_source,
@@ -53,12 +62,28 @@
             "drawCallback": function() {
             	post_process_datatable(datapage);
             },
+	        // buttons: buttons,
+            // responsive: true,
             //"order": [[ 2, "asc" ]],
             //dom: 'lfrtip',
+	        // dom: 'iplBfrt',
+	        dom: 'lifpt',
             initComplete: function() {
                 //post_process_datatable(datapage);
             }
-            //responsive: true
+        });
+
+        
+        // Apply the search
+        dtable.columns().every( function () {
+            var that = this;
+            $( 'input', this.footer() ).on('keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                        .search( this.value )
+                        .draw();
+                }
+            });
         });
 
         function post_process_datatable(page) {

@@ -33,6 +33,7 @@ class Dashboard extends Base_Controller {
     //====================================//
 
 	public function index() {
+            // $this->printer($_SESSION, true);
 		$data = $this->data;
         $data['page'] = 'dashboard';
     	$data['page_title'] .= 'Dashboard';

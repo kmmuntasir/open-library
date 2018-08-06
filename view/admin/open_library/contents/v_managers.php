@@ -7,13 +7,23 @@
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th>Phone</th>
-					<th>Email</th>
-					<th>Username</th>
-          <th>Authorization</th>
+					<th class="dt_sm">Phone</th>
+					<th class="dt_sm">Email</th>
+					<th class="dt_sm">Username</th>
+          <th class="dt_xs">Authorization</th>
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
+      <tfoot>
+        <tr>
+          <td>Name</td>
+          <td>Phone</td>
+          <td>Email</td>
+          <td>Username</td>
+          <td>Autdorization</td>
+          <td class="opt_column">Options</td>
+        </tr>
+      </tfoot>
 		</table>
 	</div>
 </div>

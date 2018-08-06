@@ -49,6 +49,9 @@ class Login extends Base_Controller {
     		$temp = array('admin_id' => $result->manager_id, 'admin_type' => $result->is_admin);
     		$this->session->set_userdata($temp);
             $this->session->unset_userdata('url_segment');
+            if($url == '') $url = "admin/dashboard";
+            // echo site_url($url).'<br>';
+            // $this->printer($_SESSION, true);
     		redirect(site_url($url));
     	}
         $url = ($url != $this->module.'/dashboard') ? '?url='.$url : '';

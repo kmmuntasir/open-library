@@ -6,18 +6,32 @@
     <table class="table table-striped datatable" data-page="<?php echo $data_page; ?>" data-source="<?php echo $source; ?>">
       <thead>
         <tr>
-          <th>Code</th>
+          <th class="dt_xs">Code</th>
           <?php if($subpage != 'issue_by_user') { ?><th>User</th><?php } ?>
           <?php if($subpage != 'issue_by_book' && $subpage != 'issue_by_book_copy') { ?><th>Book</th><?php } ?>
-          <th class="issue_datetime_th">Date</th>
-          <?php if($subpage == 'requests' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Auto Expire</th> <?php } ?>
-          <?php if($subpage == 'active' || $subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Deadline</th> <?php } ?>
-          <?php if($subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Fine</th><?php } ?>
-          <?php if($subpage == 'completed' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Returned</th> <?php } ?>
-          <?php if($subpage == 'all' || $subpage == 'requests' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th>Status</th> <?php } ?>
+          <th class="dt_sm">Date</th>
+          <?php if($subpage == 'requests' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th class="dt_sm">Auto Expire</th> <?php } ?>
+          <?php if($subpage == 'active' || $subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th class="dt_sm">Deadline</th> <?php } ?>
+          <?php if($subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th class="dt_xs">Fine</th><?php } ?>
+          <?php if($subpage == 'completed' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th class="dt_sm">Returned</th> <?php } ?>
+          <?php if($subpage == 'all' || $subpage == 'requests' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><th class="dt_xs">Status</th> <?php } ?>
           <th class="opt_column">Options</th>
         </tr>
       </thead>
+      <tfoot>
+        <tr>
+          <td>Code</td>
+          <?php if($subpage != 'issue_by_user') { ?><td>User</td><?php } ?>
+          <?php if($subpage != 'issue_by_book' && $subpage != 'issue_by_book_copy') { ?><td>Book</td><?php } ?>
+          <td class="dt_sm">Date</td>
+          <?php if($subpage == 'requests' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><td>Auto Expire</td> <?php } ?>
+          <?php if($subpage == 'active' || $subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><td>Deadline</td> <?php } ?>
+          <?php if($subpage == 'overdue' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><td>Fine</td><?php } ?>
+          <?php if($subpage == 'completed' || $subpage == 'all' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><td>Returned</td> <?php } ?>
+          <?php if($subpage == 'all' || $subpage == 'requests' || $subpage == 'issue_by_user' || $subpage == 'issue_by_book' || $subpage == 'issue_by_book_copy') { ?><td>Status</td> <?php } ?>
+          <td class="opt_column">Options</td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </div>
