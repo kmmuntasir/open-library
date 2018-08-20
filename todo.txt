@@ -1,10 +1,7 @@
 ===================================================================
 Current Issues
 ===================================================================
-- Add Buttons and Footer search boxes in datatables footer
-
-- Enable managing the authorization level of Managers (Admin/Manager)
-    - Control sensitive sections from only Admin user, not from manager.
+- Add Footer search boxes in datatables footer
 
 - Re-inspect book deletion mechanism
 - Recheck the book lending process and issue status scenario
@@ -32,3 +29,12 @@ Will be done later
 
 - Merge all sync/update/online indicator into one ajax call
 ====================================================================
+
+
+
+Done
+====================================================================
+
+
+- Enable managing the authorization level of Managers (Admin/Manager)
+    - Control sensitive sections from only Admin user, not from manager.

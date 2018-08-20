@@ -254,23 +254,41 @@ class User extends Base_Controller {
         //$this->printer($_POST, true);
 
         $aff = $this->m_user->update_user($user_id, $_POST);
-        if($aff) $this->redirect_msg('/admin/user', 'User Updated Successfully', 'success');
-        else $this->redirect_msg('/admin/user', 'Something went wrong!', 'danger');
+
+        $user = $this->m_user->get_single_user($user_id);
+        // $this->printer($user, true);
+        if($user->is_teacher) $subpage = '/teachers';
+        else $subpage = '/students';
+
+        if($aff) $this->redirect_msg('/admin/user'.$subpage, 'User Updated Successfully', 'success');
+        else $this->redirect_msg('/admin/user'.$subpage, 'Something went wrong!', 'danger');
     }
 
     public function delete($user_id=NULL) {
         if(!$user_id) redirect_msg('/admin/user');
         $count = $this->m_user->check_user_for_issue($user_id);
         if($count > 0) $this->redirect_msg('/admin/user', 'There are incomplete issues from this user', 'danger');
+
+
+        $user = $this->m_user->get_single_user($user_id);
+        if($user->is_teacher) $subpage = '/teachers';
+        else $subpage = '/students';
+
+
         if($status = $this->m_user->delete_user($user_id)) 
-        	$this->redirect_msg('/admin/user', 'User Deactivated Successfully', 'success');
-        else $this->redirect_msg('/admin/user', 'Something went wrong!', 'danger');
+        	$this->redirect_msg('/admin/user'.$subpage, 'User Deactivated Successfully', 'success');
+        else $this->redirect_msg('/admin/user'.$subpage, 'Something went wrong!', 'danger');
     }
 
     public function reactivate($user_id=NULL) {
         if(!$user_id) redirect_msg('/admin/user');
+
+        $user = $this->m_user->get_single_user($user_id);
+        if($user->is_teacher) $subpage = '/teachers';
+        else $subpage = '/students';
+
         if($status = $this->m_user->reactivate_user($user_id)) 
-            $this->redirect_msg('/admin/user', 'User Reactivated Successfully', 'success');
-        else $this->redirect_msg('/admin/user', 'Something went wrong!', 'danger');
+            $this->redirect_msg('/admin/user'.$subpage, 'User Reactivated Successfully', 'success');
+        else $this->redirect_msg('/admin/user'.$subpage, 'Something went wrong!', 'danger');
     }
 }

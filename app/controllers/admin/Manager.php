@@ -34,7 +34,8 @@ class Manager extends Base_Controller {
 
         //$data['managers'] = $this->m_manager->all_managers();
 
-        //$this->printer($data, true);
+        // $this->printer($data, true);
+        // $this->printer($_SESSION, true);
 
     	$data['content'] = 'v_managers.php';
     	$this->load->view($this->viewpath.'v_main', $data);
@@ -52,6 +53,7 @@ class Manager extends Base_Controller {
     }
 
     public function add() {
+        // $this->printer($_POST, true);
         if($_POST['manager_pass_1'] != $_POST['manager_pass_2']) $this->redirect_msg('/admin/manager', 'Passwords do not match!', 'danger');
         $_POST['manager_id'] = $this->m_manager->new_id('manager');
         $_POST['manager_pass'] = md5($_POST['manager_pass_1']);
@@ -67,7 +69,8 @@ class Manager extends Base_Controller {
 
     public function update($manager_id=NULL) {
         if(!$manager_id) redirect_msg('/admin/manager');
-        //$this->printer($_POST);
+        if($manager_id == 'IST_LIBRARY_1') unset($_POST['is_admin']);
+        // $this->printer($_POST, true);
 
         if($_POST['manager_pass_1'] != $_POST['manager_pass_2']) $this->redirect_msg('/admin/manager', 'Passwords do not match!', 'danger');
         if($_POST['manager_pass_1'] == $_POST['manager_pass_2'] && $_POST['manager_pass_2'] != '') $_POST['manager_pass'] = md5($_POST['manager_pass_1']);

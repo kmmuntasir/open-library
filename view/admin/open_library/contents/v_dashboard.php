@@ -48,6 +48,17 @@
           <th class="opt_column">Options</th>
         </tr>
       </thead>
+      <tfoot>
+        <tr>
+          <td>Code</td>
+          <td>User</td>
+          <td>Book</td>
+          <td>Date</td>
+          <td>Auto Expire</td>
+          <td>Status</td>
+          <td class="opt_column">Options</td>
+        </tr>
+      </tfoot>
     </table>
   </div>
   <?php } ?>

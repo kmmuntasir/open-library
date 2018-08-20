@@ -51,6 +51,9 @@
       		<input required type="password" class="form-control add_pass_1" name="manager_pass_1" placeholder="Password"/>
       		<label for="manager_pass_2">Confirm Password</label>
       		<input required type="password" class="form-control add_pass_2" name="manager_pass_2" placeholder="Confirm Password"/>
+          <label for="is_admin">Authorization Level</label><br>
+          <input type="radio" name="is_admin" value="0" checked> Manager<br>
+          <input type="radio" name="is_admin" value="1"> Admin
       </div>
       <div class="modal-footer">
       		<button type="submit" class="btn btn-sm btn-primary pull-right manager_add"><i class="fa fa-plus"></i> Add</button>
@@ -85,6 +88,9 @@
         		<input type="password" class="form-control update_pass_1" name="manager_pass_1" placeholder="New Password (Leave empty to keep unchanged)"/>
         		<label for="manager_pass_2">Confirm Password</label>
         		<input type="password" class="form-control update_pass_2" name="manager_pass_2" placeholder="Confirm Password (Leave empty to keep unchanged)"/>
+            <label>Authorization Level</label><br>
+            <input type="radio" id="manager_radio_button" name="is_admin" value="0"> Manager<br>
+            <input type="radio" id="admin_radio_button" name="is_admin" value="1"> Admin
         </div>
         <div class="modal-footer">
         		<button type="submit" class="btn btn-sm btn-primary pull-right manager_update"><i class="fa fa-refresh"></i> Update</button>

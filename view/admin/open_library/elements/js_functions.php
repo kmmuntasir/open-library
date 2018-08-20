@@ -1,6 +1,12 @@
 <script>
 //window.open('http://localhost/library.ist.edu.bd','IST Library','toolbar=no, menubar=no, resizable=yes');
 	$(document).ready(function(){
+
+
+		var global_admin_id = $('#global_admin_id').val();
+		var global_admin_type = $('#global_admin_type').val();
+
+
 		var busy = false;
 		function sync_trigger() {
 			//alert("Sync Trigger");

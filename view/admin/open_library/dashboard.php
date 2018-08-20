@@ -2,6 +2,8 @@
   <?php require_once('elements/nav.php'); ?>
 </div>
 <div class="container-fluid">
+  <input type="hidden" id="global_admin_id" value="<?php echo $this->session->admin_id; ?>">
+  <input type="hidden" id="global_admin_type" value="<?php echo $this->session->admin_type; ?>">
   <div class="row">
     <!--
     <div class="col-sm-2 col-md-2 sidebar">
@@ -17,7 +19,10 @@
           <?php if($page == 'dashboard') { ?>
           <button class="btn btn-md btn-primary"><?php echo (count($issues))?'<span class="badge">'.count($issues).'</span> New Request(s)':'No Issue Requests'; ?> </button>     
 
+          <?php if($this->session->admin_type != 0) { ?>
           <button style="margin-left: 5px;" id="restore_backup" class="btn btn-md btn-default pull-right">Restore Backup</button>
+          <?php } ?>
+
           <a style="margin-left: 5px;" href="<?php echo site_url('admin/dashboard/backup'); ?>" class="btn btn-md btn-success pull-right">Backup System</a>
           <?php } ?>
           <?php if($page == 'user') { ?>

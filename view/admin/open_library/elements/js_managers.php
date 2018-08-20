@@ -27,6 +27,21 @@ $(document).on('click', '.edit_manager', function() {
 		$('.edit_form_inputs').children('input[name="manager_phone"]').val(man.manager_phone);
 		$('.edit_form_inputs').children('input[name="manager_email"]').val(man.manager_email);
 		$('.edit_form_inputs').children('input[name="manager_user"]').val(man.manager_user);
+
+
+		$('#manager_radio_button').removeAttr('checked');
+		$('#manager_radio_button').removeAttr('disabled');
+		$('#admin_radio_button').removeAttr('checked');
+		$('#admin_radio_button').removeAttr('disabled');
+
+		if(man.is_admin == 2) {
+			$('#admin_radio_button').prop('disabled', true);
+			$('#manager_radio_button').prop('disabled', true);
+			return;
+		}
+		if(man.is_admin == 1) $('#admin_radio_button').prop('checked', true);
+		else $('#manager_radio_button').prop('checked', true);
+
 	});
 });
 
@@ -39,13 +54,19 @@ function post_process_managers_table() {
 
 		var id = $(this).children('td:nth-child(6)').html();
 		if(id != null) {
-			var auth = ['Manager', 'Admin'];
+			var auth = ['Manager', 'Admin', 'Super Admin'];
 			var auth_status = $(this).children('td:nth-child(5)').html();
 			$(this).children('td:nth-child(5)').html(auth[auth_status]);
 
 
-			$(this).children('td:nth-child(6)').html('')
-			var buttons = '<a href="#" manager="'+id+'" class="edit edit_manager btn btn-sm btn-info"><i class="fa fa-pencil"></i></a>';
+			$(this).children('td:nth-child(6)').html('');
+
+			var buttons = "";
+
+			if(auth_status == 0 || (global_admin_type == 2) || id == global_admin_id)
+				buttons += '<a href="#" manager="'+id+'" class="edit edit_manager btn btn-sm btn-info"><i class="fa fa-pencil"></i></a>';
+
+
 			if(auth_status == 0) buttons += ' <a href="'+site_url+'/admin/manager/delete/'+id+'" class="delete btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>';
 
 

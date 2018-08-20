@@ -20,7 +20,7 @@
             Dashboard
           </a>
         </li>
-        <?php if($this->session->userdata['admin_type']==1) { ?>
+        <?php if($this->session->userdata['admin_type']!=0) { ?>
         <li <?php if($page=='managers') echo 'class="active"'; ?>>
           <a href="<?php echo site_url($module.'/manager'); ?>">
             <span class="nav_icon"><i class="fa fa-user"></i></span>
@@ -129,7 +129,7 @@
             <i class="fa fa-caret-down pull-right"></i>
           </a>
           <ul class="dropdown-menu" id="settings_submenu" role="menu">
-          <?php if($this->session->userdata['admin_type']==1) { ?>
+          <?php if($this->session->userdata['admin_type'] != 0) { ?>
             <li class="<?php if($page == 'settings' && $subpage =='app_settings') echo 'active'; ?>">
               <a href="<?php echo site_url($module.'/settings'); ?>">
               <span class="nav_icon"><i class="fa fa-cogs"></i></span>Settings
