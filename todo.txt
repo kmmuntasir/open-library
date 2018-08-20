@@ -7,7 +7,7 @@ Current Issues
 
 - Fix Library Card Design
 
-- Consider SMS sending feature for issues
+- Consider SMS/Email sending feature for issues
 
 - Write Script for importing books from old software.
 

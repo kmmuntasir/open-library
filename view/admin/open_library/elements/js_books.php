@@ -64,7 +64,7 @@ $(document).on('click', '.view_book', function() {
 			book_copies += '<td>'+ remarks + '</td>';
 			var copy_options = "";
 
-			copy_options += '<a title="Edit this copy" class="btn btn-warning btn-xs" href="#"><i class="fa fa-pencil"></i></a>';
+			copy_options += '<a title="Edit this copy" book_copy_accession_no="'+book.book_copies[i].book_copy_accession_no+'" class="editCopy btn btn-warning btn-xs" href="#"><i class="fa fa-pencil"></i></a>';
 
 
 			var delete_url = site_url + 'admin/book/delete_copy_ajax/' + book.book_copies[i].book_copy_accession_no;
