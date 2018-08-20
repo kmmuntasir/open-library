@@ -25,6 +25,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['app_domain'] = 'library.ist.edu.bd';
 $config['base_url'] = ($_SERVER['HTTP_HOST'] == 'localhost') ? ($_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/'.explode('/', $_SERVER['REQUEST_URI'])[1].'/') : ((explode('.', $_SERVER['HTTP_HOST'])[0] == 192) ? ($_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/'.explode('/', $_SERVER['REQUEST_URI'])[1].'/') : ($_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/'));
+
+// $config['base_url'] = 'http://library.ist.edu.bd';
+
+
 // This line of code assigns http://domain.tld/ to the base url if the host is not localhost. If it is, then it assigns the immediate subfolder of localhost which the script belongs to.
 
 $config['branch'] = 'L'; // For Library

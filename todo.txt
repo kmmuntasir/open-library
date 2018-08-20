@@ -1,10 +1,9 @@
 ===================================================================
 Current Issues
 ===================================================================
-- Add Footer search boxes in datatables footer
 
-- Re-inspect book deletion mechanism
 - Recheck the book lending process and issue status scenario
+- Recheck the sync operations.
 
 - Fix Library Card Design
 
@@ -34,7 +33,7 @@ Will be done later
 
 Done
 ====================================================================
-
+- Add Footer search boxes in datatables footer
 
 - Enable managing the authorization level of Managers (Admin/Manager)
     - Control sensitive sections from only Admin user, not from manager.

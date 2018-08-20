@@ -46,7 +46,7 @@ class Login extends Base_Controller {
     	$result = $this->m_admin->login_check_manager($username, md5($password));
         $url = $this->session->userdata('url_segment');
     	if($result) {
-    		$temp = array('admin_id' => $result->manager_id, 'admin_type' => $result->is_admin);
+    		$temp = array('admin_id' => $result->manager_id, 'admin_type' => $result->is_admin, 'admin_name' =>$result->manager_name);
     		$this->session->set_userdata($temp);
             $this->session->unset_userdata('url_segment');
             if($url == '') $url = "admin/dashboard";

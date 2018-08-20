@@ -49,7 +49,7 @@ class Book extends Base_Controller {
 
     public function all_books_json() {
         $books = $this->m_book->all_books_json();
-        //$this->printer($books, true);
+        // $this->printer($books, true);
         ini_set('memory_limit', '-1');
         echo $this->book_to_datatable($books, 1, 1);
     }
@@ -264,6 +264,17 @@ class Book extends Base_Controller {
         else $this->redirect_msg('/admin/book', 'Something went wrong!', 'danger');
     }
 
+    public function delete_copy_ajax($book_copy_accession_no) {
+        if(!$book_copy_accession_no) exit("No Acc. no Found");
+
+        $book = $this->m_book->get_single_copy_details($book_copy_accession_no);
+        if($book->book_copy_status==0) exit( 'This copy is currently issued by someone');
+        if($book->book_copy_is_deleted) exit( 'It\'s already a deleted copy');
+        $status = $this->m_book->delete_copy($book_copy_accession_no, $book);
+        if($status) echo 'success';
+        else echo 'Something went wrong!';
+    }
+
     public function delete_copy_range() {
         $aff = $this->m_book->delete_copy_range($_POST['book_id'], $_POST['book_copy_accession_no_1'], $_POST['book_copy_accession_no_2']);
         
@@ -287,10 +298,19 @@ class Book extends Base_Controller {
                 
                 array_push($json_data['data'][$i], $book->book_id);
                 array_push($json_data['data'][$i], $book->book_title);
-                array_push($json_data['data'][$i], json_encode($this->m_book->book_authors($book->book_id)));
+                // array_push($json_data['data'][$i], json_encode($this->m_book->book_authors($book->book_id)));
+
+                $authors = $this->m_book->book_authors($book->book_id);
+                $delimiter = "";
+                $authors_for_book = '';
+                foreach ($authors as $key => $author) {
+                    $authors_for_book .= $delimiter.$author->author_id."\t".$author->author_name;
+                    $delimiter = "\n";
+                }
+                array_push($json_data['data'][$i], $authors_for_book);
                 array_push($json_data['data'][$i], $book->book_edition);
                 array_push($json_data['data'][$i], $book->book_isbn);
-                array_push($json_data['data'][$i], json_encode(array($book->publication_id, $book->publication_name)));
+                array_push($json_data['data'][$i], $book->publication_id."\t".$book->publication_name);
                 array_push($json_data['data'][$i], $book->book_stock);
                 array_push($json_data['data'][$i], $book->book_available);
                 array_push($json_data['data'][$i], $read_flag);
@@ -300,6 +320,7 @@ class Book extends Base_Controller {
                 ++$i;
             }
         }
+        // $this->printer($json_data);
         if($json_output) return json_encode($json_data);
         else return $json_data;
     }

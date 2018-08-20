@@ -53,7 +53,7 @@ $(document).on('click', '.view_book', function() {
 		while(i<book.book_copies.length) {
 			var style = '';
 			if(book.book_copies[i].book_copy_status == 0) style = 'style="color:#f00;"';
-			book_copies += '<tr '+style+ '><td><a title="View Details" class="accession_anchor" href="#">'+book.book_copies[i].book_copy_accession_no + '</a></td>';
+			book_copies += '<tr id="copy_row_'+book.book_copies[i].book_copy_accession_no+'" '+style+ '><td><a title="View Details" class="accession_anchor" href="#">'+book.book_copies[i].book_copy_accession_no + '</a></td>';
 			book_copies += '<td>'+type[book.book_copies[i].book_copy_type] + '</td>';
 			book_copies += '<td>'+copy_status[book.book_copies[i].book_copy_status] + '</td>';
 			book_copies += '<td>'+book.book_copies[i].book_copy_date + '</td>';
@@ -61,23 +61,42 @@ $(document).on('click', '.view_book', function() {
 			book_copies += '<td>'+source[book.book_copies[i].book_copy_source] + '</td>';
 			if(book.book_copies[i].book_copy_remarks != null) var remarks = book.book_copies[i].book_copy_remarks;
 			else var remarks = ' ';
+			book_copies += '<td>'+ remarks + '</td>';
+			var copy_options = "";
+
+			copy_options += '<a title="Edit this copy" class="btn btn-warning btn-xs" href="#"><i class="fa fa-pencil"></i></a>';
+
+
+			var delete_url = site_url + 'admin/book/delete_copy_ajax/' + book.book_copies[i].book_copy_accession_no;
+
+			copy_options += '<button title="Delete this copy" style="margin-left: 2px;" class="delete_copy_ajax btn btn-danger btn-xs" delete_url="'+ delete_url +'" ac_no="'+book.book_copies[i].book_copy_accession_no+'"><i class="fa fa-remove"></i></button>';
+
+			// copy_options = "";
+
+			book_copies += '<td>'+ copy_options + '</td></tr>';
+
+
 			i++;
-			book_copies += '<td>'+ remarks + '</td></tr>';
 		}
 		$('.book_copy_details_box').children('tbody').html(book_copies);
 		$('#addCopyModalButton').attr('book_id', book.book_id);
 	});
 });
+
 // Functions for Book Copy View Form
 $(document).on('click', '.accession_anchor', function() { 
 	var book_copy_accession_no = $(this).html();
 	if(book_copy_accession_no != '') {
+
 		var url = site_url + 'admin/book/delete_copy/' + book_copy_accession_no;
 		$('#view_copy_footer').children('a.delete').attr('href', url);
+
 		url = site_url + 'admin/issue/issue_by_book_copy/' + book_copy_accession_no;
 		$('#view_copy_footer').children('a.history').attr('href', url);
+
 		$('#view_copy_footer').children('button.editCopy').attr('book_copy_accession_no', book_copy_accession_no);
 		url = site_url + 'admin/book/copy_details/' + book_copy_accession_no;
+
     	$.post(url, function(data) {
     		if(data) {
 		    	$('#viewModal').removeClass('show');
@@ -131,6 +150,38 @@ $(document).on('click', '.accession_anchor', function() {
     	});
 	}
 });
+
+// Function for delete_copy_ajax
+$(document).on('click', '.delete_copy_ajax', function() { 
+	var url = $(this).attr('delete_url');
+	var ac_no = $(this).attr('ac_no');
+
+	if(!confirm("Are you sure to delete Accession No: "+ac_no+"?")) {
+		event.preventDefault();
+		return;
+	}
+
+	// alert(url);
+
+	if(url != '' && url != null) {
+    	$.post(url, function(data) {
+    		if(data == 'success') {
+    			$('#copy_row_'+ac_no).fadeOut(300, function() {
+    				$(this).remove();
+	    		});
+    			showFlash('Successfully Deleted', 'success');
+	    	}
+	    	else {
+    			showFlash(data, 'danger');
+		    }
+    	});
+	}
+
+
+	event.preventDefault();
+});
+
+
 // Functions for Book Copy Edit Form
 $(document).on('click', '.editCopy', function() { 
 	var book_copy_accession_no = $(this).attr('book_copy_accession_no');
@@ -163,6 +214,8 @@ $(document).on('click', '.editCopy', function() {
     	});
 	}
 });
+
+
 // Functions for Book Add Form
 
 $(document).on('click', 'button#add_author_plus', function() {
@@ -327,6 +380,7 @@ $(document).on('click', '.addCopy', function() {
 
 
 function post_process_books_table() {
+
 	$('.datatable tbody tr').each(function(){ 
 		var p_flag = $(this).attr('rendered');
 		if(p_flag != null) return;
@@ -341,31 +395,36 @@ function post_process_books_table() {
 			$(this).children('td:nth-child(2)').html(title);
 
 			var authors = $(this).children('td:nth-child(3)').html();
-			if(authors != null) {
-				var authors_json = $.parseJSON(authors);
-				//console.log(authors_json);
-				var author_link = '';
 
-				$.each( authors_json, function( index, author ){
-				    author_link += '<a title="View All Books by this Author" href="'+site_url+'/admin/book/book_by_filter/1/'+author.author_id+'">'+author.author_name+'</a><br />';
-				});
+			if(authors != null && authors != "") {
+				var authors_for_book = authors.split("\n");
+				var author_link = '';
+				for(var i=0; i < authors_for_book.length; i++) {
+					var single_author = authors_for_book[i].split("\t");
+				    author_link += '<a title="View All Books by this Author" href="'+site_url+'/admin/book/book_by_filter/1/'+single_author[0]+'">'+single_author[1]+'</a><br />';
+
+				}
 				$(this).children('td:nth-child(3)').html(author_link);
 			}
 
+
+
 			var pub = $(this).children('td:nth-child(6)').html();
+
+			
 			if(pub != null) {
-				var pub_json = $.parseJSON(pub);
-				//console.log(pub_json);
-				pub = '<a title="View All Books by this Publisher" href="'+site_url+'/admin/book/book_by_filter/3/'+pub_json[0]+'">'+pub_json[1]+'</a>';
+				var publications = pub.split("\t");
+				pub = '<a title="View All Books by this Publisher" href="'+site_url+'/admin/book/book_by_filter/3/'+publications[0]+'">'+publications[1]+'</a>';
 				$(this).children('td:nth-child(6)').html(pub);
 			}
 
+
 			var read = $(this).children('td:nth-child(9)').html();
 			if(read == 1) {
-				button = '<a target="_blank" href="'+site_url+'/admin/book/read_online/'+id+'" title="" class="btn btn-primary btn-xs">Read Online</a>';
+				button = '<a target="_blank" href="'+site_url+'/admin/book/read_online/'+id+'" title="" class="btn btn-primary btn-xs">Read</a>';
 				$(this).children('td:nth-child(9)').html(button);
 			}
-			else $(this).children('td:nth-child(9)').html('Not Available');
+			else $(this).children('td:nth-child(9)').html('N/A');
 
 
 			var url_unlocked = $(this).children('td:nth-child(10)').html();
@@ -378,3 +437,89 @@ function post_process_books_table() {
 
 	});
 }
+
+$(document).on('click', '#book_copy_details_button', function() {
+	$('#copy_entry_Modal').removeClass('hide');
+	$('#copy_entry_Modal').addClass('show');
+});
+
+
+// Functions for Book Copy View Form
+$( "#get_copy_details" ).submit(function( event ) {
+
+	var book_copy_accession_no = $('#book_copy_accession_no').val();
+	if(book_copy_accession_no != '') {
+		var url = site_url + 'admin/book/delete_copy/' + book_copy_accession_no;
+		$('#view_copy_footer').children('a.deleted').attr('href', url);
+
+		url = site_url + 'admin/issue/issue_by_book_copy/' + book_copy_accession_no;
+		$('#view_copy_footer').children('a.history').attr('href', url);
+
+		$('#view_copy_footer').children('button.editCopy').attr('book_copy_accession_no', book_copy_accession_no);
+		url = site_url + 'admin/book/copy_details/' + book_copy_accession_no;
+		
+    	$.post(url, function(data) {
+    		if(data) {
+		    	$('#viewCopyModal').removeClass('hide');
+		    	$('#viewCopyModal').addClass('show');
+	    		var copy_status = ['Issued', 'Available'];
+	    		var status = ['Inactive', 'Active'];
+				var type = ['<button type="button" class="btn btn-xs btn-primary">Reference</button>', 'Normal'];
+	    		var source = ['', 'Purchase', 'Donation', 'Others'];
+	    		var book = $.parseJSON(data);
+	    		var deleted = '';
+	    		if(book.book_copy_is_deleted == 1) {
+					deleted = '<button class="btn btn-sm btn-danger" type="button">Deleted</button>';
+					$('a.delete').addClass('hide');
+				}
+				else {
+					$('a.delete').removeClass('hide');
+					$('a.delete').attr("href", site_url + 'admin/book/delete_copy/' + book_copy_accession_no);
+				}
+	    		$('.view_title').html(book.book_title + ' ' + deleted);
+	    		$('.view_isbn').html(book.book_isbn);
+	    		$('.view_publication').html(book.publication_name);
+	    		$('.view_edition').html(book.book_edition);
+	    		$('.view_place_of_publication').html(book.book_place_of_pub);
+	    		$('.view_year_of_publication').html(book.book_year_of_pub);
+	    		$('.view_total_pages').html(book.book_pages);
+	    		$('.view_status').html(status[book.book_status]);
+	    		$('.view_stock').html(book.book_stock);
+	    		$('.view_available').html(book.book_available);
+	    		$('.view_remarks').html(book.book_remarks);
+	    		var authors = '<ul>';
+	    		var i=0;
+	    		while(i<book.authors.length) {
+	    			authors += '<li>'+book.authors[i++].author_name + '</li>';
+	    		}
+	    		authors += '</ul>';
+	    		$('.view_author').html(authors);
+
+	    		var categories = '<ul>';
+	    		var i=0;
+	    		while(i<book.categories.length) {
+	    			categories += '<li>'+book.categories[i++].category_name + '</li>';
+	    		}
+	    		categories += '</ul>';
+	    		$('.view_category').html(categories);
+
+	    		$('.view_accession_no').html(book.book_copy_accession_no);
+	    		$('.view_copy_type').html(type[book.book_copy_type]);
+	    		$('.view_copy_status').html(copy_status[book.book_copy_status]);
+	    		$('.view_copy_manager').html(book.manager_name);
+	    		$('.view_copy_date').html(book.book_copy_date);
+	    		$('.view_copy_price').html('BDT ' + book.book_copy_price);
+	    		$('.view_copy_source').html(source[book.book_copy_source]);
+	    		$('.view_add_date').html(book.book_add_date);
+	    		$('.view_copy_remarks').html(book.book_copy_remarks);
+    		}
+    		else showFlash('Invalid Accession Number', 'danger');
+
+
+    		$('#copy_entry_Modal').removeClass('show');
+    		$('#copy_entry_Modal').addClass('hide');
+    		$('#get_copy_details')[0].reset();
+    	});
+	}
+	event.preventDefault();
+});

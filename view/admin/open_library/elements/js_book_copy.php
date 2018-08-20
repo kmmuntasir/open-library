@@ -2,6 +2,7 @@
 $('#delete_copy_range_form').submit(function(event){
 	if(!confirm('Are you sure to delete?')) event.preventDefault();
 });
+
 // Functions for Book Copy View Form
 $( "#get_copy_details" ).submit(function( event ) {
 	var book_copy_accession_no = $('#book_copy_accession_no').val();
@@ -72,6 +73,7 @@ $( "#get_copy_details" ).submit(function( event ) {
 	}
 	event.preventDefault();
 });
+
 // Functions for Book Copy Edit Form
 $(document).on('click', '.editCopy', function() { 
 	var book_copy_accession_no = $(this).attr('book_copy_accession_no');

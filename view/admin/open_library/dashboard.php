@@ -30,6 +30,16 @@
             <button style="margin-left: 5px;" id="import_user" class="btn btn-md btn-default pull-right">Import</button>
 
           <?php } ?>
+
+          <?php if($page == 'books') { ?>
+
+            <button style="margin-left: 5px;" id="book_copy_details_button" type="button" class="btn btn-primary btn-md pull-right"><i class="fa fa-copy"></i> View Single Copy Details</button>
+
+          <?php } ?>
+
+
+
+
         <button id="add_button" type="button" class="btn btn-info btn-md pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add</button>
         <?php } ?>
 

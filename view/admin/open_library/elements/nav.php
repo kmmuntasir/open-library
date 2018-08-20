@@ -21,12 +21,6 @@
           </a>
         </li>
         <?php if($this->session->userdata['admin_type']!=0) { ?>
-        <li <?php if($page=='managers') echo 'class="active"'; ?>>
-          <a href="<?php echo site_url($module.'/manager'); ?>">
-            <span class="nav_icon"><i class="fa fa-user"></i></span>
-            Managers
-          </a>
-        </li>
         <li class="dropdown <?php if($page=='user') echo 'active'; ?>">
           <a id="user_submenu_button" class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
             <span class="nav_icon"><i class="fa fa-users"></i></span> Users
@@ -83,12 +77,14 @@
             Books
           </a>
         </li>
-        <li <?php if($page=='book_copy') echo 'class="active"'; ?>>
+
+        <!-- <li <?php if($page=='book_copy') echo 'class="active"'; ?>>
           <a href="<?php echo site_url($module.'/book/copy'); ?>">
             <span class="nav_icon"><i class="fa fa-file"></i></span>
             Book Copy
           </a>
-        </li>
+        </li> -->
+        
         <li class="dropdown <?php if($page=='issue') echo 'active'; ?>">
           <a class="dropdown-toggle" id="issue_nav_button" href="#" data-toggle="dropdown" aria-expanded="false" role="button" aria-haspopup="true">
             <span class="nav_icon"><i class="fa fa-credit-card-alt"></i></span> Issues
@@ -123,19 +119,35 @@
           </ul>
         </li>
         <!-- Application Settins available for admins -->
+          <?php if($this->session->userdata['admin_type'] != 0) { ?>
         <li class="dropdown <?php if($page=='settings') echo 'active'; ?>">
           <a id="settings_submenu_button" class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
             <span class="nav_icon"><i class="fa fa-wpforms"></i></span> App
             <i class="fa fa-caret-down pull-right"></i>
           </a>
           <ul class="dropdown-menu" id="settings_submenu" role="menu">
-          <?php if($this->session->userdata['admin_type'] != 0) { ?>
+            <li <?php if($page=='managers') echo 'class="active"'; ?>>
+              <a href="<?php echo site_url($module.'/manager'); ?>">
+                <span class="nav_icon"><i class="fa fa-user"></i></span>
+                Managers
+              </a>
+            </li>
             <li class="<?php if($page == 'settings' && $subpage =='app_settings') echo 'active'; ?>">
               <a href="<?php echo site_url($module.'/settings'); ?>">
               <span class="nav_icon"><i class="fa fa-cogs"></i></span>Settings
               </a>
             </li>
+          </ul>
+        </li>
           <?php } ?>
+
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+            <span class="nav_icon"><i class="fa fa-user"></i></span> <?php echo $this->session->admin_name; ?>
+            <i class="fa fa-caret-down pull-right"></i>
+          </a>
+          <ul class="dropdown-menu" id="settings_submenu" role="menu">
             <li class="">
               <a href="<?php echo site_url($module.'/login/logout'); ?>">
               <span class="nav_icon"><i class="fa fa-sign-out"></i></span>Log Out
@@ -143,6 +155,10 @@
             </li>
           </ul>
         </li>
+
+
+
+
       </ul>
     </div>
   </div>

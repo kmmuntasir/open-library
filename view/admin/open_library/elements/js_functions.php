@@ -157,7 +157,10 @@
 
 
 	    $(document).one('click', '.delete', function() {
-	    	if(!confirm("Are you sure to delete?")) return false;
+	    	if(!confirm("Are you sure to delete?")) {
+	    		event.preventDefault();
+	    		return false;
+	    	}
 	    });
 	    
 	    //============= Page Depended Functions =================

@@ -186,7 +186,7 @@
 
 <!-- Modal for Viewing Single Book -->
 <div id="viewModal" class="modal hide" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
   <form class="lib_form" action="hello.php">
     <!-- Modal content-->
     <div class="modal-content">
@@ -287,6 +287,7 @@
                 <th>Price</th>
                 <th>Source</th>
                 <th>Remarks</th>
+                <th>Option</th>
               </tr>
             </thead>
             <tbody>
@@ -540,6 +541,31 @@
     </div>
   </div>
 </div>
+
+<!-- Modal for entering Copy accession no. -->
+<div id="copy_entry_Modal" class="modal hide" role="dialog">
+  <div class="modal-dialog">
+    <form class="lib_form" id="get_copy_details">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">View Single Copy Details</h4>
+        </div>
+        <div class="modal-body">
+            <input autofocus="" id="book_copy_accession_no" autofocus="" required type="text" class="form-control" name="book_copy_accession_no" placeholder="Enter the Accession No."/>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-check"></i> Get Details</button>
+            <div class="clearfix"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
 
 
 <datalist id="author_names">
