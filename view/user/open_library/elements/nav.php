@@ -24,7 +24,7 @@
         </li>
         <li <?php if($page=='authors') echo 'class="active"'; ?>>
           <a href="<?php echo site_url($module.'/author'); ?>">
-            <span class="nav_icon"><i class="fa fa-users"></i></span>
+            <span class="nav_icon"><i class="fa fa-pencil"></i></span>
             Authors
           </a>
         </li>

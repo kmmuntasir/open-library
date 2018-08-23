@@ -2,6 +2,10 @@
 Current Issues
 ===================================================================
 
+- Prevent Backup System from being logged
+
+- Enable Admin to read book from admin panel, without using user credential
+
 - Recheck the book lending process and issue status scenario
 - Recheck the sync operations.
 
