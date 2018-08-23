@@ -329,7 +329,7 @@
               <label class="col-sm-12" for="book_copy_accession_no">Starting Accession No.</label>
             </td>
             <td>
-              <input id="starting_accession" required type="text" class="col-sm-12" name="book_copy_accession_no" placeholder="Starting Accession No."/>
+              <input id="starting_accession" readonly="" required type="text" class="col-sm-12" name="book_copy_accession_no" placeholder="Starting Accession No."/>
             </td>
           </tr>
           <tr>

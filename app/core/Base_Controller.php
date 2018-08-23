@@ -132,7 +132,8 @@ class Base_Controller extends CI_Controller
             $new_key = $result->$primary_key + 1;
 	    }
 	    else $new_key = 1;
-	    return $CI->config->item('branch').'_'.$new_key;
+	    // return $CI->config->item('branch').'_'.$new_key;
+        return $CI->config->item('branch').$new_key;
 	}
 
     public function redirect_msg($url, $msg='', $type="success", $number=0, $prevent_logging=0) {

@@ -31,8 +31,8 @@ $config['base_url'] = ($_SERVER['HTTP_HOST'] == 'localhost') ? ($_SERVER['REQUES
 
 // This line of code assigns http://domain.tld/ to the base url if the host is not localhost. If it is, then it assigns the immediate subfolder of localhost which the script belongs to.
 
-$config['branch'] = 'L'; // For Library
-// $config['branch'] = 'R'; // For Remote Server
+$config['branch'] = 'l'; // For Library
+// $config['branch'] = 'r'; // For Remote Server
 
 /*
 |--------------------------------------------------------------------------

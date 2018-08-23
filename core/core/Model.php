@@ -91,7 +91,8 @@ class CI_Model {
             $new_key = $result->$primary_key + 1;
 	    }
 	    else $new_key = 1;
-	    return $CI->config->item('branch').'_'.$new_key;
+	    // return $CI->config->item('branch').'_'.$new_key;
+	    return $CI->config->item('branch').$new_key;
 	}
 
 	public function printer($arr, $exit_flag = false) { // for debug purpose

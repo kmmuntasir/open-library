@@ -43,7 +43,7 @@ class Book extends Base_Controller {
         $data['publications'] = $this->m_publication->all_publications();
         $data['content'] = 'v_books.php';
         $data['source'] = $this->data['controller'].'/all_books_json';
-        //$this->printer($data['books'], true);
+        // $this->printer($data, true);
         $this->load->view($this->viewpath.'v_main', $data);
 	}
 
@@ -220,6 +220,7 @@ class Book extends Base_Controller {
     }
 
     public function add_copy($book_id=NULL) {
+        // $this->printer($_POST, true);
         if(!$book_id) redirect_msg('/admin/book');
         if($this->m_book->check_book_existence($book_id) != 1) $this->redirect_msg('/admin/book', 'Invalid Book ID', 'danger');
 
@@ -234,7 +235,7 @@ class Book extends Base_Controller {
         $book_copy = array();
         $i = $_POST['book_copy_num'];
         while($i--) {
-            $book_copy_single['book_copy_accession_no'] = $this->config->item('branch').'_c_'.$acc;
+            $book_copy_single['book_copy_accession_no'] = $this->config->item('branch').'c'.$acc;
             array_push($book_copy, $book_copy_single);
             ++$acc;
         }
@@ -333,5 +334,11 @@ class Book extends Base_Controller {
         $data['page_title'] .= 'Read Online';
         //$this->printer($data, true);
         $this->load->view($this->viewpath.'/contents/v_book_read_online', $data);
+    }
+
+    /****************************** Import Function **************************/
+
+    public function importer() {
+        echo 'Starting Import';
     }
 }
