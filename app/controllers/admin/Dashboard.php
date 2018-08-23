@@ -244,10 +244,10 @@ class Dashboard extends Base_Controller {
                         $this->clear_backup_dir($this->backup_dir); // Successful Restore, removing failsafe backup
 
 
-                        // echo 'Success! Total Number of Queries: '.$num_of_queries.'<br>';
-                        // echo 'success';
+                        echo 'Success! Total Number of Queries: '.$num_of_queries.'<br>';
+                        echo 'success';
 
-                        $this->redirect_msg('admin/login/logout', 'Success! Total Number of Queries: '.$num_of_queries.'<br>', 'success');
+                        $this->redirect_msg('admin/login/logout', 'Success! Total Number of Queries: '.$num_of_queries.'<br>', 'success', 0, 1);
                     }
                     else { 
                         echo '<h4>Damaged/Wrong Backup File</h4><br>Attempting to Reverse to the Previous State of System...........<br>';

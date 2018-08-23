@@ -99,6 +99,11 @@ class Base_Controller extends CI_Controller
     public function __log() {
         if(isset($_SESSION['sync'])) return;
         if(get_class($this->ci) == 'Sync') return;
+
+
+        // echo 'Started Base Logging<br>';
+
+
         $CI = & get_instance();
         $queries = $CI->db->queries;
         

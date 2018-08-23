@@ -55,7 +55,7 @@
           <input type="hidden" name="num_of_books" value="1">
           <div class="book_box">
             <label class="col-sm-4" for="book_1">Acc. No.(s)<button type="button" id="book_plus" class="inline_plus btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i></button><button type="button"  id="book_minus" class="inline_minus btn btn-xs btn-danger pull-right"><i class="fa fa-minus"></i></button></label>
-            <input required type="text" class="col-sm-8" name="book_1" placeholder="Book Accession No."/>
+            <input autofocus="" required type="text" class="col-sm-8" name="book_1" placeholder="Book Accession No."/>
           </div>
 
       </div>
@@ -238,7 +238,7 @@
         <div class="col-sm-12">
           <br />
           <label class="col-sm-4" for="issue_book_copy_accession_no">Accession No.</label>
-          <input required="" id="issue_book_copy_accession_no_input" type="text" class="col-sm-8" name="issue_book_copy_accession_no" placeholder="Book Copy Accession Number"/>
+          <input autofocus="" required="" id="issue_book_copy_accession_no_input" type="text" class="col-sm-8" name="issue_book_copy_accession_no" placeholder="Book Copy Accession Number"/>
         </div>
       </div>
       <div class="modal-footer">
@@ -263,7 +263,7 @@
       <div class="modal-body modal-scroll add_form_inputs">
         <div class="col-sm-12">
           <label class="col-sm-4" for="user_library_code">User Library Code</label>
-          <input required="" id="user_library_code_input" type="password" class="col-sm-8" name="user_library_code" placeholder="User Library Code (use barcode machine)"/>
+          <input autofocus="" required="" id="user_library_code_input" type="password" class="col-sm-8" name="user_library_code" placeholder="User Library Code (use barcode machine)"/>
           <div class="clearfix"></div><br />
           <div id="renew_alert" class="alert alert-md alert-danger">Are you sure you want to renew this issue? Any fine will be wiped out if the issue is renewed. Please clear out all fine before proceeding</div>
         </div>

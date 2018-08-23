@@ -2,18 +2,16 @@
 Current Issues
 ===================================================================
 
-- Prevent Backup System from being logged
 
-- Enable Admin to read book from admin panel, without using user credential
 
-- Recheck the book lending process and issue status scenario
-- Recheck the sync operations.
+
+
 
 - Fix Library Card Design
+- Write Script for importing books from old software.
 
 - Consider SMS/Email sending feature for issues
 
-- Write Script for importing books from old software.
 
 - Write A Documentation + User Manual
 
@@ -41,3 +39,11 @@ Done
 
 - Enable managing the authorization level of Managers (Admin/Manager)
     - Control sensitive sections from only Admin user, not from manager.
+- Prevent Backup System from being logged
+- Demand Activation doesn't work when only one copy is unissued and available shows 0
+- Autofocus Accession No. for Add New Issue Modal
+- Check how long a confirmed issue will stay valid
+- Recheck the book lending process and issue status scenario
+- Recheck the sync operations.
+- Enable Admin to read book from admin panel, without using user credential
+

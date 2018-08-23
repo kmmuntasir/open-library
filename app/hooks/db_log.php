@@ -13,6 +13,9 @@ class Db_log {
     // Name of function same as mentioned in Hooks Config
     function logQueries() {
         if(get_class($this->ci) == 'Sync') return;
+
+        // echo '<br>Started Hook Logging<br>';
+        
         $CI = & get_instance();
         $queries = $CI->db->queries;
         

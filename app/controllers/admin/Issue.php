@@ -355,8 +355,11 @@ class Issue extends Base_Controller {
 
             if(!$book_copy) echo("Accession No. #$issue_book_copy_accession_no Doesn't Exist");
 
-            else if($book_copy->book_available == 0)
-                echo("Accession No. #$issue_book_copy_accession_no ($book_copy->book_title) is Not Available right now (All copies are lent out)");
+
+            // else if($book_copy->book_available == 0)
+            //     echo("Accession No. #$issue_book_copy_accession_no ($book_copy->book_title) is Not Available right now (All copies are lent out)");
+
+
             else if($book_copy->book_copy_status==0) 
                 echo("Accession No. #$issue_book_copy_accession_no ($book_copy->book_title) is already issued to someone else");
             else if($book_copy->book_copy_type==0) 

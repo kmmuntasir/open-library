@@ -24,8 +24,8 @@
 		var sync = function() {if(!busy) sync_trigger();};
 		var interval = <?php echo $this->sync_interval*1000; ?>;
 		<?php if($this->settings->application_role == 0) { ?>
-		// sync_trigger();
-		// setInterval(sync, interval);
+		sync_trigger();
+		setInterval(sync, interval);
 		<?php } ?>
 
 
@@ -44,8 +44,8 @@
 		}
 		var stat_time = function() {online_status();};
 		var stat_check_interval = <?php echo $this->sync_interval*1500; ?>;
-		//online_status();
-		//setInterval(stat_time, stat_check_interval);
+		online_status();
+		setInterval(stat_time, stat_check_interval);
 
 		var site_url = "<?php echo site_url(); ?>/";
 		// Datatables Functions
