@@ -7,7 +7,6 @@ Current Issues
 
 
 
-- Fix Library Card Design
 - Write Script for importing books from old software.
 
 - Consider SMS/Email sending feature for issues
@@ -46,4 +45,5 @@ Done
 - Recheck the book lending process and issue status scenario
 - Recheck the sync operations.
 - Enable Admin to read book from admin panel, without using user credential
+- Fix Library Card Design
 

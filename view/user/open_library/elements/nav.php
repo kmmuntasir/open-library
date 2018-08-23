@@ -4,7 +4,19 @@
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="nav_icon"><i class="fa fa-align-justify"></i></span>
       </button>
-      <a class="navbar-brand" href="#">IST Library</a>
+      <!-- <a class="navbar-brand" href="#">IST Library</a> -->
+      <a class="navbar-brand" href="#">
+
+        <div class="hidden-xs hidden-sm">
+          <img id="logo_image" src="<?php echo base_url('images/'.$this->settings->institute_logo); ?>" alt="<?php echo $this->settings->institute_name; ?>">
+          <span id="institute_name"><?php echo $this->settings->institute_name; ?></span>
+        </div>
+
+        <div class="hidden-md hidden-lg hidden-xl">
+          <img id="logo_image_mobile" src="<?php echo base_url('images/'.$this->settings->institute_logo); ?>" alt="<?php echo $this->settings->institute_name; ?>">
+          <span id="institute_name_mobile"><?php echo $this->settings->institute_name; ?></span>
+        </div>
+      </a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">

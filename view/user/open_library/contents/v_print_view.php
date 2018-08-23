@@ -1,6 +1,28 @@
+<style type="text/css">
+
+	@page {
+		size: A4 portrait;
+		margin: 2rem;
+	}
+
+	@media screen {
+
+	}
+
+	@media print {
+
+	}
+
+	@media screen, print {
+
+	}
+
+
+</style>
+
 <div class="modal-body library_card_wrap">
 	<div class="card_head">
-		<img class="campus_logo" src="<?php echo base_url('images/logo.png'); ?>">
+		<img class="campus_logo" src="<?php echo base_url('images/'.$this->settings->institute_logo); ?>">
 		<h3>INSTITUTE OF SCIENCE AND TECHNOLOGY</h3>
 		<h4>LIBRARY CARD</h4>
 		<div class="clearfix"></div>
