@@ -123,8 +123,11 @@ class Book extends Base_Controller {
 
         $book_duplicate = $this->m_book->check_book_title_edition($book['book_title'], $book['book_edition']);
         if($book_duplicate) $this->redirect_msg('/admin/book', 'Same edition of this book already exists', 'danger');
-        $book_duplicate = $this->m_book->check_duplicate_isbn($book['book_isbn']);
-        if($book_duplicate) $this->redirect_msg('/admin/book', 'Duplicate ISBN Number', 'danger');
+
+        if($book['book_isbn'] != '') {
+            $book_duplicate = $this->m_book->check_duplicate_isbn($book['book_isbn']);
+            if($book_duplicate) $this->redirect_msg('/admin/book', 'Duplicate ISBN Number', 'danger');
+        }
 
         $authors = $categories = array();
         $publication_name = $_POST['publication_name'];
@@ -159,10 +162,14 @@ class Book extends Base_Controller {
             if($book_duplicate->book_id != $book_id) // Different entry with same name and edition
                 $this->redirect_msg('/admin/book', 'Same edition of this book already exists', 'danger');
         }
-        $book_duplicate = $this->m_book->check_duplicate_isbn($book['book_isbn']);
-        if($book_duplicate) {
-            if($book_duplicate->book_id != $book_id) // Different entry with same ISBN
-                $this->redirect_msg('/admin/book', 'Duplicate ISBN Number', 'danger');
+
+
+        if($book['book_isbn'] != '') {
+            $book_duplicate = $this->m_book->check_duplicate_isbn($book['book_isbn']);
+            if($book_duplicate) {
+                if($book_duplicate->book_id != $book_id) // Different entry with same ISBN
+                    $this->redirect_msg('/admin/book', 'Duplicate ISBN Number', 'danger');
+            }
         }
 
         $authors = $categories = array();
@@ -344,7 +351,7 @@ class Book extends Base_Controller {
 
         echo 'Starting Import<br>';
 
-        $old_books = $this->m_book->old_books(500);
+        $old_books = $this->m_book->old_books(1000);
 
         $new_books = array();
 
@@ -374,6 +381,7 @@ class Book extends Base_Controller {
             // Processing Categories  ======================================================
 
             // Later
+            array_push($categories, 'Other');
 
             // Constructing Book array =====================================================
 

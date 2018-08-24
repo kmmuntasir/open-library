@@ -159,6 +159,13 @@ class M_book extends Ci_model {
     }
 
     public function update_book($book_id, $book, $publication_name, $authors, $categories) {
+
+        // $this->printer($book_id);
+        // $this->printer($book);
+        // $this->printer($publication_name);
+        // $this->printer($authors);
+        // $this->printer($categories, true);
+
         $this->db->trans_start();
         //Processing Publication
         $this->db->where('publication_name', $publication_name);
