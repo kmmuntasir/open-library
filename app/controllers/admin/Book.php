@@ -202,6 +202,23 @@ class Book extends Base_Controller {
         else $this->redirect_msg('/admin/book', 'Something went wrong!', 'danger');
     }
 
+    public function merge() {
+        // $this->printer($_POST);
+        $_POST['merge_book_id'] = explode(',', $_POST['merge_book_id']);
+        $idx = array_search($_POST['merge_book_select'], $_POST['merge_book_id']);
+        unset($_POST['merge_book_id'][$idx]);
+
+        $master_id = $_POST['merge_book_select'];
+        $slave_ids = $_POST['merge_book_id'];
+        $this->printer($master_id);
+        $this->printer($slave_ids);
+
+        $status = $this->m_book->merge($master_id, $slave_ids);
+
+        echo $status;
+
+    }
+
     public function copy() {
         $data = $this->data;
         $data['page'] = 'book_copy';

@@ -1,12 +1,9 @@
-
+// Functions for Book Merging
 
 var total_merge = 0;
 var merge_book_id = [];
 var merge_book_title = [];
 
-$(document).ready(function() {
-
-});
 
 $(document).on('click', '.datatable tbody tr td:first-child', function() {
 	var book_id = $(this).html();
@@ -16,13 +13,21 @@ $(document).on('click', '.datatable tbody tr td:first-child', function() {
 	var list_status = $(this).attr('onmergelist');
 
 	if(list_status == 'yes') {
+
+		var idx = $.inArray(book_id, merge_book_id);
+		// alert(idx);
+
+		merge_book_id.splice(idx, 1);
+		merge_book_title.splice(idx, 1);
 		
 		total_merge--;
 		$('#merge_book_button span.badge').html(total_merge);
 		if(total_merge == 0) $('#merge_book_button span.badge').css('display', 'none');
 
 		$(this).attr('onmergelist', 'no');
-		$(this).removeClass('text-danger');
+		$(this).css('font-weight', 'normal');
+		$(this).css('background-color', 'transparent');
+		$(this).css('color', '#000');
 	}
 	else {
 		merge_book_id.push(book_id);
@@ -33,18 +38,37 @@ $(document).on('click', '.datatable tbody tr td:first-child', function() {
 		$('#merge_book_button span.badge').css('display', 'inline');
 
 		$(this).attr('onmergelist', 'yes');
-		$(this).addClass('text-danger');
+		$(this).css('font-weight', 'bold');
+		$(this).css('background-color', '#a94442');
+		$(this).css('color', '#fff');
+		
 	}
-
-
-
-
-
 })
 
 $(document).on('click', '#merge_book_button', function() {
 	if(total_merge == 0) alert("No Book Selected. To select a book for merging, click on the book id");
-	else alert("Yes found");
+	else {
+		$('#merge_book_select').html('');
+		$('#merge_book_id').val('');
+		var delimiter = '';
+		for(var i=0; i<total_merge; i++) {
+			var opt = '<option value="' + merge_book_id[i] + '">' + merge_book_id[i] + ' - ' + merge_book_title[i] + '</option>';
+			$('#merge_book_select').append(opt);
+			var ids = $('#merge_book_id').val() + delimiter + merge_book_id[i];
+			$('#merge_book_id').val(ids);
+			delimiter = ',';
+		}
+
+		$('#merge_book_modal').removeClass('hide');
+		$('#merge_book_modal').addClass('show');
+	}
+});
+
+$(document).on('submit', '#merge_book_form', function() {
+	if(!confirm("Are you sure?")) {
+		event.preventDefault();
+		return;
+	}
 });
 
 // Functions for Book View Form

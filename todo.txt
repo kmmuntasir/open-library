@@ -2,9 +2,6 @@
 Current Issues
 ===================================================================
 
-
-
-
 - Enable Book Merging
 
 - Consider SMS/Email sending feature for issues

@@ -1,3 +1,11 @@
+<style type="text/css">
+  .datatable tbody tr td:first-child:hover {
+    background-color: #09f;
+    color: #fff;
+    font-weight: bold;
+  }
+</style>
+
 <div class="row">
 	<div class="col-sm-12 table-responsive">
 		<table data-page="books" class="table table-striped datatable " data-source="<?php echo $source; ?>">
@@ -564,7 +572,30 @@
   </div>
 </div>
 
+<!-- Modal for entering Copy accession no. -->
+<div id="merge_book_modal" class="modal hide" role="dialog">
+  <div class="modal-dialog">
+    <form class="lib_form" id="merge_book_form" action="<?php echo $controller.'/merge' ?>" method="post">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Merge Books : Select Merge Target</h4>
+        </div>
+        <div class="modal-body">
+            <select autofocus="" id="merge_book_select" class="form-control" name="merge_book_select">
 
+            </select>
+            <input type="hidden" name="merge_book_id" id="merge_book_id">
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-check"></i> Confirm Merge</button>
+            <div class="clearfix"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
 
 

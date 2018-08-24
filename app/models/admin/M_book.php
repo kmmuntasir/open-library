@@ -383,6 +383,63 @@ class M_book extends Ci_model {
         return ($book) ? $book->book_url: NULL;
     }
 
+    public function merge($master_id, $slave_ids) {
+        $this->db->trans_start();
+
+        $master_book = $this->get_single_book($master_id);
+
+        $new_stock = $master_book->book_stock;
+        $new_available = $master_book->book_available;
+
+        $master_authors = $this->db->select('author_id')->where('book_id', $master_id)->get('book_author')->result();
+        foreach($master_authors as $key => $author) $master_authors[$key] = $master_authors[$key]->author_id;
+        $master_categories = $this->db->select('category_id')->where('book_id', $master_id)->get('book_category')->result();
+        foreach($master_categories as $key => $category) $master_categories[$key] = $master_categories[$key]->category_id;
+
+        $this->printer($master_authors);
+        $this->printer($master_categories);
+
+
+        foreach ($slave_ids as $key => $sid) {
+            $slave_book = $this->get_single_book($sid);
+
+            $new_stock += $slave_book->book_stock;
+            $new_available += $slave_book->book_available;
+
+
+            $authors = $this->db->where('book_id', $sid)->get('book_author')->result();
+            foreach($authors as $key => $author) {
+                $idx = array_search($author->author_id, $master_authors);
+                if($idx > -1) continue;
+                else 
+                    $this->db->where('book_author_id', $author->book_author_id)->update('book_author', array('book_id'=>$master_id));
+            }
+
+
+            $categories = $this->db->where('book_id', $sid)->get('book_category')->result();
+            foreach($categories as $key => $category) {
+                $idx = array_search($category->category_id, $master_categories);
+                if($idx > -1) continue;
+                else 
+                    $this->db->where('book_category_id', $category->book_category_id)->update('book_category', array('book_id'=>$master_id));
+            }
+
+            $this->db->where('book_id', $sid)->update('book_copy', array('book_id'=>$master_id));
+            $this->db->where('issue_book_id', $sid)->update('issue', array('issue_book_id'=>$master_id));
+
+            $this->db->where('book_id', $sid)->delete('book');
+        }
+
+        $new_book = array();
+        $new_book['book_stock'] = $new_stock;
+        $new_book['book_available'] = $new_available;
+
+        $this->db->where('book_id', $master_id)->update('book', $new_book);
+
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? 1 : 0;
+    }
+
     /************************** Import Functions **************************/
 
     public function old_books($limit=50) {
