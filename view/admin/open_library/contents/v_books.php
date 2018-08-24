@@ -7,7 +7,7 @@
 					<th>Title</th>
 					<th>Author(s)</th>
 					<th class="dt_xs">Edition</th>
-          <th class="dt_xs">ISBN</th>
+          <!-- <th class="dt_xs">ISBN</th> -->
 					<th class="dt_xs">Publisher</th>
 					<th class="dt_xs">Stock</th>
 					<th class="dt_xs">Available</th>
@@ -22,7 +22,7 @@
           <td>Title</td>
           <td>Author(s)</td>
           <td>Edition</td>
-          <td>ISBN</td>
+          <!-- <td>ISBN</td> -->
           <td>Publisher</td>
           <td>Stock</td>
           <td>Available</td>

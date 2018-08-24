@@ -10,7 +10,8 @@ class M_book extends Ci_model {
     }
 
     public function all_books_json() {
-        $selection = 'book_id, book_title, book_edition, book_isbn, publication.publication_id, publication_name, book_stock, book_available, book_url, book_url_unlocked';
+        // $selection = 'book_id, book_title, book_edition, book_isbn, publication.publication_id, publication_name, book_stock, book_available, book_url, book_url_unlocked';
+        $selection = 'book_id, book_title, book_edition, publication.publication_id, publication_name, book_stock, book_available, book_url, book_url_unlocked';
         
         $this->db->select($selection)->where('is_deleted', 0)->join('publication', 'publication.publication_id = book.publication_id');
         return $this->db->get('book')->result();

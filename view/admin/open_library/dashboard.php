@@ -35,6 +35,8 @@
 
             <button style="margin-left: 5px;" id="book_copy_details_button" type="button" class="btn btn-primary btn-md pull-right"><i class="fa fa-copy"></i> View Single Copy Details</button>
 
+            <button style="margin-left: 5px;" id="merge_book_button" type="button" class="btn btn-success btn-md pull-right"><i class="fa fa-compress"></i> Merge Books <span style="display: none;" class="badge badge-xs">3</span></button>
+
           <?php } ?>
 
 

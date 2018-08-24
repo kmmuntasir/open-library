@@ -242,7 +242,7 @@ class Book extends Base_Controller {
         $book_copy = array();
         $i = $_POST['book_copy_num'];
         while($i--) {
-            $book_copy_single['book_copy_accession_no'] = $this->config->item('branch').'c'.$acc;
+            $book_copy_single['book_copy_accession_no'] = $this->config->item('branch').$acc;
             array_push($book_copy, $book_copy_single);
             ++$acc;
         }
@@ -317,7 +317,7 @@ class Book extends Base_Controller {
                 }
                 array_push($json_data['data'][$i], $authors_for_book);
                 array_push($json_data['data'][$i], $book->book_edition);
-                array_push($json_data['data'][$i], $book->book_isbn);
+                // array_push($json_data['data'][$i], $book->book_isbn);
                 array_push($json_data['data'][$i], $book->publication_id."\t".$book->publication_name);
                 array_push($json_data['data'][$i], $book->book_stock);
                 array_push($json_data['data'][$i], $book->book_available);
@@ -458,7 +458,7 @@ class Book extends Base_Controller {
             $new_copy = array();
 
             $new_copy['book_id']                = $new_book_id;
-            $new_copy['book_copy_accession_no'] = $this->config->item('branch').'c'.$copy->copy_id;
+            $new_copy['book_copy_accession_no'] = $this->config->item('branch').$copy->copy_id;
             $new_copy['book_copy_status']       = 1;
             $new_copy['book_copy_type']         = $copy->copy_type - 1;
             $new_copy['book_copy_date']         = $copy->copy_date;

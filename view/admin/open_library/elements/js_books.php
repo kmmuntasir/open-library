@@ -1,3 +1,52 @@
+
+
+var total_merge = 0;
+var merge_book_id = [];
+var merge_book_title = [];
+
+$(document).ready(function() {
+
+});
+
+$(document).on('click', '.datatable tbody tr td:first-child', function() {
+	var book_id = $(this).html();
+	var book_title = $(this).parent('tr').children('td:nth-child(2)').children('a').html();
+	// alert(book_id + ' - ' + book_title);
+
+	var list_status = $(this).attr('onmergelist');
+
+	if(list_status == 'yes') {
+		
+		total_merge--;
+		$('#merge_book_button span.badge').html(total_merge);
+		if(total_merge == 0) $('#merge_book_button span.badge').css('display', 'none');
+
+		$(this).attr('onmergelist', 'no');
+		$(this).removeClass('text-danger');
+	}
+	else {
+		merge_book_id.push(book_id);
+		merge_book_title.push(book_title);
+
+		total_merge++;
+		$('#merge_book_button span.badge').html(total_merge);
+		$('#merge_book_button span.badge').css('display', 'inline');
+
+		$(this).attr('onmergelist', 'yes');
+		$(this).addClass('text-danger');
+	}
+
+
+
+
+
+})
+
+$(document).on('click', '#merge_book_button', function() {
+	if(total_merge == 0) alert("No Book Selected. To select a book for merging, click on the book id");
+	else alert("Yes found");
+});
+
 // Functions for Book View Form
 $(document).on('click', '.view_book', function() { 
 	var book_id = $(this).attr('book_id');
@@ -380,7 +429,6 @@ $(document).on('click', '.addCopy', function() {
 
 
 function post_process_books_table() {
-
 	$('.datatable tbody tr').each(function(){ 
 		var p_flag = $(this).attr('rendered');
 		if(p_flag != null) return;
@@ -409,30 +457,30 @@ function post_process_books_table() {
 
 
 
-			var pub = $(this).children('td:nth-child(6)').html();
+			var pub = $(this).children('td:nth-child(5)').html();
 
 			
 			if(pub != null) {
 				var publications = pub.split("\t");
 				pub = '<a title="View All Books by this Publisher" href="'+site_url+'/admin/book/book_by_filter/3/'+publications[0]+'">'+publications[1]+'</a>';
-				$(this).children('td:nth-child(6)').html(pub);
+				$(this).children('td:nth-child(5)').html(pub);
 			}
 
 
-			var read = $(this).children('td:nth-child(9)').html();
+			var read = $(this).children('td:nth-child(8)').html();
 			if(read == 1) {
 				button = '<a target="_blank" href="'+site_url+'/admin/book/read_online/'+id+'" title="" class="btn btn-primary btn-xs">Read</a>';
-				$(this).children('td:nth-child(9)').html(button);
+				$(this).children('td:nth-child(8)').html(button);
 			}
-			else $(this).children('td:nth-child(9)').html('N/A');
+			else $(this).children('td:nth-child(8)').html('N/A');
 
 
-			var url_unlocked = $(this).children('td:nth-child(10)').html();
-			if(url_unlocked == 1) $(this).children('td:nth-child(10)').html('<code>Yes</code>');
-			else $(this).children('td:nth-child(10)').html('<code>No</code>');
+			var url_unlocked = $(this).children('td:nth-child(9)').html();
+			if(url_unlocked == 1) $(this).children('td:nth-child(9)').html('<code>Yes</code>');
+			else $(this).children('td:nth-child(9)').html('<code>No</code>');
 
 			var action_buttons = '<a title="View Book Details" href="#" book_id="'+id+'" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a> <a title="Add Copies for this Book" href="#" book_id="'+id+'" class="addCopy btn btn-xs btn-success"><i class="fa fa-copy"></i></a> <a title="Edit Book Details" href="#" book_id="'+id+'" class="edit edit_book btn btn-xs btn-info"><i class="fa fa-pencil"></i></a> <a title="Delete Book" href="'+site_url+'/admin/book/delete/'+id+'" class="delete btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>';
-			$(this).children('td:nth-child(11)').html(action_buttons);
+			$(this).children('td:nth-child(10)').html(action_buttons);
 		}
 
 	});
