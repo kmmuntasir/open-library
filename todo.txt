@@ -5,12 +5,9 @@ Current Issues
 
 
 
-
-
-- Write Script for importing books from old software.
+- Enable Book Merging
 
 - Consider SMS/Email sending feature for issues
-
 
 - Write A Documentation + User Manual
 
@@ -46,4 +43,5 @@ Done
 - Recheck the sync operations.
 - Enable Admin to read book from admin panel, without using user credential
 - Fix Library Card Design
+- Write Script for importing books from old software.
 

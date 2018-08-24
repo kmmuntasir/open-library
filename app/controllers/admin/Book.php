@@ -339,6 +339,233 @@ class Book extends Base_Controller {
     /****************************** Import Function **************************/
 
     public function importer() {
-        echo 'Starting Import';
+
+        $total_count = 0;
+
+        echo 'Starting Import<br>';
+
+        $old_books = $this->m_book->old_books(500);
+
+        $new_books = array();
+
+        echo count($old_books).'<br>';
+
+        // $this->tabular($old_books, true);
+
+        foreach ($old_books as $key => $book) {
+            $authors = array();
+            $categories = array();
+
+            // echo $book->book_title.'<br>';
+
+            // Processing Authors ======================================================
+
+            $arr = explode('&', $book->book_author);
+            foreach($arr as $author) {
+                $author = trim($author);
+                if($author == 'others' || $author == 'Others' || $author == 'other') continue;
+                $author = $this->author_processor($author);
+                if($author == '') continue;
+                array_push($authors, $author);
+            }
+            // $this->printer($authors);
+            // Author Ready
+
+            // Processing Categories  ======================================================
+
+            // Later
+
+            // Constructing Book array =====================================================
+
+            $new_book = array();
+
+            // $new_book['']
+
+            $new_book['book_id']            = $this->m_book->new_id('book');
+            $new_book['book_isbn']          = '';
+            $new_book['book_title']         = $book->book_title;
+            // $new_book['publication_id']
+            $new_book['book_add_date']      = date('Y-m-d H:i:s');
+            $new_book['manager_id']         = $this->session->admin_id;
+            $new_book['book_edition']       = $book->book_edition;
+            $new_book['book_place_of_pub']  = $book->place_of_publication;
+            $new_book['book_year_of_pub']   = $book->year_of_publication;
+            $new_book['book_pages']         = $book->total_page_number;
+            $new_book['book_status']        = 1;
+            $new_book['book_remarks']       = $book->book_comments;
+            $new_book['book_stock']         = 0;
+            $new_book['book_available']     = 0;
+            $new_book['book_url']           = '';
+            $new_book['book_url_unlocked']  = 1;
+            $new_book['is_deleted']         = 0;
+            
+
+
+            // $this->printer($new_book);
+
+            $book_duplicate = $this->m_book->check_book_title_edition($new_book['book_title'], $new_book['book_edition']);
+
+
+            if($book_duplicate) {
+                // echo 'Duplicate Found - '.$book->book_title.'<br>';
+                $this->add_old_copies($book->book_id, $book_duplicate->book_id);
+                $this->m_book->flag_book($book->book_id);
+                continue;
+            }
+
+            $publication_name = $book->book_publisher;
+
+            $status = false;
+            
+            $status = $this->m_book->add_book($new_book, $publication_name, $authors, $categories);
+
+            if($status) {
+                // Book inserted, add copies now.
+                // echo $new_book['book_id'].' - '.$book->book_id.'<br>';
+
+                $this->add_old_copies($book->book_id, $new_book['book_id']);
+
+                $this->m_book->flag_book($book->book_id);
+                array_push($new_books, $new_book);
+                $total_count++;
+            }
+        }
+
+        echo $total_count.'<br>';
+        // $this->tabular($new_books);
+    }
+
+    public function add_old_copies($book_id, $new_book_id) {
+        $old_copies = $this->m_book->old_copies($book_id);
+
+        $new_copies = array();
+        $ref_copies = 0;
+
+
+        $purchase_array = array("Purchase", "P", "pur", "purchase", "Purchase, Lost & replace", "purchase, Lost & replace", "p", " P", "PUrchase", "Parchage", "Purche", "Purched", "purche", "pUR", "Pur.", 'g', 'R', "Purchase (lost of cash memo)");
+        $donation_array = array("Asia Foundation", "Asia foundation", "Donated", "Donation", "Gift", "gift", "Free", "AIBI", "Asia foundation, AIBI", "AF", "IST");
+        $others_array   = array("Others", "--", "A", "No", "aF", "---", );
+
+        foreach ($old_copies as $key => $copy) {
+            $new_copy = array();
+
+            $new_copy['book_id']                = $new_book_id;
+            $new_copy['book_copy_accession_no'] = $this->config->item('branch').'c'.$copy->copy_id;
+            $new_copy['book_copy_status']       = 1;
+            $new_copy['book_copy_type']         = $copy->copy_type - 1;
+            $new_copy['book_copy_date']         = $copy->copy_date;
+            $new_copy['book_copy_price']        = $copy->copy_price;
+            $new_copy['book_copy_remarks']      = '';
+            $new_copy['book_copy_manager_id']   = $this->session->admin_id;
+
+            if($new_copy['book_copy_type'] == 0) $ref_copies++;
+
+
+            if(array_search($copy->copy_source, $purchase_array) !== false)
+                $new_copy['book_copy_source'] = 1;
+            else if(array_search($copy->copy_source, $donation_array) !== false) {
+                $new_copy['book_copy_remarks'] = $copy->copy_source;
+                $new_copy['book_copy_source'] = 2;
+            }
+            else if(array_search($copy->copy_source, $others_array) !== false)
+                $new_copy['book_copy_source'] = 3;
+            else if($copy->copy_source == '') $new_copy['book_copy_source'] = 3;
+            else {
+                $new_copy['book_copy_remarks'] = $copy->copy_source;
+                $new_copy['book_copy_source'] = 3;
+            }
+            array_push($new_copies, $new_copy);
+        }
+
+
+
+        // $this->tabular($old_copies);
+        // $this->tabular($new_copies);
+        // $this->printer($new_copies);
+
+        $this->m_book->add_old_copies($new_book_id, $new_copies, $ref_copies);
+    }
+
+    public function categorize() {
+        // echo 'Started Categorizing'.'<br>'.'<br>'.'<br>';
+
+        // $skip = array();
+        
+        // $str = file_get_contents('string.txt');
+
+        // // var_dump($str);
+
+        // $arr = explode(' ', $str);
+
+        // $arr = array_unique($arr);
+
+        // foreach ($arr as $key => $word) {
+        //     if(is_numeric($word)) unset($arr[$key]);
+        // }
+
+        // echo count($arr).'<br>';
+        // $this->printer($arr);
+
+            
+        $purchase_array = array("Purchase", "P", "pur", "purchase", "Purchase, Lost & replace", "purchase, Lost & replace", "p", " P", "PUrchase", "Parchage", "Purche", "Purched", "purche", "pUR", "Pur.", 'g', 'R', "Purchase (lost of cash memo)");
+        $donation_array = array("Asia Foundation", "Asia foundation", "Donated", "Donation", "Gift", "gift", "Free", "AIBI", "Asia foundation, AIBI", "AF", "IST");
+        $others_array   = array("Others", "--", "A", "No", "aF", "---", );
+
+        $copies = $this->db->get('lib_copy')->result();
+
+        $arr = array();
+
+        foreach ($copies as $key => $copy) {
+
+            
+
+            if(array_search($copy->copy_source, $purchase_array) !== false)
+                $copy->copy_source = 1;
+            else if(array_search($copy->copy_source, $donation_array) !== false) {
+                $copy->copy_ac_no = $copy->copy_source;
+                $copy->copy_source = 2;
+            }
+            else if(array_search($copy->copy_source, $others_array) !== false)
+                $copy->copy_source = 3;
+            else if($copy->copy_source == '') $copy->copy_source = 3;
+            else {
+                $copy->copy_ac_no = $copy->copy_source;
+                $copy->copy_source = 3;
+            }
+
+        }
+
+        $this->tabular($arr);
+
+    }
+
+    /* This function processes an author name
+    *  It replaces any occurances of ",," or ", ," with a "," in a string
+    *  It checks the first name of an author for a trailing period. If not
+    *  found, it adds the period after the first name if the first name is
+    *  an initial (less than 5 chars long).
+    *  At last it concatenates the first name and last name with a space
+    *  between them.
+    *  Finally it capitalize each words of the name and returns the string.
+    */
+
+    function author_processor($author) {
+        $author = str_replace(',,', ',', $author);
+        $author = str_replace(', ,', ',', $author);
+        $temp = explode(',', $author); // Seperating the first name and lastname
+        foreach($temp as $key=>$t) $temp[$key] = trim($t); // Triming any begining or trailing whitespace
+        if(count($temp) > 1) { // If existing both first name and last name
+            if(trim($temp[0]) == '' || trim($temp[1]) == '') {
+                $author = $temp[1].$temp[0]; // Concatenating
+            }
+            else {
+                $lastchar = substr($temp[1], -1); // Checking for trailing period after initials
+                if($lastchar != '.' && strlen($temp[1])<5) $temp[1] .= '.'; // Adding period
+                $temp[1] = str_replace('. ', '.', $temp[1]); // Removing whitespace between two initial characters
+                $author = $temp[1].' '.$temp[0]; // Concatenating with a space between them.
+            }
+        }
+        else $author = $temp[0];
+        return ucwords($author); // returning after capitalizing
     }
 }

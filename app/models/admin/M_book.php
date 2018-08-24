@@ -100,6 +100,7 @@ class M_book extends Ci_model {
     }
 
     public function add_book($book, $publication_name, $authors, $categories) {
+
         $this->db->trans_start();
         //Processing Publication
         $this->db->where('publication_name', $publication_name);
@@ -111,9 +112,14 @@ class M_book extends Ci_model {
             $book['publication_id'] = $pub_id;
         }
 
+
         // Inserting Book
         $this->db->insert('book', $book);
         $book_id = $book['book_id'];
+
+        // echo $this->db->last_query();
+
+        // $this->printer($book, true);
 
         // Processing Authors
         $book_author = array();
@@ -367,6 +373,52 @@ class M_book extends Ci_model {
     public function book_url($book_id) {
         $book = $this->db->select('book_url')->where('book_id', $book_id)->get('book')->row();
         return ($book) ? $book->book_url: NULL;
+    }
+
+    /************************** Import Functions **************************/
+
+    public function old_books($limit=50) {
+        $this->db->where('flag', 0);
+        $this->db->limit($limit);
+        return $this->db->get('lib_book')->result();
+    }
+
+    public function old_copies($book_id, $limit=1000) {
+        $this->db->where('book_id', $book_id);
+        $this->db->where('copy_status', 1);
+        $this->db->limit($limit);
+        return $this->db->get('lib_copy')->result();
+    }
+
+    public function flag_book($book_id) {
+        $this->db->trans_start();
+        $this->db->where('book_id', $book_id);
+        $this->db->update('lib_book', array('flag'=>1));
+        $this->db->trans_complete();
+    }
+
+    public function flag_copy($copy_id) {
+        $this->db->trans_start();
+        $this->db->where('copy_id', $copy_id);
+        $this->db->update('lib_copy', array('copy_status'=>0));
+        $this->db->trans_complete();
+    }
+
+    public function add_old_copies($book_id, $book_copy, $ref_copies) {
+        $aff = 0;
+        $this->db->trans_start();
+        $this->db->insert_batch('book_copy', $book_copy);
+        $aff = $this->db->affected_rows();
+        $book = $this->get_single_book($book_id);
+        $book_updated = array();
+        $book_updated['book_stock'] = $book->book_stock + count($book_copy);
+        $book_updated['book_available'] = $book->book_available + (count($book_copy) - $ref_copies);
+
+        $this->db->where('book_id', $book_id);
+        $this->db->update('book', $book_updated);
+
+        $this->db->trans_complete();
+        return ($this->db->trans_status())?$aff:0;
     }
 
 }
