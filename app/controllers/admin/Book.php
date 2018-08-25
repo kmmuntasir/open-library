@@ -203,7 +203,7 @@ class Book extends Base_Controller {
     }
 
     public function merge() {
-        // $this->printer($_POST);
+        // $this->printer($_POST, true);
         $_POST['merge_book_id'] = explode(',', $_POST['merge_book_id']);
         $idx = array_search($_POST['merge_book_select'], $_POST['merge_book_id']);
         unset($_POST['merge_book_id'][$idx]);

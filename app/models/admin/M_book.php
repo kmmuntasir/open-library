@@ -127,34 +127,35 @@ class M_book extends Ci_model {
         foreach($authors as $key => $author_name) {
             $this->db->where('author_name', $author_name);
             $author = $this->db->get('author')->row();
-            if($author) array_push($book_author, array('book_id'=>$book_id, 'author_id'=>$author->author_id));
+            if($author) $book_author = array('book_author_id'=>$this->new_id('book_author'), 'book_id'=>$book_id, 'author_id'=>$author->author_id);
             else {
                 $a_id = $this->new_id('author');
                 $author = array('author_name' => $author_name, 'author_id'=>$a_id);
                 $this->db->insert('author', $author);
-                array_push($book_author, array('book_id'=>$book_id, 'author_id'=>$a_id));
+                $book_author = array('book_author_id'=>$this->new_id('book_author'), 'book_id'=>$book_id, 'author_id'=>$a_id);
             }
+            //Inserting Book-Author Relation
+            $this->db->insert('book_author', $book_author);
         }
-        //Inserting Book-Author Relations
-        $this->db->insert_batch('book_author', $book_author);
-        $book_author_aff = $this->db->affected_rows();
+        // $book_author_aff = $this->db->affected_rows();
 
         //Processing Categories
         $book_category = array();
         foreach($categories as $key=>$category_name) {
             $this->db->where('category_name', $category_name);
             $category = $this->db->get('category')->row();
-            if($category) array_push($book_category, array('book_id'=>$book_id, 'category_id'=>$category->category_id));
+            if($category) $book_category = array('book_category_id'=>$this->new_id('book_category'), 'book_id'=>$book_id, 'category_id'=>$category->category_id);
             else {
                 $c_id = $this->new_id('category');
                 $category = array('category_name' => $category_name, 'category_id'=>$c_id);
                 $this->db->insert('category', $category);
-                array_push($book_category, array('book_id'=>$book_id, 'category_id'=>$c_id));
+                $book_category = array('book_category_id'=>$this->new_id('book_category'), 'book_id'=>$book_id, 'category_id'=>$c_id);
             }
+            //Inserting Book-Category Relation
+            $this->db->insert('book_category', $book_category);
         }
-        //Inserting Book-Category Relations
-        $this->db->insert_batch('book_category', $book_category);
-        $book_category_aff = $this->db->affected_rows();
+        // $book_category_aff = $this->db->affected_rows();
+
         $this->db->trans_complete();
         return ($this->db->trans_status())?1:0;
     }
@@ -183,44 +184,51 @@ class M_book extends Ci_model {
         $this->db->update('book', $book);
 
         // Processing Authors
+
+        //Removing old Book-Author Relations
+        $this->db->where('book_id', $book_id);
+        $this->db->delete('book_author');
+
         $book_author = array();
         foreach($authors as $key => $author_name) {
             $this->db->where('author_name', $author_name);
             $author = $this->db->get('author')->row();
-            if($author) array_push($book_author, array('book_id'=>$book_id, 'author_id'=>$author->author_id));
+            if($author) $book_author = array('book_author_id'=>$this->new_id('book_author'), 'book_id'=>$book_id, 'author_id'=>$author->author_id);
             else {
                 $a_id = $this->new_id('author');
                 $author = array('author_name' => $author_name, 'author_id'=>$a_id);
                 $this->db->insert('author', $author);
-                array_push($book_author, array('book_id'=>$book_id, 'author_id'=>$a_id));
+                $book_author = array('book_author_id'=>$this->new_id('book_author'), 'book_id'=>$book_id, 'author_id'=>$a_id);
             }
+
+            //Inserting Book-Author Relation
+            $this->db->insert('book_author', $book_author);
         }
-        //Removing old Book-Author Relations
-        $this->db->where('book_id', $book_id);
-        $this->db->delete('book_author');
-        //Inserting Book-Author Relations
-        $this->db->insert_batch('book_author', $book_author);
-        $book_author_aff = $this->db->affected_rows();
+        // $book_author_aff = $this->db->affected_rows();
 
         //Processing Categories
+
+        //Removing old Book-Category Relations
+        $this->db->where('book_id', $book_id);
+        $this->db->delete('book_category');
+
         $book_category = array();
         foreach($categories as $key=>$category_name) {
             $this->db->where('category_name', $category_name);
             $category = $this->db->get('category')->row();
-            if($category) array_push($book_category, array('book_id'=>$book_id, 'category_id'=>$category->category_id));
+            if($category) $book_category = array('book_category_id'=>$this->new_id('book_category'), 'book_id'=>$book_id, 'category_id'=>$category->category_id);
             else {
                 $c_id = $this->new_id('category');
                 $category = array('category_name' => $category_name, 'category_id'=>$c_id);
                 $this->db->insert('category', $category);
-                array_push($book_category, array('book_id'=>$book_id, 'category_id'=>$c_id));
+                $book_category = array('book_category_id'=>$this->new_id('book_category'), 'book_id'=>$book_id, 'category_id'=>$c_id);
             }
+
+            //Inserting Book-Category Relation
+            $this->db->insert('book_category', $book_category);
         }
-        //Removing old Book-Category Relations
-        $this->db->where('book_id', $book_id);
-        $this->db->delete('book_category');
-        //Inserting Book-Category Relations
-        $this->db->insert_batch('book_category', $book_category);
-        $book_category_aff = $this->db->affected_rows();
+        // $book_category_aff = $this->db->affected_rows();
+
         $this->db->trans_complete();
         return ($this->db->trans_status())?1:0;
     }
@@ -384,7 +392,7 @@ class M_book extends Ci_model {
     }
 
     public function merge($master_id, $slave_ids) {
-        $this->db->trans_start();
+        $this->db->trans_start(true);
 
         $master_book = $this->get_single_book($master_id);
 
@@ -401,6 +409,7 @@ class M_book extends Ci_model {
 
 
         foreach ($slave_ids as $key => $sid) {
+            echo '<br>Processing ID: '.$sid.'<br>';
             $slave_book = $this->get_single_book($sid);
 
             $new_stock += $slave_book->book_stock;
@@ -408,16 +417,23 @@ class M_book extends Ci_model {
 
 
             $authors = $this->db->where('book_id', $sid)->get('book_author')->result();
+            // echo $this->db->last_query().'<br>';
+            $this->printer($authors);
             foreach($authors as $key => $author) {
+                echo 'Author: '.$author->author_id.'<br>';
                 $idx = array_search($author->author_id, $master_authors);
                 if($idx > -1) continue;
-                else 
+                else { 
                     $this->db->where('book_author_id', $author->book_author_id)->update('book_author', array('book_id'=>$master_id));
+                    echo $this->db->last_query().'<br>';
+                }
+
             }
 
 
             $categories = $this->db->where('book_id', $sid)->get('book_category')->result();
             foreach($categories as $key => $category) {
+                echo 'Category: '.$category->category_id.'<br>';
                 $idx = array_search($category->category_id, $master_categories);
                 if($idx > -1) continue;
                 else 
