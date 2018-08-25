@@ -6,47 +6,6 @@
 		var global_admin_id = $('#global_admin_id').val();
 		var global_admin_type = $('#global_admin_type').val();
 
-
-		var busy = false;
-		function sync_trigger() {
-			//alert("Sync Trigger");
-			if(busy) return;
-			busy = true;
-			var url = "<?php echo site_url('user/sync') ?>";
-			$.post( url, function( data ) { 
-				if(data != '') {
-					//alert(data);
-				}
-			});
-			busy = false;
-		}
-		
-		var sync = function() {if(!busy) sync_trigger();};
-		var interval = <?php echo $this->sync_interval*1000; ?>;
-		<?php if($this->settings->application_role == 0) { ?>
-		sync_trigger();
-		setInterval(sync, interval);
-		<?php } ?>
-
-
-		// Function for Changing the online_offline indicator
-		function online_status() {
-			//alert("Status Checker");
-		    var status_url = "<?php echo site_url('user/sync/last_sync_time/1') ?>";
-		    $.post( status_url, function( data ) { 
-		        if(data) {
-		        	var indicator = '';
-		        	if(data > <?php echo $this->sync_interval*1.4; ?>) $('#main_nav').addClass('navbar-inverse');
-		        	else $('#main_nav').removeClass('navbar-inverse');
-		            //$('#online_status').html(indicator);
-		        }
-		    });
-		}
-		var stat_time = function() {online_status();};
-		var stat_check_interval = <?php echo $this->sync_interval*1500; ?>;
-		online_status();
-		setInterval(stat_time, stat_check_interval);
-
 		var site_url = "<?php echo site_url(); ?>/";
 		// Datatables Functions
 		var datatable_source = $('.datatable').attr('data-source');
@@ -162,6 +121,48 @@
 	    		return false;
 	    	}
 	    });
+
+	    // API Calls ==============================================================
+
+	    var busy = false;
+	    function sync_trigger() {
+	    	//alert("Sync Trigger");
+	    	if(busy) return;
+	    	busy = true;
+	    	var url = "<?php echo site_url('user/sync') ?>";
+	    	$.post( url, function( data ) { 
+	    		if(data != '') {
+	    			//alert(data);
+	    		}
+	    	});
+	    	busy = false;
+	    }
+	    
+	    var sync = function() {if(!busy) sync_trigger();};
+	    var interval = <?php echo $this->sync_interval*1000; ?>;
+	    <?php if($this->settings->application_role == 0) { ?>
+		    // sync_trigger();
+		    // setInterval(sync, interval);
+	    <?php } ?>
+
+
+	    // Function for Changing the online_offline indicator
+	    function online_status() {
+	    	//alert("Status Checker");
+	        var status_url = "<?php echo site_url('user/sync/last_sync_time/1') ?>";
+	        $.post( status_url, function( data ) { 
+	            if(data) {
+	            	var indicator = '';
+	            	if(data > <?php echo $this->sync_interval*1.4; ?>) $('#main_nav').addClass('navbar-inverse');
+	            	else $('#main_nav').removeClass('navbar-inverse');
+	                //$('#online_status').html(indicator);
+	            }
+	        });
+	    }
+	    var stat_time = function() {online_status();};
+	    var stat_check_interval = <?php echo $this->sync_interval*1500; ?>;
+	    online_status();
+	    setInterval(stat_time, stat_check_interval);
 	    
 	    //============= Page Depended Functions =================
 	    <?php require_once('js_'.$page.'.php'); ?>

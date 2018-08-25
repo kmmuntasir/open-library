@@ -33,21 +33,27 @@ class Sync extends Base_Controller {
 
     public function index() {
         if($this->settings->application_role) die('0');
-        $data = $this->data;
         $sync_limit = 10;
+        $ret = true;
         if($this->server->server_sync_status && strtotime($this->server->server_last_connection) >= time()-($this->sync_interval*3)) exit(0);
 
         if($this->check_server_connection() == false) exit('0');
+        echo 'check_server_connection: '.$ret.'<br>';
 
         if(!$this->lock_server($this->server->server_id)) exit('0');
+        echo 'lock_server: '.$ret.'<br>';
         
         $ret = $this->fetch_queries($sync_limit);
+        echo 'fetch_queries: '.$ret.'<br>';
         
         $ret &= $this->release();
+        echo 'release: '.$ret.'<br>';
         
         $ret &= $this->confirm();
+        echo 'confirm: '.$ret.'<br>';
         
         $ret &= $this->push_queries($sync_limit);
+        echo 'push_queries: '.$ret.'<br>';
         
         if($ret) $this->update_server_connection_time($this->server->server_id);
         $this->unlock_server($this->server->server_id);
@@ -57,15 +63,8 @@ class Sync extends Base_Controller {
 
     public function check_server_connection() {
         $response = $this->my_curl($this->server_url.'confirm_server_connection', array('access_code'=>$this->server->server_access_code));
-        if($response == hash('sha512', $this->server->server_access_code)) return true;
+        if($response == md5($this->server->server_access_code)) return true;
         return false;
-    }
-
-    public function confirm_server_connection() {
-        $curl_data  = json_decode($_POST['curl_data'], true);
-        $access_code = $curl_data['access_code'];
-        if(!$this->authenticate($access_code)) die('Invalid Access Code');
-        echo hash('sha512', $access_code);
     }
 
     public function fetch_queries($sync_limit=0) {
@@ -127,6 +126,12 @@ class Sync extends Base_Controller {
     }
     
     /* ================================================================================= */
+
+    public function confirm_server_connection() {
+        $access_code = $_POST['access_code'];
+        if(!$this->authenticate($access_code)) die('Invalid Access Code');
+        echo md5($access_code);
+    }
 
     public function feed_queries($sync_limit=0) {
         $curl_data  = json_decode($_POST['curl_data'], true);
@@ -227,8 +232,8 @@ class Sync extends Base_Controller {
         return true;
     }
 
-    public function lock_server($server_id) {return $this->m_sync->lock_server($server_id);}
-    public function unlock_server($server_id) {return $this->m_sync->unlock_server($server_id);}
+    public function lock_server($server_id) {echo $this->m_sync->lock_server($server_id);}
+    public function unlock_server($server_id) {echo $this->m_sync->unlock_server($server_id);}
 
     public function update_server_connection_time($server_id) {return $this->m_sync->update_server_connection_time($server_id);}
 

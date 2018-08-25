@@ -9,7 +9,7 @@ $(document).ready(function() {
             if(data) {
                 $('#last_sync_time').html(data);
             }
-            //setTimeout(function(){ $('#last_sync_time_indicator').addClass('pause-spinner'); }, 1000);
+            setTimeout(function(){ $('#last_sync_time_indicator').addClass('pause-spinner'); }, 1000);
         });
     }
     

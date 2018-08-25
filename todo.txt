@@ -2,13 +2,20 @@
 Current Issues
 ===================================================================
 
-- Enable Book Merging
+- Sync function is slowing down/crashing the local server (may be file_get_contents/curl issue)
+    - Convert all curl operations to AJAX to relax the local server
 
-- Consider SMS/Email sending feature for issues
+- Solve backup restore issue for large files
+
+- Backup Restore isn't working on remote server
+
+- Create Cleaning Mechanism (Log)
 
 - Write A Documentation + User Manual
 
 - Let the user to reset password using email. === Remote Server Problem
+
+- Consider SMS/Email sending feature for issues
 ===================================================================
 
 ===================================================================
@@ -41,4 +48,5 @@ Done
 - Enable Admin to read book from admin panel, without using user credential
 - Fix Library Card Design
 - Write Script for importing books from old software.
+- Enable Book Merging
 

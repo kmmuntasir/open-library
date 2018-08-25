@@ -15,6 +15,9 @@
       <h1 class="page-header">
         <?php echo $page_title; ?>
         <!-- Trigger the modal with a button -->
+        <?php if($page == 'sync') { ?>
+          <button id="sync_page_time" class="pull-right btn btn-primary">Last Sync: 8:55 pm, June 9, 2016</button>
+        <?php } ?>
         <?php if($page != 'book_copy' && $page != 'sync') { ?>
           <?php if($page == 'dashboard') { ?>
           <button class="btn btn-md btn-primary"><?php echo (count($issues))?'<span class="badge">'.count($issues).'</span> New Request(s)':'No Issue Requests'; ?> </button>     

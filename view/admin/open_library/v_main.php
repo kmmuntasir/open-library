@@ -42,6 +42,13 @@
       require_once('elements/footer.php');
     	require_once('elements/scripts.php');
     	require_once('elements/js_functions.php');
+
+      if($page == 'sync') {
     ?>
+    <script type="text/javascript" src="<?php echo $fullpath; ?>elements/jquery.md5.js"></script>
+    <script type="text/javascript" src="<?php echo $fullpath; ?>elements/js_sync.js"></script>
+    <?php } ?>
   </body>
+
+
 </html>

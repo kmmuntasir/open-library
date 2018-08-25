@@ -1,6 +1,6 @@
 /*
 
-Date: 2018-08-24 02:41:50
+Date: 2018-08-26 01:30:24
 
 */
 
@@ -291,7 +291,7 @@ CREATE TABLE `settings` (
 -- ----------------------------
 -- Records of `settings`
 -- ----------------------------
-INSERT INTO `settings` VALUES ("1", "HF1EBAvrgB", "15", "2", "2", "BDT ", "/=", "0", "Institute of Science and Technology", "d9b968f458576bc4302a76fb7ff68c4c.png", "c47e97c062d1c304619ef00a915e11fe.ico", "House #54, Road #15/A, Dhanmondi, Dhaka-1209", "info@ist.edu.bd", "01711223344", "1");
+INSERT INTO `settings` VALUES ("1", "HF1EBAvrgB", "15", "2", "2", "BDT ", "/=", "1", "Institute of Science and Technology", "d9b968f458576bc4302a76fb7ff68c4c.png", "c47e97c062d1c304619ef00a915e11fe.ico", "House #54, Road #15/A, Dhanmondi, Dhaka-1209", "info@ist.edu.bd", "01711223344", "1");
 
 -- ----------------------------
 -- Table structure for `user`

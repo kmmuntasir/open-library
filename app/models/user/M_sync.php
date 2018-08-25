@@ -6,6 +6,12 @@ class M_sync extends Ci_model {
         return $this->db->get('server')->row();
     }
 
+    public function access_code() {
+        return $this->db->get('settings')->row()->server_access_code;
+    }
+
+    // ==================================================================================
+
     public function feed_queries($sync_limit) {
         return $this->db->where('log_is_synced', 0)->limit($sync_limit)->order_by('log_datetime')->get('log')->result();
     }
@@ -31,7 +37,7 @@ class M_sync extends Ci_model {
         $this->db->trans_start();
         $this->db->where('server_id', $server_id)->update('server', $server);
         $this->db->trans_complete();
-        return $this->db->trans_status();
+        return $this->db->trans_status()?1:0;
     }
 
     public function unlock_server($server_id) {
@@ -39,7 +45,7 @@ class M_sync extends Ci_model {
         $this->db->trans_start();
         $this->db->where('server_id', $server_id)->update('server', $server);
         $this->db->trans_complete();
-        return $this->db->trans_status();
+        return $this->db->trans_status()?1:0;
     }
 
     public function update_server_connection_time($server_id) {
@@ -48,10 +54,6 @@ class M_sync extends Ci_model {
         $this->db->where('server_id', $server_id)->update('server', $server);
         $this->db->trans_complete();
         return $this->db->trans_status();
-    }
-
-    public function access_code() {
-        return $this->db->get('settings')->row()->server_access_code;
     }
 }
 ?>
