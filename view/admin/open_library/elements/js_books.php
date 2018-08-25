@@ -25,9 +25,14 @@ $(document).on('click', '.datatable tbody tr td:first-child', function() {
 		if(total_merge == 0) $('#merge_book_button span.badge').css('display', 'none');
 
 		$(this).attr('onmergelist', 'no');
+
 		$(this).css('font-weight', 'normal');
 		$(this).css('background-color', 'transparent');
 		$(this).css('color', '#000');
+		
+		$(this).parent('tr').children('td:nth-child(2)').css('font-weight', 'normal');
+		$(this).parent('tr').children('td:nth-child(2)').css('background-color', 'transparent');
+		$(this).parent('tr').children('td:nth-child(2)').children('a').css('color', '');
 	}
 	else {
 		merge_book_id.push(book_id);
@@ -38,15 +43,24 @@ $(document).on('click', '.datatable tbody tr td:first-child', function() {
 		$('#merge_book_button span.badge').css('display', 'inline');
 
 		$(this).attr('onmergelist', 'yes');
+
 		$(this).css('font-weight', 'bold');
 		$(this).css('background-color', '#a94442');
 		$(this).css('color', '#fff');
+
+		$(this).parent('tr').children('td:nth-child(2)').css('font-weight', 'bold');
+		$(this).parent('tr').children('td:nth-child(2)').css('background-color', '#a94442');
+		$(this).parent('tr').children('td:nth-child(2)').children('a').css('color', '#fff');
+
+		
 		
 	}
 })
 
 $(document).on('click', '#merge_book_button', function() {
-	if(total_merge == 0) alert("No Book Selected. To select a book for merging, click on the book id");
+	if(total_merge < 0) alert("Something went wrong, please reload the page.");
+	else if(total_merge == 0) alert("No Book Selected. To select a book for merging, click on the book id");
+	else if(total_merge == 1) alert("Only 1 Book Selected. Please select at least two books to merge. To select a book for merging, click on the book id");
 	else {
 		$('#merge_book_select').html('');
 		$('#merge_book_id').val('');

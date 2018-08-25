@@ -392,24 +392,15 @@ class M_book extends Ci_model {
     }
 
     public function merge($master_id, $slave_ids) {
-        $this->db->trans_start(true);
+        $this->db->trans_start();
 
         $master_book = $this->get_single_book($master_id);
 
         $new_stock = $master_book->book_stock;
         $new_available = $master_book->book_available;
 
-        $master_authors = $this->db->select('author_id')->where('book_id', $master_id)->get('book_author')->result();
-        foreach($master_authors as $key => $author) $master_authors[$key] = $master_authors[$key]->author_id;
-        $master_categories = $this->db->select('category_id')->where('book_id', $master_id)->get('book_category')->result();
-        foreach($master_categories as $key => $category) $master_categories[$key] = $master_categories[$key]->category_id;
-
-        $this->printer($master_authors);
-        $this->printer($master_categories);
-
-
         foreach ($slave_ids as $key => $sid) {
-            echo '<br>Processing ID: '.$sid.'<br>';
+            // echo '<br>Processing ID: '.$sid.'<br>';
             $slave_book = $this->get_single_book($sid);
 
             $new_stock += $slave_book->book_stock;
@@ -418,26 +409,35 @@ class M_book extends Ci_model {
 
             $authors = $this->db->where('book_id', $sid)->get('book_author')->result();
             // echo $this->db->last_query().'<br>';
-            $this->printer($authors);
+            // $this->printer($authors);
             foreach($authors as $key => $author) {
-                echo 'Author: '.$author->author_id.'<br>';
-                $idx = array_search($author->author_id, $master_authors);
-                if($idx > -1) continue;
+                // echo 'Author: '.$author->author_id.'<br>';
+                $existing_record = $this->db->where('book_id', $master_id)->where('author_id', $author->author_id)->get('book_author')->row();
+
+               if($existing_record) continue;
                 else { 
+                    // echo 'Found New Author<br>';
                     $this->db->where('book_author_id', $author->book_author_id)->update('book_author', array('book_id'=>$master_id));
-                    echo $this->db->last_query().'<br>';
+                    // echo $this->db->last_query().'<br>';
                 }
 
             }
 
 
             $categories = $this->db->where('book_id', $sid)->get('book_category')->result();
+            // echo $this->db->last_query().'<br>';
+            // $this->printer($categories);
             foreach($categories as $key => $category) {
-                echo 'Category: '.$category->category_id.'<br>';
-                $idx = array_search($category->category_id, $master_categories);
-                if($idx > -1) continue;
-                else 
+                // echo 'Category: '.$category->category_id.'<br>';
+
+                $existing_record = $this->db->where('book_id', $master_id)->where('category_id', $category->category_id)->get('book_category')->row();
+
+                if($existing_record) continue;
+                else {
+                    // echo 'Found New Category<br>';
                     $this->db->where('book_category_id', $category->book_category_id)->update('book_category', array('book_id'=>$master_id));
+                    // echo $this->db->last_query().'<br>';
+                }
             }
 
             $this->db->where('book_id', $sid)->update('book_copy', array('book_id'=>$master_id));
@@ -453,7 +453,7 @@ class M_book extends Ci_model {
         $this->db->where('book_id', $master_id)->update('book', $new_book);
 
         $this->db->trans_complete();
-        return $this->db->trans_status() ? 1 : 0;
+        return $this->db->trans_status();
     }
 
     /************************** Import Functions **************************/

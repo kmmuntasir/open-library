@@ -210,12 +210,16 @@ class Book extends Base_Controller {
 
         $master_id = $_POST['merge_book_select'];
         $slave_ids = $_POST['merge_book_id'];
-        $this->printer($master_id);
-        $this->printer($slave_ids);
+        // $this->printer($master_id);
+        // $this->printer($slave_ids);
 
         $status = $this->m_book->merge($master_id, $slave_ids);
 
-        echo $status;
+        // var_dump($status);
+        // exit();
+
+        if($status) $this->redirect_msg('/admin/book', 'Books Merged Successfully', 'success');
+        else $this->redirect_msg('/admin/book', 'Something went wrong!', 'danger');
 
     }
 
