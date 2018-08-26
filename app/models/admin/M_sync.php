@@ -14,9 +14,9 @@ class M_sync extends Ci_model {
         return $this->db->where('log_is_synced', 0)->limit($sync_limit)->order_by('log_datetime')->get('log')->result();
     }
 
-    public function add_log($logs) {
+    public function add_log($log) {
         $this->db->trans_start();
-        $this->db->insert_batch('log', $logs);
+        $this->db->insert('log', $log);
         $this->db->trans_complete();
         return $this->db->trans_status();
     }
@@ -59,6 +59,11 @@ class M_sync extends Ci_model {
         $this->db->query($query);
         $this->db->trans_complete();
         return $this->db->trans_status() ? 1:0;
+    }
+
+    public function is_already_synced($log_entry_id) {
+    	$existing_log = $this->db->where('log_entry_id', $log_entry_id)->where('log_is_synced', 1)->get('log')->row();
+    	return $existing_log ? true : false;
     }
     
 }

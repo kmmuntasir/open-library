@@ -68,19 +68,17 @@ function fetch_queries(limit=0) {
 			$('#fetch_list').html();
 			for(var i=0; i < queries.length; i++) {
 				// $('#fetch_list').append(JSON.stringify(queries[i])+'<br><br><br>');
-				// $('#fetch_list').append(queries[i].log_entry_id+'<br><br>');
-				entry_ids.push(queries[i].log_entry_id);
-				delete queries[i].log_id;
-				run(queries[i], add_applied_queries);
+				$('#fetch_list').append(queries[i].log_entry_id+'<br><br>');
 			}
 
-			$.post(sync_url+'add_log', {'queries':applied_queries}, function(data) {
+			$('#release_list').html('');
+			$.post(sync_url+'add_log', {'queries':queries}, function(entry_ids) {
+				if(isJSON(entry_ids)) {
+					$.post(server_url+'update_log_as_synced', {'access_code': server_access_code, 'entry_ids':entry_ids}, function(data) {
+						$('#release_list').html(data);
+					});
+				}
 
-				alert(data);
-
-				// $.post(server_url+'update_log_as_synced', {'access_code': server_access_code, 'data':entry_ids}, function(data) {
-
-				// });
 
 			});
 

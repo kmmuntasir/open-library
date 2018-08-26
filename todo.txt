@@ -4,8 +4,12 @@ Current Issues
 
 - Sync function is slowing down/crashing the local server (may be file_get_contents/curl issue)
     - Convert all curl operations to AJAX to relax the local server
+    
+- Book Copy accession no. is duplicating when adding for a new book
 
 - Solve backup restore issue for large files
+
+- Change password types in library code input
 
 - Backup Restore isn't working on remote server
 

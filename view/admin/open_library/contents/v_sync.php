@@ -23,7 +23,7 @@
 		<div class="col-sm-3">
 			<div class="panel panel-warning">
 			  <div class="panel-heading">Release List</div>
-			  <div class="panel-body">
+			  <div class="panel-body" id="release_list">
 
 			  </div>
 			  <div class="panel-footer">

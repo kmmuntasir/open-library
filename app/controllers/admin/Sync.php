@@ -72,12 +72,45 @@ class Sync extends Base_Controller {
     }
 
     public function add_log() {
-        $this->printer($_POST);
+        $queries = $_POST['queries'];
+        unset($_POST['queries']);
+        foreach ($queries as $key => $query) {
+            unset($queries[$key]['log_id']);
+        }
+
+        $entry_ids = array();
+        // $this->printer($queries);
+        foreach($queries as $key=>$query) {
+            // Checking if this log entry is already synced before
+            if($this->m_sync->is_already_synced($query['log_entry_id'])) {
+                array_push($entry_ids, $queries[$key]['log_entry_id']);
+                unset($queries[$key]);
+            }
+            else {
+                unset($queries[$key]['log_id']);
+                $res = $this->run_query($query['log_query']); // Running log queries (applying changes into local server)
+                if($res) {
+                    $queries[$key]['log_is_synced'] = 1;
+                    $aff = $this->m_sync->add_log($queries[$key]);    // Adding query in log entry
+                    if($aff) array_push($entry_ids, $queries[$key]['log_entry_id']);
+                }
+            }
+        }
+
+        // $this->printer($queries);
+        // $this->printer($entry_ids, true);
+        echo json_encode($entry_ids);
+
+        // $postdata = array();
+        // $postdata['access_code'] = $this->server->server_access_code;
+        // $postdata['entry_ids'] = $entry_ids;
+        // // $this->printer($postdata, true);
+        // echo json_encode($postdata);
     }
 
-    public function run_query() {
-        if(!isset($_POST['query'])) exit('0');
-        // echo $_POST['query'];
-        echo $this->m_sync->run_query($_POST['query']);
+    public function run_query($query=NULL) {
+        // return 1;
+        if(!$query) return 0;
+        return $this->m_sync->run_query($query);
     }
 }
