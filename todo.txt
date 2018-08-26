@@ -2,6 +2,8 @@
 Current Issues
 ===================================================================
 
+- Test Release function and Confirm function on sync page for correctness
+
 - Beautify Sync Page Animations
     
 - Book Copy accession no. is duplicating when adding for a new book
