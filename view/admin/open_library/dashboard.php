@@ -16,7 +16,7 @@
         <?php echo $page_title; ?>
         <!-- Trigger the modal with a button -->
         <?php if($page == 'sync') { ?>
-          <button id="sync_page_time" class="pull-right btn btn-primary">Last Sync: 8:55 pm, June 9, 2016</button>
+          <button id="sync_page_time" class="pull-right btn btn-primary">Last Sync: <?php echo date('g:i:s A, F d, Y', strtotime(date($this->server->server_last_connection))); ?></button>
         <?php } ?>
         <?php if($page != 'book_copy' && $page != 'sync') { ?>
           <?php if($page == 'dashboard') { ?>

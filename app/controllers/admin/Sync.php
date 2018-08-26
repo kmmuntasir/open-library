@@ -129,7 +129,7 @@ class Sync extends Base_Controller {
     public function lock_server($server_id) {echo $this->m_sync->lock_server($server_id);}
     public function unlock_server($server_id) {echo $this->m_sync->unlock_server($server_id);}
 
-    public function update_server_connection_time($server_id) {return $this->m_sync->update_server_connection_time($server_id);}
+    public function update_server_connection_time($server_id) {echo $this->m_sync->update_server_connection_time($server_id);}
 
     public function last_sync_time($seconds = 0) {
         //echo $this->server->server_last_connection.'<br>';

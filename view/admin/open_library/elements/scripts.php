@@ -1,5 +1,6 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="<?php echo $fullpath; ?>assets/js/jquery.min.js"></script>
+<script src="<?php echo $fullpath; ?>assets/js/jquery-dateformat.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?php echo $fullpath; ?>assets/bootstrap/js/bootstrap.min.js"></script>
 <!-- DataTables Script -->

@@ -10,6 +10,7 @@ var server_access_code = '';
 var sync_limit = '';
 var access_post_data = '';
 var applied_queries = '';
+var sync_interval = '';
 
 $(document).ready(function() {
 	application_role = $('#application_role').val();
@@ -19,8 +20,12 @@ $(document).ready(function() {
 	server_access_code = $('#server_access_code').val();
 	access_post_data = {'access_code': server_access_code};
 	sync_limit = $('#sync_limit').val();
+	sync_interval = $('#sync_interval').val();
 	if(application_role == 0) {
-		sync();
+		var sync_trigger = function() {if(!syncing) sync();};
+	    var interval = sync_interval*1000;
+	    sync();
+	    setInterval(sync, interval);
 	}
 	else {
 		// Show message
@@ -111,63 +116,52 @@ function push_queries(limit=0) {
 			var queries = $.parseJSON(data);
 			if(queries.length == 0) {
 				$('#push_list').html('Nothing to Push');
-				return;
+				update_local_server_connection_time();
+				update_remote_server_connection_time();
 			}
-			$.post(server_url+'receive_local_log', {'access_code': server_access_code, 'queries':queries}, function(entry_ids) {
-				if(isJSON(entry_ids)) {
-					$.post(sync_url+'update_log_as_synced', {'access_code': server_access_code, 'entry_ids':entry_ids}, function(data) {
-						$('#push_list').html(data);
-					});
-				}
-				else $('#push_list').html('Logs Pushed but Wasn\'t Reveived by Remote Server');
-			});
+			else {
+				$.post(server_url+'receive_local_log', {'access_code': server_access_code, 'queries':queries}, function(entry_ids) {
+					if(isJSON(entry_ids)) {
+						$.post(sync_url+'update_log_as_synced', {'access_code': server_access_code, 'entry_ids':entry_ids}, function(data) {
+							$('#push_list').html(data);
+							update_local_server_connection_time();
+						});
+					}
+					else {
+						$('#push_list').html('Logs Pushed but Wasn\'t Reveived by Remote Server');
+						update_local_server_connection_time();
+					}
+				});
+			}
 		}
-		else $('#push_list').html('Local Server Feed Error');
+		else {
+			$('#push_list').html('Local Server Feed Error');
+			update_local_server_connection_time();
+		}
 	});
 }
 
-function update_server_connection_time() {
-	
+function update_local_server_connection_time() {
+	$.post(sync_url+'update_server_connection_time/'+server_id, function(data) {
+		var now = "Last Sync: " + formatDate(null, 'h:mm:ss a, MMMM d, yyyy');
+		$('#sync_page_time').html(now);
+		finish_sync();
+	});
 }
 
-function unlock_server() {
-	locked = false;
+function update_remote_server_connection_time() {
+	$.post(server_url+'update_server_connection_time/'+server_id, function(data) {
+		// Some action
+	});
+}
+
+function unlock_server(s_id) {
+	$.post(sync_url+'unlock_server/'+s_id, function(data) {
+		locked = false;
+	});
 }
 
 function finish_sync() {
-	if(locked) unlock_server();
+	if(locked) unlock_server(server_id);
 	syncing = false;
 }
-
-function run(q, callback) {
-	postdata = {'query':q.log_query};
-	$.post(sync_url+'run_query', postdata, function(data) {
-		if(data == '1') callback(q);
-	});
-}
-
-function add_applied_queries(q) {
-	q.log_is_synced = 1;
-	applied_queries.push(q);
-}
-	/* ================================================================= *
-	
-	$ret = $this->fetch_queries($sync_limit);
-	echo 'fetch_queries: '.$ret.'<br>';
-	
-	$ret &= $this->release();
-	echo 'release: '.$ret.'<br>';
-	
-	$ret &= $this->confirm();
-	echo 'confirm: '.$ret.'<br>';
-	
-	$ret &= $this->push_queries($sync_limit);
-	echo 'push_queries: '.$ret.'<br>';
-	
-	if($ret) $this->update_server_connection_time($this->server->server_id);
-	$this->unlock_server($this->server->server_id);
-
-	/* ================================================================= */
-
-	// Finished Work
-

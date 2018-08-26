@@ -2,8 +2,7 @@
 Current Issues
 ===================================================================
 
-- Sync function is slowing down/crashing the local server (may be file_get_contents/curl issue)
-    - Convert all curl operations to AJAX to relax the local server
+- Beautify Sync Page Animations
     
 - Book Copy accession no. is duplicating when adding for a new book
 
@@ -53,4 +52,6 @@ Done
 - Fix Library Card Design
 - Write Script for importing books from old software.
 - Enable Book Merging
+- Sync function is slowing down/crashing the local server (may be file_get_contents/curl issue)
+    - Convert all curl operations to AJAX to relax the local server
 

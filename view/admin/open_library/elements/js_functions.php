@@ -124,28 +124,6 @@
 
 	    // API Calls ==============================================================
 
-	    var busy = false;
-	    function sync_trigger() {
-	    	//alert("Sync Trigger");
-	    	if(busy) return;
-	    	busy = true;
-	    	var url = "<?php echo site_url('user/sync') ?>";
-	    	$.post( url, function( data ) { 
-	    		if(data != '') {
-	    			//alert(data);
-	    		}
-	    	});
-	    	busy = false;
-	    }
-	    
-	    var sync = function() {if(!busy) sync_trigger();};
-	    var interval = <?php echo $this->sync_interval*1000; ?>;
-	    <?php if($this->settings->application_role == 0) { ?>
-		    // sync_trigger();
-		    // setInterval(sync, interval);
-	    <?php } ?>
-
-
 	    // Function for Changing the online_offline indicator
 	    function online_status() {
 	    	//alert("Status Checker");
@@ -178,5 +156,34 @@
 	        return false;
 	    }
 	    return true;
+	}
+
+	
+	function formatDate(date=null, format='MMM d, yyyy') {
+		// Requires jquery-dateFormat Plugin
+		// yy = short year
+		// yyyy = long year
+		// M = month (1-12)
+		// MM = month (01-12)
+		// MMM = month abbreviation (Jan, Feb ... Dec)
+		// MMMM = long month (January, February ... December)
+		// d = day (1 - 31)
+		// dd = day (01 - 31)
+		// ddd = day of the week in words (Monday, Tuesday ... Sunday)
+		// E = short day of the week in words (Mon, Tue ... Sun)
+		// D - Ordinal day (1st, 2nd, 3rd, 21st, 22nd, 23rd, 31st, 4th...)
+		// h = hour in am/pm (0-12)
+		// hh = hour in am/pm (00-12)
+		// H = hour in day (0-23)
+		// HH = hour in day (00-23)
+		// mm = minute
+		// ss = second
+		// SSS = milliseconds
+		// a = AM/PM marker
+		// p = a.m./p.m. marker
+
+		if(date != null) var d = new Date(date);
+		else var d = new Date();
+		return $.format.date(d, format)
 	}
 </script>

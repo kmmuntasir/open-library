@@ -148,11 +148,15 @@
             <i class="fa fa-caret-down pull-right"></i>
           </a>
           <ul class="dropdown-menu" id="settings_submenu" role="menu">
+            <?php if($this->settings->application_role == 0) { ?>
             <li class="<?php if($page == 'sync') echo 'active'; ?>">
               <a href="<?php echo site_url($module.'/sync'); ?>">
               <span class="nav_icon"><i class="fa fa-refresh"></i></span>Sync
               </a>
             </li>
+            <?php } ?>
+
+
             <li class="">
               <a href="<?php echo site_url($module.'/login/logout'); ?>">
               <span class="nav_icon"><i class="fa fa-sign-out"></i></span>Log Out

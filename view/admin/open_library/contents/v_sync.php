@@ -3,8 +3,8 @@
 <input type="hidden" id="server_id" value="<?php echo $this->server->server_id; ?>">
 <input type="hidden" id="server_url" value="<?php echo $this->server_url; ?>">
 <input type="hidden" id="server_access_code" value="<?php echo $this->server->server_access_code; ?>">
-<input type="hidden" id="local_url" value="<?php echo $this->local_url; ?>">
 <input type="hidden" id="sync_limit" value="<?php echo $sync_limit; ?>">
+<input type="hidden" id="sync_interval" value="<?php echo $this->sync_interval; ?>">
 
 
 <div class="row">
