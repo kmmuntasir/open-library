@@ -70,4 +70,14 @@ class Sync extends Base_Controller {
         if($access_code == $this->access_code) return true;
         else return false;
     }
+
+    public function add_log() {
+        $this->printer($_POST);
+    }
+
+    public function run_query() {
+        if(!isset($_POST['query'])) exit('0');
+        // echo $_POST['query'];
+        echo $this->m_sync->run_query($_POST['query']);
+    }
 }

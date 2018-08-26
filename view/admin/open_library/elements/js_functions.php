@@ -168,4 +168,15 @@
 	    <?php require_once('js_'.$page.'.php'); ?>
 
 	});
+
+
+
+	function isJSON(str) {
+	    try {
+	        JSON.parse(str);
+	    } catch (e) {
+	        return false;
+	    }
+	    return true;
+	}
 </script>

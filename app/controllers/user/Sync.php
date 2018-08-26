@@ -134,14 +134,13 @@ class Sync extends Base_Controller {
     }
 
     public function feed_queries($sync_limit=0) {
-        $curl_data  = json_decode($_POST['curl_data'], true);
-        $access_code = $curl_data['access_code'];
+        $access_code = $_POST['access_code'];
         if(!$this->authenticate($access_code)) die('Invalid Access Code');
 
         if($sync_limit == 0) exit();
         $queries = $this->m_sync->feed_queries($sync_limit);
         echo json_encode($queries);
-        $this->update_server_connection_time($this->server->server_id);
+        // $this->update_server_connection_time($this->server->server_id);
     }
 
     public function receive_local_log() {

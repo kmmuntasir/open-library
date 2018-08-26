@@ -12,7 +12,7 @@
 		<div class="col-sm-3">
 			<div class="panel panel-default">
 			  <div class="panel-heading">Fetch List</div>
-			  <div class="panel-body">
+			  <div class="panel-body" id="fetch_list">
 
 			  </div>
 			  <div class="panel-footer">

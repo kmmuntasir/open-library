@@ -1,4 +1,5 @@
 var syncing = false;
+var locked = false;
 var application_role = null;
 var sync_limit = 10;
 var ret = true;
@@ -7,6 +8,8 @@ var server_url = '';
 var sync_url = '';
 var server_access_code = '';
 var sync_limit = '';
+var access_post_data = '';
+var applied_queries = '';
 
 $(document).ready(function() {
 	application_role = $('#application_role').val();
@@ -14,6 +17,7 @@ $(document).ready(function() {
 	server_url = $('#server_url').val();
 	sync_url = $('#sync_url').val();
 	server_access_code = $('#server_access_code').val();
+	access_post_data = {'access_code': server_access_code};
 	sync_limit = $('#sync_limit').val();
 	if(application_role == 0) {
 		sync();
@@ -33,26 +37,57 @@ function sync() {
 }
 
 function start_sync() {
-	check_server_connection();
+	confirm_server_connection();
 }
 
-function check_server_connection() {
-	var postdata = {'access_code': server_access_code};
-	$.post(server_url+'confirm_server_connection', postdata, function(data) {
-		if(data = $.md5(server_access_code)) lock_server(server_id);
+function confirm_server_connection() {
+	$.post(server_url+'confirm_server_connection', access_post_data, function(data) {
+		if(data == $.md5(server_access_code)) lock_server(server_id);
 		else syncing = false;
 	});
 }
 
 function lock_server(s_id) {
 	$.post(sync_url+'lock_server/'+s_id, function(data) {
-		if(data == '1') fetch_queries(sync_limit);
+		if(data == '1') {
+			locked = true;
+			fetch_queries(sync_limit);
+		}
 		else syncing = false;
 	});
 }
 
-function fetch_queries() {
-	if($sync_limit == 0) return false;
+function fetch_queries(limit=0) {
+	if(limit == 0) finish_sync();
+	applied_queries = [];
+
+	$.post(server_url+'feed_queries/'+limit, access_post_data, function(data) {
+		if(isJSON(data)) {
+			var queries = $.parseJSON(data);
+			var entry_ids = [];
+			$('#fetch_list').html();
+			for(var i=0; i < queries.length; i++) {
+				// $('#fetch_list').append(JSON.stringify(queries[i])+'<br><br><br>');
+				// $('#fetch_list').append(queries[i].log_entry_id+'<br><br>');
+				entry_ids.push(queries[i].log_entry_id);
+				delete queries[i].log_id;
+				run(queries[i], add_applied_queries);
+			}
+
+			$.post(sync_url+'add_log', {'queries':applied_queries}, function(data) {
+
+				alert(data);
+
+				// $.post(server_url+'update_log_as_synced', {'access_code': server_access_code, 'data':entry_ids}, function(data) {
+
+				// });
+
+			});
+
+		}
+	});
+
+	/*
 	// Fetching remote log and syncing
 	$queries = $this->my_curl($this->server_url.'feed_queries/'.$sync_limit, array('access_code'=>$this->server->server_access_code));
 	if($queries == false) return false; // No Server Connection
@@ -80,6 +115,7 @@ function fetch_queries() {
 	    return true;
 	}
 	return false;
+	*/
 }
 
 function release() {
@@ -99,11 +135,24 @@ function update_server_connection_time() {
 }
 
 function unlock_server() {
-	
+	locked = false;
 }
 
 function finish_sync() {
+	if(locked) unlock_server();
 	syncing = false;
+}
+
+function run(q, callback) {
+	postdata = {'query':q.log_query};
+	$.post(sync_url+'run_query', postdata, function(data) {
+		if(data == '1') callback(q);
+	});
+}
+
+function add_applied_queries(q) {
+	q.log_is_synced = 1;
+	applied_queries.push(q);
 }
 	/* ================================================================= *
 	
