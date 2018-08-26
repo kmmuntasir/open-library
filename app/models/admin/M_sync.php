@@ -22,10 +22,9 @@ class M_sync extends Ci_model {
     }
 
     public function update_log_as_synced($entry_ids) {
-        $log = array('log_is_synced'=>1);
         $this->db->trans_start();
         foreach($entry_ids as $entry_id) {
-            $this->db->where('log_entry_id', $entry_id)->update('log', $log);
+            $this->db->where('log_entry_id', $entry_id)->update('log', array('log_is_synced'=>1));
         }
         $this->db->trans_complete();
     }

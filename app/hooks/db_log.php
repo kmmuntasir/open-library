@@ -12,7 +12,10 @@ class Db_log {
  
     // Name of function same as mentioned in Hooks Config
     function logQueries() {
-        if(get_class($this->ci) == 'Sync') return;
+        if(get_class($this->ci) == 'Sync') {
+            if(!isset($_SESSION['sync_on'])) return;
+            unset($_SESSION['sync_on']);
+        }
 
         // echo '<br>Started Hook Logging<br>';
         

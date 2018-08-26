@@ -144,50 +144,66 @@ class Sync extends Base_Controller {
     }
 
     public function receive_local_log() {
-        $curl_data  = json_decode($_POST['curl_data'], true);
-        $access_code = $curl_data['access_code'];
+        if(!isset($_POST['access_code']) || !isset($_POST['queries'])) die('Invalid POST Data');
+        $access_code = $_POST['access_code'];
         if(!$this->authenticate($access_code)) die('Invalid Access Code');
 
-        $queries = $curl_data['data'];
+        $queries = $_POST['queries'];
         $entry_ids = array();
         foreach($queries as $key=>$query) {
-            array_push($entry_ids, $queries[$key]['log_entry_id']);
-            $this->db->trans_start();
-            $this->db->query($query['log_query']); // Running log queries (applying changes into remote server)
-            $this->db->trans_complete();
+            // Checking if this log entry is already synced before
+            if($this->m_sync->is_already_synced($query['log_entry_id'])) {
+                array_push($entry_ids, $queries[$key]['log_entry_id']);
+                unset($queries[$key]);
+            }
+            else {
+                unset($queries[$key]['log_id']);
+                $res = $this->run_query($query['log_query']); // Running log queries (applying changes into remote server)
+                if($res) {
+                    $queries[$key]['log_is_synced'] = 1;
+                    $aff = $this->m_sync->add_log($queries[$key]);    // Adding query in log entry
+                    if($aff) array_push($entry_ids, $queries[$key]['log_entry_id']);
+                }
+            }
         }
-        $aff = $this->m_sync->add_log($queries);    // Adding queries in log entry
         echo json_encode($entry_ids);
-        $this->update_server_connection_time($this->server->server_id);
     }
 
     public function update_log_as_synced($local_sync_data=NULL) {
+        // $this->printer($_POST, true);
         if($local_sync_data == NULL) {
-            $curl_data  = json_decode($_POST['curl_data'], true);
-            $access_code = $curl_data['access_code'];
+            $access_code = $_POST['access_code'];
             if(!$this->authenticate($access_code)) die('Invalid Access Code');
             
-            $entry_ids = $curl_data['data'];
-            $this->update_server_connection_time($this->server->server_id);
+            $entry_ids = $_POST['entry_ids'];
+            $entry_ids = json_decode($entry_ids);
+            // $this->update_server_connection_time($this->server->server_id);
         }
         else $entry_ids = $local_sync_data;
         $this->m_sync->update_log_as_synced($entry_ids);
+        $this->printer($entry_ids);
     }
 
     public function release() {
         $issues = $this->m_issue->all_expired_confirmed_issue_requests();
-        if(count($issues) == 0) {
-            //echo 'No Expired Confirmed Issues<br>';
-            return true;
+        if(count($issues) == 0) echo 'No Issue to Release<br>';
+        else {
+            foreach($issues as $key=>$issue) {
+                $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 8);
+                $new['book'] = array('book_id' => $issue->book_id, 'book_available' => $issue->book_available+1);
+
+                $reply = $this->update_issue($new);
+                if($reply) echo 'Released Issue '.$issue->issue_id.'<br>';
+                else echo 'Issue '.$issue->issue_id.' Failed to release<br>';
+            }
         }
-        foreach($issues as $key=>$issue) {
-            $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 8);
-            $new['book'] = array('book_id' => $issue->book_id, 'book_available' => $issue->book_available+1);
-            $reply = $this->my_curl($this->local_url.'update_issue', $new); // Updating issue through a different controller, because we need the log entry for update
-            // if($reply) echo 'Released Issue '.$issue->issue_id.'<br>';
-            // else echo 'Issue '.$issue->issue_id.' Failed to release<br>';
-        }
-        return true;
+    }
+
+    public function update_issue($new=NULL) {
+        if(!$new) return 0;
+        $_SESSION['sync_on'] = true; // because we need the log entry for update
+        if($this->m_issue->update_issue_for_sync($new['book'], $new['issue'])) return 1;
+        else return 0;
     }
 
     public function confirm() {
@@ -201,7 +217,7 @@ class Sync extends Base_Controller {
                     $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 0);
                     $new['book'] = array('book_id' => $issue->issue_book_id, 'book_available' => $book_available-1);
 
-                    $reply = $this->my_curl($this->local_url.'update_issue', $new); // Updating issue through a different controller.
+                    $reply = $this->update_issue($new);
                     if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
                     else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
                 }
@@ -210,6 +226,7 @@ class Sync extends Base_Controller {
                 }
             }
         }
+        else echo 'No Demands Available<br>';
 
         // Check new requests to confirm them or converting them into demands
         $issues = $this->m_issue->all_new_issue_requests();
@@ -223,11 +240,12 @@ class Sync extends Base_Controller {
                     $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 6); // Converting into Demands
                     $new['book'] = array('book_id' => $issue->book_id);
                 }
-                $reply = $this->my_curl($this->local_url.'update_issue', $new); // Updating issue through a different controller.
-                // if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
-                // else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
+                $reply = $this->update_issue($new);
+                if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
+                else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
             }
         }
+        else echo 'No Requests Available<br>';
         return true;
     }
 
@@ -249,5 +267,11 @@ class Sync extends Base_Controller {
     public function check_access_code($access_code) {
         if($access_code == $this->access_code) return true;
         else return false;
+    }
+
+    public function run_query($query=NULL) {
+        // return 1;
+        if(!$query) return 0;
+        return $this->m_sync->run_query($query);
     }
 }

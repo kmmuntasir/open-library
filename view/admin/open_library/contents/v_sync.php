@@ -34,7 +34,7 @@
 		<div class="col-sm-3">
 			<div class="panel panel-info">
 			  <div class="panel-heading">Confirm List</div>
-			  <div class="panel-body">
+			  <div class="panel-body" id="confirm_list">
 
 			  </div>
 			  <div class="panel-footer">
@@ -45,7 +45,7 @@
 		<div class="col-sm-3">
 			<div class="panel panel-success">
 			  <div class="panel-heading">Push List</div>
-			  <div class="panel-body">
+			  <div class="panel-body" id="push_list">
 
 			  </div>
 			  <div class="panel-footer">

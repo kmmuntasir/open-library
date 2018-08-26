@@ -16,6 +16,22 @@ class M_issue extends Ci_model {
         // exit();
         return $result;
     }
+    
+    public function all_demands() {
+        $now = date('Y-m-d H:i:s');
+        // $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
+        return $this->db->where('issue_status', 6)->get('issue')->result();
+    }
+
+    public function book_availibility($book_id) {
+        return $this->db->select('book_available')->where('book_id', $book_id)->get('book')->row()->book_available;
+    }
+    
+    public function all_new_issue_requests() {
+        $now = date('Y-m-d H:i:s');
+        $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
+        return $this->db->where('issue_auto_expire_datetime >', $now)->where('(issue_status = 9)')->get('issue')->result();
+    }
 
     public function all_issue_requests() {
         $now = date('Y-m-d H:i:s');
@@ -79,6 +95,14 @@ class M_issue extends Ci_model {
         return $this->db->trans_status();
     }
 
+    public function update_issue_for_sync($book=NULL, $issue=NULL) {
+        $this->db->trans_start();
+        if($book) $this->db->where('book_id', $book['book_id'])->update('book', $book);
+        if($issue) $this->db->where('issue_id', $issue['issue_id'])->update('issue', $issue);
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
+
     public function renew_issue($issue_old, $issue_new) {
         $this->db->trans_start();
         $this->db->where('issue_id', $issue_old['issue_id'])->update('issue', $issue_old);
@@ -120,6 +144,12 @@ class M_issue extends Ci_model {
     public function check_book_duplicate_issue($user_id, $book_id) {
         $this->db->where('user_id', $user_id)->where('issue_book_id', $book_id)->where('(issue_status != 2 AND issue_status != 3 AND issue_status != 8)');
         return $this->db->count_all_results('issue');
+    }
+
+    public function all_expired_confirmed_issue_requests() {
+        $now = date('Y-m-d H:i:s');
+        $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
+        return $this->db->where('issue_auto_expire_datetime <', $now)->where('(issue_status = 0)')->get('issue')->result();
     }
 
 }

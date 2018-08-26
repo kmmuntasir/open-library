@@ -59,73 +59,71 @@ function lock_server(s_id) {
 
 function fetch_queries(limit=0) {
 	if(limit == 0) finish_sync();
-	applied_queries = [];
-
+	$('#fetch_list').html('');
 	$.post(server_url+'feed_queries/'+limit, access_post_data, function(data) {
 		if(isJSON(data)) {
 			var queries = $.parseJSON(data);
-			var entry_ids = [];
-			$('#fetch_list').html();
-			for(var i=0; i < queries.length; i++) {
-				// $('#fetch_list').append(JSON.stringify(queries[i])+'<br><br><br>');
-				$('#fetch_list').append(queries[i].log_entry_id+'<br><br>');
+			if(queries.length == 0) {
+				$('#fetch_list').html('Nothing to Fetch');
+				release();
 			}
-
-			$('#release_list').html('');
-			$.post(sync_url+'add_log', {'queries':queries}, function(entry_ids) {
-				if(isJSON(entry_ids)) {
-					$.post(server_url+'update_log_as_synced', {'access_code': server_access_code, 'entry_ids':entry_ids}, function(data) {
-						$('#release_list').html(data);
-					});
-				}
-
-
-			});
-
+			else {
+				$.post(sync_url+'receive_local_log', {'access_code': server_access_code, 'queries':queries}, function(entry_ids) {
+					if(isJSON(entry_ids)) {
+						$.post(server_url+'update_log_as_synced', {'access_code': server_access_code, 'entry_ids':entry_ids}, function(data) {
+							$('#fetch_list').html(data);
+							release();
+						});
+					}
+					else {
+						$('#fetch_list').html('Logs Fetched but Wasn\'t Added in Local Server');
+						release();
+					}
+				});
+			}
+		}
+		else {
+			$('#fetch_list').html('Remote Server Feed Error');
+			release();
 		}
 	});
-
-	/*
-	// Fetching remote log and syncing
-	$queries = $this->my_curl($this->server_url.'feed_queries/'.$sync_limit, array('access_code'=>$this->server->server_access_code));
-	if($queries == false) return false; // No Server Connection
-	if($queries == 'Invalid Access Code') return false;
-	$queries = json_decode($queries, true);   // Fetching unsynced log entries
-	if(count($queries) == 0) {
-	    //echo 'Nothing new to fetch from the remote server<br>';
-	    return true;
-	}
-	// // Fetched
-	// echo 'Fetched<br>';
-	// $this->printer($queries);
-	$entry_ids = array();
-	foreach($queries as $key=>$query) {
-	    array_push($entry_ids, $queries[$key]['log_entry_id']);
-	    unset($queries[$key]['log_id']);
-	    $this->db->trans_start();
-	    $this->db->query($query['log_query']); // Running log queries (applying changes into local server)
-	    $this->db->trans_complete();
-	    $queries[$key]['log_is_synced'] = 1;
-	}
-	$aff = $this->m_sync->add_log($queries);    // Adding queries in log entry
-	if($aff) {
-	    $this->my_curl($this->server_url.'update_log_as_synced', array('access_code'=>$this->server->server_access_code, 'data'=>$entry_ids)); // Confirming remote server about the ids which has been synced
-	    return true;
-	}
-	return false;
-	*/
 }
 
 function release() {
-	
+	$.post(sync_url+'release', function(data) {
+		$('#release_list').html(data);
+		confirm();
+	});
 }
 
 function confirm() {
-	
+	$.post(sync_url+'confirm', function(data) {
+		$('#confirm_list').html(data);
+		push_queries(sync_limit);
+	});
 }
 
-function push_queries() {
-	
+function push_queries(limit=0) {
+	if(limit == 0) finish_sync();
+	$('#push_list').html('');
+	$.post(sync_url+'feed_queries/'+limit, access_post_data, function(data) {
+		if(isJSON(data)) {
+			var queries = $.parseJSON(data);
+			if(queries.length == 0) {
+				$('#push_list').html('Nothing to Push');
+				return;
+			}
+			$.post(server_url+'receive_local_log', {'access_code': server_access_code, 'queries':queries}, function(entry_ids) {
+				if(isJSON(entry_ids)) {
+					$.post(sync_url+'update_log_as_synced', {'access_code': server_access_code, 'entry_ids':entry_ids}, function(data) {
+						$('#push_list').html(data);
+					});
+				}
+				else $('#push_list').html('Logs Pushed but Wasn\'t Reveived by Remote Server');
+			});
+		}
+		else $('#push_list').html('Local Server Feed Error');
+	});
 }
 
 function update_server_connection_time() {
