@@ -27,6 +27,11 @@ class Sync extends Base_Controller {
         $this->server_url = $this->server->server_url.'/user/sync/';
 
         $this->data['controller'] = site_url('user/sync');
+
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Credentials: false');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+
     }
     //====================================//
 

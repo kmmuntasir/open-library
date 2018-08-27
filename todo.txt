@@ -3,7 +3,6 @@ Current Issues
 ===================================================================
 
 
-- Beautify Sync Page Animations
     
 - Book Copy accession no. is duplicating when adding for a new book
 
@@ -60,4 +59,5 @@ Done
 - Sync function is slowing down/crashing the local server (may be file_get_contents/curl issue)
     - Convert all curl operations to AJAX to relax the local server
 - Test Release function and Confirm function on sync page for correctness
+- Beautify Sync Page Animations
 

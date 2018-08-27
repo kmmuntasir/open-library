@@ -39,8 +39,7 @@ function sync() {
 	$.post(sync_url+'is_sync_ready', function(data) {
 		if(data == 'yes') {
 			start_sync();
-			start_sync_indicator();
-			reset_wait_indicator();
+			reset_wait_indicator(start_sync_indicator);
 		}
 		else syncing = false;
 	});
@@ -169,8 +168,7 @@ function unlock_server(s_id) {
 function finish_sync() {
 	if(locked) unlock_server(server_id);
 	syncing = false;
-	reset_sync_indicator();
-	start_wait_indicator();
+	reset_sync_indicator(start_wait_indicator);
 }
 
 
@@ -179,23 +177,26 @@ function finish_sync() {
 function start_wait_indicator() {
 	$("#wait_indicator").animate({
 	    width: "100%"
-	}, interval-300);
+	}, interval-1000);
 }
 	
-function reset_wait_indicator() {
+function reset_wait_indicator(callback) {
 	$("#wait_indicator").animate({
 	    width: "0%"
 	}, 0);
+	callback();
 }
 
 function start_sync_indicator() {
 	$('#sync_indicator i').addClass('fa-spin');
+	$('#sync_indicator').removeClass('btn-default');
 	$('#sync_indicator').addClass('btn-success');
 }
 
-function reset_sync_indicator() {
+function reset_sync_indicator(callback) {
 	$('#sync_indicator i').removeClass('fa-spin');
 	$('#sync_indicator').removeClass('btn-success');
 	$('#sync_indicator').addClass('btn-default');
+	callback();
 }
 
