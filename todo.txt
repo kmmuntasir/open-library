@@ -2,8 +2,6 @@
 Current Issues
 ===================================================================
 
-
-    
 - Book Copy accession no. is duplicating when adding for a new book
 
 - Solve backup restore issue for large files
