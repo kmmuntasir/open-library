@@ -17,6 +17,7 @@
         <!-- Trigger the modal with a button -->
         <?php if($page == 'sync') { ?>
           <button id="sync_page_time" class="pull-right btn btn-primary">Last Sync: <?php echo date('g:i:s A, F d, Y', strtotime(date($this->server->server_last_connection))); ?></button>
+          <div id="sync_indicator" style="margin-right: 5px;" class="btn btn-success btn-md pull-right"><i class="fa fa-refresh"></i></div>
         <?php } ?>
         <?php if($page != 'book_copy' && $page != 'sync') { ?>
           <?php if($page == 'dashboard') { ?>

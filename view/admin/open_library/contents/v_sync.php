@@ -6,7 +6,16 @@
 <input type="hidden" id="sync_limit" value="<?php echo $sync_limit; ?>">
 <input type="hidden" id="sync_interval" value="<?php echo $this->sync_interval; ?>">
 
-
+<div class="row">
+	<div class="col-xs-12">
+		<div class="col-xs-12">
+			<div class="progress">
+			  <div id="wait_indicator" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="row">
 	<div class="col-xs-12 sync_page">
 		<div class="col-sm-3">
@@ -55,3 +64,11 @@
 		</div>
 	</div>
 </div>
+
+
+<style type="text/css">
+	.progress-bar {
+	    -webkit-transition: none !important;
+	    transition: none !important;
+	}
+</style>

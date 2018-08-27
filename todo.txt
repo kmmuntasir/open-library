@@ -2,7 +2,6 @@
 Current Issues
 ===================================================================
 
-- Test Release function and Confirm function on sync page for correctness
 
 - Beautify Sync Page Animations
     
@@ -13,6 +12,10 @@ Current Issues
 - Change password types in library code input
 
 - Backup Restore isn't working on remote server
+
+- Enable option for delete demand
+
+- Recheck issuing reference copy to teachers
 
 - Create Cleaning Mechanism (Log)
 
@@ -56,4 +59,5 @@ Done
 - Enable Book Merging
 - Sync function is slowing down/crashing the local server (may be file_get_contents/curl issue)
     - Convert all curl operations to AJAX to relax the local server
+- Test Release function and Confirm function on sync page for correctness
 

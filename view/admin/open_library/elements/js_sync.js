@@ -11,6 +11,7 @@ var sync_limit = '';
 var access_post_data = '';
 var applied_queries = '';
 var sync_interval = '';
+var interval = 0;
 
 $(document).ready(function() {
 	application_role = $('#application_role').val();
@@ -23,7 +24,7 @@ $(document).ready(function() {
 	sync_interval = $('#sync_interval').val();
 	if(application_role == 0) {
 		var sync_trigger = function() {if(!syncing) sync();};
-	    var interval = sync_interval*1000;
+	    interval = sync_interval*1000;
 	    sync();
 	    setInterval(sync, interval);
 	}
@@ -36,7 +37,11 @@ function sync() {
 	if(syncing) return;
 	syncing = true;
 	$.post(sync_url+'is_sync_ready', function(data) {
-		if(data == 'yes') start_sync();
+		if(data == 'yes') {
+			start_sync();
+			start_sync_indicator();
+			reset_wait_indicator();
+		}
 		else syncing = false;
 	});
 }
@@ -164,4 +169,33 @@ function unlock_server(s_id) {
 function finish_sync() {
 	if(locked) unlock_server(server_id);
 	syncing = false;
+	reset_sync_indicator();
+	start_wait_indicator();
 }
+
+
+// ======================= Animation Functions =======================
+
+function start_wait_indicator() {
+	$("#wait_indicator").animate({
+	    width: "100%"
+	}, interval-300);
+}
+	
+function reset_wait_indicator() {
+	$("#wait_indicator").animate({
+	    width: "0%"
+	}, 0);
+}
+
+function start_sync_indicator() {
+	$('#sync_indicator i').addClass('fa-spin');
+	$('#sync_indicator').addClass('btn-success');
+}
+
+function reset_sync_indicator() {
+	$('#sync_indicator i').removeClass('fa-spin');
+	$('#sync_indicator').removeClass('btn-success');
+	$('#sync_indicator').addClass('btn-default');
+}
+
