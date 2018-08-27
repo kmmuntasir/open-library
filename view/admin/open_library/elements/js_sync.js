@@ -12,6 +12,7 @@ var access_post_data = '';
 var applied_queries = '';
 var sync_interval = '';
 var interval = 0;
+var last_updated = '';
 
 $(document).ready(function() {
 	application_role = $('#application_role').val();
@@ -22,11 +23,14 @@ $(document).ready(function() {
 	access_post_data = {'access_code': server_access_code};
 	sync_limit = $('#sync_limit').val();
 	sync_interval = $('#sync_interval').val();
+	last_updated = Date.now();
 	if(application_role == 0) {
-		var sync_trigger = function() {if(!syncing) sync();};
-	    interval = sync_interval*1000;
+		// var sync_trigger = function() {if(!syncing) sync();};
+		// var request_timeout_handler_trigger = function() {request_timeout_handler();};
+	    interval = sync_interval*500;
 	    sync();
 	    setInterval(sync, interval);
+	    setInterval(request_timeout_handler, interval*3);
 	}
 	else {
 		// Show message
@@ -148,6 +152,7 @@ function push_queries(limit=0) {
 function update_local_server_connection_time() {
 	$.post(sync_url+'update_server_connection_time/'+server_id, function(data) {
 		var now = "Last Sync: " + formatDate(null, 'h:mm:ss a, MMMM d, yyyy');
+		last_updated = Date.now();
 		$('#sync_page_time').html(now);
 		finish_sync();
 	});
@@ -200,3 +205,18 @@ function reset_sync_indicator(callback) {
 	callback();
 }
 
+
+// ======================= Request Time Out Handler ==================
+
+
+function request_timeout_handler() {
+	var now = Date.now();
+	var diff = now - last_updated;
+	if(diff > (interval * 3)) {
+		reload();
+	}
+}
+
+function reload(forceget=false) {
+	location.reload(forceget);
+}
