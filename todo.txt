@@ -2,7 +2,6 @@
 Current Issues
 ===================================================================
 
-
 - Forbid Reissue if there are active demand for this book.
 
 - Solve backup restore issue for large files
