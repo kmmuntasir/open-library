@@ -2,7 +2,8 @@
 Current Issues
 ===================================================================
 
-- Book Copy accession no. is duplicating when adding for a new book
+
+- Forbid Reissue if there are active demand for this book.
 
 - Solve backup restore issue for large files
 
@@ -59,4 +60,5 @@ Done
 - Test Release function and Confirm function on sync page for correctness
 - Beautify Sync Page Animations
 - Solve Request Timed Out issue in sync page.
+- Book Copy accession no. is duplicating when adding for a new book
 

@@ -358,29 +358,12 @@ class M_book extends Ci_model {
     }
 
     public function last_accession_number() {
+        $new_key = 0;
         $result = $this->db->select('book_copy_accession_no')->order_by('book_copy_id', 'DESC')->limit(1)->get('book_copy')->row();
         if($result) {
-
-            // if($result->book_copy_accession_no == int($result->book_copy_accession_no)) $num_value = $result->book_copy_accession_no;
-
-            $num_value = 0;
-
-            $arr = explode('_', $result->book_copy_accession_no);
-
-            if(count($arr) > 1) // underscore Style ac no.
-                $num_value = $arr[count($arr)-1];
-
-            else { // new or numeric style ac no.
-                $arr = explode('c', $result->book_copy_accession_no);
-
-                if(count($arr) > 1) // Non numeric ac no.
-                    $num_value = $arr[count($arr)-1];
-                else { // Numeric ac no.
-                    $num_value = $arr[0];
-                }
-            }
-
-            $new_key = $num_value + 1;
+            preg_match_all('!\d+!', $result->book_copy_accession_no, $matches);
+            // $this->printer($matches);
+            $new_key = $matches[0][0] + 1;
         }
         else $new_key = 1;
         return $new_key;
