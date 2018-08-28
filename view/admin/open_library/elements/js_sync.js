@@ -27,7 +27,7 @@ $(document).ready(function() {
 	if(application_role == 0) {
 		// var sync_trigger = function() {if(!syncing) sync();};
 		// var request_timeout_handler_trigger = function() {request_timeout_handler();};
-	    interval = sync_interval*500;
+	    interval = sync_interval*1000;
 	    sync();
 	    setInterval(sync, interval);
 	    setInterval(request_timeout_handler, interval*3);
