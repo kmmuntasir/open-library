@@ -23,6 +23,10 @@ class M_issue extends Ci_model {
         return $this->db->where('issue_status', 6)->get('issue')->result();
     }
 
+    public function check_book_for_demand($book_id) {
+        return $this->db->select('count(issue_id) as count')->where('issue_status', 6)->where('issue_book_id', $book_id)->get('issue')->row()->count;
+    }
+
     public function book_availibility($book_id) {
         return $this->db->select('book_available')->where('book_id', $book_id)->get('book')->row()->book_available;
     }

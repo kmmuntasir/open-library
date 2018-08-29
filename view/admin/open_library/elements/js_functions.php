@@ -130,10 +130,8 @@
 	        var status_url = "<?php echo site_url('user/sync/last_sync_time/1') ?>";
 	        $.post( status_url, function( data ) { 
 	            if(data) {
-	            	var indicator = '';
-	            	if(data > <?php echo $this->sync_interval*1.4; ?>) $('#main_nav').addClass('navbar-inverse');
+	            	if(data > <?php echo $this->sync_interval*3; ?>) $('#main_nav').addClass('navbar-inverse');
 	            	else $('#main_nav').removeClass('navbar-inverse');
-	                //$('#online_status').html(indicator);
 	            }
 	        });
 	    }

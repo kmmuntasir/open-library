@@ -209,7 +209,6 @@ class Issue extends Base_Controller {
     }
 
     public function add_issue() {
-        //$this->printer($_POST, true);
         $user_library_code = $_POST['user_library_code'];
         // Getting user by user library code
         $user = $this->m_issue->get_user_by_user_library_code($user_library_code);
@@ -225,7 +224,7 @@ class Issue extends Base_Controller {
             else if($this->m_issue->check_book_duplicate_issue($user->user_id, $book_copy->book_id))
                 array_push($msg, array("A copy of this book is currently Issued to/Requested by you", "danger"));
             else if($book_copy->book_available == 0)
-                array_push($msg, arry("Accession No. #$book_copy_accession_no ($book_copy->book_title) is Not Available right now (All copies are lent out)", "danger"));
+                array_push($msg, array("Accession No. #$book_copy_accession_no ($book_copy->book_title) is Not Available right now (All copies are lent out)", "danger"));
             else if($book_copy->book_copy_status==0) 
                 array_push($msg, array("Accession No. #$book_copy_accession_no ($book_copy->book_title) is already issued to someone else", "danger"));
             else if($book_copy->book_copy_type==0) {
@@ -239,7 +238,6 @@ class Issue extends Base_Controller {
             }
             else if($book_copy->book_copy_is_deleted==1) 
                 array_push($msg, array("Accession No. #$book_copy_accession_no ($book_copy->book_title) is a Deleted Book", "danger"));
-            //else if(check if another copy of this book is already issued to this student) echo "Hello";
             else {   // Everything Clear, Proceed to issue the book
                 if($this->issue_book($book_copy, $book_copy_accession_no, $user)) { 
                     array_push($msg, array("Accession No. #$book_copy_accession_no ($book_copy->book_title) Issued Successfully (Issue #".$issue['issue_id'].") until ".date('M d, Y h:i a', strtotime(date('Y-m-d 16:30:00', strtotime("+".$this->settings->issue_deadline." days")))), "success"));
@@ -251,7 +249,7 @@ class Issue extends Base_Controller {
 
     public function issue_book($book_copy, $book_copy_accession_no, $user) {
         // Decrease book availability in book table
-        $deduct = ($user->is_teacher)?0:1;
+        $deduct = ($user->is_teacher && ($book_copy->book_copy_type==0))?0:1; // User is teacher and It's a reference copy
         $book = array('book_available'=>($book_copy->book_available - $deduct));
         $book_id = $book_copy->book_id;
         // Convert Book Copy Status -> Issued (0-issued, 1-available)
@@ -330,10 +328,6 @@ class Issue extends Base_Controller {
         //$this->printer($data, true);
         $data['content'] = 'v_issue.php';
         $this->load->view($this->viewpath.'v_main', $data);
-    }
-
-    public function test() {
-        $this->m_book->check_book_id_accession_no('IST_LIBRARY_2', 'L_c_71');
     }
 
     public function activate($issue_id=NULL) {
@@ -443,28 +437,36 @@ class Issue extends Base_Controller {
         if(!isset($_POST['user_library_code'])) $this->redirect_msg('admin/issue/active', 'User Library Code is required', 'danger');
         $issue = $this->m_issue->get_single_issue($issue_id);
         if($issue) {
+            // $this->printer($issue, true);
             if($issue->issue_status != 1) $this->redirect_msg('admin/issue/active', 'This issue isn\'t ready to be renewed', 'danger');
             if($_POST['user_library_code'] != $issue->user_library_code) $this->redirect_msg('admin/issue/active', 'Invalid User Library Code', 'danger');
 
+            // Checking if there is any active demand for this book
+            if($this->m_issue->check_book_for_demand($issue->book_id) && $issue->is_teacher == 0) $this->redirect_msg('admin/issue/active', 'This issue cannot be renewed because there are existing demands for this book.', 'danger');
+
             //Receiving the old issue.
-            $issue_updated = array('issue_id'=> $issue_id ,'issue_status'=> 3, 'issue_return_datetime'=>date('Y-m-d H:i:s'));
+            $issue_updated                              = array(
+                                                            'issue_id'=> $issue_id, 
+                                                            'issue_status'=> 3, 
+                                                            'issue_return_datetime'=>date('Y-m-d H:i:s')
+                                                        );
             //Creating new issue.
             $issue_new = array();
             $issue_new['issue_id'] = $this->m_issue->new_id('issue');
-            $issue_new['issue_datetime'] = date('Y-m-d H:i:s');
-            $issue_new['issue_deadline'] = date('Y-m-d 16:30:00', strtotime("+".$this->settings->issue_deadline." days"));
-            $issue_new['issue_book_id'] = $issue->issue_book_id;
-            $issue_new['issue_book_copy_accession_no'] = $issue->issue_book_copy_accession_no;
-            $issue_new['user_id'] = $issue->user_id;
-            $issue_new['manager_id'] = $this->session->admin_id;
-            $issue_new['issue_status'] = 1;
-            $issue_new['issue_lend_user_code'] = $this->__unique_code();
-            $issue_new['issue_receive_user_code'] = $this->__unique_code();
-            $issue_new['issue_receive_admin_code'] = $this->__unique_code();
-            $issue_new['issue_fine_user_code'] = $this->__unique_code();
-            $issue_new['issue_fine_admin_code'] = $this->__unique_code();
-            $issue_new['issue_renew_user_code'] = $this->__unique_code();
-            $issue_new['issue_remarks'] = '';
+            $issue_new['issue_datetime']                = date('Y-m-d H:i:s');
+            $issue_new['issue_deadline']                = date('Y-m-d 16:30:00', strtotime("+".$this->settings->issue_deadline." days"));
+            $issue_new['issue_book_id']                 = $issue->issue_book_id;
+            $issue_new['issue_book_copy_accession_no']  = $issue->issue_book_copy_accession_no;
+            $issue_new['user_id']                       = $issue->user_id;
+            $issue_new['manager_id']                    = $this->session->admin_id;
+            $issue_new['issue_status']                  = 1;
+            $issue_new['issue_lend_user_code']          = $this->__unique_code();
+            $issue_new['issue_receive_user_code']       = $this->__unique_code();
+            $issue_new['issue_receive_admin_code']      = $this->__unique_code();
+            $issue_new['issue_fine_user_code']          = $this->__unique_code();
+            $issue_new['issue_fine_admin_code']         = $this->__unique_code();
+            $issue_new['issue_renew_user_code']         = $this->__unique_code();
+            $issue_new['issue_remarks']                 = '';
 
             $status = $this->m_issue->renew_issue($issue_updated, $issue_new);
 

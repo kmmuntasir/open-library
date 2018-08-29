@@ -2,17 +2,11 @@
 Current Issues
 ===================================================================
 
-- Forbid Reissue if there are active demand for this book.
+- Change password types in library code input
 
 - Solve backup restore issue for large files
 
-- Change password types in library code input
-
 - Backup Restore isn't working on remote server
-
-- Enable option for delete demand
-
-- Recheck issuing reference copy to teachers
 
 - Create Cleaning Mechanism (Log)
 
@@ -60,4 +54,6 @@ Done
 - Beautify Sync Page Animations
 - Solve Request Timed Out issue in sync page.
 - Book Copy accession no. is duplicating when adding for a new book
+- Forbid Reissue if there are active demand for this book (only for students).
+- Recheck issuing reference copy to teachers
 
