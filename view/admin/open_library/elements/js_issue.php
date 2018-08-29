@@ -23,16 +23,6 @@ $(document).on('click', 'button#book_minus', function() {
 	$('.add_form_inputs').children('input[name="num_of_books"]').val(n);
 });
 
-$('#add_issue_form').submit(function(event) {
-	if(!confirm("Are you sure to issue?")) {
-		event.preventDefault;
-		return false;
-	}
-	$('.add_form_inputs').children('input[name="user_library_code_primary"]').val();
-	$('.add_form_inputs').children('input[name="user_library_code"]').val($('.add_form_inputs').children('input[name="user_library_code_primary"]').val());
-	$('.add_form_inputs').children('input[name="user_library_code_primary"]').val('');
-});
-
 var issue = '';
 var user_details = '';
 var book_details = '';
@@ -132,6 +122,7 @@ $(document).on('click', '#issue_renew_button', function() {
 	$('#renewModal_form').attr('action', url);
 	$('#viewModal').removeClass('show').addClass('hide');
 	$('#renewModal').removeClass('hide').addClass('show');
+	$('.library_code_curtain').html('');
 });
 
 // $('#renewModal_form').submit(function(event) {
@@ -220,6 +211,7 @@ $(document).on('click', '#fine_receive_button', function() {
 $(document).on('click', '#issue_activate_button', function() {
 	$('#viewModal').removeClass('show').addClass('hide');
 	$('#activateModal').removeClass('hide').addClass('show');
+	$('.library_code_curtain').html('');
 	var url = site_url + 'admin/issue/activate/' + issue.issue_id;
 	$('#activateModal_form').attr('action', url);
 });
@@ -524,3 +516,10 @@ function post_process_issue_by_book_copy_table() {
 
 	});
 }
+
+$(document).on('input', 'input[name=user_library_code]', function() {
+	var code = $(this).val();
+	var star = '';
+	for(var i=0; i< code.length; i++) star += '*';
+	$(this).siblings('.library_code_curtain').html(star);
+});

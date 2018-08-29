@@ -68,7 +68,7 @@
 <!-- Modal for Issuing Books -->
 <div id="myModal" class="modal hide" role="dialog">
   <div class="modal-dialog">
-  <form id="add_issue_form" class="lib_form" action="<?php echo site_url($module).'/issue/add_issue'; ?>" method="post">
+  <form autocomplete="off" id="add_issue_form" class="lib_form" action="<?php echo site_url($module).'/issue/add_issue'; ?>" method="post">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -77,8 +77,13 @@
       </div>
       <div class="modal-body modal-scroll add_form_inputs">
           <label class="col-sm-4" for="user_roll">User Library Code</label>
-          <input type="password" class="col-sm-8" name="user_library_code_primary" placeholder="User Library Code"/>
-          <input type="hidden" class="col-sm-8" name="user_library_code" placeholder="User Library Code"/>
+
+          <div class="col-sm-8 library_code_curtain_box">
+            <input required="" type="text" class="col-xs-12" name="user_library_code" autocomplete="off" placeholder="User Library Code (use barcode machine)"/>
+            <div class="library_code_curtain">****</div>
+            <div class="clearfix"></div>
+          </div>
+
 
           <input type="hidden" name="num_of_books" value="1">
           <div class="book_box">
@@ -229,7 +234,7 @@
 <!-- Modal for Activating Issue -->
 <div id="activateModal" class="modal hide" role="dialog">
   <div class="modal-dialog">
-    <form id="activateModal_form" action="<?php echo site_url('admin/issue/activate');?>" method="post">
+    <form autocomplete="off" id="activateModal_form" action="<?php echo site_url('admin/issue/activate');?>" method="post">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -239,7 +244,12 @@
       <div class="modal-body modal-scroll add_form_inputs">
         <div class="col-sm-12">
           <label class="col-sm-4" for="user_library_code">User Library Code</label>
-          <input required="" id="user_library_code_input" type="password" class="col-sm-8" name="user_library_code" placeholder="User Library Code (use barcode machine)"/>
+          <div class="col-sm-8 library_code_curtain_box">
+            <input required="" id="user_library_code_input" type="text" class="col-xs-12" name="user_library_code" autocomplete="off" placeholder="User Library Code (use barcode machine)"/>
+            <div class="library_code_curtain">****</div>
+            <div class="clearfix"></div>
+          </div>
+
         </div>
         <div class="col-sm-12">
           <br />

@@ -209,6 +209,7 @@ class Issue extends Base_Controller {
     }
 
     public function add_issue() {
+        // $this->printer($_POST, true);
         $user_library_code = $_POST['user_library_code'];
         // Getting user by user library code
         $user = $this->m_issue->get_user_by_user_library_code($user_library_code);

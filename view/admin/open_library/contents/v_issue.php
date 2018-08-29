@@ -40,7 +40,7 @@
 <!-- Modal for Issuing Books -->
 <div id="myModal" class="modal hide" role="dialog">
   <div class="modal-dialog">
-  <form id="add_issue_form" class="lib_form" action="<?php echo $controller.'/add_issue'; ?>" method="post">
+  <form autocomplete="off" id="add_issue_form" class="lib_form" action="<?php echo $controller.'/add_issue'; ?>" method="post">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -49,9 +49,11 @@
       </div>
       <div class="modal-body modal-scroll add_form_inputs">
           <label class="col-sm-4" for="user_roll">User Library Code</label>
-          <input type="password" class="col-sm-8" name="user_library_code_primary" placeholder="User Library Code"/>
-          <input type="hidden" class="col-sm-8" name="user_library_code" placeholder="User Library Code"/>
-
+          <div class="col-sm-8 library_code_curtain_box">
+            <input required="" oncopy="return false" type="text" class="col-xs-12" name="user_library_code" autocomplete="off" placeholder="User Library Code (use barcode machine)"/>
+            <div class="library_code_curtain">****</div>
+            <div class="clearfix"></div>
+          </div>
           <input type="hidden" name="num_of_books" value="1">
           <div class="book_box">
             <label class="col-sm-4" for="book_1">Acc. No.(s)<button type="button" id="book_plus" class="inline_plus btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i></button><button type="button"  id="book_minus" class="inline_minus btn btn-xs btn-danger pull-right"><i class="fa fa-minus"></i></button></label>
@@ -223,7 +225,7 @@
 <!-- Modal for Activating Issue -->
 <div id="activateModal" class="modal hide" role="dialog">
   <div class="modal-dialog">
-    <form id="activateModal_form" action="<?php echo site_url('admin/issue/activate');?>" method="post">
+    <form autocomplete="off" id="activateModal_form" action="<?php echo site_url('admin/issue/activate');?>" method="post">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -233,7 +235,13 @@
       <div class="modal-body modal-scroll add_form_inputs">
         <div class="col-sm-12">
           <label class="col-sm-4" for="user_library_code">User Library Code</label>
-          <input required="" id="user_library_code_input" type="password" class="col-sm-8" name="user_library_code" placeholder="User Library Code (use barcode machine)"/>
+
+          <div class="col-sm-8 library_code_curtain_box">
+            <input required="" id="user_library_code_input" type="text" class="col-xs-12" name="user_library_code" autocomplete="off" placeholder="User Library Code (use barcode machine)"/>
+            <div class="library_code_curtain">****</div>
+            <div class="clearfix"></div>
+          </div>
+
         </div>
         <div class="col-sm-12">
           <br />
@@ -253,7 +261,7 @@
 <!-- Modal for Renewing Issue -->
 <div id="renewModal" class="modal hide" role="dialog">
   <div class="modal-dialog">
-    <form id="renewModal_form" action="#" method="post">
+    <form autocomplete="off" id="renewModal_form" action="#" method="post">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -263,7 +271,13 @@
       <div class="modal-body modal-scroll add_form_inputs">
         <div class="col-sm-12">
           <label class="col-sm-4" for="user_library_code">User Library Code</label>
-          <input autofocus="" required="" id="user_library_code_input" type="password" class="col-sm-8" name="user_library_code" placeholder="User Library Code (use barcode machine)"/>
+
+          <div class="col-sm-8 library_code_curtain_box">
+            <input autofocus="" required="" type="text" class="col-xs-12" name="user_library_code" autocomplete="off" placeholder="User Library Code (use barcode machine)"/>
+            <div class="library_code_curtain">****</div>
+            <div class="clearfix"></div>
+          </div>
+
           <div class="clearfix"></div><br />
           <div id="renew_alert" class="alert alert-md alert-danger">Are you sure you want to renew this issue? Any fine will be wiped out if the issue is renewed. Please clear out all fine before proceeding</div>
         </div>

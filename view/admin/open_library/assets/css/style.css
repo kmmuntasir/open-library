@@ -149,6 +149,25 @@
 	height:60px;
 }
 
+.library_code_curtain_box {
+
+}
+
+.library_code_curtain {
+	width: 91.25%;
+	height: 24px;
+	background-color: #fff;
+	/*background-color: #f00;*/
+	/*background-color: rgba(240, 240, 240, 0.5);*/
+	position: absolute;
+	font-size: 25px;
+	font-weight: bold;
+	letter-spacing: 0.1em;
+	pointer-events: none;
+	margin: 1px auto 0 1px;
+	padding-left: 5px;
+}
+
 /********************** Settings Page CSS *********************/
 
 .settings_table {
@@ -171,7 +190,6 @@
 	border-bottom: solid 1px #ddd;
 	transition: all 500ms ease;
 }
-
 
 
 

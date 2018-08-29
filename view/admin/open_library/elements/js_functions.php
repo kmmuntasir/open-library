@@ -72,6 +72,7 @@
 	    $(document).on('click', '#add_button', function() {
 	    	$('#myModal').removeClass('hide');
 	    	$('#myModal').addClass('show');
+			$('.library_code_curtain').html('');
 	    });
 
 	    $(document).on('click', 'button.close', function() {
