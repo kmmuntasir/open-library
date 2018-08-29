@@ -67,24 +67,49 @@ class M_admin extends Ci_model {
     }
 
     function run_sql_queries_one_by_one($sql_file_name) {
+        set_time_limit(0);
         $file = fopen($sql_file_name, "r");
         if($file) {
             $num_of_queries = 0;
             $query = '';
+            $str_flag = false;
+            $slash_flag = false;
             $this->db->trans_start();
+            // echo '<br>Starting Running SQL Queries<br>';
             while (!feof ($file)){
                 $last_char = fgetc($file);
                 $query .= $last_char;
-                if($last_char == ';') { // One Query Found, now run it.
-                    // echo $query.'<br>';
+                if($last_char == "'") {
+                    if(!$slash_flag) $str_flag = !$str_flag;
+                    else $slash_flag = false;
+                }
+                else if($last_char == '"') {
+                    if(!$slash_flag) $str_flag = !$str_flag;
+                    else $slash_flag = false;
+                }
+                else if($last_char == "\\") {
+                    $slash_flag = true;
+                }
+                else if($last_char == ';') {
+                    $slash_flag = false;
+                    if($str_flag) continue;
+                    // One Query Found, now run it.
+                    // $this->printer($query);
                     ++$num_of_queries;
                     $flag = $this->db->query($query);
                     if($flag == false) break;
                     $query = '';
                 }
+                else $slash_flag = false;
             }
             $this->db->trans_complete();
 
+            // echo '<br>Finished Running SQL Queries<br>';
+
+            // echo "Slash: ".$slash_flag.'<br>';
+            // echo 'STR  : '.$str_flag.'<br>';
+
+            // echo $num_of_queries.'<br>';
             if($this->db->trans_status()) return $num_of_queries;
             else return false;
 

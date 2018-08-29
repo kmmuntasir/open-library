@@ -236,11 +236,14 @@ class Dashboard extends Base_Controller {
                 $ext = pathinfo($found_file, PATHINFO_EXTENSION);
                 if($ext != 'SQL' && $ext != 'sql') echo 'Wrong Backup File / File Format';
                 else { // SQL file found, now import.
+                    rename($this->upload_dir.$found_file, $this->upload_dir."run.sql");
+                    $found_file = "run.sql";
                     // Taking a backup of current system state.
                     $this->backup_db($safety_backup_filename);
-                    // echo 'Running SQL File: '.$found_file.'<br>';
+                    echo 'Running SQL File: '.$found_file.'<br>';
                     $num_of_queries = $this->m_admin->run_sql_queries_one_by_one($this->upload_dir.$found_file);
                     if($num_of_queries) {
+                        // $this->clear_backup_dir($this->upload_dir);
                         $this->clear_backup_dir($this->backup_dir); // Successful Restore, removing failsafe backup
 
 
@@ -277,5 +280,14 @@ class Dashboard extends Base_Controller {
             }
             fclose($file);
         }
+    }
+
+    function test() {
+
+        $filepath = 'uploads/test.sql';
+        $num_of_queries = $this->m_admin->run_sql_queries_one_by_one($filepath);
+
+        echo $num_of_queries;
+
     }
 }

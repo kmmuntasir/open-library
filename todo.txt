@@ -3,7 +3,6 @@ Current Issues
 ===================================================================
 
 
-- Solve backup restore issue for large files
 
 - Backup Restore isn't working on remote server
 
@@ -56,4 +55,5 @@ Done
 - Forbid Reissue if there are active demand for this book (only for students). 
 - Recheck issuing reference copy to teachers
 - Change password types in library code input
+- Solved backup restore issue for large files
 
