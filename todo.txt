@@ -2,7 +2,7 @@
 Current Issues
 ===================================================================
 
-
+- Allow users to edit their details
 
 - Backup Restore isn't working on remote server
 
