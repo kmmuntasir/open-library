@@ -4,6 +4,8 @@ Current Issues
 
 - Allow users to edit their details
 
+- Fix User Dept Issue (MBA / MCSE missing)
+
 - Backup Restore isn't working on remote server
 
 - Create Cleaning Mechanism (Log)

@@ -38,7 +38,7 @@
   			      		</tr>
   			      		<tr>
   			      			<th>Session</th>
-  			      			<td><?php echo $user->user_session; ?></td>
+  			      			<td><?php echo $user->user_session.' - '.($user->user_session + 1); ?></td>
   			      		</tr>
   			      		<?php } else { ?>
   			      		<tr>

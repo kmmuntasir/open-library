@@ -36,6 +36,13 @@ class M_user extends Ci_model {
         return $this->db->trans_status();
     }
 
+    public function check_duplicate_student($user_dept, $user_session, $user_roll) {
+        $this->db->select('count(user_id) as count');
+        $this->db->where('user_dept', $user_dept);
+        $this->db->where('user_session', $user_session)->where('user_roll', $user_roll);
+        return $this->db->get('user')->row()->count;
+    }
+
     public function update_user($user_id, $user) {
     	$this->db->trans_start();
         $this->db->where('user_id', $user_id);

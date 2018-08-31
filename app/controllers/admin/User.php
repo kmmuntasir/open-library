@@ -128,10 +128,9 @@ class User extends Base_Controller {
         // exit($filepath);
 
         $users_arr = array();
+        $export_arr = array();
         $file = fopen($filepath, "r");
         $fail_file_path = $this->upload_dir.'failed.csv';
-        $fail_file = fopen($fail_file_path, "w");
-        fclose($fail_file);
         if($file) {
             if (!feof ($file)) {
                 $str = fgets($file);
@@ -144,46 +143,71 @@ class User extends Base_Controller {
 
                 if(count($str_exp) == 6) {
                     // $this->printer($str_exp);
+                    $single_fail_flag = false;
                     $single_user = array();
+                    $single_export = array();
                     
                     $single_user['is_teacher']   = $is_teacher;
 
-                    $single_user['user_name']            = $str_exp[0];
+                    $single_user['user_id']              = $this->new_id('user');
+                    $single_export['ID'] = $single_user['user_id'];
+
+                    $single_user['user_name']            = trim($str_exp[0]);
                     $single_user['user_phone']           = $str_exp[1];
                     $single_user['user_email']           = $str_exp[2];
                     $single_user['user_dept']            = $str_exp[3];
+                    $single_export['DEPT'] = $single_user['user_dept'];
 
                     if($is_teacher) {
                         $single_user['teacher_id']            = $str_exp[4];
                         $single_user['teacher_designation']   = $str_exp[5];
                     }
                     else {
-                        $single_user['user_roll']            = $str_exp[4];
+                        $single_user['user_roll']            = (int)$str_exp[4];
                         $single_user['user_session']         = (int)$str_exp[5];
+
+                        $single_export['Session'] = $single_user['user_session'];
+                        $single_export['Roll'] = $single_user['user_roll'];
                     }
 
-                    $single_user['user_pass']            = $this->__unique_code();
-
-                    $single_user['user_id']              = $this->new_id('user');
+                    $single_export['Name'] = $single_user['user_name'];
                     $single_user['user_username']        = $str_exp[3].$str_exp[4].'_'.$single_user['user_id'];
+                    $single_export['Username'] = $single_user['user_username'];
+                    $single_export['Password'] = $this->__unique_code(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+                    $single_user['user_pass']            = md5($single_export['Password']);
+
                     $single_user['user_library_code']    = substr(md5($single_user['user_id']), 16);
 
-                    $status = $this->m_user->add_user($single_user);
-                    // $this->printer($this->db->last_query());
 
-                    if($status) $success_count++;
-                    else {
-                        $this->append($str, $fail_file_path);
-                        $fail_count++;
+                    if(!$is_teacher) {
+                        if($this->m_user->check_duplicate_student($single_user['user_dept'], $single_user['user_session'], $single_user['user_roll'])) {
+                            $this->append($str, $fail_file_path);
+                            $fail_count++;
+                            $single_fail_flag = true;
+                        }
                     }
 
-                    // $this->printer($single_user);
+                    if(!$single_fail_flag) {
+                        $status = $this->m_user->add_user($single_user);
+                        // $this->printer($this->db->last_query());
 
-                    // array_push($users_arr, $single_user);
+                        if($status) $success_count++;
+                        else {
+                            $this->append($str, $fail_file_path);
+                            $fail_count++;
+                        }
+
+                        // $this->printer($single_user);
+
+                        array_push($users_arr, $single_user);
+                        array_push($export_arr, $single_export);
+
+                        // $this->printer($single_user);
+                        // $this->printer($single_export);
+                    }
                 }
 
             }
-            // $this->printer($users_arr);
             fclose($file);
             echo "Fail: ". $fail_count.'<br>';
             echo "Success: ". $success_count.'<br>';
@@ -193,22 +217,35 @@ class User extends Base_Controller {
             if($fail_count == 0) {
                 echo "Import Success";
                 unlink($fail_file_path);
-                $this->redirect_msg('/admin/user/'.$user_type[$is_teacher], 'Imported Successfully', 'success');
+                echo "<h1 style='color:#f00;'>DON'T CLOSE THIS BROWSER PAGE!!!<br>This is the only time you can see this table. Please copy the following table and paste it to MS Word or any other word processing software to store and print.</h1>";
+                $this->tabular($export_arr, false, true, true, 'cellspacing="0" cellpadding="10" style="background-color: #fff; font-size: 14px;" align="center"');
+                // $this->redirect_msg('/admin/user/'.$user_type[$is_teacher], 'Imported Successfully', 'success');
             }
             else {
                 if($success_count == 0) {
                     echo "Import Failed";
                     unlink($fail_file_path);
-                    $this->redirect_msg('/admin/user/'.$user_type[$is_teacher], 'Import Failed', 'danger');
+                    echo 'Import Failed';
+                    // $this->redirect_msg('/admin/user/'.$user_type[$is_teacher], 'Import Failed', 'danger');
                 }
                 else {
                     $status_msg = "Import Partially Succeeded<br>Success Count: ".$success_count.'<br>';
-                    $status_msg .= "Downloading the failed user list...<br>";
-                    $this->__download($fail_file);
+                    $status_msg .= "Click below to download the failed user list...<br>";
+                    echo $status_msg;
+                    $fail_url = site_url('admin/user/download_failed_file');
+                    echo '<a href="'.$fail_url.'">Download Failed File List</a>';
+                    echo '<br><h3>Success List</h3>';
+                echo "<h1 style='color:#f00;'>DON'T CLOSE THIS BROWSER PAGE!!!<br>This is the only time you can see this table. Please copy the following table and paste it to MS Word or any other word processing software to store and print.</h1>";
+                    $this->tabular($export_arr, false, true, true, 'cellspacing="0" cellpadding="10" style="background-color: #fff; font-size: 14px;" align="center"');
                 }
             }
         }
         else echo 'Invalid Path';
+    }
+
+    public function download_failed_file() {
+        $fail_file_path = $this->upload_dir.'failed.csv';
+        $this->__download($fail_file_path);
     }
 
     public function add($user_type = 'students') {
