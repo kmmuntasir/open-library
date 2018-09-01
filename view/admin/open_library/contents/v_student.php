@@ -10,7 +10,7 @@
 					<th class="dt_xs">ID</th>
 					<th>Name</th>
 					<th class="dt_sm">Username</th>
-					<th class="dt_xs">Dept</th>
+					<th class="dt_xs">Program</th>
 					<th class="dt_xs">Session</th>
 					<th class="dt_xs">Roll</th>
 					<th class="dt_md">Email</th>
@@ -23,7 +23,7 @@
           <td>ID</td>
           <td>Name</td>
           <td>Username</td>
-          <td>Dept</td>
+          <td>Program</td>
           <td>Session</td>
           <td>Roll</td>
           <td>Email</td>
@@ -47,17 +47,19 @@
       <div class="modal-body modal-scroll">
           <label for="user_name">Name</label>
           <input autofocus required type="text" class="form-control" name="user_name" placeholder="Name"/>
-          <label for="user_dept">Department</label>
+          <label for="user_dept">Program</label>
           <select id="user_dept_add" required class="form-control" name="user_dept">
-          	<option selected="selected" value="nothing">--Please select a Department--</option>
+          	<option selected="selected" value="nothing">--Please select a Program--</option>
           	<option value="CSE">CSE</option>
           	<option value="ECE">ECE</option>
           	<option value="BBA">BBA</option>
+            <option value="MBA">MBA</option>
+            <option value="MCSE">MCSE</option>
           	<option value="Diploma">Diploma</option>
-      		<option value="CT">CT</option>
-      		<option value="ET">ET</option>
-      		<option value="CMT">CMT</option>
-      		<option value="TCT">TCT</option>
+        		<option value="CT">CT</option>
+        		<option value="ET">ET</option>
+        		<option value="CMT">CMT</option>
+        		<option value="TCT">TCT</option>
           </select>
           <label for="user_session">Session</label>
           <input required type="number" class="form-control" value="<?php echo date('Y'); ?>" name="user_session" placeholder="Session (Example 2009-10)"/>
@@ -97,12 +99,15 @@
 	      <div class="modal-body edit_form_inputs modal-scroll">
 	      	<label for="user_name">Name</label>
 	      	<input autofocus required type="text" class="form-control" name="user_name" placeholder="Name"/>
-	      	<label for="user_dept">Department</label>
+	      	<label for="user_dept">Program</label>
 	      	<select id="user_dept_update" required class="form-control" name="user_dept">
-	      		<option id="select_dept" value="nothing">--Please select a Department--</option>
+	      		<option id="select_dept" value="nothing">--Please select a Program--</option>
 	      		<option id="CSE" value="CSE">CSE</option>
 	      		<option id="ECE" value="ECE">ECE</option>
 	      		<option id="BBA" value="BBA">BBA</option>
+            <option id="MBA" value="MBA">MBA</option>
+            <option id="MCSE" value="MCSE">MCSE</option>
+            <option id="Diploma" value="Diploma">Diploma</option>
 	      		<option id="CT" value="CT">CT</option>
 	      		<option id="ET" value="ET">ET</option>
 	      		<option id="CMT" value="CMT">CMT</option>

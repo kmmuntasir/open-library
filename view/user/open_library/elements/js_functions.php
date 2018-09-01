@@ -438,6 +438,18 @@
 	    		if(!confirm("Are you sure to generate new code?")) return false;
 	    	});
 
+	    	$(document).on('click', '#user_edit_modal_button', function() {
+	    		var url = site_url + 'user/profile/get_contact_info';
+	    		$.post(url, function(data) {
+	    			var user = $.parseJSON(data);
+	    			$('#user_phone').val(user.user_phone);
+	    			$('#user_email').val(user.user_email);
+	    		});
+
+	    		$('#user_edit_modal').removeClass('hide');
+	    		$('#user_edit_modal').addClass('show');
+	    	});
+
 	    <?php } ?>
 
 	    <?php if($page == 'login') { ?> //============= Issue Requests Page JS Functions

@@ -2,11 +2,6 @@
 Current Issues
 ===================================================================
 
-- Allow users to edit their details
-
-- Fix User Dept Issue (MBA / MCSE missing)
-
-- Backup Restore isn't working on remote server
 
 - Create Cleaning Mechanism (Log)
 
@@ -58,4 +53,7 @@ Done
 - Recheck issuing reference copy to teachers
 - Change password types in library code input
 - Solved backup restore issue for large files
+- Backup Restore isn't working on remote server
+- Fix User Dept Issue (MBA / MCSE missing)
+- Allow users to edit their details
 

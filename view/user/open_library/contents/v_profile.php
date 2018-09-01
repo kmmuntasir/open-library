@@ -10,7 +10,10 @@
   			<!-- Modal content-->
   			<div class="modal-content">
   			  <div class="modal-header">
-  			    <h4 class="modal-title">Profile Information</h4>
+  			    <h4 class="modal-title">
+              Profile Information
+              <button type="button" id="user_edit_modal_button" class="btn btn-primary btn-md pull-right"><i class="fa fa-edit"></i> Edit Contact Info</button>
+            </h4>
   			  </div>
   			  <div class="modal-body">
   			      <table class="table table-striped">
@@ -28,7 +31,7 @@
   			      			<td><?php echo $user->user_username; ?></td>
   			      		</tr>
   			      		<tr>
-  			      			<th>Department</th>
+  			      			<th>Program</th>
   			      			<td><?php echo $user->user_dept; ?></td>
   			      		</tr>
   			      		<?php if($user->is_teacher == 0) { ?>
@@ -108,7 +111,7 @@
 	  					<td><?php echo $user->user_name; ?></td>
 	  				</tr>
 	  				<tr>
-	  					<th>Department</th>
+	  					<th>Program</th>
 	  					<td class="colon-td">:</td>
 	  					<td><?php echo $user->user_dept; ?></td>
 	  				</tr>
@@ -165,5 +168,30 @@
     	  </div>
     	</form>
     </div>
+  </div>
+</div>
+
+<!-- Modal for adding Users -->
+<div id="user_edit_modal" class="modal hide" role="dialog">
+  <div class="modal-dialog">
+  <form id="user_editform" class="lib_form" action="<?php echo $controller.'/update'; ?>" method="post">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Contact Info</h4>
+      </div>
+      <div class="modal-body modal-scroll">
+          <label for="user_phone">Phone</label>
+          <input id="user_phone" required type="text" class="form-control" name="user_phone" placeholder="Phone" autofocus="" />
+          <label for="user_email">Email</label>
+          <input id="user_email" required type="email" class="form-control" name="user_email" placeholder="Email"/>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-check"></i> Save changes</button>
+          <div class="clearfix"></div>
+      </div>
+    </div>
+    </form>
   </div>
 </div>

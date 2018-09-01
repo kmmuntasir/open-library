@@ -43,6 +43,7 @@ $(document).on('click', '.edit_user', function() {
 	var url = '<?php echo $controller; ?>' + '/update/' + user_id;
 	$('#editModal').children('.modal-dialog').children('form.lib_form').attr('action', url);
 	url = site_url + 'admin/user/single_user/' + user_id;
+
 	$.post(url, function(data) {
 		var user = $.parseJSON(data);
 		$('.edit_form_inputs').children('input[name="user_name"]').val(user.user_name);
@@ -57,11 +58,7 @@ $(document).on('click', '.edit_user', function() {
 		$('.edit_form_inputs').children('input[name="user_username"]').val(user.user_username);
 		//$('.edit_form_inputs').children('input[name="user_session"]').val(user.user_dept);
 
-		
-		$('#user_dept_update').children('option').each(function() {
-			if(user.user_dept == $(this).html()) 
-				$(this).attr('selected', 'selected');
-		});
+		$('#user_dept_update').val(user.user_dept);
 	});
 });
 

@@ -19,5 +19,11 @@ class M_profile extends Ci_model {
         return $this->db->where('user_library_code', $user_library_code)->get('user')->num_rows();
     }
 
+    public function get_contact_info() {
+        $this->db->select('user_phone, user_email');
+        $this->db->where('user_id', $this->session->user_id);
+        return $this->db->get('user')->row();
+    }
+
 }
 ?>

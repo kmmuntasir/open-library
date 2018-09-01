@@ -76,5 +76,16 @@ class Profile extends Base_Controller {
         $this->load->view($this->viewpath.'v_print', $data);
     }
 
+    public function update() {
+        $stat = $this->m_profile->update($_POST);
+        if($stat) $this->redirect_msg('user/profile', 'Successfully Updated Contact Info', 'success');
+        else $this->redirect_msg('user/profile', 'Failed to Update', 'danger');
+    }
+
+    public function get_contact_info() {
+        $contact = $this->m_profile->get_contact_info();
+        echo json_encode($contact);
+    }
+
     
 }

@@ -240,15 +240,15 @@ class Dashboard extends Base_Controller {
                     $found_file = "run.sql";
                     // Taking a backup of current system state.
                     $this->backup_db($safety_backup_filename);
-                    echo 'Running SQL File: '.$found_file.'<br>';
+                    // echo 'Running SQL File: '.$found_file.'<br>';
                     $num_of_queries = $this->m_admin->run_sql_queries_one_by_one($this->upload_dir.$found_file);
                     if($num_of_queries) {
                         // $this->clear_backup_dir($this->upload_dir);
                         $this->clear_backup_dir($this->backup_dir); // Successful Restore, removing failsafe backup
 
 
-                        echo 'Success! Total Number of Queries: '.$num_of_queries.'<br>';
-                        echo 'success';
+                        // echo 'Success! Total Number of Queries: '.$num_of_queries.'<br>';
+                        // echo 'success';
 
                         $this->redirect_msg('admin/login/logout', 'Success! Total Number of Queries: '.$num_of_queries.'<br>', 'success', 0, 1);
                     }
