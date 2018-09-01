@@ -3,6 +3,7 @@ Current Issues
 ===================================================================
 
 
+- Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
 - Create Cleaning Mechanism (Log)
 
 - Write A Documentation + User Manual
@@ -21,8 +22,6 @@ Will be done later
     - Issue Report                      |
     - Fine Report                       |
 
-
-- Merge all sync/update/online indicator into one ajax call
 ====================================================================
 
 
@@ -56,4 +55,5 @@ Done
 - Backup Restore isn't working on remote server
 - Fix User Dept Issue (MBA / MCSE missing)
 - Allow users to edit their details
+- Backup doesn't work in remote server
 

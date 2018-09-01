@@ -61,7 +61,7 @@ class Dashboard extends Base_Controller {
         $filename = $this->backup_dir.'backup_'.'library'.'-'.date('Y-m-d_H-i-s').'.sql';
         $zipname  = $this->backup_dir.'backup_'.'library'.'-'.date('Y-m-d_H-i-s').'.zip';
 
-        echo '<br>'.$filename.'<br>'.$zipname.'<br><br>';
+        // echo '<br>'.$filename.'<br>'.$zipname.'<br><br>';
 
         $this->backup_db($filename);
 
