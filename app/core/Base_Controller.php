@@ -362,14 +362,6 @@ class Base_Controller extends CI_Controller
         else return $api_reply;
     }
 
-    /*
-        Issue Confirmation SMS
-        Issue Receival SMS
-             Receive
-             Renew
-        Issue Fine Receival SMS
-    */
-
 }
 
 ?>

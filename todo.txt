@@ -7,8 +7,6 @@ Current Issues
 
 - Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
 
-- Make sync page reload after 10 sync operations
-
 - Create Cleaning Mechanism (Log)
 
 - Write A Documentation + User Manual
@@ -61,4 +59,5 @@ Done
 - Backup doesn't work in remote server
 - Remove Book Copy page from user end
 - Created SMS Mechanism
+- Make sync page reload after 10 sync operations
 

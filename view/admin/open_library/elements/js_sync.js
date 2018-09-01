@@ -13,6 +13,7 @@ var applied_queries = '';
 var sync_interval = '';
 var interval = 0;
 var last_updated = '';
+var counter = 0;
 
 $(document).ready(function() {
 	application_role = $('#application_role').val();
@@ -173,7 +174,9 @@ function unlock_server(s_id) {
 function finish_sync() {
 	if(locked) unlock_server(server_id);
 	syncing = false;
-	reset_sync_indicator(start_wait_indicator);
+	++counter;
+	if(counter == 10) reload(); // Reloading page to get rid of excessive dom memory load
+	else reset_sync_indicator(start_wait_indicator);
 }
 
 
