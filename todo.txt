@@ -3,14 +3,17 @@ Current Issues
 ===================================================================
 
 
+- Check if Request from teacher gets approved when only reference copy is available
+
 - Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
+
+- Make sync page reload after 10 sync operations
+
 - Create Cleaning Mechanism (Log)
 
 - Write A Documentation + User Manual
 
 - Let the user to reset password using email. === Remote Server Problem
-
-- Consider SMS/Email sending feature for issues
 ===================================================================
 
 ===================================================================
@@ -56,4 +59,6 @@ Done
 - Fix User Dept Issue (MBA / MCSE missing)
 - Allow users to edit their details
 - Backup doesn't work in remote server
+- Remove Book Copy page from user end
+- Created SMS Mechanism
 

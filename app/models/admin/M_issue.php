@@ -19,7 +19,7 @@ class M_issue extends Ci_model {
     
     public function all_demands() {
         $now = date('Y-m-d H:i:s');
-        // $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
+        $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
         return $this->db->where('issue_status', 6)->get('issue')->result();
     }
 

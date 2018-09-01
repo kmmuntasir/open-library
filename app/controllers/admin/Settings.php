@@ -120,4 +120,12 @@ class Settings extends Base_Controller {
         }
         else $this->redirect_msg($this->module.'/settings', $total_error, 'danger');
     }
+
+    public function update_sms_settings() {
+        if(isset($_POST['sms_sending_status'])) 
+            $_POST['sms_sending_status'] = (int)$_POST['sms_sending_status'];
+        $status = $this->m_settings->update_info($_POST);
+        if($status) $this->redirect_msg($this->module.'/settings', 'Settings Saved Successfully', 'success');
+        else $this->redirect_msg($this->module.'/settings', 'Something went wrong!', 'danger');
+    }
 }

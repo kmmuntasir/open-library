@@ -52,12 +52,7 @@
             Books
           </a>
         </li>
-        <li <?php if($page=='book_copy') echo 'class="active"'; ?>>
-          <a href="<?php echo site_url($module.'/book/copy'); ?>">
-            <span class="nav_icon"><i class="fa fa-file"></i></span>
-            Book Copy
-          </a>
-        </li>
+        
         <li class="dropdown <?php if($page=='issue') echo 'active'; ?>">
           <a class="dropdown-toggle" id="issue_nav_button" href="#" data-toggle="dropdown" aria-expanded="false" role="button" aria-haspopup="true">
             <span class="nav_icon"><i class="fa fa-credit-card-alt"></i></span> My Issues

@@ -98,3 +98,46 @@
   </div>
   </form>
 </div>
+
+<div class="col-xs-12 col-sm-6">
+  <form action="<?php echo $controller.'/update_sms_settings'; ?>" method="post">
+  <div class="panel panel-primary">
+    <div class="panel-heading">SMS Settings</div>
+    <div class="panel-body">
+      <label class="col-sm-4 col-xs-12" for="application_role">SMS Gateway URL</label>
+      <div class="col-sm-8 col-xs-12">
+        <input required type="text" class="col-xs-12" name="sms_gateway_url" value="<?php echo $this->settings->sms_gateway_url; ?>">
+      </div>
+      <div class="clearfix"></div>
+      <hr>
+      <label class="col-sm-4 col-xs-12" for="application_role">SMS Gateway Access Token</label>
+      <div class="col-sm-8 col-xs-12">
+        <input required type="text" class="col-xs-12" name="sms_access_token" value="<?php echo $this->settings->sms_access_token; ?>">
+      </div>
+      <div class="clearfix"></div>
+      <hr>
+      <div class="form-group">
+        <label class="col-sm-4 col-xs-12">SMS Sending Status</label>
+
+        <?php
+          $stat = array('', '');
+          $stat[$this->settings->sms_sending_status] = 'checked ';
+        ?>
+
+        <div class="col-sm-8 col-xs-12">
+          <input id="sms_on" <?php echo $stat[1]; ?> type="radio" name="sms_sending_status" value="1">
+          <label for="sms_on">On</label>
+          <input style="margin-left: 30px;" id="sms_off" <?php echo $stat[0]; ?> type="radio" name="sms_sending_status" value="0">
+          <label for="sms_off">Off</label>
+        </div>
+      </div>
+      
+
+    </div>
+    <div class="panel-footer">
+        <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-save"></i> Save</button>
+        <div class="clearfix"></div>
+    </div>
+  </div>
+  </form>
+</div>

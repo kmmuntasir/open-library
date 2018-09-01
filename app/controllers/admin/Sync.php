@@ -34,6 +34,11 @@ class Sync extends Base_Controller {
     }
     //====================================//
 
+    public function test() {
+        // $reply = $this->send_sms('01516180603', 'hello');
+        // $this->printer($reply);
+    }
+
 	public function index() {
         $data = $this->data;
         $data['page'] = 'sync';
@@ -83,7 +88,13 @@ class Sync extends Base_Controller {
                     $new['book'] = array('book_id' => $issue->issue_book_id, 'book_available' => $book_available-1);
 
                     $reply = $this->update_issue($new);
-                    if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
+                    if($reply) {
+                        echo 'Confirmed Issue '.$issue->issue_id.'<br>';
+                        // Attempting SMS
+                        $msg = "Confirmed Issue #".$issue->issue_id." for \"".$issue->book_title."\". Please collect within 48 hours.";
+                        $sms_reply = $this->send_sms($issue->user_phone, $msg);
+                        if($sms_reply == 'success') echo 'SMS Sent<br>';
+                    }
                     else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
                 }
                 else {
@@ -106,7 +117,17 @@ class Sync extends Base_Controller {
                     $new['book'] = array('book_id' => $issue->book_id);
                 }
                 $reply = $this->update_issue($new);
-                if($reply) echo 'Confirmed Issue '.$issue->issue_id.'<br>';
+                    if($reply) {
+                        if($issue->book_available > 0) {
+                            echo 'Confirmed Issue '.$issue->issue_id.'<br>';
+                            // Attempting SMS
+                            $msg = "Confirmed Issue #".$issue->issue_id." for \"".$issue->book_title."\". Please collect within 48 hours.";
+                            $sms_reply = $this->send_sms($issue->user_phone, $msg);
+                            if($sms_reply == 'success') echo 'SMS Sent<br>';
+                        }
+                        else echo 'Demanded Issue '.$issue->issue_id.'<br>';
+
+                    }
                 else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
             }
         }

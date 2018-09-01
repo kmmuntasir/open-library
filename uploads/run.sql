@@ -1,6 +1,6 @@
 /*
 
-Date: 2018-09-01 05:11:47
+Date: 2018-09-02 00:13:54
 
 */
 
@@ -15502,7 +15502,7 @@ CREATE TABLE `log` (
   `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `log_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`,`log_entry_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1246 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1248 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `log`
@@ -16752,6 +16752,8 @@ INSERT INTO `log` VALUES ("1242", "m_1242", "INSERT INTO `user` (`is_teacher`, `
 INSERT INTO `log` VALUES ("1243", "m_1243", "INSERT INTO `user` (`is_teacher`, `user_id`, `user_name`, `user_phone`, `user_email`, `user_dept`, `user_roll`, `user_session`, `user_username`, `user_pass`, `user_library_code`) VALUES (\'0\', \'m1243\', \'Maria Jahan\', \'\', \'\', \'MCSE\', 17019, 2016, \'MCSE17019_m1243\', \'7c5ce8817f43c9ccd658b5fcb7faa023\', \'7fb7da25ad370d35\')", "1", "2018-09-01 05:09:58");
 INSERT INTO `log` VALUES ("1244", "m_1244", "INSERT INTO `user` (`is_teacher`, `user_id`, `user_name`, `user_phone`, `user_email`, `user_dept`, `user_roll`, `user_session`, `user_username`, `user_pass`, `user_library_code`) VALUES (\'0\', \'m1244\', \'Al Mamun\', \'\', \'\', \'MCSE\', 17020, 2016, \'MCSE17020_m1244\', \'6bb89752345f6535f1911ec2aef5ce27\', \'d25fbe09a25204b2\')", "1", "2018-09-01 05:09:58");
 INSERT INTO `log` VALUES ("1245", "m_1245", "INSERT INTO `user` (`is_teacher`, `user_id`, `user_name`, `user_phone`, `user_email`, `user_dept`, `user_roll`, `user_session`, `user_username`, `user_pass`, `user_library_code`) VALUES (\'0\', \'m1245\', \'Md. Rahamatullah\', \'\', \'\', \'MCSE\', 17021, 2016, \'MCSE17021_m1245\', \'6c5e1edb0c0ed2159bebf8a4e6ad1281\', \'b9f4a2e851d65556\')", "1", "2018-09-01 05:09:58");
+INSERT INTO `log` VALUES ("1246", "s1246", "UPDATE `manager` SET `manager_name` = \'Muntasir Billah Munna\', `manager_phone` = \'01516180603\', `manager_email` = \'kmmuntasir@gmail.com\', `manager_user` = \'admin\', `manager_pass` = \'13563efc6e9a785d43c5f1bb85ba25e7\' WHERE `manager_id` = \'IST_LIBRARY_1\'", "1", "2018-09-01 02:23:53");
+INSERT INTO `log` VALUES ("1247", "s1247", "UPDATE `manager` SET `manager_name` = \'Muntasir Billah Munna\', `manager_phone` = \'01516180603\', `manager_email` = \'kmmuntasir@gmail.com\', `manager_user` = \'$uperadmin\' WHERE `manager_id` = \'IST_LIBRARY_1\'", "1", "2018-09-01 02:24:12");
 
 -- ----------------------------
 -- Table structure for `manager`
@@ -16775,7 +16777,7 @@ CREATE TABLE `manager` (
 -- ----------------------------
 -- Records of `manager`
 -- ----------------------------
-INSERT INTO `manager` VALUES ("1", "IST_LIBRARY_1", "admin", "202cb962ac59075b964b07152d234b70", "Muntasir Billah Munna", "01516180603", "kmmuntasir@gmail.com", "2", "0", "2018-08-24 02:40:35");
+INSERT INTO `manager` VALUES ("1", "IST_LIBRARY_1", "$uperadmin", "13563efc6e9a785d43c5f1bb85ba25e7", "Muntasir Billah Munna", "01516180603", "kmmuntasir@gmail.com", "2", "0", "2018-09-01 02:24:12");
 INSERT INTO `manager` VALUES ("3", "L_2", "khalil", "202cb962ac59075b964b07152d234b70", "Khalilullah", "234567", "khalil@mia.com", "0", "0", "2018-08-20 20:03:36");
 INSERT INTO `manager` VALUES ("4", "L_3", "salma", "202cb962ac59075b964b07152d234b70", "Salma", "23455", "sal@ma.com", "1", "0", "2018-08-20 20:02:55");
 
@@ -17275,7 +17277,7 @@ CREATE TABLE `server` (
 -- ----------------------------
 -- Records of `server`
 -- ----------------------------
-INSERT INTO `server` VALUES ("1", "remote", "http://library.ist.edu.bd/index.php", "2018-09-01 05:11:40", "1", "1", "HF1EBAvrgB");
+INSERT INTO `server` VALUES ("1", "remote", "http://library.ist.edu.bd/index.php", "2018-09-01 06:32:03", "1", "1", "HF1EBAvrgB");
 
 -- ----------------------------
 -- Table structure for `settings`
@@ -17297,13 +17299,16 @@ CREATE TABLE `settings` (
   `institute_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'admin@yourschool.edu',
   `institute_phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'Your School Phone',
   `app_installed` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `sms_gateway_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sms_access_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sms_sending_status` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `settings`
 -- ----------------------------
-INSERT INTO `settings` VALUES ("1", "HF1EBAvrgB", "15", "2", "2", "BDT ", "/=", "0", "Institute of Science and Technology", "d9b968f458576bc4302a76fb7ff68c4c.png", "c47e97c062d1c304619ef00a915e11fe.ico", "House #54, Road #15/A, Dhanmondi, Dhaka-1209", "info@ist.edu.bd", "01711223344", "1");
+INSERT INTO `settings` VALUES ("1", "HF1EBAvrgB", "15", "2", "2", "BDT ", "/=", "1", "Institute of Science and Technology", "d9b968f458576bc4302a76fb7ff68c4c.png", "c47e97c062d1c304619ef00a915e11fe.ico", "House #54, Road #15/A, Dhanmondi, Dhaka-1209", "info@ist.edu.bd", "01711223344", "1", "http://sms.greenweb.com.bd/api.php", "05d5610709b2f2b886fc0e4849eec4eb", 0);
 
 -- ----------------------------
 -- Table structure for `user`

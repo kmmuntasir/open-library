@@ -405,7 +405,11 @@ class Issue extends Base_Controller {
                 // $this->printer($book_copy);
                 // $this->printer($issue_updated);
 
-                if($status) echo 'success';
+                if($status) {
+                    echo 'success';
+                    $msg = "Recieved Issue #".$issue_id." (".$issue->book_title."). Thank You.";
+                    $this->send_sms($issue->user_phone, $msg);
+                }
                 else echo 'Failure to Process';
             }
 
@@ -415,7 +419,12 @@ class Issue extends Base_Controller {
                 $book_copy = array('book_copy_accession_no' => $issue->issue_book_copy_accession_no, 'book_copy_status'=>1);
                 $issue_updated = array('issue_id'=> $issue_id ,'issue_status'=> 3, 'issue_return_datetime'=>date('Y-m-d H:i:s'));
                 $status = $this->m_issue->update_issue($issue_id, $issue_updated, $book, $book_copy);
-                if($status) echo 'success';
+                
+                if($status) {
+                    echo 'success';
+                    $msg = "Recieved Issue #".$issue_id." (".$issue->book_title."). Thank You.";
+                    $this->send_sms($issue->user_phone, $msg);
+                }
                 else echo 'Failure to Process';
             }
 
@@ -425,7 +434,12 @@ class Issue extends Base_Controller {
                 $issue_updated = array('issue_id'=> $issue_id ,'issue_status'=> 3);
                 $issue_updated['issue_received_fine']= $issue->issue_total_fine;
                 $status = $this->m_issue->update_issue($issue_id, $issue_updated);
-                if($status) echo 'success';
+                
+                if($status) {
+                    echo 'success';
+                    $msg = "Recieved Total Fine ".$this->settings->currency_before.$issue->issue_total_fine.$this->settings->currency_after." for Issue #".$issue_id." (".$issue->book_title."). Thank You.";
+                    $this->send_sms($issue->user_phone, $msg);
+                }
                 else echo 'Failure to Process';
             } 
             else echo 'Issue is not ready to be received';
@@ -476,7 +490,12 @@ class Issue extends Base_Controller {
             // $this->printer($issue_updated);
             // $this->printer($issue_new, true);
 
-            if($status) $this->redirect_msg('admin/issue/active', 'Successfully Renewed, New Issue ID: #'.$issue_new['issue_id'], 'success');
+            if($status) {
+                $msg = "Renewed Issue #".$issue_id." (".$issue->book_title."). New Issue ID: #".$issue_new['issue_id'];
+                $this->send_sms($issue->user_phone, $msg);
+
+                $this->redirect_msg('admin/issue/active', 'Successfully Renewed, New Issue ID: #'.$issue_new['issue_id'], 'success');
+            }
             else $this->redirect_msg('admin/issue/active', 'Something went wrong', 'danger');
         }
         else $this->redirect_msg('admin/issue/active', 'Invalid Issue ID', 'danger');

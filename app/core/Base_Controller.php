@@ -329,6 +329,47 @@ class Base_Controller extends CI_Controller
         else return $json_data;
     }
 
+    // =============================== SMS Functions ===========================
+
+
+    public function send_sms($to=NULL, $message=NULL) {
+        if(!$this->settings->sms_sending_status) return 'SMS Sending Turned Off By Admin';
+        /*
+            Returns 'success' if succeeded, returns API Reply if SMS is not sent.
+        */
+        if(!$to || !$message) return 'Recipient and Message Text is Required';
+
+
+        $sms = array();
+        $sms['to']      = $to;
+        $sms['message'] = $message;
+        $sms['token']   = $this->settings->sms_access_token;
+
+        // $this->printer($sms, true);
+
+        $ch = curl_init(); // Initialize cURL
+        curl_setopt($ch, CURLOPT_URL,$this->settings->sms_gateway_url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sms));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $api_reply = curl_exec($ch);
+
+        $sms_stat = explode(':', $api_reply)[0];
+
+        // $sms_stat = 'Ok';
+
+        if($sms_stat == 'Ok') return 'success';
+        else return $api_reply;
+    }
+
+    /*
+        Issue Confirmation SMS
+        Issue Receival SMS
+             Receive
+             Renew
+        Issue Fine Receival SMS
+    */
+
 }
 
 ?>
