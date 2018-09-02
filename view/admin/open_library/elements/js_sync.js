@@ -78,7 +78,7 @@ function fetch_queries(limit=0) {
 		if(isJSON(data)) {
 			var queries = $.parseJSON(data);
 			if(queries.length == 0) {
-				$('#fetch_list').html('Nothing to Fetch');
+				$('#fetch_list').html('Nothing to Fetch<br> ');
 				release();
 			}
 			else {
@@ -125,7 +125,7 @@ function push_queries(limit=0) {
 			var queries = $.parseJSON(data);
 			if(queries.length == 0) {
 				$('#push_list').html('Nothing to Push');
-				update_local_server_connection_time();
+				clean_old_logs();
 				update_remote_server_connection_time();
 			}
 			else {
@@ -133,20 +133,27 @@ function push_queries(limit=0) {
 					if(isJSON(entry_ids)) {
 						$.post(sync_url+'update_log_as_synced', {'access_code': server_access_code, 'entry_ids':entry_ids}, function(data) {
 							$('#push_list').html(data);
-							update_local_server_connection_time();
+							clean_old_logs();
 						});
 					}
 					else {
 						$('#push_list').html('Logs Pushed but Wasn\'t Reveived by Remote Server');
-						update_local_server_connection_time();
+						clean_old_logs();
 					}
 				});
 			}
 		}
 		else {
 			$('#push_list').html('Local Server Feed Error');
-			update_local_server_connection_time();
+			clean_old_logs();
 		}
+	});
+}
+
+function clean_old_logs() {
+	$.post(sync_url+'clean_old_logs/'+(sync_limit * 10), function(data) {
+		$('#log_clean_panel').html(data);
+		update_local_server_connection_time();
 	});
 }
 

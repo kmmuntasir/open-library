@@ -2,12 +2,11 @@
 Current Issues
 ===================================================================
 
-
 - Check if Request from teacher gets approved when only reference copy is available
 
 - Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
 
-- Create Cleaning Mechanism (Log)
+- new_id prefix should be dynamic (from application role)
 
 - Write A Documentation + User Manual
 
@@ -60,4 +59,6 @@ Done
 - Remove Book Copy page from user end
 - Created SMS Mechanism
 - Make sync page reload after 10 sync operations
+
+- Create Cleaning Mechanism (Log)
 

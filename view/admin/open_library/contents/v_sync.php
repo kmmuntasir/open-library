@@ -63,6 +63,19 @@
 			</div> <!-- Panel Ends -->
 		</div>
 	</div>
+	<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-3 col-sm-offset-9">
+			<div class="panel panel-primary">
+			  <div class="panel-heading">Log Cleaner</div>
+			  <div class="panel-body" id="log_clean_panel">
+
+			  </div>
+			  <div class="panel-footer">
+
+			  </div>
+			</div> <!-- Panel Ends -->
+		</div>
+	</div>
 </div>
 
 

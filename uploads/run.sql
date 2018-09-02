@@ -1,6 +1,6 @@
 /*
 
-Date: 2018-09-02 02:35:03
+Date: 2018-09-02 17:52:10
 
 */
 
@@ -16061,7 +16061,7 @@ CREATE TABLE `settings` (
 -- ----------------------------
 -- Records of `settings`
 -- ----------------------------
-INSERT INTO `settings` VALUES ("1", "e4849eec4eb", "15", "2", "2", "BDT ", "/=", "1", "Institute of Science and Technology", "d9b968f458576bc4302a76fb7ff68c4c.png", "c47e97c062d1c304619ef00a915e11fe.ico", "House #54, Road #15/A, Dhanmondi, Dhaka-1209", "info@ist.edu.bd", "01711223344", "1", "http://sms.greenweb.com.bd/api.php", "No Token", 0);
+INSERT INTO `settings` VALUES ("1", "e4849eec4eb", "15", "2", "2", "BDT ", "/=", "1", "Institute of Science and Technology", "d9b968f458576bc4302a76fb7ff68c4c.png", "c47e97c062d1c304619ef00a915e11fe.ico", "House #54, Road #15/A, Dhanmondi, Dhaka-1209", "info@ist.edu.bd", "01711223344", "1", "http://sms.greenweb.com.bd/api.php", "46a97c98e7751d33c527dce90c10d1d1", 0);
 
 -- ----------------------------
 -- Table structure for `user`

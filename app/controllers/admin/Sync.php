@@ -56,7 +56,7 @@ class Sync extends Base_Controller {
 
     public function release() {
         $issues = $this->m_issue->all_expired_confirmed_issue_requests();
-        if(count($issues) == 0) echo 'No Issue to Release<br>';
+        if(count($issues) == 0) echo 'No Issue to Release<br> ';
         else {
             foreach($issues as $key=>$issue) {
                 $new['issue'] = array('issue_id' => $issue->issue_id ,'issue_status' => 8);
@@ -150,7 +150,11 @@ class Sync extends Base_Controller {
     public function lock_server($server_id) {echo $this->m_sync->lock_server($server_id);}
     public function unlock_server($server_id) {echo $this->m_sync->unlock_server($server_id);}
 
-    public function update_server_connection_time($server_id) {echo $this->m_sync->update_server_connection_time($server_id);}
+    public function update_server_connection_time($server_id) {
+        if(isset($_SESSION['sync_on'])) unset($_SESSION['sync_on']); 
+        // because we don't want the log entry
+        echo $this->m_sync->update_server_connection_time($server_id);
+    }
 
     public function last_sync_time($seconds = 0) {
         //echo $this->server->server_last_connection.'<br>';
@@ -238,5 +242,17 @@ class Sync extends Base_Controller {
         // return 1;
         if(!$query) return 0;
         return $this->m_sync->run_query($query);
+    }
+
+    public function clean_old_logs($limit = 100) {
+        $_SESSION['sync_on'] = true; // because we need the log entry for update
+
+        $count = $this->m_sync->count_synced_logs();
+        echo "Total Synced Log: ".$count.'<br>';
+        if($count <= $limit) exit('No Logs to Clean');
+        $word = ($count == 1) ? "entry" : "entries";
+        $status = $this->m_sync->clean_old_logs($count - $limit + 1);
+        if($status) echo "Cleaned ".($count - $limit)." old log $word";
+        else echo 'Something went wrong while cleaning '.($count - $limit)." old log $word";
     }
 }

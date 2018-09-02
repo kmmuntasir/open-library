@@ -64,6 +64,23 @@ class M_sync extends Ci_model {
     	$existing_log = $this->db->where('log_entry_id', $log_entry_id)->where('log_is_synced', 1)->get('log')->row();
     	return $existing_log ? true : false;
     }
+
+    public function count_synced_logs() {
+        return $this->db->select('count(log_id) as count')->where('log_is_synced', 1)->get('log')->row()->count;
+    }
+
+    public function clean_old_logs($limit) {
+        $this->db->trans_start();
+
+        $this->db->where('log_is_synced', 1);
+        $this->db->limit($limit);
+        $this->db->order_by('log_id', 'asc');
+        $this->db->delete('log');
+
+        $this->db->trans_complete();
+
+        return $this->db->trans_status() ? 1:0;
+    }
     
 }
 ?>
