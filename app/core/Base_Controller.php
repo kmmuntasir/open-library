@@ -16,6 +16,8 @@ class Base_Controller extends CI_Controller
 	 	//$this->load->model("admin/m_admin");
          $this->load->model("admin/m_settings");
          $this->settings = $this->m_settings->all_settings();
+         // Setting Branch Prefix 'm' for local server, 's' for remote server.
+         $_SESSION['branch_prefix'] = $this->settings->application_role ? 's':'m';
 
         // loading libraries
 	 	$this->load->library('session');
@@ -202,7 +204,7 @@ class Base_Controller extends CI_Controller
 	    }
 	    else $new_key = 1;
 	    // return $CI->config->item('branch').'_'.$new_key;
-        return $CI->config->item('branch').$new_key;
+        return $_SESSION['branch_prefix'].$new_key;
 	}
 
     public function redirect_msg($url, $msg='', $type="success", $number=0, $prevent_logging=0) {

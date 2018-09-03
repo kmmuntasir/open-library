@@ -263,7 +263,7 @@ class Book extends Base_Controller {
         $book_copy = array();
         $i = $_POST['book_copy_num'];
         while($i--) {
-            $book_copy_single['book_copy_accession_no'] = $this->config->item('branch').$acc;
+            $book_copy_single['book_copy_accession_no'] = $_SESSION['branch_prefix'].$acc;
             array_push($book_copy, $book_copy_single);
             ++$acc;
         }
@@ -479,7 +479,7 @@ class Book extends Base_Controller {
             $new_copy = array();
 
             $new_copy['book_id']                = $new_book_id;
-            $new_copy['book_copy_accession_no'] = $this->config->item('branch').$copy->copy_id;
+            $new_copy['book_copy_accession_no'] = $_SESSION['branch_prefix'].$copy->copy_id;
             $new_copy['book_copy_status']       = 1;
             $new_copy['book_copy_type']         = $copy->copy_type - 1;
             $new_copy['book_copy_date']         = $copy->copy_date;

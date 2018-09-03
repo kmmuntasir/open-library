@@ -281,13 +281,4 @@ class Dashboard extends Base_Controller {
             fclose($file);
         }
     }
-
-    function test() {
-
-        $filepath = 'uploads/test.sql';
-        $num_of_queries = $this->m_admin->run_sql_queries_one_by_one($filepath);
-
-        echo $num_of_queries;
-
-    }
 }

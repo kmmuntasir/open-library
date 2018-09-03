@@ -49,7 +49,7 @@ class Db_log {
             $new_key = $result->$primary_key + 1;
         }
         else $new_key = 1;
-        return $CI->config->item('branch').'_'.$new_key;
+        return $_SESSION['branch_prefix'].'_'.$new_key;
     }
  
 }
