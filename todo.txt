@@ -2,7 +2,6 @@
 Current Issues
 ===================================================================
 
-- Cleanup Application Directory of Unnecessary Files
 
 - Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
 
@@ -14,6 +13,8 @@ Current Issues
 ===================================================================
 Will be done later
 ===================================================================
+
+- Create an installer
 - Report Page                           |
     - Books Report                      |
         - Online Reading Report         | 
@@ -59,4 +60,5 @@ Done
 - Make sync page reload after 10 sync operations
 - Create Cleaning Mechanism (Log)
 - new_id prefix should be dynamic (from application role)
+- Cleanup Application Directory of Unnecessary Files
 
