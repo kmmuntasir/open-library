@@ -53,8 +53,10 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-	// define('ENVIRONMENT', 'production');
+	if($_SERVER['HTTP_HOST'] == 'localhost' || explode(':', $_SERVER['HTTP_HOST'])[0] == '192' || explode(':', $_SERVER['HTTP_HOST'])[0] == '127')
+		define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	else 
+		define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 
 /*
  *---------------------------------------------------------------
