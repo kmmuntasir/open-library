@@ -2,7 +2,6 @@
 Current Issues
 ===================================================================
 
-
 - Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
 
 - Write A Documentation + User Manual
