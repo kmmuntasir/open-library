@@ -106,13 +106,13 @@
     <div class="panel-body">
       <label class="col-sm-4 col-xs-12" for="application_role">SMS Gateway URL</label>
       <div class="col-sm-8 col-xs-12">
-        <input required type="text" class="col-xs-12" name="sms_gateway_url" value="<?php echo $this->settings->sms_gateway_url; ?>">
+        <input type="text" class="col-xs-12" name="sms_gateway_url" value="<?php echo $this->settings->sms_gateway_url; ?>">
       </div>
       <div class="clearfix"></div>
       <hr>
       <label class="col-sm-4 col-xs-12" for="application_role">SMS Gateway Access Token</label>
       <div class="col-sm-8 col-xs-12">
-        <input required type="text" class="col-xs-12" name="sms_access_token" value="<?php echo $this->settings->sms_access_token; ?>">
+        <input type="text" class="col-xs-12" name="sms_access_token" value="<?php echo $this->settings->sms_access_token; ?>">
       </div>
       <div class="clearfix"></div>
       <hr>

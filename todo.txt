@@ -2,7 +2,7 @@
 Current Issues
 ===================================================================
 
-- Check if Request from teacher gets approved when only reference copy is available
+- Cleanup Application Directory of Unnecessary Files
 
 - Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
 
