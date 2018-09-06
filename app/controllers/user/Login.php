@@ -60,7 +60,7 @@ class Login extends Base_Controller {
     }
 
     public function request_password_reset() {
-        $app_domain = $this->config->item('app_domain');
+        $app_domain = $_SERVER['HTTP_HOST'];
         $admin_email = 'admin@'.$app_domain;
         if(!isset($_GET['url'])) $url = $this->module.'/dashboard';
   		else $url = $_GET['url'];
