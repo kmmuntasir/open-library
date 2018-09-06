@@ -11,7 +11,7 @@
         ?>
         <div class="flash_message_login col-xs-12" <?php if($m[0]) echo 'style="display:block;"'; ?>>
           <div class="alert alert-<?php echo $m[1]; ?>" role="alert">
-            <?php echo $m[0]; ?>
+            <h5><?php echo $m[0]; ?></h5>
           </div>
         </div>
         <?php } } ?>

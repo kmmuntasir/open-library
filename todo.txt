@@ -2,16 +2,17 @@
 Current Issues
 ===================================================================
 
-- Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
-
 - Write A Documentation + User Manual
 
-- Let the user to reset password using email. === Remote Server Problem
 ===================================================================
 
 ===================================================================
 Will be done later
 ===================================================================
+
+- Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
+
+- Openssl encrypt all api response data to secure the plaintext transactions.
 
 - Create an installer
 - Report Page                           |
@@ -60,4 +61,4 @@ Done
 - Create Cleaning Mechanism (Log)
 - new_id prefix should be dynamic (from application role)
 - Cleanup Application Directory of Unnecessary Files
-
+- Let the user to reset password using email.

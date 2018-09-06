@@ -82,7 +82,7 @@ class Login extends Base_Controller {
                 $reset_link = site_url($this->module.'/login/reset_password?reset_code='.$user_password_reset_code);
                 $message = $this->password_reset_message($reset_link, $app_domain);                
                 $this->__mail($admin_email, $user->user_email, 'Password reset link for '.$app_domain, $reset_link);
-                $this->redirect_msg(site_url($this->module.'/login'), 'Successfully Requested for Password Reset<br>Please check your email for the password reset link', 'success');
+                $this->redirect_msg(site_url($this->module.'/login'), 'Successfully Requested for Password Reset<br>Please check your email for the password reset link<br>Don\'t forget to check your SPAM folder', 'success');
             }
             else $this->redirect_msg(site_url($this->module.'/login'), 'Something went wrong. Please try again later', 'danger');
             
