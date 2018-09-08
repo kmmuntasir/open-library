@@ -2,6 +2,10 @@
 Current Issues
 ===================================================================
 
+- Book delete button works regardless of the choice "Yes" or "No"
+
+- Remove all delete buttons from software except for superadmin
+
 - Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
 
 - Write A Documentation + User Manual
