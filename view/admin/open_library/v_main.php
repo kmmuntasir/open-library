@@ -11,6 +11,7 @@
       return $str;
   }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <?php require_once('elements/head.php'); ?>

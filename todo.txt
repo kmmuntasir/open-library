@@ -2,15 +2,10 @@
 Current Issues
 ===================================================================
 
-<<<<<<< HEAD
-- Book delete button works regardless of the choice "Yes" or "No"
-
 - Remove all delete buttons from software except for superadmin
 
-- Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
+- Created deleted books page
 
-=======
->>>>>>> c82bdfdb9b7a6dc34bf9bb48ac0800c571a6c9ef
 - Write A Documentation + User Manual
 
 ===================================================================
@@ -37,7 +32,6 @@ Will be done later
 Done
 ====================================================================
 - Add Footer search boxes in datatables footer
-
 - Enable managing the authorization level of Managers (Admin/Manager)
     - Control sensitive sections from only Admin user, not from manager.
 - Prevent Backup System from being logged
@@ -71,3 +65,6 @@ Done
 - new_id prefix should be dynamic (from application role)
 - Cleanup Application Directory of Unnecessary Files
 - Let the user to reset password using email.
+- Book delete button works regardless of the choice "Yes" or "No"
+- Book considered as duplicate when matched with a deleted book
+

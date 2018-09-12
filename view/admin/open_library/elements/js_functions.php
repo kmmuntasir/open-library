@@ -116,7 +116,7 @@
 	    }
 
 
-	    $(document).one('click', '.delete', function() {
+	    $(document).on('click', '.delete', function() {
 	    	if(!confirm("Are you sure to delete?")) {
 	    		event.preventDefault();
 	    		return false;

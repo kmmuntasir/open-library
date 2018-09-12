@@ -88,7 +88,7 @@ class M_book extends Ci_model {
     }
 
     public function check_book_title_edition($book_title, $book_edition) {
-        $this->db->where('book_title', $book_title)->where('book_edition', $book_edition);
+        $this->db->where('book_title', $book_title)->where('book_edition', $book_edition)->where('is_deleted', 0);
         return $this->db->get('book')->row();
     }
 
