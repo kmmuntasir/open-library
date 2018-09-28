@@ -2,6 +2,16 @@
 Current Issues
 ===================================================================
 
+- Book Receive button delays too much to take action (after clicking "OK" on "Are you sure?")
+
+- Duplicate authors remains for a book when merged several books
+
+- All Books List needed (according to accession number)
+
+- ID needed in authors, categories and publications page in admin section
+
+- Publisher instead of Publication (only in view)
+
 - Remove all delete buttons from software except for superadmin
 
 - Created deleted books page
