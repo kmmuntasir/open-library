@@ -1,6 +1,6 @@
 /*
 
-Date: 2018-09-28 23:46:52
+Date: 2018-09-24 16:38:45
 
 */
 
@@ -14,10 +14,10 @@ CREATE TABLE `author` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `author_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `author_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`author_id`,`author_name`),
   KEY `author_id` (`author_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1981 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1971 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `author`
@@ -1696,6 +1696,7 @@ INSERT INTO `author` VALUES ("1671", "m1671", "M. Gupta", "2018-08-28 16:26:44")
 INSERT INTO `author` VALUES ("1672", "m1672", "P.C. Brewer", "2018-08-28 16:26:44");
 INSERT INTO `author` VALUES ("1673", "m1673", "A. Malvino", "2018-08-28 16:26:44");
 INSERT INTO `author` VALUES ("1674", "m1674", "D.J. Bates", "2018-08-28 16:26:44");
+INSERT INTO `author` VALUES ("1675", "m1675", "N.C.Masud Shil", "2018-08-28 16:26:44");
 INSERT INTO `author` VALUES ("1676", "m1676", "M.F. Alam", "2018-08-28 16:26:44");
 INSERT INTO `author` VALUES ("1677", "m1677", "R.K. Mazumder", "2018-08-28 16:26:44");
 INSERT INTO `author` VALUES ("1678", "m1678", "Chartis Jones", "2018-08-28 16:26:44");
@@ -1705,6 +1706,8 @@ INSERT INTO `author` VALUES ("1681", "m1681", "J.K. Goyal", "2018-08-28 16:26:44
 INSERT INTO `author` VALUES ("1682", "m1682", "J.W. Brown", "2018-08-28 16:26:44");
 INSERT INTO `author` VALUES ("1683", "m1683", "R.V. Churchill", "2018-08-28 16:26:44");
 INSERT INTO `author` VALUES ("1684", "m1684", "Khanna.M.L.", "2018-08-28 16:26:45");
+INSERT INTO `author` VALUES ("1685", "m1685", "N.C.Masurt.M.Z. Shill", "2018-08-28 16:26:45");
+INSERT INTO `author` VALUES ("1686", "m1686", "M F. Alam", "2018-08-28 16:26:45");
 INSERT INTO `author` VALUES ("1687", "m1687", "M. Reynolds", "2018-08-28 16:26:45");
 INSERT INTO `author` VALUES ("1688", "m1688", "H. Kootz", "2018-08-28 16:26:45");
 INSERT INTO `author` VALUES ("1689", "m1689", "M. Shajahan Mina", "2018-08-28 16:26:45");
@@ -1895,6 +1898,7 @@ INSERT INTO `author` VALUES ("1873", "m1873", "H. Anton", "2018-08-28 16:26:54")
 INSERT INTO `author` VALUES ("1874", "m1874", "S. Davis", "2018-08-28 16:26:54");
 INSERT INTO `author` VALUES ("1875", "m1875", "W A. Tribel", "2018-08-28 16:26:54");
 INSERT INTO `author` VALUES ("1876", "m1876", "IST", "2018-08-28 16:26:54");
+INSERT INTO `author` VALUES ("1877", "m1877", "N. Shil", "2018-08-28 16:26:54");
 INSERT INTO `author` VALUES ("1878", "m1878", "A.K.", "2018-08-28 16:26:54");
 INSERT INTO `author` VALUES ("1879", "m1879", "Norton\'s P", "2018-08-28 16:26:54");
 INSERT INTO `author` VALUES ("1880", "m1880", "M. Ali", "2018-08-28 16:26:54");
@@ -1988,16 +1992,6 @@ INSERT INTO `author` VALUES ("1967", "m1967", "Md. Hafizuddin", "2018-08-28 16:2
 INSERT INTO `author` VALUES ("1968", "m1968", "J.R. Meredith", "2018-08-28 16:27:28");
 INSERT INTO `author` VALUES ("1969", "m1969", "S.J. Mantel", "2018-08-28 16:27:28");
 INSERT INTO `author` VALUES ("1970", "m1970", "Md. Sekul Islam", "2018-08-28 16:27:29");
-INSERT INTO `author` VALUES ("1971", "s1971", "C.G Traver", "2018-09-25 12:06:18");
-INSERT INTO `author` VALUES ("1972", "s1972", "D.B Botkin", "2018-09-26 10:45:03");
-INSERT INTO `author` VALUES ("1973", "s1973", "E.A Keller", "2018-09-26 10:45:03");
-INSERT INTO `author` VALUES ("1974", "s1974", "I. Bivens", "2018-09-26 10:51:12");
-INSERT INTO `author` VALUES ("1975", "s1975", "S. Taylor", "2018-09-26 10:55:08");
-INSERT INTO `author` VALUES ("1976", "s1976", "Chandra", "2018-09-26 10:55:08");
-INSERT INTO `author` VALUES ("1977", "s1977", "C.L Bovee", "2018-09-27 12:15:37");
-INSERT INTO `author` VALUES ("1978", "s1978", "J.V Thill", "2018-09-27 12:15:37");
-INSERT INTO `author` VALUES ("1979", "s1979", "R.L Raina", "2018-09-27 12:15:37");
-INSERT INTO `author` VALUES ("1980", "s1980", "M.Z Masud", "2018-09-27 12:21:22");
 
 -- ----------------------------
 -- Table structure for `book`
@@ -2017,25 +2011,25 @@ CREATE TABLE `book` (
   `book_pages` int(11) DEFAULT NULL,
   `book_status` tinyint(4) NOT NULL,
   `book_remarks` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `book_stock` int(11) NOT NULL DEFAULT 0,
-  `book_available` int(11) NOT NULL DEFAULT 0,
+  `book_stock` int(11) NOT NULL DEFAULT '0',
+  `book_available` int(11) NOT NULL DEFAULT '0',
   `book_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `book_url_unlocked` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `book_url_unlocked` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `is_deleted` bit(1) NOT NULL DEFAULT b'0',
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`book_id`),
   KEY `book_id` (`book_id`),
   KEY `FK1_book_publication` (`publication_id`),
   KEY `FK2_book_manager` (`manager_id`),
   CONSTRAINT `book_ibfk_1` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`publication_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `book_ibfk_2` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2254 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2246 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `book`
 -- ----------------------------
 INSERT INTO `book` VALUES ("1", "m1", "", "A text book of Electrical Tecnology in S.I. System of Units", "m1", "2018-08-28 16:22:48", "IST_LIBRARY_1", "21st Reviced", "New Delhi", "1995", "612", "1", "", "11", "10", "", "1", 0, "2018-08-28 16:22:48");
-INSERT INTO `book` VALUES ("2", "m2", "", "Electronic principles", "m2", "2018-08-28 16:22:48", "IST_LIBRARY_1", "3rd", "New Delhi", "1984", "768", "1", "", "14", "13", "", "1", 0, "2018-09-27 13:35:49");
+INSERT INTO `book` VALUES ("2", "m2", "", "Electronic principles", "m2", "2018-08-28 16:22:48", "IST_LIBRARY_1", "3rd", "New Delhi", "1984", "768", "1", "", "11", "9", "", "1", 0, "2018-08-28 16:24:04");
 INSERT INTO `book` VALUES ("3", "m3", "", "Fundamentals of Computer Engineering: logic design", "m3", "2018-08-28 16:22:48", "IST_LIBRARY_1", "First", "New York", "1988", "506", "1", "", "1", "0", "", "1", 0, "2018-08-28 16:22:48");
 INSERT INTO `book` VALUES ("4", "m4", "", "Fuzzy sets, Uncertainty, and information", "m4", "2018-08-28 16:22:48", "IST_LIBRARY_1", "1st", "NewDelhi", "1988", "367", "1", "", "2", "1", "", "1", 0, "2018-08-28 16:22:48");
 INSERT INTO `book` VALUES ("5", "m5", "", "Principles of electronics", "m5", "2018-08-28 16:22:48", "IST_LIBRARY_1", "1st", "New Delhi", "1993", "496", "1", "", "4", "3", "", "1", 0, "2018-08-28 16:24:47");
@@ -2122,6 +2116,7 @@ INSERT INTO `book` VALUES ("85", "m85", "", "Elements of Discrete Mathematics", 
 INSERT INTO `book` VALUES ("86", "m86", "", "Teach Yourself Visual basic 3.0", "m9", "2018-08-28 16:23:43", "IST_LIBRARY_1", "1st", "New Delhi", "1994", "540", "1", "", "2", "1", "", "1", 0, "2018-08-28 16:23:43");
 INSERT INTO `book` VALUES ("87", "m87", "", "The art of prolog", "m29", "2018-08-28 16:23:43", "IST_LIBRARY_1", "1st", "New Delhi", "1994", "540", "1", "", "4", "2", "", "1", 0, "2018-08-28 16:24:03");
 INSERT INTO `book` VALUES ("88", "m88", "", "Waite Groups new C Primer plus", "m50", "2018-08-28 16:23:43", "IST_LIBRARY_1", "2nd", "Carmel", "1993", "764", "1", "", "3", "2", "", "1", 0, "2018-08-28 16:24:09");
+INSERT INTO `book` VALUES ("89", "m89", "", "Digital Computer Electronics", "m51", "2018-08-28 16:23:43", "IST_LIBRARY_1", "3rd ", "New Delhi", "1993", "528", "1", "", "2", "2", "", "1", 0, "2018-08-28 16:23:43");
 INSERT INTO `book` VALUES ("90", "m90", "", "Vector Mechanic for Engineers:Statics", "m6", "2018-08-28 16:23:43", "IST_LIBRARY_1", "5th", "New York", "1988", "497", "1", "", "7", "6", "", "1", 0, "2018-08-28 16:23:43");
 INSERT INTO `book` VALUES ("91", "m91", "", "The Scientific Image:Erom came to Computer", "m52", "2018-08-28 16:23:43", "IST_LIBRARY_1", "1st", "New York", "1992", "239", "1", "", "0", "0", "", "1", 0, "2018-08-28 16:23:43");
 INSERT INTO `book` VALUES ("92", "m92", "", "Calculus of finite differences & numerical analysis", "m53", "2018-08-28 16:23:43", "IST_LIBRARY_1", "1st", "Meerut", "1996", "392", "1", "", "4", "4", "", "1", 0, "2018-08-28 16:23:43");
@@ -2632,6 +2627,7 @@ INSERT INTO `book` VALUES ("596", "m596", "", "Visual Fox pro programming coveri
 INSERT INTO `book` VALUES ("597", "m597", "", "Visual Fox pro 3.0", "m151", "2018-08-28 16:24:47", "IST_LIBRARY_1", "1st", "Chittogong", "1998", "374", "1", "", "2", "2", "", "1", 0, "2018-08-28 16:24:47");
 INSERT INTO `book` VALUES ("598", "m598", "", "Teach yourself ...visual Fox pro 3 for windows", "m13", "2018-08-28 16:24:47", "IST_LIBRARY_1", "1st", "New Delhi", "1995", "494", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:24:47");
 INSERT INTO `book` VALUES ("599", "m599", "", "Mastering Oracle 7 & client server computing ", "m13", "2018-08-28 16:24:47", "IST_LIBRARY_1", "1st", "New Delhi", "1996", "750", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:24:47");
+INSERT INTO `book` VALUES ("600", "m600", "", "Electronics principles", "m40", "2018-08-28 16:24:47", "IST_LIBRARY_1", "3rd", "New Delhi", "1984", "770", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:24:47");
 INSERT INTO `book` VALUES ("601", "m601", "", "Fundamentals of applied statistics", "m40", "2018-08-28 16:24:47", "IST_LIBRARY_1", "1st", "New Delhi", "1984", "644", "1", "", "6", "5", "", "1", 0, "2018-08-28 16:24:47");
 INSERT INTO `book` VALUES ("602", "m602", "", "Visual J++ bible", "m17", "2018-08-28 16:24:47", "IST_LIBRARY_1", "1st", "New Delhi", "1997", "920", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:24:47");
 INSERT INTO `book` VALUES ("603", "m603", "", "Theory & problem of la-place transforms", "m6", "2018-08-28 16:24:47", "IST_LIBRARY_1", "1st", "New york", "1986", "267", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:24:48");
@@ -3034,7 +3030,7 @@ INSERT INTO `book` VALUES ("999", "m999", "", "Java networking programming", "m1
 INSERT INTO `book` VALUES ("1000", "m1000", "", "e-business with net.commerce", "m29", "2018-08-28 16:24:59", "IST_LIBRARY_1", "1st", "Upper Saddle river,NJ", "1999", "748", "1", "With CD", "15", "14", "", "1", 0, "2018-08-28 16:24:59");
 INSERT INTO `book` VALUES ("1001", "m1001", "", "VHDL made easy", "m29", "2018-08-28 16:24:59", "IST_LIBRARY_1", "1st", "Upper Saddle river,NJ", "1997", "431", "1", "Photocopy", "5", "4", "", "1", 0, "2018-08-28 16:24:59");
 INSERT INTO `book` VALUES ("1002", "m1002", "", "System analysis & design", "m29", "2018-08-28 16:24:59", "IST_LIBRARY_1", "3rd", "Englewoodchiff,N.J", "1995", "982", "1", "Photocopy", "1", "0", "", "1", 0, "2018-08-28 16:24:59");
-INSERT INTO `book` VALUES ("1003", "m1003", "", "Professional XML", "m191", "2018-08-28 16:24:59", "IST_LIBRARY_1", "1st", "Birmingham", "2000", "1190", "1", "no", "3", "2", "", "1", 0, "2018-09-27 14:54:22");
+INSERT INTO `book` VALUES ("1003", "m1003", "", "Professional XML", "m191", "2018-08-28 16:24:59", "IST_LIBRARY_1", "1st", "Birmingham", "2000", "1190", "1", "no", "3", "2", "", "1", 0, "2018-08-28 16:24:59");
 INSERT INTO `book` VALUES ("1004", "m1004", "", "Professional active server pages 3.0", "m191", "2018-08-28 16:24:59", "IST_LIBRARY_1", "1st", "Birmingham", "1999", "1300", "1", "No", "3", "2", "", "1", 0, "2018-08-28 16:24:59");
 INSERT INTO `book` VALUES ("1005", "m1005", "", "Professional P++ Programing", "m191", "2018-08-28 16:24:59", "IST_LIBRARY_1", "1st", "Birmingham", "1999", "931", "1", "", "3", "2", "", "1", 0, "2018-08-28 16:24:59");
 INSERT INTO `book` VALUES ("1006", "m1006", "", "Professional Linux deployment", "m191", "2018-08-28 16:24:59", "IST_LIBRARY_1", "1st", "Birmingham", "2000", "671", "1", "", "2", "1", "", "1", 0, "2018-08-28 16:24:59");
@@ -3197,10 +3193,10 @@ INSERT INTO `book` VALUES ("1162", "m1162", "", "SONET", "m6", "2018-08-28 16:25
 INSERT INTO `book` VALUES ("1163", "m1163", "", "DAta base management system.DCA-2304", "m198", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Gazipur", "1998", "248", "1", "No", "1", "0", "", "1", 0, "2018-08-28 16:25:04");
 INSERT INTO `book` VALUES ("1164", "m1164", "", "Digital system and computer organization.DCA-2301", "m198", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Gazipur", "1998", "234", "1", "No", "1", "0", "", "1", 0, "2018-08-28 16:25:04");
 INSERT INTO `book` VALUES ("1165", "m1165", "", "Microcomputers & microprocessors DCA 2303", "m198", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Gazipur", "1998", "256", "1", "No", "1", "0", "", "1", 0, "2018-08-28 16:25:04");
-INSERT INTO `book` VALUES ("1166", "m1166", "", "Operating systems.DCA-2302", "m198", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Gazipur", "1998", "264", "1", "No", "2", "1", "", "1", 0, "2018-09-26 10:47:21");
+INSERT INTO `book` VALUES ("1166", "m1166", "", "Operating systems.DCA-2302", "m198", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Gazipur", "1998", "264", "1", "No", "1", "0", "", "1", 0, "2018-08-28 16:25:04");
 INSERT INTO `book` VALUES ("1167", "m1167", "", "English: DCA-1304", "m198", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Gazipur", "1998", "150", "1", "No", "3", "2", "", "1", 0, "2018-08-28 16:26:34");
 INSERT INTO `book` VALUES ("1168", "m1168", "", "Discrete mathe in computer", "m29", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Englewood cliffs NJ", "1977", "414", "1", "No", "1", "0", "", "1", 0, "2018-08-28 16:25:04");
-INSERT INTO `book` VALUES ("1169", "m1169", "", "Computer networks:DCA-3303", "m198", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Gazipur", "1998", "229", "1", "Photocopy", "2", "1", "", "1", 0, "2018-09-25 11:25:36");
+INSERT INTO `book` VALUES ("1169", "m1169", "", "Computer networks:DCA-3303", "m198", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Gazipur", "1998", "229", "1", "Photocopy", "1", "0", "", "1", 0, "2018-08-28 16:25:04");
 INSERT INTO `book` VALUES ("1170", "m1170", "", "Computer Basics.DCA-1201", "m198", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Gazipur", "1997", "206", "1", "NO", "1", "0", "", "1", 0, "2018-08-28 16:25:04");
 INSERT INTO `book` VALUES ("1171", "m1171", "", "Computer programming.DCA-1303", "m198", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "Gazipur", "1997", "230", "1", "NO", "2", "1", "", "1", 0, "2018-08-28 16:25:05");
 INSERT INTO `book` VALUES ("1172", "m1172", "", "SMSCRIPT II.5 programming", "m164", "2018-08-28 16:25:04", "IST_LIBRARY_1", "1st", "La Jolla,CA.", "1998", "66", "1", "Photocopy", "1", "0", "", "1", 0, "2018-08-28 16:25:04");
@@ -3857,6 +3853,7 @@ INSERT INTO `book` VALUES ("1822", "m1822", "", "Theory & problems of complex va
 INSERT INTO `book` VALUES ("1823", "m1823", "", "Functions of a complex variable", "m53", "2018-08-28 16:26:45", "IST_LIBRARY_1", "1st", "Meerut", "0000", "460", "1", "", "0", "0", "", "1", 0, "2018-08-28 16:26:45");
 INSERT INTO `book` VALUES ("1824", "m1824", "", "Entrepreneurial development ", "m5", "2018-08-28 16:26:45", "IST_LIBRARY_1", "1st", "New Delhi", "1999", "420", "1", "", "3", "3", "", "1", 0, "2018-08-28 16:26:45");
 INSERT INTO `book` VALUES ("1825", "m1825", "", "Marketing management", "m338", "2018-08-28 16:26:45", "IST_LIBRARY_1", "13th", "Upper Saddle river,NJ", "2009", "803", "1", "", "3", "3", "", "1", 0, "2018-08-28 16:26:45");
+INSERT INTO `book` VALUES ("1826", "m1826", "", "Bangladesh income tax theory & practice", "m346", "2018-08-28 16:26:45", "IST_LIBRARY_1", "2nd", "Dhaka", "2008", "688", "1", "", "0", "0", "", "1", 0, "2018-08-28 16:26:45");
 INSERT INTO `book` VALUES ("1827", "m1827", "", "Beginning E- commerce with visual basic, ASP ,SQL, MTS", "m191", "2018-08-28 16:26:45", "IST_LIBRARY_1", "1st", "Birmingham", "2000", "791", "1", "Photocopy", "11", "11", "", "1", 0, "2018-08-28 16:26:45");
 INSERT INTO `book` VALUES ("1828", "m1828", "", "MAnagement: a global & entrepreneurial perspective", "m40", "2018-08-28 16:26:45", "IST_LIBRARY_1", "12th", "New Delhi", "2008", "556", "1", "", "5", "5", "", "1", 0, "2018-08-28 16:26:45");
 INSERT INTO `book` VALUES ("1829", "m1829", "", "Fundamentals of finance", "m350", "2018-08-28 16:26:45", "IST_LIBRARY_1", "3rd", "Dhaka", "2004", "1387", "1", "", "5", "5", "", "1", 0, "2018-08-28 16:26:45");
@@ -3958,7 +3955,7 @@ INSERT INTO `book` VALUES ("1924", "m1924", "", "Principles of corporate finance
 INSERT INTO `book` VALUES ("1925", "m1925", "", "Interregnal calculus & differential calculus somekern Part-1,2oran", "m367", "2018-08-28 16:26:49", "IST_LIBRARY_1", "4th", "Dhaka", "2008", "856", "1", "", "0", "0", "", "1", 0, "2018-08-28 16:26:49");
 INSERT INTO `book` VALUES ("1926", "m1926", "", "Network management: principles & practice", "m152", "2018-08-28 16:26:49", "IST_LIBRARY_1", "1st", "New Delhi", "2000", "664", "1", "", "0", "0", "", "1", 0, "2018-08-28 16:26:49");
 INSERT INTO `book` VALUES ("1927", "m1927", "", "Project management for business & technology : principle....", "m173", "2018-08-28 16:26:49", "IST_LIBRARY_1", "1st", "New Delhi", "2001", "622", "1", "", "6", "6", "", "1", 0, "2018-08-28 16:26:49");
-INSERT INTO `book` VALUES ("1928", "m1928", "", "Programming in ANSI C ", "m40", "2018-08-28 16:26:49", "IST_LIBRARY_1", "4th", "New Delhi", "2007", "561", "1", "", "8", "7", "", "1", 0, "2018-09-27 12:55:24");
+INSERT INTO `book` VALUES ("1928", "m1928", "", "Programming in ANSI C ", "m40", "2018-08-28 16:26:49", "IST_LIBRARY_1", "4th", "New Delhi", "2007", "561", "1", "", "5", "5", "", "1", 0, "2018-08-28 16:26:49");
 INSERT INTO `book` VALUES ("1929", "m1929", "", "College mathematical methods. Physics V-2", "m183", "2018-08-28 16:26:49", "IST_LIBRARY_1", "1st", "Dhaka", "1997", "525", "1", "", "5", "5", "", "1", 0, "2018-08-28 16:26:49");
 INSERT INTO `book` VALUES ("1930", "m1930", "", "College mathematical methods. Physics V-1", "m183", "2018-08-28 16:26:49", "IST_LIBRARY_1", "2nd", "Dhaka", "1998", "810", "1", "", "3", "3", "", "1", 0, "2018-08-28 16:26:49");
 INSERT INTO `book` VALUES ("1931", "m1931", "", "Wireless communications & networks", "m173", "2018-08-28 16:26:49", "IST_LIBRARY_1", "2nd", "New Delhi", "2005", "573", "1", "", "5", "5", "", "1", 0, "2018-08-28 16:26:49");
@@ -4069,6 +4066,7 @@ INSERT INTO `book` VALUES ("2035", "m2035", "", "THeory and problems of partial 
 INSERT INTO `book` VALUES ("2036", "m2036", "", "Rdhat  Linux essentials", "m401", "2018-08-28 16:26:52", "IST_LIBRARY_1", "", "Dhaka", "2007", "431", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:52");
 INSERT INTO `book` VALUES ("2037", "m2037", "", "Redhat enterprise Linux network services & security", "m401", "2018-08-28 16:26:52", "IST_LIBRARY_1", "", "Dhaka", "2007", "361", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:52");
 INSERT INTO `book` VALUES ("2038", "m2038", "", "Redhat Linux system administration", "m401", "2018-08-28 16:26:52", "IST_LIBRARY_1", "", "Dhaka", "2007", "335", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:52");
+INSERT INTO `book` VALUES ("2039", "m2039", "", "Programing in ANSIC", "m42", "2018-08-28 16:26:52", "IST_LIBRARY_1", "4th", "NewDelhi", "2007", "561", "1", "", "2", "2", "", "1", 0, "2018-08-28 16:26:52");
 INSERT INTO `book` VALUES ("2040", "m2040", "", "Essentials of topology & functional analysis", "m402", "2018-08-28 16:26:52", "IST_LIBRARY_1", "", "Dhaka", "2006", "279", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:52");
 INSERT INTO `book` VALUES ("2041", "m2041", "", "Essential of number theory", "m402", "2018-08-28 16:26:52", "IST_LIBRARY_1", "", "Dhaka", "2006", "231", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:52");
 INSERT INTO `book` VALUES ("2042", "m2042", "", "Essential of real analysis", "m402", "2018-08-28 16:26:52", "IST_LIBRARY_1", "", "Dhaka", "2006", "351", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:52");
@@ -4089,7 +4087,7 @@ INSERT INTO `book` VALUES ("2056", "m2056", "", "Basic VISL design ", "m394", "2
 INSERT INTO `book` VALUES ("2057", "m2057", "", "Operating system concepts", "m36", "2018-08-28 16:26:53", "IST_LIBRARY_1", "8th", "NewDelhi", "2010", "992", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:53");
 INSERT INTO `book` VALUES ("2058", "m2058", "", "Operating system concepts", "m36", "2018-08-28 16:26:53", "IST_LIBRARY_1", "7th", "NewDelhi", "2005", "943", "1", "", "5", "5", "", "1", 0, "2018-08-28 16:26:53");
 INSERT INTO `book` VALUES ("2059", "m2059", "", "Software engineering", "m18", "2018-08-28 16:26:53", "IST_LIBRARY_1", "5th", "New York", "2001", "887", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:53");
-INSERT INTO `book` VALUES ("2060", "m2060", "", "College liner algebra", "m407", "2018-08-28 16:26:53", "IST_LIBRARY_1", "6th", "Dhaka", "2009", "824", "1", "", "1", "1", "", "1", 0, "2018-09-27 15:23:21");
+INSERT INTO `book` VALUES ("2060", "m2060", "", "College liner algebra", "m407", "2018-08-28 16:26:53", "IST_LIBRARY_1", "6th", "Dhaka", "2009", "824", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:53");
 INSERT INTO `book` VALUES ("2061", "m2061", "", "Banking", "m408", "2018-08-28 16:26:53", "IST_LIBRARY_1", "", "NewDelhi", "2009", "376", "1", "", "11", "11", "", "1", 0, "2018-08-28 16:26:53");
 INSERT INTO `book` VALUES ("2062", "m2062", "", "Modern auditing", "m335", "2018-08-28 16:26:53", "IST_LIBRARY_1", "6th", "New York", "1996", "957", "1", "", "9", "9", "", "1", 0, "2018-08-28 16:26:53");
 INSERT INTO `book` VALUES ("2063", "m2063", "", "Foundations of financial management", "m42", "2018-08-28 16:26:53", "IST_LIBRARY_1", "13th", "NewDelhi", "2009", "722", "1", "maincopy", "6", "6", "", "1", 0, "2018-08-28 16:26:53");
@@ -4099,6 +4097,7 @@ INSERT INTO `book` VALUES ("2066", "m2066", "", "Business communication & report
 INSERT INTO `book` VALUES ("2067", "m2067", "", "INformation technology for management:Informating...", "m36", "2018-08-28 16:26:53", "IST_LIBRARY_1", "7th", "NewDelhi", "2007", "640", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:53");
 INSERT INTO `book` VALUES ("2068", "m2068", "", "Physics ,Part-2", "m36", "2018-08-28 16:26:53", "IST_LIBRARY_1", "2nd", "NewDelhi", "2007", "640", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:53");
 INSERT INTO `book` VALUES ("2069", "m2069", "", "Complex variables", "m406", "2018-08-28 16:26:53", "IST_LIBRARY_1", "2nd", "Dhaka", "2012", "625", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:53");
+INSERT INTO `book` VALUES ("2070", "m2070", "", "Programming in ANSIC", "m42", "2018-08-28 16:26:53", "IST_LIBRARY_1", "4th", "Dhaka", "2007", "561", "1", "Gift", "1", "1", "", "1", 0, "2018-08-28 16:26:53");
 INSERT INTO `book` VALUES ("2071", "m2071", "", "Organizational behavior", "m410", "2018-08-28 16:26:53", "IST_LIBRARY_1", "3rd", "Dhaka", "2009", "380", "1", "Gift", "6", "6", "", "1", 0, "2018-08-28 16:26:53");
 INSERT INTO `book` VALUES ("2072", "m2072", "", "Differental calculas", "m411", "2018-08-28 16:26:53", "IST_LIBRARY_1", "2nd", "Dhaka", "1999", "653", "1", "Gift", "2", "2", "", "1", 0, "2018-08-28 16:26:53");
 INSERT INTO `book` VALUES ("2073", "m2073", "", "Differental calculas & equation", "m411", "2018-08-28 16:26:53", "IST_LIBRARY_1", "2nd", "Dhaka", "2000", "486", "1", "Gift", "1", "1", "", "1", 0, "2018-08-28 16:26:53");
@@ -4111,11 +4110,12 @@ INSERT INTO `book` VALUES ("2079", "m2079", "", "Journal on business & technolog
 INSERT INTO `book` VALUES ("2080", "m2080", "", "Journal on business & technology,V-2", "m412", "2018-08-28 16:26:54", "IST_LIBRARY_1", "", "Dhaka", "2009", "201", "1", "", "5", "5", "", "1", 0, "2018-08-28 16:26:54");
 INSERT INTO `book` VALUES ("2081", "m2081", "", "Journal on business technology", "m412", "2018-08-28 16:26:54", "IST_LIBRARY_1", "--", "Dhaka", "2012", "219", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:26:54");
 INSERT INTO `book` VALUES ("2082", "m2082", "", "Calculus of finite diffenences & numerical analysis", "m413", "2018-08-28 16:26:54", "IST_LIBRARY_1", "4th", "Meerut", "1998", "444", "1", "", "1", "0", "", "1", 0, "2018-08-28 16:26:54");
+INSERT INTO `book` VALUES ("2083", "m2083", "", "Bangladesh income tax; theory and practice", "m346", "2018-08-28 16:26:54", "IST_LIBRARY_1", "2nd", "Dhaka", "2012", "786", "1", "", "0", "0", "", "1", 0, "2018-08-28 16:26:54");
 INSERT INTO `book` VALUES ("2084", "m2084", "", "Theory & problem of data structure", "m6", "2018-08-28 16:26:54", "IST_LIBRARY_1", "2nd", "Newyork", "1999", "352", "1", "Gift of Dr.Shaleh Rafiq", "0", "0", "", "1", 0, "2018-08-28 16:26:54");
 INSERT INTO `book` VALUES ("2085", "m2085", "", "A text book of electrical technology", "m344", "2018-08-28 16:26:54", "IST_LIBRARY_1", "23th re. ed.", "NewDelhi", "2002", "597", "1", "purche", "0", "0", "", "1", 0, "2018-08-28 16:26:54");
 INSERT INTO `book` VALUES ("2086", "m2086", "", "A text book of electrical technology V-4", "m344", "2018-08-28 16:26:54", "IST_LIBRARY_1", "23th re. ed.", "NewDelhi", "2002", "597", "1", "purched", "4", "4", "", "1", 0, "2018-08-28 16:26:54");
 INSERT INTO `book` VALUES ("2087", "m2087", "", "Deferentional calculas V1,2", "m367", "2018-08-28 16:26:54", "IST_LIBRARY_1", "4th", "Dhaka", "2008", "742", "1", "purched", "1", "1", "", "1", 0, "2018-08-28 16:26:54");
-INSERT INTO `book` VALUES ("2088", "m2088", "", "Introduction to computers", "m414", "2018-08-28 16:26:54", "IST_LIBRARY_1", "7th", "NewDelhi", "2011", "657", "1", "purched", "11", "10", "", "1", 0, "2018-09-25 11:27:49");
+INSERT INTO `book` VALUES ("2088", "m2088", "", "Introduction to computers", "m414", "2018-08-28 16:26:54", "IST_LIBRARY_1", "7th", "NewDelhi", "2011", "657", "1", "purched", "10", "10", "", "1", 0, "2018-08-28 16:26:54");
 INSERT INTO `book` VALUES ("2089", "m2089", "", "Financial institutions management", "m6", "2018-08-28 16:26:54", "IST_LIBRARY_1", "6th", "Newyork", "2008", "896", "1", "purched", "2", "2", "", "1", 0, "2018-08-28 16:26:54");
 INSERT INTO `book` VALUES ("2090", "m2090", "", "commercial bank management", "m6", "2018-08-28 16:26:54", "IST_LIBRARY_1", "5th", "Newyork", "2002", "830", "1", "purched", "2", "2", "", "1", 0, "2018-08-28 16:26:54");
 INSERT INTO `book` VALUES ("2091", "m2091", "", "Bangla academy bengali english dictionary", "m77", "2018-08-28 16:26:54", "IST_LIBRARY_1", "2nd", "Dhaka", "1994", "891", "1", "purched", "3", "3", "", "1", 0, "2018-08-28 16:26:54");
@@ -4142,7 +4142,7 @@ INSERT INTO `book` VALUES ("2111", "m2111", "", "College mathematical mathods:ma
 INSERT INTO `book` VALUES ("2112", "m2112", "", "Bangladesh income tax:Theory & practice", "m417", "2018-08-28 16:27:24", "IST_LIBRARY_1", "7th", "Dhaka", "2013", "692", "1", "", "3", "2", "", "1", 0, "2018-08-28 16:27:24");
 INSERT INTO `book` VALUES ("2113", "m2113", "", "Management: a global and entrepreneurial perspective", "m418", "2018-08-28 16:27:24", "IST_LIBRARY_1", "13th", "New Delhi", "2010", "546", "1", "", "1", "0", "", "1", 0, "2018-08-28 16:27:24");
 INSERT INTO `book` VALUES ("2114", "m2114", "", "Bangladesh labour & industrial law. Bang. Act 2006", "m419", "2018-08-28 16:27:24", "IST_LIBRARY_1", "-", "Dhaka", "2011", "415", "1", "", "1", "0", "", "1", 0, "2018-08-28 16:27:24");
-INSERT INTO `book` VALUES ("2115", "m2115", "", "Managerial economics", "m420", "2018-08-28 16:27:24", "IST_LIBRARY_1", "8th ", "New York", "1996", "824", "1", "", "4", "3", "", "1", 0, "2018-09-25 11:59:31");
+INSERT INTO `book` VALUES ("2115", "m2115", "", "Managerial economics", "m420", "2018-08-28 16:27:24", "IST_LIBRARY_1", "8th print", "New York", "1996", "824", "1", "", "1", "0", "", "1", 0, "2018-08-28 16:27:24");
 INSERT INTO `book` VALUES ("2116", "m2116", "", "Microprocessors, Pc harware and interfacing", "m173", "2018-08-28 16:27:24", "IST_LIBRARY_1", "-", "New Delhi", "2003", "824", "1", "", "1", "0", "", "1", 0, "2018-08-28 16:27:24");
 INSERT INTO `book` VALUES ("2117", "m2117", "", "Data communation & networking", "m418", "2018-08-28 16:27:24", "IST_LIBRARY_1", "4th", "New Delhi", "2007", "1168", "1", "", "3", "3", "", "1", 0, "2018-08-28 16:27:24");
 INSERT INTO `book` VALUES ("2118", "m2118", "", "Renewable energy source & emerging technologies", "m421", "2018-08-28 16:27:24", "IST_LIBRARY_1", "2nd", "New Delhi", "2011", "456", "1", "", "2", "1", "", "1", 0, "2018-08-28 16:27:24");
@@ -4273,14 +4273,6 @@ INSERT INTO `book` VALUES ("2242", "m2242", "", "Project management:a managerial
 INSERT INTO `book` VALUES ("2243", "m2243", "", "Managerial accounting.", "m40", "2018-08-28 16:27:28", "IST_LIBRARY_1", "13th", "New Delhi", "2010", "831", "1", "Replacement", "1", "0", "", "1", 0, "2018-08-28 16:27:29");
 INSERT INTO `book` VALUES ("2244", "m2244", "", "College mathematical methods:mathematical physics.V.2", "m460", "2018-08-28 16:27:29", "IST_LIBRARY_1", "2nd", "Dhaka", "2010", "528", "1", "", "1", "1", "", "1", 0, "2018-08-28 16:27:29");
 INSERT INTO `book` VALUES ("2245", "m2245", "", "Practical applied physics & electronics.", "m461", "2018-08-28 16:27:29", "IST_LIBRARY_1", "1st", "Dhaka", "1989", "241", "1", "", "5", "4", "", "1", 0, "2018-08-28 16:27:29");
-INSERT INTO `book` VALUES ("2246", "s2246", "", "Microcomputer trouble-shooting DCA-3302", "m198", "2018-09-25 11:23:10", "L_3", "2nd", "Dhaka", "2017", "181", "1", "", "1", "0", "", "1", 0, "2018-09-25 11:24:11");
-INSERT INTO `book` VALUES ("2247", "s2247", "", "Strategic marketing", "m6", "2018-09-25 11:36:17", "L_3", "10th", "New York", "2013", "671", "1", "", "4", "3", "", "1", 0, "2018-09-25 11:38:48");
-INSERT INTO `book` VALUES ("2248", "s2248", "", "E-commerce", "m374", "2018-09-25 12:06:18", "L_3", "10th", "India", "2014", "902", "1", "", "4", "3", "", "1", 0, "2018-09-25 12:08:30");
-INSERT INTO `book` VALUES ("2249", "s2249", "", "Environmental science:earth as a living planet.", "m368", "2018-09-26 10:45:03", "L_3", "9th", "USA", "2014", "677", "1", "", "1", "0", "", "1", 0, "2018-09-26 10:46:10");
-INSERT INTO `book` VALUES ("2250", "s2250", "", "Calculus:late transcendentals international.....", "m335", "2018-09-26 10:51:12", "L_3", "10th", "New Delhi", "2013", "1209", "1", "Maincopy", "1", "0", "", "1", 0, "2018-09-26 10:51:54");
-INSERT INTO `book` VALUES ("2251", "s2251", "", "Communication for business:a practical approach", "m152", "2018-09-26 10:55:08", "L_3", "4th", "New Delhi", "2005", "454", "1", "", "4", "3", "", "1", 0, "2018-09-26 10:56:44");
-INSERT INTO `book` VALUES ("2252", "s2252", "", "Business communication.", "m374", "2018-09-27 12:15:37", "L_3", "13th", "India", "2016", "791", "1", "", "5", "4", "", "1", 0, "2018-09-27 12:17:26");
-INSERT INTO `book` VALUES ("2253", "s2253", "984-300-000975-5", "Bangladesh income tax:theory & practice", "m346", "2018-09-27 12:21:22", "L_3", "11th", "Dhaka", "2017", "754", "1", "", "0", "0", "", "1", 0, "2018-09-27 12:21:22");
 
 -- ----------------------------
 -- Table structure for `book_author`
@@ -4296,11 +4288,13 @@ CREATE TABLE `book_author` (
   KEY `FK2_book_author_book` (`book_id`),
   CONSTRAINT `book_author_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `author` (`author_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `book_author_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3009 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2980 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `book_author`
 -- ----------------------------
+INSERT INTO `book_author` VALUES ("1", "m1", "m1", "m1");
+INSERT INTO `book_author` VALUES ("2", "m2", "m1", "m2");
 INSERT INTO `book_author` VALUES ("3", "m3", "m2", "m3");
 INSERT INTO `book_author` VALUES ("4", "m4", "m3", "m4");
 INSERT INTO `book_author` VALUES ("5", "m5", "m3", "m5");
@@ -4313,6 +4307,8 @@ INSERT INTO `book_author` VALUES ("11", "m11", "m7", "m11");
 INSERT INTO `book_author` VALUES ("12", "m12", "m8", "m12");
 INSERT INTO `book_author` VALUES ("13", "m13", "m8", "m13");
 INSERT INTO `book_author` VALUES ("14", "m14", "m9", "m14");
+INSERT INTO `book_author` VALUES ("15", "m15", "m10", "m15");
+INSERT INTO `book_author` VALUES ("16", "m16", "m10", "m16");
 INSERT INTO `book_author` VALUES ("17", "m17", "m11", "m17");
 INSERT INTO `book_author` VALUES ("18", "m18", "m12", "m18");
 INSERT INTO `book_author` VALUES ("19", "m19", "m12", "m19");
@@ -4412,7 +4408,8 @@ INSERT INTO `book_author` VALUES ("112", "m112", "m87", "m107");
 INSERT INTO `book_author` VALUES ("113", "m113", "m87", "m108");
 INSERT INTO `book_author` VALUES ("114", "m114", "m88", "m109");
 INSERT INTO `book_author` VALUES ("115", "m115", "m88", "m110");
-INSERT INTO `book_author` VALUES ("117", "m117", "m2", "m111");
+INSERT INTO `book_author` VALUES ("116", "m116", "m89", "m3");
+INSERT INTO `book_author` VALUES ("117", "m117", "m89", "m111");
 INSERT INTO `book_author` VALUES ("118", "m118", "m90", "m112");
 INSERT INTO `book_author` VALUES ("119", "m119", "m90", "m113");
 INSERT INTO `book_author` VALUES ("120", "m120", "m91", "m114");
@@ -5084,6 +5081,7 @@ INSERT INTO `book_author` VALUES ("785", "m785", "m597", "m587");
 INSERT INTO `book_author` VALUES ("786", "m786", "m597", "m588");
 INSERT INTO `book_author` VALUES ("787", "m787", "m598", "m555");
 INSERT INTO `book_author` VALUES ("788", "m788", "m599", "m589");
+INSERT INTO `book_author` VALUES ("789", "m789", "m600", "m3");
 INSERT INTO `book_author` VALUES ("790", "m790", "m601", "m590");
 INSERT INTO `book_author` VALUES ("791", "m791", "m601", "m19");
 INSERT INTO `book_author` VALUES ("792", "m792", "m602", "m591");
@@ -6665,6 +6663,8 @@ INSERT INTO `book_author` VALUES ("2367", "m2367", "m1812", "m1673");
 INSERT INTO `book_author` VALUES ("2368", "m2368", "m1812", "m1674");
 INSERT INTO `book_author` VALUES ("2369", "m2369", "m1813", "m1624");
 INSERT INTO `book_author` VALUES ("2370", "m2370", "m1813", "m1625");
+INSERT INTO `book_author` VALUES ("2371", "m2371", "m1814", "m1675");
+INSERT INTO `book_author` VALUES ("2372", "m2372", "m1814", "m1676");
 INSERT INTO `book_author` VALUES ("2373", "m2373", "m1815", "m1677");
 INSERT INTO `book_author` VALUES ("2374", "m2374", "m1816", "m1");
 INSERT INTO `book_author` VALUES ("2375", "m2375", "m1816", "m2");
@@ -6681,6 +6681,8 @@ INSERT INTO `book_author` VALUES ("2385", "m2385", "m1823", "m343");
 INSERT INTO `book_author` VALUES ("2386", "m2386", "m1824", "m1516");
 INSERT INTO `book_author` VALUES ("2387", "m2387", "m1825", "m1164");
 INSERT INTO `book_author` VALUES ("2388", "m2388", "m1825", "m1462");
+INSERT INTO `book_author` VALUES ("2389", "m2389", "m1826", "m1685");
+INSERT INTO `book_author` VALUES ("2390", "m2390", "m1826", "m1686");
 INSERT INTO `book_author` VALUES ("2391", "m2391", "m1827", "m1687");
 INSERT INTO `book_author` VALUES ("2392", "m2392", "m1828", "m1107");
 INSERT INTO `book_author` VALUES ("2393", "m2393", "m1828", "m1688");
@@ -6953,7 +6955,7 @@ INSERT INTO `book_author` VALUES ("2659", "m2659", "m2019", "m74");
 INSERT INTO `book_author` VALUES ("2660", "m2660", "m2020", "m1835");
 INSERT INTO `book_author` VALUES ("2661", "m2661", "m2021", "m443");
 INSERT INTO `book_author` VALUES ("2662", "m2662", "m2022", "m1836");
-INSERT INTO `book_author` VALUES ("2663", "m2663", "m2023", "m1888");
+INSERT INTO `book_author` VALUES ("2663", "m2663", "m2023", "m1675");
 INSERT INTO `book_author` VALUES ("2664", "m2664", "m2024", "m383");
 INSERT INTO `book_author` VALUES ("2665", "m2665", "m2025", "m1837");
 INSERT INTO `book_author` VALUES ("2666", "m2666", "m2025", "m1838");
@@ -6973,6 +6975,7 @@ INSERT INTO `book_author` VALUES ("2679", "m2679", "m2035", "m1841");
 INSERT INTO `book_author` VALUES ("2680", "m2680", "m2036", "m1842");
 INSERT INTO `book_author` VALUES ("2681", "m2681", "m2037", "m1842");
 INSERT INTO `book_author` VALUES ("2682", "m2682", "m2038", "m1842");
+INSERT INTO `book_author` VALUES ("2683", "m2683", "m2039", "m981");
 INSERT INTO `book_author` VALUES ("2684", "m2684", "m2040", "m1843");
 INSERT INTO `book_author` VALUES ("2685", "m2685", "m2040", "m1844");
 INSERT INTO `book_author` VALUES ("2686", "m2686", "m2041", "m1843");
@@ -7016,6 +7019,7 @@ INSERT INTO `book_author` VALUES ("2723", "m2723", "m2067", "m1867");
 INSERT INTO `book_author` VALUES ("2724", "m2724", "m2068", "m278");
 INSERT INTO `book_author` VALUES ("2725", "m2725", "m2068", "m277");
 INSERT INTO `book_author` VALUES ("2726", "m2726", "m2069", "m1868");
+INSERT INTO `book_author` VALUES ("2727", "m2727", "m2070", "m981");
 INSERT INTO `book_author` VALUES ("2728", "m2728", "m2071", "m1869");
 INSERT INTO `book_author` VALUES ("2729", "m2729", "m2071", "m1870");
 INSERT INTO `book_author` VALUES ("2730", "m2730", "m2072", "m1667");
@@ -7036,6 +7040,7 @@ INSERT INTO `book_author` VALUES ("2744", "m2744", "m2080", "m1876");
 INSERT INTO `book_author` VALUES ("2745", "m2745", "m2081", "m1876");
 INSERT INTO `book_author` VALUES ("2746", "m2746", "m2082", "m115");
 INSERT INTO `book_author` VALUES ("2747", "m2747", "m2082", "m680");
+INSERT INTO `book_author` VALUES ("2748", "m2748", "m2083", "m1877");
 INSERT INTO `book_author` VALUES ("2749", "m2749", "m2084", "m118");
 INSERT INTO `book_author` VALUES ("2750", "m2750", "m2085", "m1");
 INSERT INTO `book_author` VALUES ("2751", "m2751", "m2085", "m1878");
@@ -7080,6 +7085,8 @@ INSERT INTO `book_author` VALUES ("2789", "m2789", "m2112", "m1888");
 INSERT INTO `book_author` VALUES ("2790", "m2790", "m2112", "m1676");
 INSERT INTO `book_author` VALUES ("2791", "m2791", "m2113", "m1107");
 INSERT INTO `book_author` VALUES ("2792", "m2792", "m2114", "m1133");
+INSERT INTO `book_author` VALUES ("2793", "m2793", "m2115", "m1891");
+INSERT INTO `book_author` VALUES ("2794", "m2794", "m2115", "m1892");
 INSERT INTO `book_author` VALUES ("2795", "m2795", "m2116", "m1893");
 INSERT INTO `book_author` VALUES ("2796", "m2796", "m2117", "m1605");
 INSERT INTO `book_author` VALUES ("2797", "m2797", "m2118", "m1894");
@@ -7265,33 +7272,6 @@ INSERT INTO `book_author` VALUES ("2976", "m2976", "m2243", "m1358");
 INSERT INTO `book_author` VALUES ("2977", "m2977", "m2243", "m1672");
 INSERT INTO `book_author` VALUES ("2978", "m2978", "m2244", "m1776");
 INSERT INTO `book_author` VALUES ("2979", "m2979", "m2245", "m1970");
-INSERT INTO `book_author` VALUES ("2980", "s2980", "s2246", "m1454");
-INSERT INTO `book_author` VALUES ("2981", "s2981", "s2247", "m1766");
-INSERT INTO `book_author` VALUES ("2982", "s2982", "s2247", "m1767");
-INSERT INTO `book_author` VALUES ("2983", "s2983", "m2115", "m1891");
-INSERT INTO `book_author` VALUES ("2984", "s2984", "m2115", "m1892");
-INSERT INTO `book_author` VALUES ("2985", "s2985", "s2248", "m204");
-INSERT INTO `book_author` VALUES ("2986", "s2986", "s2248", "s1971");
-INSERT INTO `book_author` VALUES ("2987", "s2987", "s2249", "s1972");
-INSERT INTO `book_author` VALUES ("2988", "s2988", "s2249", "s1973");
-INSERT INTO `book_author` VALUES ("2989", "s2989", "s2250", "m1873");
-INSERT INTO `book_author` VALUES ("2990", "s2990", "s2250", "s1974");
-INSERT INTO `book_author` VALUES ("2991", "s2991", "s2250", "m1874");
-INSERT INTO `book_author` VALUES ("2992", "s2992", "s2251", "s1975");
-INSERT INTO `book_author` VALUES ("2993", "s2993", "s2251", "s1976");
-INSERT INTO `book_author` VALUES ("2994", "s2994", "s2252", "s1977");
-INSERT INTO `book_author` VALUES ("2995", "s2995", "s2252", "s1978");
-INSERT INTO `book_author` VALUES ("2996", "s2996", "s2252", "s1979");
-INSERT INTO `book_author` VALUES ("2997", "s2997", "s2253", "m1888");
-INSERT INTO `book_author` VALUES ("2998", "s2998", "s2253", "s1980");
-INSERT INTO `book_author` VALUES ("2999", "s2999", "s2253", "m1676");
-INSERT INTO `book_author` VALUES ("3002", "s3000", "m1814", "m1888");
-INSERT INTO `book_author` VALUES ("3003", "s3003", "m1814", "m1676");
-INSERT INTO `book_author` VALUES ("3004", "s3004", "m1814", "s1980");
-INSERT INTO `book_author` VALUES ("3005", "s3005", "m1", "m1");
-INSERT INTO `book_author` VALUES ("3006", "s3006", "m1", "m2");
-INSERT INTO `book_author` VALUES ("3007", "s3007", "m10", "m15");
-INSERT INTO `book_author` VALUES ("3008", "s3008", "m10", "m16");
 
 -- ----------------------------
 -- Table structure for `book_category`
@@ -7307,11 +7287,12 @@ CREATE TABLE `book_category` (
   KEY `FK2_book_category_book` (`book_id`),
   CONSTRAINT `book_category_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `book_category_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2273 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2246 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `book_category`
 -- ----------------------------
+INSERT INTO `book_category` VALUES ("1", "m1", "m1", "m1");
 INSERT INTO `book_category` VALUES ("2", "m2", "m2", "m1");
 INSERT INTO `book_category` VALUES ("3", "m3", "m3", "m1");
 INSERT INTO `book_category` VALUES ("4", "m4", "m4", "m1");
@@ -7320,6 +7301,7 @@ INSERT INTO `book_category` VALUES ("6", "m6", "m6", "m1");
 INSERT INTO `book_category` VALUES ("7", "m7", "m7", "m1");
 INSERT INTO `book_category` VALUES ("8", "m8", "m8", "m1");
 INSERT INTO `book_category` VALUES ("9", "m9", "m9", "m1");
+INSERT INTO `book_category` VALUES ("10", "m10", "m10", "m1");
 INSERT INTO `book_category` VALUES ("11", "m11", "m11", "m1");
 INSERT INTO `book_category` VALUES ("12", "m12", "m12", "m1");
 INSERT INTO `book_category` VALUES ("13", "m13", "m13", "m1");
@@ -7398,6 +7380,7 @@ INSERT INTO `book_category` VALUES ("85", "m85", "m85", "m1");
 INSERT INTO `book_category` VALUES ("86", "m86", "m86", "m1");
 INSERT INTO `book_category` VALUES ("87", "m87", "m87", "m1");
 INSERT INTO `book_category` VALUES ("88", "m88", "m88", "m1");
+INSERT INTO `book_category` VALUES ("89", "m89", "m89", "m1");
 INSERT INTO `book_category` VALUES ("90", "m90", "m90", "m1");
 INSERT INTO `book_category` VALUES ("91", "m91", "m91", "m1");
 INSERT INTO `book_category` VALUES ("92", "m92", "m92", "m1");
@@ -7908,6 +7891,7 @@ INSERT INTO `book_category` VALUES ("596", "m596", "m596", "m1");
 INSERT INTO `book_category` VALUES ("597", "m597", "m597", "m1");
 INSERT INTO `book_category` VALUES ("598", "m598", "m598", "m1");
 INSERT INTO `book_category` VALUES ("599", "m599", "m599", "m1");
+INSERT INTO `book_category` VALUES ("600", "m600", "m600", "m1");
 INSERT INTO `book_category` VALUES ("601", "m601", "m601", "m1");
 INSERT INTO `book_category` VALUES ("602", "m602", "m602", "m1");
 INSERT INTO `book_category` VALUES ("603", "m603", "m603", "m1");
@@ -9121,6 +9105,7 @@ INSERT INTO `book_category` VALUES ("1810", "m1810", "m1810", "m1");
 INSERT INTO `book_category` VALUES ("1811", "m1811", "m1811", "m1");
 INSERT INTO `book_category` VALUES ("1812", "m1812", "m1812", "m1");
 INSERT INTO `book_category` VALUES ("1813", "m1813", "m1813", "m1");
+INSERT INTO `book_category` VALUES ("1814", "m1814", "m1814", "m1");
 INSERT INTO `book_category` VALUES ("1815", "m1815", "m1815", "m1");
 INSERT INTO `book_category` VALUES ("1816", "m1816", "m1816", "m1");
 INSERT INTO `book_category` VALUES ("1817", "m1817", "m1817", "m1");
@@ -9132,6 +9117,7 @@ INSERT INTO `book_category` VALUES ("1822", "m1822", "m1822", "m1");
 INSERT INTO `book_category` VALUES ("1823", "m1823", "m1823", "m1");
 INSERT INTO `book_category` VALUES ("1824", "m1824", "m1824", "m1");
 INSERT INTO `book_category` VALUES ("1825", "m1825", "m1825", "m1");
+INSERT INTO `book_category` VALUES ("1826", "m1826", "m1826", "m1");
 INSERT INTO `book_category` VALUES ("1827", "m1827", "m1827", "m1");
 INSERT INTO `book_category` VALUES ("1828", "m1828", "m1828", "m1");
 INSERT INTO `book_category` VALUES ("1829", "m1829", "m1829", "m1");
@@ -9344,6 +9330,7 @@ INSERT INTO `book_category` VALUES ("2035", "m2035", "m2035", "m1");
 INSERT INTO `book_category` VALUES ("2036", "m2036", "m2036", "m1");
 INSERT INTO `book_category` VALUES ("2037", "m2037", "m2037", "m1");
 INSERT INTO `book_category` VALUES ("2038", "m2038", "m2038", "m1");
+INSERT INTO `book_category` VALUES ("2039", "m2039", "m2039", "m1");
 INSERT INTO `book_category` VALUES ("2040", "m2040", "m2040", "m1");
 INSERT INTO `book_category` VALUES ("2041", "m2041", "m2041", "m1");
 INSERT INTO `book_category` VALUES ("2042", "m2042", "m2042", "m1");
@@ -9374,6 +9361,7 @@ INSERT INTO `book_category` VALUES ("2066", "m2066", "m2066", "m1");
 INSERT INTO `book_category` VALUES ("2067", "m2067", "m2067", "m1");
 INSERT INTO `book_category` VALUES ("2068", "m2068", "m2068", "m1");
 INSERT INTO `book_category` VALUES ("2069", "m2069", "m2069", "m1");
+INSERT INTO `book_category` VALUES ("2070", "m2070", "m2070", "m1");
 INSERT INTO `book_category` VALUES ("2071", "m2071", "m2071", "m1");
 INSERT INTO `book_category` VALUES ("2072", "m2072", "m2072", "m1");
 INSERT INTO `book_category` VALUES ("2073", "m2073", "m2073", "m1");
@@ -9386,6 +9374,7 @@ INSERT INTO `book_category` VALUES ("2079", "m2079", "m2079", "m1");
 INSERT INTO `book_category` VALUES ("2080", "m2080", "m2080", "m1");
 INSERT INTO `book_category` VALUES ("2081", "m2081", "m2081", "m1");
 INSERT INTO `book_category` VALUES ("2082", "m2082", "m2082", "m1");
+INSERT INTO `book_category` VALUES ("2083", "m2083", "m2083", "m1");
 INSERT INTO `book_category` VALUES ("2084", "m2084", "m2084", "m1");
 INSERT INTO `book_category` VALUES ("2085", "m2085", "m2085", "m1");
 INSERT INTO `book_category` VALUES ("2086", "m2086", "m2086", "m1");
@@ -9417,6 +9406,7 @@ INSERT INTO `book_category` VALUES ("2111", "m2111", "m2111", "m1");
 INSERT INTO `book_category` VALUES ("2112", "m2112", "m2112", "m1");
 INSERT INTO `book_category` VALUES ("2113", "m2113", "m2113", "m1");
 INSERT INTO `book_category` VALUES ("2114", "m2114", "m2114", "m1");
+INSERT INTO `book_category` VALUES ("2115", "m2115", "m2115", "m1");
 INSERT INTO `book_category` VALUES ("2116", "m2116", "m2116", "m1");
 INSERT INTO `book_category` VALUES ("2117", "m2117", "m2117", "m1");
 INSERT INTO `book_category` VALUES ("2118", "m2118", "m2118", "m1");
@@ -9547,32 +9537,6 @@ INSERT INTO `book_category` VALUES ("2242", "m2242", "m2242", "m1");
 INSERT INTO `book_category` VALUES ("2243", "m2243", "m2243", "m1");
 INSERT INTO `book_category` VALUES ("2244", "m2244", "m2244", "m1");
 INSERT INTO `book_category` VALUES ("2245", "m2245", "m2245", "m1");
-INSERT INTO `book_category` VALUES ("2246", "s2246", "s2246", "s2");
-INSERT INTO `book_category` VALUES ("2247", "s2247", "s2246", "s3");
-INSERT INTO `book_category` VALUES ("2248", "s2248", "s2247", "s4");
-INSERT INTO `book_category` VALUES ("2249", "s2249", "s2247", "s5");
-INSERT INTO `book_category` VALUES ("2250", "s2250", "m2115", "m1");
-INSERT INTO `book_category` VALUES ("2251", "s2251", "s2248", "s4");
-INSERT INTO `book_category` VALUES ("2252", "s2252", "s2248", "s6");
-INSERT INTO `book_category` VALUES ("2253", "s2253", "s2249", "s2");
-INSERT INTO `book_category` VALUES ("2254", "s2254", "s2249", "s7");
-INSERT INTO `book_category` VALUES ("2255", "s2255", "s2249", "s8");
-INSERT INTO `book_category` VALUES ("2256", "s2256", "s2250", "s9");
-INSERT INTO `book_category` VALUES ("2257", "s2257", "s2250", "s2");
-INSERT INTO `book_category` VALUES ("2258", "s2258", "s2251", "s2");
-INSERT INTO `book_category` VALUES ("2259", "s2259", "s2251", "s7");
-INSERT INTO `book_category` VALUES ("2260", "s2260", "s2251", "s10");
-INSERT INTO `book_category` VALUES ("2261", "s2261", "s2252", "s4");
-INSERT INTO `book_category` VALUES ("2262", "s2262", "s2252", "s11");
-INSERT INTO `book_category` VALUES ("2263", "s2263", "s2253", "s4");
-INSERT INTO `book_category` VALUES ("2264", "s2264", "s2253", "s12");
-INSERT INTO `book_category` VALUES ("2266", "s2265", "m1814", "s4");
-INSERT INTO `book_category` VALUES ("2267", "s2267", "m1814", "s12");
-INSERT INTO `book_category` VALUES ("2268", "s2268", "m1", "s7");
-INSERT INTO `book_category` VALUES ("2269", "s2269", "m1", "s2");
-INSERT INTO `book_category` VALUES ("2270", "s2270", "m1", "s13");
-INSERT INTO `book_category` VALUES ("2271", "s2271", "m10", "s2");
-INSERT INTO `book_category` VALUES ("2272", "s2272", "m10", "s14");
 
 -- ----------------------------
 -- Table structure for `book_copy`
@@ -9589,15 +9553,15 @@ CREATE TABLE `book_copy` (
   `book_copy_source` tinyint(1) DEFAULT NULL,
   `book_copy_remarks` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `book_copy_manager_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `book_copy_is_deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `book_copy_is_deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`book_copy_id`,`book_copy_accession_no`),
   KEY `FK1_book_copy_book` (`book_id`),
   KEY `FK2_book_copy_manager` (`book_copy_manager_id`),
   KEY `book_copy_accession_no` (`book_copy_accession_no`),
   CONSTRAINT `book_copy_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `book_copy_ibfk_2` FOREIGN KEY (`book_copy_manager_id`) REFERENCES `manager` (`manager_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5893 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5867 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `book_copy`
@@ -9887,8 +9851,8 @@ INSERT INTO `book_copy` VALUES ("282", "m86", "m216", "1", "1", "1997-02-04", "2
 INSERT INTO `book_copy` VALUES ("283", "m87", "m217", "1", "0", "1997-02-04", "350", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:23:43");
 INSERT INTO `book_copy` VALUES ("284", "m87", "m631", "1", "1", "1997-03-01", "350", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:23:43");
 INSERT INTO `book_copy` VALUES ("285", "m88", "m218", "1", "0", "1997-02-04", "1280", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:23:43");
-INSERT INTO `book_copy` VALUES ("286", "m2", "m219", "1", "1", "1997-02-04", "180", "1", "", "IST_LIBRARY_1", "0", "2018-09-27 13:34:31");
-INSERT INTO `book_copy` VALUES ("287", "m2", "m220", "1", "1", "1997-02-04", "180", "1", "", "IST_LIBRARY_1", "0", "2018-09-27 13:34:31");
+INSERT INTO `book_copy` VALUES ("286", "m89", "m219", "1", "1", "1997-02-04", "180", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:23:43");
+INSERT INTO `book_copy` VALUES ("287", "m89", "m220", "1", "1", "1997-02-04", "180", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:23:43");
 INSERT INTO `book_copy` VALUES ("288", "m90", "m221", "1", "0", "1997-02-04", "0", "2", "Asia Foundation", "IST_LIBRARY_1", "0", "2018-08-28 16:23:43");
 INSERT INTO `book_copy` VALUES ("289", "m90", "m222", "1", "1", "1997-02-04", "0", "2", "Asia Foundation", "IST_LIBRARY_1", "0", "2018-08-28 16:23:43");
 INSERT INTO `book_copy` VALUES ("290", "m90", "m223", "1", "1", "1997-02-04", "0", "2", "Asia Foundation", "IST_LIBRARY_1", "0", "2018-08-28 16:23:43");
@@ -10316,7 +10280,7 @@ INSERT INTO `book_copy` VALUES ("711", "m260", "m942", "1", "1", "1997-08-04", "
 INSERT INTO `book_copy` VALUES ("712", "m261", "m778", "1", "1", "1997-05-12", "231", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:04");
 INSERT INTO `book_copy` VALUES ("713", "m262", "m3538", "1", "1", "2004-08-14", "0", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:04");
 INSERT INTO `book_copy` VALUES ("714", "m262", "m3539", "1", "1", "2004-08-14", "0", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:04");
-INSERT INTO `book_copy` VALUES ("715", "m2", "m578", "1", "1", "1997-02-26", "150", "1", "", "IST_LIBRARY_1", "0", "2018-09-27 13:35:49");
+INSERT INTO `book_copy` VALUES ("715", "m2", "m578", "1", "0", "1997-02-26", "150", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:04");
 INSERT INTO `book_copy` VALUES ("716", "m263", "m579", "1", "1", "1997-02-26", "118", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:04");
 INSERT INTO `book_copy` VALUES ("717", "m265", "m581", "1", "1", "1997-02-26", "1480.1", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:04");
 INSERT INTO `book_copy` VALUES ("718", "m268", "m582", "1", "1", "2008-07-06", "1214.1", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:04");
@@ -11158,7 +11122,7 @@ INSERT INTO `book_copy` VALUES ("1553", "m597", "m1475", "1", "1", "1998-08-08",
 INSERT INTO `book_copy` VALUES ("1554", "m598", "m1476", "1", "1", "1998-08-08", "305", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:47");
 INSERT INTO `book_copy` VALUES ("1555", "m599", "m1477", "1", "1", "1998-08-08", "580", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:47");
 INSERT INTO `book_copy` VALUES ("1556", "m180", "m1478", "1", "1", "1998-08-08", "290", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:47");
-INSERT INTO `book_copy` VALUES ("1557", "m2", "m1479", "1", "1", "1998-08-09", "160", "1", "", "IST_LIBRARY_1", "0", "2018-09-27 13:34:31");
+INSERT INTO `book_copy` VALUES ("1557", "m600", "m1479", "1", "1", "1998-08-09", "160", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:47");
 INSERT INTO `book_copy` VALUES ("1558", "m601", "m1480", "1", "0", "1998-08-11", "111", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:47");
 INSERT INTO `book_copy` VALUES ("1559", "m601", "m1481", "1", "1", "1998-08-11", "111", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:47");
 INSERT INTO `book_copy` VALUES ("1560", "m601", "m1482", "1", "1", "1998-08-11", "111", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:47");
@@ -12061,8 +12025,8 @@ INSERT INTO `book_copy` VALUES ("2456", "m1001", "m2312", "1", "1", "2000-09-30"
 INSERT INTO `book_copy` VALUES ("2457", "m1001", "m2313", "1", "1", "2000-09-30", "5.46", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:59");
 INSERT INTO `book_copy` VALUES ("2458", "m1002", "m2314", "1", "0", "2000-09-30", "497.5", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:59");
 INSERT INTO `book_copy` VALUES ("2459", "m1003", "m2316", "1", "0", "2000-10-01", "796.5", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:59");
-INSERT INTO `book_copy` VALUES ("2460", "m1003", "m2317", "1", "1", "2000-09-30", "796.5", "1", "", "IST_LIBRARY_1", "0", "2018-09-27 14:53:39");
-INSERT INTO `book_copy` VALUES ("2461", "m1003", "m2318", "1", "1", "2000-10-01", "796.5", "1", "", "IST_LIBRARY_1", "0", "2018-09-27 14:54:22");
+INSERT INTO `book_copy` VALUES ("2460", "m1003", "m2317", "1", "1", "2000-09-30", "796.5", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:59");
+INSERT INTO `book_copy` VALUES ("2461", "m1003", "m2318", "1", "1", "2000-10-01", "796.5", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:59");
 INSERT INTO `book_copy` VALUES ("2462", "m1004", "m2319", "1", "0", "2000-10-01", "767", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:59");
 INSERT INTO `book_copy` VALUES ("2463", "m1004", "m2320", "1", "1", "2000-10-01", "767", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:59");
 INSERT INTO `book_copy` VALUES ("2464", "m1004", "m2321", "1", "1", "2000-10-01", "767", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:24:59");
@@ -14677,7 +14641,7 @@ INSERT INTO `book_copy` VALUES ("5072", "m1927", "m5072", "1", "1", "2009-10-25"
 INSERT INTO `book_copy` VALUES ("5073", "m1927", "m5073", "1", "1", "2009-10-25", "260", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:49");
 INSERT INTO `book_copy` VALUES ("5074", "m1927", "m5074", "1", "1", "2009-10-25", "260", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:49");
 INSERT INTO `book_copy` VALUES ("5075", "m1927", "m5075", "1", "1", "2009-10-25", "260", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:49");
-INSERT INTO `book_copy` VALUES ("5076", "m1928", "m5076", "1", "0", "2009-11-02", "85", "1", "", "IST_LIBRARY_1", "0", "2018-09-27 12:55:24");
+INSERT INTO `book_copy` VALUES ("5076", "m1928", "m5076", "1", "1", "2009-11-02", "85", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:49");
 INSERT INTO `book_copy` VALUES ("5077", "m1928", "m5077", "1", "1", "2009-11-02", "85", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:49");
 INSERT INTO `book_copy` VALUES ("5078", "m1928", "m5078", "1", "1", "2009-11-02", "85", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:49");
 INSERT INTO `book_copy` VALUES ("5079", "m1928", "m5079", "1", "1", "2009-11-02", "85", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:49");
@@ -14995,8 +14959,8 @@ INSERT INTO `book_copy` VALUES ("5390", "m2035", "m5365", "1", "1", "2013-01-17"
 INSERT INTO `book_copy` VALUES ("5391", "m2036", "m5366", "1", "1", "2013-01-17", "100", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:52");
 INSERT INTO `book_copy` VALUES ("5392", "m2037", "m5367", "1", "1", "2013-01-17", "100", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:52");
 INSERT INTO `book_copy` VALUES ("5393", "m2038", "m5368", "1", "1", "2013-01-17", "100", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:52");
-INSERT INTO `book_copy` VALUES ("5394", "m1928", "m5369", "1", "1", "2013-01-17", "0", "3", "", "IST_LIBRARY_1", "0", "2018-09-27 12:54:04");
-INSERT INTO `book_copy` VALUES ("5395", "m1928", "m5370", "1", "1", "2013-01-17", "0", "3", "", "IST_LIBRARY_1", "0", "2018-09-27 12:54:04");
+INSERT INTO `book_copy` VALUES ("5394", "m2039", "m5369", "1", "1", "2013-01-17", "0", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:52");
+INSERT INTO `book_copy` VALUES ("5395", "m2039", "m5370", "1", "1", "2013-01-17", "0", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:52");
 INSERT INTO `book_copy` VALUES ("5396", "m2040", "m5371", "1", "1", "2013-01-17", "350", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:52");
 INSERT INTO `book_copy` VALUES ("5397", "m2041", "m5372", "1", "1", "2013-01-17", "250", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:52");
 INSERT INTO `book_copy` VALUES ("5398", "m2042", "m5373", "1", "1", "2013-01-17", "250", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:52");
@@ -15069,7 +15033,7 @@ INSERT INTO `book_copy` VALUES ("5464", "m2058", "m5439", "1", "1", "2013-01-18"
 INSERT INTO `book_copy` VALUES ("5465", "m2058", "m5440", "1", "1", "2013-01-18", "160", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
 INSERT INTO `book_copy` VALUES ("5466", "m2058", "m5441", "1", "1", "2013-01-18", "160", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
 INSERT INTO `book_copy` VALUES ("5467", "m2059", "m5442", "1", "1", "2013-01-18", "160", "3", "Replace of 738", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
-INSERT INTO `book_copy` VALUES ("5468", "m2060", "m5443", "1", "1", "2013-01-18", "450", "3", "", "IST_LIBRARY_1", "0", "2018-09-27 15:23:21");
+INSERT INTO `book_copy` VALUES ("5468", "m2060", "m5443", "1", "1", "2013-01-18", "450", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
 INSERT INTO `book_copy` VALUES ("5469", "m2061", "m5444", "1", "1", "2013-01-18", "260", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
 INSERT INTO `book_copy` VALUES ("5470", "m2061", "m5493", "1", "1", "2013-01-18", "1560", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
 INSERT INTO `book_copy` VALUES ("5471", "m2061", "m5494", "1", "1", "2013-01-18", "400", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
@@ -15132,7 +15096,7 @@ INSERT INTO `book_copy` VALUES ("5527", "m2066", "m5492", "1", "1", "2013-01-18"
 INSERT INTO `book_copy` VALUES ("5528", "m2067", "m5503", "1", "1", "2013-01-18", "1000", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
 INSERT INTO `book_copy` VALUES ("5529", "m2068", "m5504", "1", "1", "2013-01-18", "0", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
 INSERT INTO `book_copy` VALUES ("5530", "m2069", "m5505", "1", "1", "2013-01-18", "0", "2", "Gift", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
-INSERT INTO `book_copy` VALUES ("5531", "m1928", "m5506", "1", "1", "2013-01-18", "0", "3", "", "IST_LIBRARY_1", "0", "2018-09-27 12:54:04");
+INSERT INTO `book_copy` VALUES ("5531", "m2070", "m5506", "1", "1", "2013-01-18", "0", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
 INSERT INTO `book_copy` VALUES ("5532", "m2071", "m5507", "1", "1", "2013-01-18", "200", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
 INSERT INTO `book_copy` VALUES ("5533", "m2071", "m5508", "1", "1", "2013-01-18", "200", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
 INSERT INTO `book_copy` VALUES ("5534", "m2071", "m5513", "1", "1", "2013-01-18", "170", "3", "", "IST_LIBRARY_1", "0", "2018-08-28 16:26:53");
@@ -15468,32 +15432,6 @@ INSERT INTO `book_copy` VALUES ("5863", "m2245", "m5869", "1", "1", "2017-07-26"
 INSERT INTO `book_copy` VALUES ("5864", "m2245", "m5870", "1", "1", "2017-07-26", "150", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:27:29");
 INSERT INTO `book_copy` VALUES ("5865", "m2245", "m5871", "1", "1", "2017-07-26", "150", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:27:29");
 INSERT INTO `book_copy` VALUES ("5866", "m2245", "m5872", "1", "1", "2017-07-26", "150", "1", "", "IST_LIBRARY_1", "0", "2018-08-28 16:27:29");
-INSERT INTO `book_copy` VALUES ("5867", "s2246", "s5873", "1", "0", "2018-09-25", "0", "2", "", "L_3", "0", "2018-09-25 11:24:11");
-INSERT INTO `book_copy` VALUES ("5868", "m1169", "s5874", "1", "1", "2018-09-25", "0", "2", "", "L_3", "0", "2018-09-25 11:25:36");
-INSERT INTO `book_copy` VALUES ("5869", "m2088", "s5875", "1", "0", "2018-09-25", "850", "1", "", "L_3", "0", "2018-09-25 11:27:49");
-INSERT INTO `book_copy` VALUES ("5870", "s2247", "s5876", "1", "0", "2018-09-25", "230", "1", "", "L_3", "0", "2018-09-25 11:38:04");
-INSERT INTO `book_copy` VALUES ("5871", "s2247", "s5877", "1", "1", "2018-09-25", "230", "1", "", "L_3", "0", "2018-09-25 11:38:48");
-INSERT INTO `book_copy` VALUES ("5872", "s2247", "s5878", "1", "1", "2018-09-25", "230", "1", "", "L_3", "0", "2018-09-25 11:38:48");
-INSERT INTO `book_copy` VALUES ("5873", "s2247", "s5879", "1", "1", "2018-09-25", "230", "1", "", "L_3", "0", "2018-09-25 11:38:48");
-INSERT INTO `book_copy` VALUES ("5874", "m2115", "s5880", "1", "1", "2018-09-25", "220", "1", "", "L_3", "0", "2018-09-25 11:59:31");
-INSERT INTO `book_copy` VALUES ("5875", "m2115", "s5881", "1", "1", "2018-09-25", "220", "1", "", "L_3", "0", "2018-09-25 11:59:31");
-INSERT INTO `book_copy` VALUES ("5876", "m2115", "s5882", "1", "1", "2018-09-25", "220", "1", "", "L_3", "0", "2018-09-25 11:59:31");
-INSERT INTO `book_copy` VALUES ("5877", "s2248", "s5883", "1", "0", "2018-09-25", "1230", "1", "Main copy", "L_3", "0", "2018-09-25 12:07:46");
-INSERT INTO `book_copy` VALUES ("5878", "s2248", "s5884", "1", "1", "2018-09-25", "200", "1", "", "L_3", "0", "2018-09-25 12:08:30");
-INSERT INTO `book_copy` VALUES ("5879", "s2248", "s5885", "1", "1", "2018-09-25", "200", "1", "", "L_3", "0", "2018-09-25 12:08:30");
-INSERT INTO `book_copy` VALUES ("5880", "s2248", "s5886", "1", "1", "2018-09-25", "200", "1", "", "L_3", "0", "2018-09-25 12:08:30");
-INSERT INTO `book_copy` VALUES ("5881", "s2249", "s5887", "1", "0", "2018-09-26", "300", "1", "", "L_3", "0", "2018-09-26 10:46:10");
-INSERT INTO `book_copy` VALUES ("5882", "m1166", "s5888", "1", "1", "2018-09-26", "0", "2", "", "L_3", "0", "2018-09-26 10:47:21");
-INSERT INTO `book_copy` VALUES ("5883", "s2250", "s5889", "1", "0", "2018-09-26", "1670", "1", "", "L_3", "0", "2018-09-26 10:51:54");
-INSERT INTO `book_copy` VALUES ("5884", "s2251", "s5890", "1", "0", "2018-09-26", "850", "1", "Maincopy", "L_3", "0", "2018-09-26 10:56:05");
-INSERT INTO `book_copy` VALUES ("5885", "s2251", "s5891", "1", "1", "2018-09-26", "120", "1", "", "L_3", "0", "2018-09-26 10:56:44");
-INSERT INTO `book_copy` VALUES ("5886", "s2251", "s5892", "1", "1", "2018-09-26", "120", "1", "", "L_3", "0", "2018-09-26 10:56:44");
-INSERT INTO `book_copy` VALUES ("5887", "s2251", "s5893", "1", "1", "2018-09-26", "120", "1", "", "L_3", "0", "2018-09-26 10:56:44");
-INSERT INTO `book_copy` VALUES ("5888", "s2252", "s5894", "1", "0", "2018-09-27", "1100", "1", "Maincopy", "L_3", "0", "2018-09-27 12:16:41");
-INSERT INTO `book_copy` VALUES ("5889", "s2252", "s5895", "1", "1", "2018-09-27", "190", "1", "", "L_3", "0", "2018-09-27 12:17:26");
-INSERT INTO `book_copy` VALUES ("5890", "s2252", "s5896", "1", "1", "2018-09-27", "190", "1", "", "L_3", "0", "2018-09-27 12:17:26");
-INSERT INTO `book_copy` VALUES ("5891", "s2252", "s5897", "1", "1", "2018-09-27", "190", "1", "", "L_3", "0", "2018-09-27 12:17:26");
-INSERT INTO `book_copy` VALUES ("5892", "s2252", "s5898", "1", "1", "2018-09-27", "190", "1", "", "L_3", "0", "2018-09-27 12:17:26");
 
 -- ----------------------------
 -- Table structure for `category`
@@ -15503,28 +15441,15 @@ CREATE TABLE `category` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `category_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `category_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`category_id`,`category_name`),
   KEY `category_id` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `category`
 -- ----------------------------
 INSERT INTO `category` VALUES ("1", "m1", "Other", "2018-08-28 16:22:48");
-INSERT INTO `category` VALUES ("2", "s2", "CSE", "2018-09-25 11:23:10");
-INSERT INTO `category` VALUES ("3", "s3", "Trouble-shooting", "2018-09-25 11:23:10");
-INSERT INTO `category` VALUES ("4", "s4", "BBA", "2018-09-25 11:36:17");
-INSERT INTO `category` VALUES ("5", "s5", "Marketing", "2018-09-25 11:36:17");
-INSERT INTO `category` VALUES ("6", "s6", "E-commerce", "2018-09-25 12:06:18");
-INSERT INTO `category` VALUES ("7", "s7", "ECE", "2018-09-26 10:45:03");
-INSERT INTO `category` VALUES ("8", "s8", "Environmental science", "2018-09-26 10:45:03");
-INSERT INTO `category` VALUES ("9", "s9", "Calculas", "2018-09-26 10:51:12");
-INSERT INTO `category` VALUES ("10", "s10", "Communication", "2018-09-26 10:55:08");
-INSERT INTO `category` VALUES ("11", "s11", "Business", "2018-09-27 12:15:37");
-INSERT INTO `category` VALUES ("12", "s12", "Income tax", "2018-09-27 12:21:22");
-INSERT INTO `category` VALUES ("13", "s13", "Electrical Technology", "2018-09-27 13:16:02");
-INSERT INTO `category` VALUES ("14", "s14", "Windows", "2018-09-27 13:16:58");
 
 -- ----------------------------
 -- Table structure for `issue`
@@ -15541,7 +15466,7 @@ CREATE TABLE `issue` (
   `issue_book_copy_accession_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `manager_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `issue_status` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `issue_status` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `issue_lend_user_code` varchar(15) CHARACTER SET latin1 NOT NULL,
   `issue_receive_user_code` varchar(15) CHARACTER SET latin1 NOT NULL,
   `issue_receive_admin_code` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
@@ -15549,8 +15474,8 @@ CREATE TABLE `issue` (
   `issue_fine_admin_code` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `issue_renew_user_code` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `issue_remarks` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `issue_total_fine` int(11) DEFAULT 0,
-  `issue_received_fine` int(10) unsigned DEFAULT 0,
+  `issue_total_fine` int(11) DEFAULT '0',
+  `issue_received_fine` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`,`issue_id`),
   KEY `FK1_issue_book` (`issue_book_id`),
   KEY `FK2_issue_book_copy` (`issue_book_copy_accession_no`),
@@ -15560,18 +15485,11 @@ CREATE TABLE `issue` (
   CONSTRAINT `issue_ibfk_2` FOREIGN KEY (`issue_book_copy_accession_no`) REFERENCES `book_copy` (`book_copy_accession_no`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `issue_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `issue_ibfk_4` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `issue`
 -- ----------------------------
-INSERT INTO `issue` VALUES ("1", "s1", "2018-09-27 14:51:26", "2018-09-27 14:52:18", "2018-10-12 16:30:00", null, "m1003", "m2317", "s1246", "IST_LIBRARY_1", "3", "$HGTTsKI", "TN9xavR8", "$H5DRruw", "$f%P$EQj", "JpTuxG9r", "padjRCpv", "", "0", "0");
-INSERT INTO `issue` VALUES ("2", "s2", "2018-09-27 14:53:20", "2018-09-27 14:53:39", "2018-10-12 16:30:00", null, "m1003", "m2317", "s1246", "IST_LIBRARY_1", "3", "xX4EQpiw", "kzdV9WJN", "t%McIH%V", "2rUiFi3F", "q#BZE&L0", "hQ#suujw", "", "0", "0");
-INSERT INTO `issue` VALUES ("3", "s3", "2018-09-27 14:54:15", "2018-09-27 14:54:22", "2018-10-12 16:30:00", null, "m1003", "m2318", "s1246", "IST_LIBRARY_1", "3", "YLHLjjdX", "8BLlilZl", "#U7R2%3G", "smKpJ4nO", "9soYpLLA", "gCqfSG%A", "", "0", "0");
-INSERT INTO `issue` VALUES ("4", "m4", "2018-09-27 15:06:16", "2018-09-27 15:15:30", "2018-10-12 16:30:00", null, "m2060", "m5443", "s1246", "m5", "3", "&bX15Hda", "Pcm$QN&h", "xEDI4$Ez", "9hIiczbS", "iTE$rEMb", "F@EBP6Pq", "", "0", "0");
-INSERT INTO `issue` VALUES ("5", "m5", "2018-09-27 15:17:39", "2018-09-27 15:22:29", "2018-10-12 16:30:00", null, "m2060", "m5443", "s1246", "m5", "3", "aUW$9bZt", "pcrS31LB", "L7inS41C", "1NfLfbr3", "KGzO6%eG", "KtX7Csfl", "", "0", "0");
-INSERT INTO `issue` VALUES ("6", "m6", "2018-09-27 15:22:29", "2018-09-27 15:23:16", "2018-10-12 16:30:00", null, "m2060", "m5443", "s1246", "m5", "3", "6MMhtGEj", "asU%EJ9r", "DJ1D5Tay", "T3ZB3wwp", "NPKoEW@y", "@lqpIJ4G", "", "0", "0");
-INSERT INTO `issue` VALUES ("7", "m6", "2018-09-27 15:22:29", "2018-09-27 15:23:16", "2018-10-12 16:30:00", null, "m2060", "m5443", "s1246", "m5", "3", "6MMhtGEj", "asU%EJ9r", "DJ1D5Tay", "T3ZB3wwp", "NPKoEW@y", "@lqpIJ4G", "", "0", "0");
 
 -- ----------------------------
 -- Table structure for `log`
@@ -15581,105 +15499,18 @@ CREATE TABLE `log` (
   `log_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `log_entry_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `log_query` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `log_datetime` datetime NOT NULL DEFAULT current_timestamp(),
+  `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `log_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`,`log_entry_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=321 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `log`
 -- ----------------------------
-INSERT INTO `log` VALUES ("230", "m_230", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:11:19");
-INSERT INTO `log` VALUES ("231", "m_231", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:11:21");
-INSERT INTO `log` VALUES ("232", "m_231", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:11:21");
-INSERT INTO `log` VALUES ("233", "m_232", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:11:21");
-INSERT INTO `log` VALUES ("234", "m_233", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:11:29");
-INSERT INTO `log` VALUES ("235", "m_234", "UPDATE `book` SET `book_id` = \'m2060\', `book_available` = 1 WHERE `book_id` = \'m2060\'", "1", "2018-09-27 15:15:33");
-INSERT INTO `log` VALUES ("236", "m_235", "UPDATE `book_copy` SET `book_copy_accession_no` = \'m5443\', `book_copy_status` = 1 WHERE `book_copy_accession_no` = \'m5443\'", "1", "2018-09-27 15:15:33");
-INSERT INTO `log` VALUES ("237", "m_236", "UPDATE `issue` SET `issue_id` = \'m4\', `issue_status` = 3, `issue_return_datetime` = \'2018-09-27 15:15:30\' WHERE `issue_id` = \'m4\'", "1", "2018-09-27 15:15:33");
-INSERT INTO `log` VALUES ("238", "m_237", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 4", "1", "2018-09-27 15:15:34");
-INSERT INTO `log` VALUES ("239", "m_238", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:15:47");
-INSERT INTO `log` VALUES ("240", "m_239", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:15:54");
-INSERT INTO `log` VALUES ("241", "m_240", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:15:54");
-INSERT INTO `log` VALUES ("242", "m_239", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:15:54");
-INSERT INTO `log` VALUES ("243", "m_241", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:16:01");
-INSERT INTO `log` VALUES ("244", "m242", "UPDATE `book` SET `book_available` = 0 WHERE `book_id` = \'m2060\'", "1", "2018-09-27 15:17:39");
-INSERT INTO `log` VALUES ("245", "m243", "UPDATE `book_copy` SET `book_copy_status` = 0 WHERE `book_copy_accession_no` = \'m5443\'", "1", "2018-09-27 15:17:39");
-INSERT INTO `log` VALUES ("246", "m244", "INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'m5\', \'2018-09-27 15:17:39\', \'2018-10-12 16:30:00\', \'m2060\', \'m5443\', \'s1246\', \'m5\', 1, \'aUW$9bZt\', \'pcrS31LB\', \'L7inS41C\', \'1NfLfbr3\', \'KGzO6%eG\', \'KtX7Csfl\', \'\')", "1", "2018-09-27 15:17:39");
-INSERT INTO `log` VALUES ("247", "m_245", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 4", "1", "2018-09-27 15:17:40");
-INSERT INTO `log` VALUES ("248", "m_246", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:19:36");
-INSERT INTO `log` VALUES ("249", "m_247", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:19:43");
-INSERT INTO `log` VALUES ("250", "m_247", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:19:43");
-INSERT INTO `log` VALUES ("251", "m_248", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:19:57");
-INSERT INTO `log` VALUES ("252", "m_249", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:20:04");
-INSERT INTO `log` VALUES ("253", "m_249", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:20:04");
-INSERT INTO `log` VALUES ("254", "m_250", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:20:04");
-INSERT INTO `log` VALUES ("255", "m_251", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:20:11");
-INSERT INTO `log` VALUES ("256", "m_252", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:20:32");
-INSERT INTO `log` VALUES ("257", "m_253", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:20:34");
-INSERT INTO `log` VALUES ("258", "m_253", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:20:34");
-INSERT INTO `log` VALUES ("259", "m_254", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:22:07");
-INSERT INTO `log` VALUES ("260", "m_255", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:22:14");
-INSERT INTO `log` VALUES ("261", "m_256", "UPDATE `log` SET `log_is_synced` = 1 WHERE `log_entry_id` = \'m_255\'", "1", "2018-09-27 15:22:21");
-INSERT INTO `log` VALUES ("262", "m_257", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:22:21");
-INSERT INTO `log` VALUES ("263", "m_258", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 3", "1", "2018-09-27 15:22:28");
-INSERT INTO `log` VALUES ("264", "m_258", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 3", "1", "2018-09-27 15:22:28");
-INSERT INTO `log` VALUES ("265", "m259", "UPDATE `issue` SET `issue_id` = \'m5\', `issue_status` = 3, `issue_return_datetime` = \'2018-09-27 15:22:29\' WHERE `issue_id` = \'m5\'", "1", "2018-09-27 15:22:33");
-INSERT INTO `log` VALUES ("266", "m259", "UPDATE `issue` SET `issue_id` = \'m5\', `issue_status` = 3, `issue_return_datetime` = \'2018-09-27 15:22:29\' WHERE `issue_id` = \'m5\'", "1", "2018-09-27 15:22:33");
-INSERT INTO `log` VALUES ("267", "m260", "INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'m6\', \'2018-09-27 15:22:29\', \'2018-10-12 16:30:00\', \'m2060\', \'m5443\', \'s1246\', \'m5\', 1, \'6MMhtGEj\', \'asU%EJ9r\', \'DJ1D5Tay\', \'T3ZB3wwp\', \'NPKoEW@y\', \'@lqpIJ4G\', \'\')", "1", "2018-09-27 15:22:33");
-INSERT INTO `log` VALUES ("268", "m260", "INSERT INTO `issue` (`issue_id`, `issue_datetime`, `issue_deadline`, `issue_book_id`, `issue_book_copy_accession_no`, `user_id`, `manager_id`, `issue_status`, `issue_lend_user_code`, `issue_receive_user_code`, `issue_receive_admin_code`, `issue_fine_user_code`, `issue_fine_admin_code`, `issue_renew_user_code`, `issue_remarks`) VALUES (\'m6\', \'2018-09-27 15:22:29\', \'2018-10-12 16:30:00\', \'m2060\', \'m5443\', \'s1246\', \'m5\', 1, \'6MMhtGEj\', \'asU%EJ9r\', \'DJ1D5Tay\', \'T3ZB3wwp\', \'NPKoEW@y\', \'@lqpIJ4G\', \'\')", "1", "2018-09-27 15:22:33");
-INSERT INTO `log` VALUES ("269", "m_261", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 3", "1", "2018-09-27 15:22:35");
-INSERT INTO `log` VALUES ("270", "m_262", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:23:12");
-INSERT INTO `log` VALUES ("271", "m_263", "UPDATE `book` SET `book_id` = \'m2060\', `book_available` = 1 WHERE `book_id` = \'m2060\'", "1", "2018-09-27 15:23:20");
-INSERT INTO `log` VALUES ("272", "m_264", "UPDATE `book_copy` SET `book_copy_accession_no` = \'m5443\', `book_copy_status` = 1 WHERE `book_copy_accession_no` = \'m5443\'", "1", "2018-09-27 15:23:20");
-INSERT INTO `log` VALUES ("273", "m_264", "UPDATE `book_copy` SET `book_copy_accession_no` = \'m5443\', `book_copy_status` = 1 WHERE `book_copy_accession_no` = \'m5443\'", "1", "2018-09-27 15:23:20");
-INSERT INTO `log` VALUES ("274", "m_265", "UPDATE `issue` SET `issue_id` = \'m6\', `issue_status` = 3, `issue_return_datetime` = \'2018-09-27 15:23:16\' WHERE `issue_id` = \'m6\'", "1", "2018-09-27 15:23:20");
-INSERT INTO `log` VALUES ("275", "m_265", "UPDATE `issue` SET `issue_id` = \'m6\', `issue_status` = 3, `issue_return_datetime` = \'2018-09-27 15:23:16\' WHERE `issue_id` = \'m6\'", "1", "2018-09-27 15:23:20");
-INSERT INTO `log` VALUES ("276", "m_266", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 5", "1", "2018-09-27 15:23:21");
-INSERT INTO `log` VALUES ("277", "m_267", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:23:40");
-INSERT INTO `log` VALUES ("278", "m_268", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:23:47");
-INSERT INTO `log` VALUES ("279", "m_269", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:24:17");
-INSERT INTO `log` VALUES ("280", "m_270", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:24:24");
-INSERT INTO `log` VALUES ("281", "m_270", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:24:24");
-INSERT INTO `log` VALUES ("282", "m_271", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:24:24");
-INSERT INTO `log` VALUES ("283", "m_272", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:24:31");
-INSERT INTO `log` VALUES ("284", "m_273", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:24:45");
-INSERT INTO `log` VALUES ("285", "m_274", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:24:52");
-INSERT INTO `log` VALUES ("286", "m_275", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:25:22");
-INSERT INTO `log` VALUES ("287", "m_276", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:25:29");
-INSERT INTO `log` VALUES ("288", "m_276", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:25:29");
-INSERT INTO `log` VALUES ("289", "m_277", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:26:27");
-INSERT INTO `log` VALUES ("290", "m_278", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:26:34");
-INSERT INTO `log` VALUES ("291", "m_279", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:28:44");
-INSERT INTO `log` VALUES ("292", "m_280", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:28:51");
-INSERT INTO `log` VALUES ("293", "m_280", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:28:51");
-INSERT INTO `log` VALUES ("294", "m_281", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:29:56");
-INSERT INTO `log` VALUES ("295", "m_282", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:30:03");
-INSERT INTO `log` VALUES ("296", "m_283", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:32:20");
-INSERT INTO `log` VALUES ("297", "m_284", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:32:27");
-INSERT INTO `log` VALUES ("298", "m_285", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:32:57");
-INSERT INTO `log` VALUES ("299", "m_286", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:33:04");
-INSERT INTO `log` VALUES ("300", "m_286", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:33:04");
-INSERT INTO `log` VALUES ("301", "m_287", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:35:28");
-INSERT INTO `log` VALUES ("302", "m_288", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:35:35");
-INSERT INTO `log` VALUES ("303", "m_289", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:35:35");
-INSERT INTO `log` VALUES ("304", "m_290", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:35:42");
-INSERT INTO `log` VALUES ("305", "m_291", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:38:29");
-INSERT INTO `log` VALUES ("306", "m_292", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:38:36");
-INSERT INTO `log` VALUES ("307", "m_293", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:42:56");
-INSERT INTO `log` VALUES ("308", "m_294", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:43:03");
-INSERT INTO `log` VALUES ("309", "m_294", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:43:03");
-INSERT INTO `log` VALUES ("310", "m_295", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:43:17");
-INSERT INTO `log` VALUES ("311", "m_296", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:43:18");
-INSERT INTO `log` VALUES ("312", "m_297", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:43:47");
-INSERT INTO `log` VALUES ("313", "m_297", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:43:47");
-INSERT INTO `log` VALUES ("314", "m_298", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:43:54");
-INSERT INTO `log` VALUES ("315", "m_298", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:43:54");
-INSERT INTO `log` VALUES ("316", "m_299", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:47:09");
-INSERT INTO `log` VALUES ("317", "m_300", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:47:16");
-INSERT INTO `log` VALUES ("318", "m_301", "UPDATE `server` SET `server_sync_status` = 0 WHERE `server_id` = \'1\'", "1", "2018-09-27 15:48:00");
-INSERT INTO `log` VALUES ("319", "m_302", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:48:07");
-INSERT INTO `log` VALUES ("320", "m_302", "DELETE FROM `log` WHERE `log_is_synced` = 1 LIMIT 2", "1", "2018-09-27 15:48:07");
+INSERT INTO `log` VALUES ("1", "m1", "UPDATE `manager` SET `manager_name` = \'Mst. Salma Begum\', `manager_phone` = \'01925791803\', `manager_email` = \'salmahasan.rr@gmail.com\', `manager_user` = \'salma\', `is_admin` = \'1\', `manager_pass` = \'1aa48fc4880bb0c9b8a3bf979d3b917e\' WHERE `manager_id` = \'L_3\'", "1", "2018-09-24 16:36:27");
+INSERT INTO `log` VALUES ("2", "m2", "UPDATE `manager` SET `manager_name` = \'Md. Khalilullah\', `manager_phone` = \'01818312680\', `manager_email` = \'khalil@mia.com\', `manager_user` = \'khalil\', `is_admin` = \'0\', `manager_pass` = \'fccb3cdc9acc14a6e70a12f74560c026\' WHERE `manager_id` = \'L_2\'", "1", "2018-09-24 16:37:51");
+INSERT INTO `log` VALUES ("3", "m3", "UPDATE `manager` SET `manager_name` = \'Mst. Salma Begum\', `manager_phone` = \'01925791803\', `manager_email` = \'salmahasan.rr@gmail.com\', `manager_user` = \'salma\', `is_admin` = \'0\' WHERE `manager_id` = \'L_3\'", "1", "2018-09-24 16:37:57");
+INSERT INTO `log` VALUES ("4", "m4", "INSERT INTO `manager` (`manager_name`, `manager_phone`, `manager_email`, `manager_user`, `is_admin`, `manager_id`, `manager_pass`) VALUES (\'Shaheen Afroz\', \'01917522360\', \'bdshaheenafroz@gmail.com\', \'afroz\', \'0\', \'m5\', \'e7b24b112a44fdd9ee93bdf998c6ca0e\')", "1", "2018-09-24 16:38:18");
 
 -- ----------------------------
 -- Table structure for `manager`
@@ -15694,8 +15525,8 @@ CREATE TABLE `manager` (
   `manager_phone` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `manager_email` varchar(50) CHARACTER SET latin1 NOT NULL,
   `is_admin` tinyint(2) NOT NULL,
-  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
-  `timestamps` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `timestamps` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`manager_id`,`manager_user`,`manager_phone`,`manager_email`),
   KEY `manager_id` (`manager_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -15704,9 +15535,9 @@ CREATE TABLE `manager` (
 -- Records of `manager`
 -- ----------------------------
 INSERT INTO `manager` VALUES ("1", "IST_LIBRARY_1", "$uperadmin", "13563efc6e9a785d43c5f1bb85ba25e7", "Muntasir Billah Munna", "01516180603", "kmmuntasir@gmail.com", "2", "0", "2018-09-01 02:24:12");
-INSERT INTO `manager` VALUES ("3", "L_2", "khalil", "fccb3cdc9acc14a6e70a12f74560c026", "Md. Khalilullah", "01818312680", "khalil@mia.com", "0", "0", "2018-09-24 16:37:58");
-INSERT INTO `manager` VALUES ("4", "L_3", "salma", "1aa48fc4880bb0c9b8a3bf979d3b917e", "Mst. Salma Begum", "01925791803", "salmahasan.rr@gmail.com", "0", "0", "2018-09-24 16:37:58");
-INSERT INTO `manager` VALUES ("8", "m5", "afroz", "e7b24b112a44fdd9ee93bdf998c6ca0e", "Shaheen Afroz", "01917522360", "bdshaheenafroz@gmail.com", "0", "0", "2018-09-24 16:38:19");
+INSERT INTO `manager` VALUES ("3", "L_2", "khalil", "fccb3cdc9acc14a6e70a12f74560c026", "Md. Khalilullah", "01818312680", "khalil@mia.com", "0", "0", "2018-09-24 16:37:51");
+INSERT INTO `manager` VALUES ("4", "L_3", "salma", "1aa48fc4880bb0c9b8a3bf979d3b917e", "Mst. Salma Begum", "01925791803", "salmahasan.rr@gmail.com", "0", "0", "2018-09-24 16:37:57");
+INSERT INTO `manager` VALUES ("8", "m5", "afroz", "e7b24b112a44fdd9ee93bdf998c6ca0e", "Shaheen Afroz", "01917522360", "bdshaheenafroz@gmail.com", "0", "0", "2018-09-24 16:38:18");
 
 -- ----------------------------
 -- Table structure for `publication`
@@ -15716,7 +15547,7 @@ CREATE TABLE `publication` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `publication_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `publication_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`publication_id`,`publication_name`),
   KEY `publication_id` (`publication_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=462 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -16204,7 +16035,7 @@ CREATE TABLE `server` (
 -- ----------------------------
 -- Records of `server`
 -- ----------------------------
-INSERT INTO `server` VALUES ("1", "remote", "http://library.ist.edu.bd/index.php", "2018-09-28 23:45:32", "1", "0", "e4849eec4eb");
+INSERT INTO `server` VALUES ("1", "remote", "http://library.ist.edu.bd/index.php", "2018-09-24 16:38:41", "1", "0", "e4849eec4eb");
 
 -- ----------------------------
 -- Table structure for `settings`
@@ -16218,14 +16049,14 @@ CREATE TABLE `settings` (
   `issue_fine_per_day` smallint(5) unsigned NOT NULL,
   `currency_before` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `currency_after` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `application_role` tinyint(1) NOT NULL DEFAULT 0,
+  `application_role` tinyint(1) NOT NULL DEFAULT '0',
   `institute_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Your School Name',
   `institute_logo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `institute_favicon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `institute_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'Your School Address',
   `institute_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'admin@yourschool.edu',
   `institute_phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'Your School Phone',
-  `app_installed` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `app_installed` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `sms_gateway_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sms_access_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sms_sending_status` bit(1) NOT NULL DEFAULT b'0',
@@ -16235,7 +16066,7 @@ CREATE TABLE `settings` (
 -- ----------------------------
 -- Records of `settings`
 -- ----------------------------
-INSERT INTO `settings` VALUES ("1", "e4849eec4eb", "15", "2", "2", "BDT ", "/=", "1", "Institute of Science and Technology", "d9b968f458576bc4302a76fb7ff68c4c.png", "c47e97c062d1c304619ef00a915e11fe.ico", "House #54, Road #15/A, Dhanmondi, Dhaka-1209", "info@ist.edu.bd", "01711223344", "1", "http://sms.greenweb.com.bd/api.php", "46a97c98e7751d33c527dce90c10d1d1", 1);
+INSERT INTO `settings` VALUES ("1", "e4849eec4eb", "15", "2", "2", "BDT ", "/=", "0", "Institute of Science and Technology", "d9b968f458576bc4302a76fb7ff68c4c.png", "c47e97c062d1c304619ef00a915e11fe.ico", "House #54, Road #15/A, Dhanmondi, Dhaka-1209", "info@ist.edu.bd", "01711223344", "1", "http://sms.greenweb.com.bd/api.php", "46a97c98e7751d33c527dce90c10d1d1", 0);
 
 -- ----------------------------
 -- Table structure for `user`
@@ -16253,17 +16084,17 @@ CREATE TABLE `user` (
   `user_dept` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `user_roll` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `user_session` year(4) NOT NULL,
-  `is_teacher` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `teacher_id` int(11) unsigned NOT NULL DEFAULT 0,
+  `is_teacher` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `teacher_id` int(11) unsigned NOT NULL DEFAULT '0',
   `teacher_designation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   `user_password_reset_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`user_id`,`user_username`,`user_phone`,`user_email`,`user_library_code`,`teacher_id`,`user_roll`,`user_password_reset_code`),
   UNIQUE KEY `user_id` (`user_id`) USING BTREE,
   UNIQUE KEY `user_username` (`user_username`) USING BTREE,
   UNIQUE KEY `user_library_code` (`user_library_code`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1247 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1246 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of `user`
@@ -17513,5 +17344,4 @@ INSERT INTO `user` VALUES ("1242", "m1242", "MCSE17018_m1242", "cc7372b018d135bb
 INSERT INTO `user` VALUES ("1243", "m1243", "MCSE17019_m1243", "7c5ce8817f43c9ccd658b5fcb7faa023", "Maria Jahan", "", "", "7fb7da25ad370d35", "MCSE", "17019", "2016", "0", "0", null, "0", "", "2018-09-01 05:09:58");
 INSERT INTO `user` VALUES ("1244", "m1244", "MCSE17020_m1244", "6bb89752345f6535f1911ec2aef5ce27", "Al Mamun", "", "", "d25fbe09a25204b2", "MCSE", "17020", "2016", "0", "0", null, "0", "", "2018-09-01 05:09:58");
 INSERT INTO `user` VALUES ("1245", "m1245", "MCSE17021_m1245", "6c5e1edb0c0ed2159bebf8a4e6ad1281", "Md. Rahamatullah", "", "", "b9f4a2e851d65556", "MCSE", "17021", "2016", "0", "0", null, "0", "", "2018-09-01 05:09:58");
-INSERT INTO `user` VALUES ("1246", "s1246", "test", "098f6bcd4621d373cade4e832627b4f6", "Test", "01516180603", "kmmuntasir@gmail.com", "WNUE8eEVKK", "CSE", "1057", "2010", "0", "0", null, "0", "", "2018-09-27 14:39:35");
 
