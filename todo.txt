@@ -3,6 +3,17 @@ Current Issues
 ===================================================================
 
 - Book Receive button delays too much to take action (after clicking "OK" on "Are you sure?")
+    - May be do something with ajax in sync page? (an extra DB table will be needed though)
+    
+- Allow managers to give discount when receiving fines
+
+- Show book authors and other details in issue table.
+
+- Sort issues in datatables in descending order
+
+- Add library ID in library card
+
+- Allow managers to see the user list (both student and teachers)
 
 - Duplicate authors remains for a book when merged several books
 
@@ -24,7 +35,7 @@ Current Issues
 Will be done later
 ===================================================================
 
-- Admin login sometimes redirect to sync page (admin/sync/lock_server/1)
+- Admin login redirects to sync page (admin/sync/lock_server/1) when another sync call is running
 
 - Openssl encrypt all api response data to secure the plaintext transactions.
 
