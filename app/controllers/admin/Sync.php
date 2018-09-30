@@ -35,7 +35,7 @@ class Sync extends Base_Controller {
     //====================================//
 
     public function test() {
-        // $reply = $this->send_sms('01516180603', 'hello');
+        // $reply = $this->insert_sms('01516180603', 'hello');
         // $this->printer($reply);
     }
 
@@ -92,7 +92,7 @@ class Sync extends Base_Controller {
                         echo 'Confirmed Issue '.$issue->issue_id.'<br>';
                         // Attempting SMS
                         $msg = "Confirmed Issue #".$issue->issue_id." for \"".$issue->book_title."\". Please collect within 48 hours.";
-                        $sms_reply = $this->send_sms($issue->user_phone, $msg);
+                        $sms_reply = $this->insert_sms($issue->user_phone, $msg);
                         if($sms_reply == 'success') echo 'SMS Sent<br>';
                     }
                     else echo 'Issue '.$issue->issue_id.' Failed to confirm<br>';
@@ -122,7 +122,7 @@ class Sync extends Base_Controller {
                             echo 'Confirmed Issue '.$issue->issue_id.'<br>';
                             // Attempting SMS
                             $msg = "Confirmed Issue #".$issue->issue_id." for \"".$issue->book_title."\". Please collect within 48 hours.";
-                            $sms_reply = $this->send_sms($issue->user_phone, $msg);
+                            $sms_reply = $this->insert_sms($issue->user_phone, $msg);
                             if($sms_reply == 'success') echo 'SMS Sent<br>';
                         }
                         else echo 'Demanded Issue '.$issue->issue_id.'<br>';
@@ -254,5 +254,9 @@ class Sync extends Base_Controller {
         $status = $this->m_sync->clean_old_logs($count - $limit + 1);
         if($status) echo "Cleaned ".($count - $limit)." old log $word";
         else echo 'Something went wrong while cleaning '.($count - $limit)." old log $word";
+    }
+
+    public function feed_sms($limit=1) {
+        echo json_encode($this->m_sync->feed_sms($limit));
     }
 }

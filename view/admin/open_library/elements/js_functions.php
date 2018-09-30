@@ -1,10 +1,21 @@
 <script>
+
 //window.open('http://localhost/library.ist.edu.bd','IST Library','toolbar=no, menubar=no, resizable=yes');
+
+var sms_access_token 	= "";
+var sms_gateway_url		= "";
+var sms_sending_status	= "";
+
 	$(document).ready(function(){
 
 
 		var global_admin_id = $('#global_admin_id').val();
 		var global_admin_type = $('#global_admin_type').val();
+
+
+		sms_access_token = $('#sms_access_token').val();
+		sms_gateway_url = $('#sms_gateway_url').val();
+		sms_sending_status = $('#sms_sending_status').val();
 
 		var site_url = "<?php echo site_url(); ?>/";
 		// Datatables Functions
@@ -185,4 +196,43 @@
 		else var d = new Date();
 		return $.format.date(d, format)
 	}
+
+	function send_sms(sms=null) {
+		alert(sms_access_token);
+		alert(sms_gateway_url);
+		alert(sms_sending_status);
+		
+	}
+
+	/*
+    public function send_sms($to=NULL, $message=NULL) {
+        if(!$this->settings->sms_sending_status) return 'SMS Sending Turned Off By Admin';
+        
+        // Returns 'success' if succeeded, returns API Reply if SMS is not sent.
+        
+        if(!$to || !$message) return 'Recipient and Message Text is Required';
+
+
+        $sms = array();
+        $sms['to']      = $to;
+        $sms['message'] = $message;
+        $sms['token']   = $this->settings->sms_access_token;
+
+        // $this->printer($sms, true);
+
+        $ch = curl_init(); // Initialize cURL
+        curl_setopt($ch, CURLOPT_URL,$this->settings->sms_gateway_url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sms));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $api_reply = curl_exec($ch);
+
+        $sms_stat = explode(':', $api_reply)[0];
+
+        // $sms_stat = 'Ok';
+
+        if($sms_stat == 'Ok') return 'success';
+        else return $api_reply;
+    }
+    */
 </script>

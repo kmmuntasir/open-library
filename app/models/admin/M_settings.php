@@ -35,5 +35,14 @@ class M_settings extends Ci_model {
         $this->db->trans_complete();
         return $this->db->trans_status();
     }
+
+    function insert_sms($sms=NULL) {
+        if(!$sms) return false;
+
+        $this->db->trans_start();
+        $this->db->insert('sms', $sms);
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
 }
 ?>

@@ -407,8 +407,8 @@ class Issue extends Base_Controller {
 
                 if($status) {
                     echo 'success';
-                    $msg = "Recieved Issue #".$issue_id." (".$issue->book_title."). Thank You.";
-                    $this->send_sms($issue->user_phone, $msg);
+                    $msg = "Recieved Issue #".$issue_id." (".$issue->book_title.") with ".$this->settings->currency_before.$issue_updated['issue_received_fine'].$this->settings->currency_after." Fine . Thank You.";
+                    $this->insert_sms($issue->user_phone, $msg);
                 }
                 else echo 'Failure to Process';
             }
@@ -423,7 +423,7 @@ class Issue extends Base_Controller {
                 if($status) {
                     echo 'success';
                     $msg = "Recieved Issue #".$issue_id." (".$issue->book_title."). Thank You.";
-                    $this->send_sms($issue->user_phone, $msg);
+                    $this->insert_sms($issue->user_phone, $msg);
                 }
                 else echo 'Failure to Process';
             }
@@ -438,7 +438,7 @@ class Issue extends Base_Controller {
                 if($status) {
                     echo 'success';
                     $msg = "Recieved Total Fine ".$this->settings->currency_before.$issue->issue_total_fine.$this->settings->currency_after." for Issue #".$issue_id." (".$issue->book_title."). Thank You.";
-                    $this->send_sms($issue->user_phone, $msg);
+                    $this->insert_sms($issue->user_phone, $msg);
                 }
                 else echo 'Failure to Process';
             } 
@@ -492,7 +492,7 @@ class Issue extends Base_Controller {
 
             if($status) {
                 $msg = "Renewed Issue #".$issue_id." (".$issue->book_title."). New Issue ID: #".$issue_new['issue_id'];
-                $this->send_sms($issue->user_phone, $msg);
+                $this->insert_sms($issue->user_phone, $msg);
 
                 $this->redirect_msg('admin/issue/active', 'Successfully Renewed, New Issue ID: #'.$issue_new['issue_id'], 'success');
             }

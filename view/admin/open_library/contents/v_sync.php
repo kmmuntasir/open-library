@@ -64,7 +64,20 @@
 		</div>
 	</div>
 	<div class="col-xs-12">
-		<div class="col-xs-12 col-sm-3 col-sm-offset-9">
+
+		<div class="col-xs-12 col-sm-3">
+			<div class="panel panel-danger">
+			  <div class="panel-heading">SMS Monitor</div>
+			  <div class="panel-body" id="sms_monitor_panel">
+
+			  </div>
+			  <div class="panel-footer">
+
+			  </div>
+			</div> <!-- Panel Ends -->
+		</div>
+
+		<div class="col-xs-12 col-sm-3">
 			<div class="panel panel-primary">
 			  <div class="panel-heading">Log Cleaner</div>
 			  <div class="panel-body" id="log_clean_panel">

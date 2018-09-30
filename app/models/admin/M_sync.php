@@ -81,6 +81,10 @@ class M_sync extends Ci_model {
 
         return $this->db->trans_status() ? 1:0;
     }
+
+    public function feed_sms($limit=1) {
+        return $this->db->limit($limit)->get('sms')->result();
+    }
     
 }
 ?>

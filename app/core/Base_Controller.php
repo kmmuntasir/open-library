@@ -333,12 +333,12 @@ class Base_Controller extends CI_Controller
 
     // =============================== SMS Functions ===========================
 
-
+    /*
     public function send_sms($to=NULL, $message=NULL) {
         if(!$this->settings->sms_sending_status) return 'SMS Sending Turned Off By Admin';
-        /*
-            Returns 'success' if succeeded, returns API Reply if SMS is not sent.
-        */
+        
+        // Returns 'success' if succeeded, returns API Reply if SMS is not sent.
+        
         if(!$to || !$message) return 'Recipient and Message Text is Required';
 
 
@@ -362,6 +362,16 @@ class Base_Controller extends CI_Controller
 
         if($sms_stat == 'Ok') return 'success';
         else return $api_reply;
+    }
+    */
+
+    public function insert_sms($to=NULL, $message=NULL) {
+        if(!$to || !$message) return false;
+        $sms = array();
+        $sms['sms_phone'] = $to;
+        $sms['sms_text'] = $message;
+
+        return $this->m_settings->insert_sms($sms);
     }
 
 }

@@ -16,6 +16,7 @@ var last_updated = '';
 var counter = 0;
 
 $(document).ready(function() {
+
 	application_role = $('#application_role').val();
 	server_id = $('#server_id').val();
 	server_url = $('#server_url').val();
@@ -36,6 +37,10 @@ $(document).ready(function() {
 	else {
 		// Show message
 	}
+
+
+
+	fire_sms();
 });
 
 function sync() {
@@ -229,4 +234,32 @@ function request_timeout_handler() {
 
 function reload(forceget=false) {
 	location.reload(forceget);
+}
+
+// ======================= SMS Functions =============================
+
+function fire_sms(limit=1) {
+	// First, fetch sms from database
+	$.post(sync_url+'feed_sms/'+limit, function(data) {
+		if(data) {
+			if(isJSON(data)) {
+				var sms = $.parseJSON(data);
+
+				if(sms.length == 0) $('#sms_monitor_panel').html("No SMS to Send");
+				else {
+					for(var i=0; i<sms.length; ++i) {
+						$('#sms_monitor_panel').html(sms[i].sms_phone + ' -> "' + sms[i].sms_text + '"<br>');
+					}
+				}
+				
+			}
+			else $('#sms_monitor_panel').html("SMS Fetching Error");
+		}
+		else $('#sms_monitor_panel').html("SMS Fetching Error");
+	});
+
+
+
+
+	// if phone number and sms text is not null or empty string, send the sms
 }

@@ -4,6 +4,12 @@
 <div class="container-fluid">
   <input type="hidden" id="global_admin_id" value="<?php echo $this->session->admin_id; ?>">
   <input type="hidden" id="global_admin_type" value="<?php echo $this->session->admin_type; ?>">
+
+  <input type="hidden" id="sms_access_token" value="<?php echo $this->settings->sms_access_token; ?>">
+  <input type="hidden" id="sms_gateway_url" value="<?php echo $this->settings->sms_gateway_url; ?>">
+  <input type="hidden" id="sms_sending_status" value="<?php echo $this->settings->sms_sending_status; ?>">
+
+  
   <div class="row">
     <!--
     <div class="col-sm-2 col-md-2 sidebar">
