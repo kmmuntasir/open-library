@@ -141,6 +141,10 @@ class M_issue extends Ci_model {
         return $this->db->where('issue.issue_book_copy_accession_no', $book_copy_accession_no)->get('issue')->result();
     }
 
+    public function get_user_by_user_id($user_id) {
+        return $this->db->where('user_id', $user_id)->get('user')->row();
+    }
+
     public function get_user_by_user_library_code($user_library_code) {
         return $this->db->where('user_library_code', $user_library_code)->get('user')->row();
     }

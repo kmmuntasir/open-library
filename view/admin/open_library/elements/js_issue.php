@@ -523,3 +523,8 @@ $(document).on('input', 'input[name=user_library_code]', function() {
 	for(var i=0; i< code.length; i++) star += '*';
 	$(this).siblings('.library_code_curtain').html(star);
 });
+
+$(document).on('click', '#issue_add_super_admin', function(){ 
+	$('#issue_add_super_admin_modal').removeClass('hide');
+	$('#issue_add_super_admin_modal').addClass('show');
+});

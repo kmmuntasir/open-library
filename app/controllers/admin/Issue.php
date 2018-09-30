@@ -581,4 +581,45 @@ class Issue extends Base_Controller {
     public function datatables_datetime_formatter($datetime) {
         return date('M d, Y', strtotime($datetime)).'<br>'.date('h:i a', strtotime($datetime));
     }
+
+
+    public function issue_add_super_admin() {
+        // $this->printer($_POST, true);
+        $user_id = $_POST['user_id'];
+        // Getting user by user library code
+        $user = $this->m_issue->get_user_by_user_id($user_id);
+        if(!$user) $this->redirect_msg('/admin/issue', 'Invalid User ID', 'danger');
+        if($user->is_deleted) $this->redirect_msg('/admin/issue', 'This user is deactivated', 'danger');
+        $msg = array();
+        for($i=1; $i<=$_POST['num_of_books']; ++$i) {
+            $field = 'book_'.$i;
+            // Processing Single Book
+            $book_copy_accession_no = $_POST[$field];
+            $book_copy = $this->m_book->get_single_copy_details($book_copy_accession_no);
+            if(!$book_copy) array_push($msg, array("Accession No. #$book_copy_accession_no Doesn't Exist)", "danger"));
+            else if($this->m_issue->check_book_duplicate_issue($user->user_id, $book_copy->book_id))
+                array_push($msg, array("A copy of this book is currently Issued to/Requested by you", "danger"));
+            else if($book_copy->book_available == 0)
+                array_push($msg, array("Accession No. #$book_copy_accession_no ($book_copy->book_title) is Not Available right now (All copies are lent out)", "danger"));
+            else if($book_copy->book_copy_status==0) 
+                array_push($msg, array("Accession No. #$book_copy_accession_no ($book_copy->book_title) is already issued to someone else", "danger"));
+            else if($book_copy->book_copy_type==0) {
+                if($user->is_teacher) {
+                    // Create process for issuing reference copy to teachers.
+                    if($this->issue_book($book_copy, $book_copy_accession_no, $user)) { 
+                        array_push($msg, array("Accession No. #$book_copy_accession_no ($book_copy->book_title) Issued Successfully (Issue #".$issue['issue_id'].") until ".date('M d, Y h:i a', strtotime($issue['issue_deadline'])), "success"));
+                    } 
+                }
+                else array_push($msg, array("Accession No. #$book_copy_accession_no ($book_copy->book_title) is a Reference Copy<br>Reference copies can only be issued by Teachers", "danger"));
+            }
+            else if($book_copy->book_copy_is_deleted==1) 
+                array_push($msg, array("Accession No. #$book_copy_accession_no ($book_copy->book_title) is a Deleted Book", "danger"));
+            else {   // Everything Clear, Proceed to issue the book
+                if($this->issue_book($book_copy, $book_copy_accession_no, $user)) { 
+                    array_push($msg, array("Accession No. #$book_copy_accession_no ($book_copy->book_title) Issued Successfully (Issue #".$issue['issue_id'].") until ".date('M d, Y h:i a', strtotime(date('Y-m-d 16:30:00', strtotime("+".$this->settings->issue_deadline." days")))), "success"));
+                } 
+            }
+        }
+        $this->redirect_msg('/admin/issue/active', $msg, '', count($msg));
+    }
 }

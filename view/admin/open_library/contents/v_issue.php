@@ -290,3 +290,39 @@
     </form>
   </div>
 </div>
+
+
+
+<!-- Modal for Issuing Books -->
+<div id="issue_add_super_admin_modal" class="modal hide" role="dialog">
+  <div class="modal-dialog">
+  <form autocomplete="off" id="issue_add_super_admin_form" class="lib_form" action="<?php echo $controller.'/issue_add_super_admin'; ?>" method="post">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Issue Book</h4>
+      </div>
+      <div class="modal-body modal-scroll add_form_inputs">
+          <label class="col-sm-4" for="user_roll">User Library ID</label>
+          <div class="col-sm-8 library_code_curtain_box">
+            <input required="" type="text" class="col-xs-12" name="user_id" autocomplete="off" placeholder="User Library ID"/>
+            <!-- <div class="library_code_curtain">****</div> -->
+            <div class="clearfix"></div>
+          </div>
+          <input type="hidden" name="num_of_books" value="1">
+          <div class="book_box">
+            <label class="col-sm-4" for="book_1">Acc. No.(s)<button type="button" id="book_plus" class="inline_plus btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i></button><button type="button"  id="book_minus" class="inline_minus btn btn-xs btn-danger pull-right"><i class="fa fa-minus"></i></button></label>
+            <input autofocus="" required type="text" class="col-sm-8" name="book_1" placeholder="Book Accession No."/>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus"></i> Add</button>
+          <div class="clearfix"></div>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+

@@ -1,6 +1,6 @@
 /*
 
-Date: 2018-09-29 20:22:54
+Date: 2018-09-29 20:33:45
 
 */
 
@@ -14,7 +14,7 @@ CREATE TABLE `author` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `author_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `author_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`author_id`,`author_name`),
   KEY `author_id` (`author_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1971 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -2011,12 +2011,12 @@ CREATE TABLE `book` (
   `book_pages` int(11) DEFAULT NULL,
   `book_status` tinyint(4) NOT NULL,
   `book_remarks` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `book_stock` int(11) NOT NULL DEFAULT 0,
-  `book_available` int(11) NOT NULL DEFAULT 0,
+  `book_stock` int(11) NOT NULL DEFAULT '0',
+  `book_available` int(11) NOT NULL DEFAULT '0',
   `book_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `book_url_unlocked` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `book_url_unlocked` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `is_deleted` bit(1) NOT NULL DEFAULT b'0',
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`book_id`),
   KEY `book_id` (`book_id`),
   KEY `FK1_book_publication` (`publication_id`),
@@ -9553,8 +9553,8 @@ CREATE TABLE `book_copy` (
   `book_copy_source` tinyint(1) DEFAULT NULL,
   `book_copy_remarks` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `book_copy_manager_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `book_copy_is_deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `book_copy_is_deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`book_copy_id`,`book_copy_accession_no`),
   KEY `FK1_book_copy_book` (`book_id`),
   KEY `FK2_book_copy_manager` (`book_copy_manager_id`),
@@ -15441,7 +15441,7 @@ CREATE TABLE `category` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `category_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `category_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`category_id`,`category_name`),
   KEY `category_id` (`category_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -15466,7 +15466,7 @@ CREATE TABLE `issue` (
   `issue_book_copy_accession_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `manager_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `issue_status` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `issue_status` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `issue_lend_user_code` varchar(15) CHARACTER SET latin1 NOT NULL,
   `issue_receive_user_code` varchar(15) CHARACTER SET latin1 NOT NULL,
   `issue_receive_admin_code` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
@@ -15474,8 +15474,8 @@ CREATE TABLE `issue` (
   `issue_fine_admin_code` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `issue_renew_user_code` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `issue_remarks` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `issue_total_fine` int(11) DEFAULT 0,
-  `issue_received_fine` int(10) unsigned DEFAULT 0,
+  `issue_total_fine` int(11) DEFAULT '0',
+  `issue_received_fine` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`,`issue_id`),
   KEY `FK1_issue_book` (`issue_book_id`),
   KEY `FK2_issue_book_copy` (`issue_book_copy_accession_no`),
@@ -15499,8 +15499,8 @@ CREATE TABLE `log` (
   `log_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `log_entry_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `log_query` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `log_datetime` datetime NOT NULL DEFAULT current_timestamp(),
+  `log_is_synced` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `log_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`,`log_entry_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -15525,8 +15525,8 @@ CREATE TABLE `manager` (
   `manager_phone` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `manager_email` varchar(50) CHARACTER SET latin1 NOT NULL,
   `is_admin` tinyint(2) NOT NULL,
-  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
-  `timestamps` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `timestamps` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`manager_id`,`manager_user`,`manager_phone`,`manager_email`),
   KEY `manager_id` (`manager_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -15547,7 +15547,7 @@ CREATE TABLE `publication` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `publication_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `publication_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`publication_id`,`publication_name`),
   KEY `publication_id` (`publication_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=462 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -16049,14 +16049,14 @@ CREATE TABLE `settings` (
   `issue_fine_per_day` smallint(5) unsigned NOT NULL,
   `currency_before` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `currency_after` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `application_role` tinyint(1) NOT NULL DEFAULT 0,
+  `application_role` tinyint(1) NOT NULL DEFAULT '0',
   `institute_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Your School Name',
   `institute_logo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `institute_favicon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `institute_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'Your School Address',
   `institute_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'admin@yourschool.edu',
   `institute_phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'Your School Phone',
-  `app_installed` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `app_installed` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `sms_gateway_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sms_access_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sms_sending_status` bit(1) NOT NULL DEFAULT b'0',
@@ -16067,6 +16067,21 @@ CREATE TABLE `settings` (
 -- Records of `settings`
 -- ----------------------------
 INSERT INTO `settings` VALUES ("1", "e4849eec4eb", "15", "2", "2", "BDT ", "/=", "1", "Institute of Science and Technology", "d9b968f458576bc4302a76fb7ff68c4c.png", "c47e97c062d1c304619ef00a915e11fe.ico", "House #54, Road #15/A, Dhanmondi, Dhaka-1209", "info@ist.edu.bd", "01711223344", "1", "http://sms.greenweb.com.bd/api.php", "46a97c98e7751d33c527dce90c10d1d1", 0);
+
+-- ----------------------------
+-- Table structure for `sms`
+-- ----------------------------
+DROP TABLE IF EXISTS `sms`;
+CREATE TABLE `sms` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sms_phone` varchar(20) NOT NULL,
+  `sms_text` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of `sms`
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `user`
@@ -16084,12 +16099,12 @@ CREATE TABLE `user` (
   `user_dept` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `user_roll` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `user_session` year(4) NOT NULL,
-  `is_teacher` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `teacher_id` int(11) unsigned NOT NULL DEFAULT 0,
+  `is_teacher` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `teacher_id` int(11) unsigned NOT NULL DEFAULT '0',
   `teacher_designation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   `user_password_reset_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`user_id`,`user_username`,`user_phone`,`user_email`,`user_library_code`,`teacher_id`,`user_roll`,`user_password_reset_code`),
   UNIQUE KEY `user_id` (`user_id`) USING BTREE,
   UNIQUE KEY `user_username` (`user_username`) USING BTREE,

@@ -49,6 +49,12 @@
 
           <?php } ?>
 
+          <?php if($page == 'issue' && $this->session->admin_type == 2) { ?>
+
+            <button style="margin-left: 5px;" id="issue_add_super_admin" type="button" class="btn btn-primary btn-md pull-right"><i class="fa fa-credit-card"></i> Issue Add Superadmin</button>
+
+          <?php } ?>
+
 
 
 
