@@ -5,6 +5,8 @@ Current Issues
 - Book Receive button delays too much to take action (after clicking "OK" on "Are you sure?")
     - May be do something with ajax in sync page? (an extra DB table will be needed though)
     
+- Enable to undelete deleted Book copies
+    
 - Create feature for moving book copies from one book to another.
     
 - Allow managers to give discount when receiving fines
