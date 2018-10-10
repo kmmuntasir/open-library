@@ -27,9 +27,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $index_path = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'];
 $config['base_url'] = substr($index_path, 0, strrpos($index_path, '/')+1);
 
+
+// $config['base_url'] = ($_SERVER['HTTP_HOST'] == 'localhost') ? ($_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/'.explode('/', $_SERVER['REQUEST_URI'])[1].'/') : ((explode('.', $_SERVER['HTTP_HOST'])[0] == 192) ? ($_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/'.explode('/', $_SERVER['REQUEST_URI'])[1].'/') : ($_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/'));
+
+
 // This line of code assigns http://domain.tld/ to the base url if the host is not localhost. If it is, then it assigns the immediate subfolder of localhost which the script belongs to.
 
 // $config['base_url'] = 'http://library.ist.edu.bd';
+
 
 
 /*

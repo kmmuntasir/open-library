@@ -7,20 +7,20 @@ class Base_Controller extends CI_Controller
     public $settings = NULL;
 	 function __construct()
 	 {
-	 	parent::__construct();
+        parent::__construct();
 
-		// Setting Timezone
-	 	date_default_timezone_set("Asia/Dhaka");
+        // Setting Timezone
+        date_default_timezone_set("Asia/Dhaka");
 
-		// loading models (If necessary)
-	 	//$this->load->model("admin/m_admin");
-         $this->load->model("admin/m_settings");
-         $this->settings = $this->m_settings->all_settings();
-         // Setting Branch Prefix 'm' for local server, 's' for remote server.
-         $_SESSION['branch_prefix'] = $this->settings->application_role ? 's':'m';
+        // loading models (If necessary)
+        $this->load->model("admin/m_admin");
+        $this->load->model("admin/m_settings");
+        $this->settings = $this->m_settings->all_settings();
+        // Setting Branch Prefix 'm' for local server, 's' for remote server.
+        $_SESSION['branch_prefix'] = $this->settings->application_role ? 's':'m';
 
         // loading libraries
-	 	$this->load->library('session');
+        $this->load->library('session');
 	 }
 
      public function __download($file_absolute_path=NULL) {
