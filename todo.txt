@@ -1,9 +1,6 @@
 ===================================================================
 Current Issues
 ===================================================================
-
-- Book Receive button delays too much to take action (after clicking "OK" on "Are you sure?")
-    - May be do something with ajax in sync page? (an extra DB table will be needed though)
     
 - Enable to undelete deleted Book copies
     
@@ -94,4 +91,6 @@ Done
 - Let the user to reset password using email.
 - Book delete button works regardless of the choice "Yes" or "No"
 - Book considered as duplicate when matched with a deleted book
+- Book Receive button delays too much to take action (after clicking "OK" on "Are you sure?")
+    - May be do something with ajax in sync page? (an extra DB table will be needed though)
 
