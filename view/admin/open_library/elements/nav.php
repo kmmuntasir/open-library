@@ -2,14 +2,11 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span class="nav_icon"><i class="fa fa-align-justify"></i></span>
       </button>
       <a class="navbar-brand" href="#">
         <img id="logo_image" src="<?php echo base_url('images/'.$this->settings->institute_logo); ?>" alt="<?php echo $this->settings->institute_name; ?>">
-        <span id="institute_name"><?php echo $this->settings->institute_name; ?></span>
+        <span class="hidden-xs hidden-sm hidden-md" id="institute_name"><?php echo $this->settings->institute_name; ?></span>
       </a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">

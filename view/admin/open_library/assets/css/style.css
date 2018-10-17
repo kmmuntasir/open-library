@@ -189,6 +189,11 @@
 #main_nav {
 	border-bottom: solid 1px #ddd;
 	transition: all 500ms ease;
+	background-color: #fff;
+}
+
+.navbar-inverse .nav_icon i.fa {
+	color:#fff;
 }
 
 
