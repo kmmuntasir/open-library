@@ -85,6 +85,14 @@ class M_sync extends Ci_model {
     public function feed_sms($limit=1) {
         return $this->db->limit($limit)->get('sms')->result();
     }
+
+    public function delete_sms($id) {
+        $this->db->trans_start();
+        $this->db->where('id', $id)->delete('sms');
+        $this->db->trans_complete();
+
+        return $this->db->trans_status() ? 1:0;
+    }
     
 }
 ?>

@@ -259,4 +259,12 @@ class Sync extends Base_Controller {
     public function feed_sms($limit=1) {
         echo json_encode($this->m_sync->feed_sms($limit));
     }
+
+    public function delete_sms() {
+        if(!isset($_POST['sms_id'])) echo 'No SMS ID Provided';
+
+        $stat = $this->m_sync->delete_sms($_POST['sms_id']);
+
+        echo ($stat) ? 'success' : 'SMS Delete Failed';
+    }
 }

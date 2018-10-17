@@ -13,7 +13,11 @@ var applied_queries = '';
 var sync_interval = '';
 var interval = 0;
 var last_updated = '';
+var sms_gateway_url = '';
+var sms_access_token = '';
+var sms_sending_status = '';
 var counter = 0;
+var sms_locked = false;
 
 $(document).ready(function() {
 
@@ -25,6 +29,9 @@ $(document).ready(function() {
 	access_post_data = {'access_code': server_access_code};
 	sync_limit = $('#sync_limit').val();
 	sync_interval = $('#sync_interval').val();
+	sms_gateway_url = $('#sms_gateway_url').val();
+	sms_access_token = $('#sms_access_token').val();
+	sms_sending_status = $('#sms_sending_status').val();
 	last_updated = Date.now();
 	if(application_role == 0) {
 		// var sync_trigger = function() {if(!syncing) sync();};
@@ -38,9 +45,6 @@ $(document).ready(function() {
 		// Show message
 	}
 
-
-
-	fire_sms();
 });
 
 function sync() {
@@ -184,10 +188,12 @@ function unlock_server(s_id) {
 }
 
 function finish_sync() {
+	fire_sms();
+
 	if(locked) unlock_server(server_id);
 	syncing = false;
 	++counter;
-	if(counter == 10) reload(); // Reloading page to get rid of excessive dom memory load
+	if(counter >= 10 && !sms_locked) reload(); // Reloading page to get rid of excessive dom memory load
 	else reset_sync_indicator(start_wait_indicator);
 }
 
@@ -246,8 +252,62 @@ function reload(forceget=false) {
 
 // ======================= SMS Functions =============================
 
+function lock_sms() {
+	sms_locked = true;
+}
+
+function unlock_sms() {
+	sms_locked = false;
+}
+
+function send_sms(to=null, message=null, id=null) {
+    if(sms_sending_status == 0) {
+    	$('#sms_monitor_panel').append('<br><br><div class="alert alert-md alert-danger"><b>SMS Sending Turned Off By Admin</b></div>');
+    	unlock_sms();
+    	return;
+    }
+
+    // Returns 'success' if succeeded, returns API Reply if SMS is not sent.
+    
+    if(!to || to=='' || !message || message=='' || !id || id=='') {
+    	$('#sms_monitor_panel').append('<br><br><div class="alert alert-md alert-danger"><b>Recipient and Message Text is Required</b></div>');
+    	unlock_sms();
+    	return;
+    }
+
+    $('#sms_monitor_panel').append('<br><br>Sending SMS......<br>');
+    $.post(sms_gateway_url, {'to': to, 'message':message, 'token':sms_access_token}, function(api_reply) {
+
+    	var sms_stat = api_reply.split(":")[0];
+
+    	// var sms_stat = res[0];
+
+    	if(sms_stat == 'Ok') {
+    		$('#sms_monitor_panel').append('<br><br><div class="alert alert-md alert-success"><b>SMS Sent Successfully</b></div>');
+    		$.post(sync_url+'delete_sms', {'sms_id': id}, function(data) {
+    			if(data == 'success')
+    				$('#sms_monitor_panel').append('<div class="alert alert-md alert-success"><b>SMS Deleted Successfully</b></div>');
+    			else
+    				$('#sms_monitor_panel').append('<div class="alert alert-md alert-danger"><b>'+data+'</b></div>');
+    			unlock_sms();
+    		});
+    	}
+    	else {
+    		$('#sms_monitor_panel').append('<br><br><div class="alert alert-md alert-danger"><b>'+api_reply+'</b></div>');
+    		unlock_sms();
+    	}
+
+
+    });
+
+
+
+}
+
 function fire_sms(limit=1) {
 	// First, fetch sms from database
+	if(sms_locked) return;
+	lock_sms();
 	$.post(sync_url+'feed_sms/'+limit, function(data) {
 		if(data) {
 			if(isJSON(data)) {
@@ -257,6 +317,35 @@ function fire_sms(limit=1) {
 				else {
 					for(var i=0; i<sms.length; ++i) {
 						$('#sms_monitor_panel').html(sms[i].sms_phone + ' -> "' + sms[i].sms_text + '"<br>');
+
+
+
+
+
+
+
+
+
+						send_sms(sms[i].sms_phone, sms[i].sms_text, sms[i].id);
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 					}
 				}
 				

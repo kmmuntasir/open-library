@@ -8,6 +8,8 @@ Current Issues
 - Enable to undelete deleted Book copies
     
 - Create feature for moving book copies from one book to another.
+
+- Create SMS balance indicator in dashboard
     
 - Allow managers to give discount when receiving fines
 

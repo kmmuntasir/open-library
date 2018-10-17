@@ -6,6 +6,10 @@
 <input type="hidden" id="sync_limit" value="<?php echo $sync_limit; ?>">
 <input type="hidden" id="sync_interval" value="<?php echo $this->sync_interval; ?>">
 
+<input type="hidden" id="sms_gateway_url" value="<?php echo $this->settings->sms_gateway_url; ?>">
+<input type="hidden" id="sms_access_token" value="<?php echo $this->settings->sms_access_token; ?>">
+<input type="hidden" id="sms_sending_status" value="<?php echo $this->settings->sms_sending_status; ?>">
+
 <div class="row">
 	<div class="col-xs-12">
 		<div class="col-xs-12">
