@@ -9,6 +9,9 @@
 <input type="hidden" id="sms_gateway_url" value="<?php echo $this->settings->sms_gateway_url; ?>">
 <input type="hidden" id="sms_access_token" value="<?php echo $this->settings->sms_access_token; ?>">
 <input type="hidden" id="sms_sending_status" value="<?php echo $this->settings->sms_sending_status; ?>">
+<input type="hidden" id="sms_gateway_info_url" value="<?php echo $this->settings->sms_gateway_info_url; ?>">
+
+<input type="hidden" id="sms_balance">
 
 <div class="row">
 	<div class="col-xs-12">

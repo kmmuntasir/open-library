@@ -160,10 +160,12 @@ class Sync extends Base_Controller {
     public function lock_server($server_id) {return $this->m_sync->lock_server($server_id);}
     public function unlock_server($server_id) {return $this->m_sync->unlock_server($server_id);}
 
+
     public function update_server_connection_time($server_id) {
         if(isset($_SESSION['sync_on'])) unset($_SESSION['sync_on']); 
         // because we don't want the log entry
-        echo $this->m_sync->update_server_connection_time($server_id);
+        if($this->settings->application_role == 1) $this->m_sync->update_server_connection_time($server_id);
+        else echo $this->m_sync->update_server_connection_time($server_id);
     }
 
     public function last_sync_time($seconds = 0) {

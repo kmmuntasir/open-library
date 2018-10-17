@@ -6,27 +6,42 @@
 ?>
 
 <div class="row placeholders">
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <i class="fa fa-book i_placeholder" style="color:green;"></i>
-    <h4>Collection</h4>
-    <span class="text-muted"><?php echo $book_count; ?> Books in Collection</span>
+  <div class="col-sm-2 col-xs-12 sms_info_wrapper">
+
+    <div class="col-xs-12 placeholders">
+      <span class="sms_info_balance"><i class="fa fa-refresh fa-spin"></i></span>
+      <h4>SMS Expiry Date</h4>
+      <span class="text-muted sms_info_date"><i class="fa fa-refresh fa-spin"></i></span>
+      <input type="hidden" id="sms_gateway_info_url" value="<?php echo $this->settings->sms_gateway_info_url; ?>">
+    </div>
+
+
   </div>
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <i class="fa fa-copy i_placeholder" style="color:orange;"></i>
-    <h4>Total Copies</h4>
-    <span class="text-muted"><?php echo $copy_count; ?> Copies in Stock</span>
+  <div class="col-sm-10 col-xs-12">
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <i class="fa fa-book i_placeholder" style="color:green;"></i>
+      <h4>Collection</h4>
+      <span class="text-muted"><?php echo $book_count; ?> Books in Collection</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <i class="fa fa-copy i_placeholder" style="color:orange;"></i>
+      <h4>Total Copies</h4>
+      <span class="text-muted"><?php echo $copy_count; ?> Copies in Stock</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <i class="fa fa-calendar i_placeholder" style="color:red;"></i>
+      <h4>Overdue Issues</h4>
+      <span class="text-muted"><?php echo $overdue_count; ?> Records</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <i id="last_sync_time_indicator" class="fa fa-spin pause-spinner fa-refresh i_placeholder" style="color:blue;"></i>
+      <h4>Last Sync</h4>
+      <span id="last_sync_time" class="text-muted"><?php echo $last_sync; ?></span>
+    </div>
   </div>
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <i class="fa fa-calendar i_placeholder" style="color:red;"></i>
-    <h4>Overdue Issues</h4>
-    <span class="text-muted"><?php echo $overdue_count; ?> Records</span>
-  </div>
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <i id="last_sync_time_indicator" class="fa fa-spin pause-spinner fa-refresh i_placeholder" style="color:blue;"></i>
-    <h4>Last Sync</h4>
-    <span id="last_sync_time" class="text-muted"><?php echo $last_sync; ?></span>
-  </div>
-</div>
+
+
+</div> <!-- placeholders ends -->
   <hr>
 
 <?php

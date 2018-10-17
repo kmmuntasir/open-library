@@ -407,7 +407,7 @@ class Issue extends Base_Controller {
 
                 if($status) {
                     echo 'success';
-                    $msg = "Recieved Issue #".$issue_id." (".$issue->book_title.") with ".$this->settings->currency_before.$issue_updated['issue_received_fine'].$this->settings->currency_after." Fine . Thank You.";
+                    $msg = "Received Issue #".$issue_id." (".$issue->book_title.") with ".$this->settings->currency_before.$issue_updated['issue_received_fine'].$this->settings->currency_after." Fine . Thank You.";
                     $this->insert_sms($issue->user_phone, $msg);
                 }
                 else echo 'Failure to Process';

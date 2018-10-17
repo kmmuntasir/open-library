@@ -181,3 +181,14 @@ body {
 .pagination > li > a {
   padding: 5px 9px;
 }
+
+.sms_info_wrapper {
+  
+}
+
+.sms_info_balance {
+  font-size: 71px;
+  font-weight: bold;
+  font-family: "Liberation Serif", "serif";
+  color:#000;
+}

@@ -262,9 +262,8 @@ class Sync extends Base_Controller {
 
     public function delete_sms() {
         if(!isset($_POST['sms_id'])) echo 'No SMS ID Provided';
-
+        $_SESSION['sync_on'] = true; // because we need the log entry for update
         $stat = $this->m_sync->delete_sms($_POST['sms_id']);
-
         echo ($stat) ? 'success' : 'SMS Delete Failed';
     }
 }

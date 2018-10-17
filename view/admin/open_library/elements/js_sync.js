@@ -18,6 +18,7 @@ var sms_access_token = '';
 var sms_sending_status = '';
 var counter = 0;
 var sms_locked = false;
+var sms_gateway_info_url = '';
 
 $(document).ready(function() {
 
@@ -32,6 +33,7 @@ $(document).ready(function() {
 	sms_gateway_url = $('#sms_gateway_url').val();
 	sms_access_token = $('#sms_access_token').val();
 	sms_sending_status = $('#sms_sending_status').val();
+	sms_gateway_info_url = $('#sms_gateway_info_url').val() + '?token='+sms_access_token+'&balance&rate';
 	last_updated = Date.now();
 	if(application_role == 0) {
 		// var sync_trigger = function() {if(!syncing) sync();};
@@ -40,6 +42,7 @@ $(document).ready(function() {
 	    sync();
 	    setInterval(sync, interval);
 	    setInterval(request_timeout_handler, interval*3);
+	    fetch_sms_balance();
 	}
 	else {
 		// Show message
@@ -146,7 +149,7 @@ function push_queries(limit=0) {
 						});
 					}
 					else {
-						$('#push_list').html('Logs Pushed but Wasn\'t Reveived by Remote Server');
+						$('#push_list').html('Logs Pushed but Wasn\'t Received by Remote Server');
 						clean_old_logs();
 					}
 				});
@@ -260,6 +263,20 @@ function unlock_sms() {
 	sms_locked = false;
 }
 
+function fetch_sms_balance() {
+	// Checking SMS Balance
+	var sms_gateway_info_url = $('#sms_gateway_info_url').val() + '?token='+sms_access_token+'&balance&rate';
+
+	$.post( sms_gateway_info_url, function( data ) {
+	    var temp = data.split('</br>');
+	    var rate = temp[1];
+	    var balance = temp[0];
+	    balance /= rate;
+        balance = parseInt(balance);
+	    $('.sms_balance').val(balance);
+	});
+}
+
 function send_sms(to=null, message=null, id=null) {
     if(sms_sending_status == 0) {
     	$('#sms_monitor_panel').append('<br><br><div class="alert alert-md alert-danger"><b>SMS Sending Turned Off By Admin</b></div>');
@@ -271,6 +288,14 @@ function send_sms(to=null, message=null, id=null) {
     
     if(!to || to=='' || !message || message=='' || !id || id=='') {
     	$('#sms_monitor_panel').append('<br><br><div class="alert alert-md alert-danger"><b>Recipient and Message Text is Required</b></div>');
+    	unlock_sms();
+    	return;
+    }
+
+    var balance = $('.sms_balance').val();
+    // balance = 0;
+    if(balance < 10) {
+    	$('#sms_monitor_panel').append('<br><br><div class="alert alert-md alert-danger"><b>Insufficient SMS Balance<br>Please Recharge</b></div>');
     	unlock_sms();
     	return;
     }
@@ -291,6 +316,19 @@ function send_sms(to=null, message=null, id=null) {
     				$('#sms_monitor_panel').append('<div class="alert alert-md alert-danger"><b>'+data+'</b></div>');
     			unlock_sms();
     		});
+    	}
+    	else if(api_reply.indexOf('Invalid Number') >= 0) {
+    		// Invalid Number
+
+    		$('#sms_monitor_panel').append('<br><br><div class="alert alert-md alert-danger"><b>'+api_reply+'</b></div>');
+    		$.post(sync_url+'delete_sms', {'sms_id': id}, function(data) {
+    			if(data == 'success')
+    				$('#sms_monitor_panel').append('<div class="alert alert-md alert-success"><b>SMS Deleted Successfully</b></div>');
+    			else
+    				$('#sms_monitor_panel').append('<div class="alert alert-md alert-danger"><b>'+data+'</b></div>');
+    			unlock_sms();
+    		});
+    		
     	}
     	else {
     		$('#sms_monitor_panel').append('<br><br><div class="alert alert-md alert-danger"><b>'+api_reply+'</b></div>');
@@ -317,35 +355,7 @@ function fire_sms(limit=1) {
 				else {
 					for(var i=0; i<sms.length; ++i) {
 						$('#sms_monitor_panel').html(sms[i].sms_phone + ' -> "' + sms[i].sms_text + '"<br>');
-
-
-
-
-
-
-
-
-
 						send_sms(sms[i].sms_phone, sms[i].sms_text, sms[i].id);
-						
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					}
 				}
 				
