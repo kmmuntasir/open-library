@@ -200,11 +200,19 @@ function start_wait_indicator() {
 	}, interval-1000);
 }
 	
+// function reset_wait_indicator(callback) {
+// 	$("#wait_indicator").animate({
+// 	    width: "0%"
+// 	}, 0);
+// 	callback();
+// }
+
 function reset_wait_indicator(callback) {
 	$("#wait_indicator").animate({
 	    width: "0%"
-	}, 0);
-	callback();
+	}, 0, function() {
+		callback();
+	});
 }
 
 function start_sync_indicator() {
