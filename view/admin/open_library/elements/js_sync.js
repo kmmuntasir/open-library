@@ -64,6 +64,7 @@ function sync() {
 
 function start_sync() {
 	confirm_server_connection();
+	fire_sms();
 }
 
 function confirm_server_connection() {
@@ -191,7 +192,6 @@ function unlock_server(s_id) {
 }
 
 function finish_sync() {
-	fire_sms();
 
 	if(locked) unlock_server(server_id);
 	syncing = false;
@@ -257,10 +257,12 @@ function reload(forceget=false) {
 
 function lock_sms() {
 	sms_locked = true;
+	// console.log('Locked');
 }
 
 function unlock_sms() {
 	sms_locked = false;
+	// console.log('Unlocked');
 }
 
 function fetch_sms_balance() {
@@ -294,7 +296,7 @@ function send_sms(to=null, message=null, id=null) {
 
     var balance = $('.sms_balance').val();
     // balance = 0;
-    if(balance < 10) {
+    if(balance < 7) {
     	$('#sms_monitor_panel').append('<br><br><div class="alert alert-md alert-danger"><b>Insufficient SMS Balance<br>Please Recharge</b></div>');
     	unlock_sms();
     	return;
@@ -351,11 +353,14 @@ function fire_sms(limit=1) {
 			if(isJSON(data)) {
 				var sms = $.parseJSON(data);
 
-				if(sms.length == 0) $('#sms_monitor_panel').html("No SMS to Send");
+				if(sms.length == 0) {
+					$('#sms_monitor_panel').html("No SMS to Send");
+					unlock_sms();
+				}
 				else {
 					for(var i=0; i<sms.length; ++i) {
 						$('#sms_monitor_panel').html(sms[i].sms_phone + ' -> "' + sms[i].sms_text + '"<br>');
-						send_sms(sms[i].sms_phone, sms[i].sms_text, sms[i].id);
+						send_sms(sms[i].sms_phone, sms[i].sms_text, sms[i].sms_id);
 					}
 				}
 				
@@ -365,8 +370,4 @@ function fire_sms(limit=1) {
 		else $('#sms_monitor_panel').html("SMS Fetching Error");
 	});
 
-
-
-
-	// if phone number and sms text is not null or empty string, send the sms
 }

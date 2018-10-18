@@ -86,9 +86,9 @@ class M_sync extends Ci_model {
         return $this->db->limit($limit)->get('sms')->result();
     }
 
-    public function delete_sms($id) {
+    public function delete_sms($sms_id) {
         $this->db->trans_start();
-        $this->db->where('id', $id)->delete('sms');
+        $this->db->where('sms_id', $sms_id)->delete('sms');
         $this->db->trans_complete();
 
         return $this->db->trans_status() ? 1:0;

@@ -368,6 +368,7 @@ class Base_Controller extends CI_Controller
     public function insert_sms($to=NULL, $message=NULL) {
         if(empty($to) || empty($message)) return false;
         $sms = array();
+        $sms['sms_id'] = $this->new_id('sms');
         $sms['sms_phone'] = $to;
         $sms['sms_text'] = $message;
 
