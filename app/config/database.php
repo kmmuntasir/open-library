@@ -100,6 +100,7 @@ $db['development']['dsn'] = '';
 $db['development']['hostname'] = 'localhost';
 $db['development']['username'] = 'root';
 $db['development']['password'] = '';
+$db['development']['password'] = 'root';
 $db['development']['database'] = 'istedubd_library';
 $db['development']['dbdriver'] = 'mysqli';
 $db['development']['dbprefix'] = '';
