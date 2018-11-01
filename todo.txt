@@ -5,8 +5,6 @@ Current Issues
 - Enable to undelete deleted Book copies
     
 - Create feature for moving book copies from one book to another.
-
-- Create SMS balance indicator in dashboard
     
 - Allow managers to give discount when receiving fines
 
@@ -93,4 +91,5 @@ Done
 - Book considered as duplicate when matched with a deleted book
 - Book Receive button delays too much to take action (after clicking "OK" on "Are you sure?")
     - May be do something with ajax in sync page? (an extra DB table will be needed though)
+- Create SMS balance indicator in dashboard
 
