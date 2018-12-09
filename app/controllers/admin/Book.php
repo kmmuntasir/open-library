@@ -103,10 +103,11 @@ class Book extends Base_Controller {
             $book->authors = $this->m_book->book_authors($book->book_id);
             $book->categories = $this->m_book->book_categories($book->book_id);
             $book->book_copies = $this->m_book->get_all_copies($book_id);
+            $book->deleted_copies = $this->m_book->get_all_deleted_copies($book_id);
             $book->book_add_date = date('M d, Y', strtotime($book->book_add_date));
             $book->timestamp = date('M d, Y', strtotime($book->timestamp));
             foreach($book->book_copies as $key => $copy) $book->book_copies[$key]->book_copy_date = date('M d, Y', strtotime($copy->book_copy_date));
-            //$this->printer($book, true);
+            // $this->printer($book, true);
             echo json_encode($book);
         }
         else echo false;
@@ -300,6 +301,16 @@ class Book extends Base_Controller {
         if($book->book_copy_status==0) exit( 'This copy is currently issued by someone');
         if($book->book_copy_is_deleted) exit( 'It\'s already a deleted copy');
         $status = $this->m_book->delete_copy($book_copy_accession_no, $book);
+        if($status) echo 'success';
+        else echo 'Something went wrong!';
+    }
+
+    public function restore_copy_ajax($book_copy_accession_no) {
+        if(!$book_copy_accession_no) exit("No Acc. no Found");
+
+        $book = $this->m_book->get_single_copy_details($book_copy_accession_no);
+        if($book->book_copy_is_deleted != 1) exit( 'It\'s not a deleted copy');
+        $status = $this->m_book->restore_copy($book_copy_accession_no, $book);
         if($status) echo 'success';
         else echo 'Something went wrong!';
     }

@@ -248,6 +248,12 @@ class M_book extends Ci_model {
         return $this->db->get('book_copy')->result();
     }
 
+    public function get_all_deleted_copies($book_id) {
+        $this->db->where('book_id', $book_id);
+        $this->db->where('book_copy_is_deleted', 1);
+        return $this->db->get('book_copy')->result();
+    }
+
     public function get_single_copy($book_copy_accession_no) {
         $this->db->where('book_copy_accession_no', $book_copy_accession_no);
         return $this->db->get('book_copy')->row();
@@ -311,6 +317,22 @@ class M_book extends Ci_model {
         $book_copy = $this->get_single_copy($book_copy_accession_no);
         $new_book = array('book_stock'=>$book->book_stock-1);
         if($book_copy->book_copy_type) $new_book['book_available']=$book->book_available-1;
+        $this->db->where('book_id', $book->book_id);
+        $this->db->update('book', $new_book);
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
+
+
+    public function restore_copy($book_copy_accession_no, $book) {
+        $this->db->trans_start();
+
+        $this->db->where('book_copy_accession_no', $book_copy_accession_no);
+        $this->db->update('book_copy', array('book_copy_is_deleted'=>0));
+
+        $book_copy = $this->get_single_copy($book_copy_accession_no);
+        $new_book = array('book_stock'=>$book->book_stock+1);
+        if($book_copy->book_copy_type) $new_book['book_available']=$book->book_available+1;
         $this->db->where('book_id', $book->book_id);
         $this->db->update('book', $new_book);
         $this->db->trans_complete();

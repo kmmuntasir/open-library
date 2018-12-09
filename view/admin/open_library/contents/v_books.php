@@ -302,9 +302,31 @@
               
             </tbody>
           </table>
+
+          <div id="deleted_copy_box" style="margin-top: 30px;">
+            <h4>Deleted Copies</h4>
+            <hr>
+            <table class="table table-striped deleted_copies_table">
+              <thead>
+                <tr>
+                  <th>Acc. No.</th>
+                  <th>Copy Type</th>
+                  <th>Added Date</th>
+                  <th>Price</th>
+                  <th>Source</th>
+                  <th>Remarks</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+              </tbody>
+            </table>
+          </div>
       </div>
       <div class="modal-footer">
-          <button id="addCopyModalButton" type="button" class="addCopy btn btn-sm btn-primary pull-right"><i class="fa fa-copy"></i> Add Copies</button>
+          <button id="addCopyModalButton" type="button" class="addCopy btn btn-sm btn-primary pull-right" style="margin-left: 10px;"><i class="fa fa-copy"></i> Add Copies</button>
+          <button id="viewDeletedCopyButton" type="button" class="viewDeletedCopy btn btn-sm btn-warning pull-right"><i class="fa fa-eye"></i> View Deleted Copies</button>
           <div class="clearfix"></div>
       </div>
     </div>

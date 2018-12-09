@@ -135,6 +135,8 @@ $(document).on('click', '.view_book', function() {
 		var copy_status = ['Issued', 'Available'];
 		var type = ['<button type="button" class="btn btn-xs btn-primary">Reference</button>', 'Normal'];
 	    var source = ['', 'Purchase', 'Donation', 'Others'];
+
+	    // Processing book copies table
 		var book_copies = '';
 		var i=0;
 		while(i<book.book_copies.length) {
@@ -166,8 +168,48 @@ $(document).on('click', '.view_book', function() {
 			i++;
 		}
 		$('.book_copy_details_box').children('tbody').html(book_copies);
+
+
+	    // Processing deleted copies table
+		var deleted_copies = '';
+		var i=0;
+		while(i<book.deleted_copies.length) {
+			var style = '';
+			if(book.deleted_copies[i].book_copy_status == 0) style = 'style="color:#f00;"';
+			deleted_copies += '<tr id="copy_row_'+book.deleted_copies[i].book_copy_accession_no+'" '+style+ '><td><a title="View Details" class="accession_anchor" href="#">'+book.deleted_copies[i].book_copy_accession_no + '</a></td>';
+			deleted_copies += '<td>'+type[book.deleted_copies[i].book_copy_type] + '</td>';
+			deleted_copies += '<td>'+book.deleted_copies[i].book_copy_date + '</td>';
+			deleted_copies += '<td>'+book.deleted_copies[i].book_copy_price + '/-</td>';
+			deleted_copies += '<td>'+source[book.deleted_copies[i].book_copy_source] + '</td>';
+			if(book.deleted_copies[i].book_copy_remarks != null) var remarks = book.deleted_copies[i].book_copy_remarks;
+			else var remarks = ' ';
+			deleted_copies += '<td>'+ remarks + '</td>';
+			var copy_options = "";
+
+			copy_options += '<a title="Edit this copy" book_copy_accession_no="'+book.deleted_copies[i].book_copy_accession_no+'" class="editCopy btn btn-warning btn-xs" href="#"><i class="fa fa-pencil"></i></a>';
+
+
+			var restore_url = site_url + 'admin/book/restore_copy_ajax/' + book.deleted_copies[i].book_copy_accession_no;
+
+			copy_options += '<button title="Restore this copy" style="margin-left: 2px;" class="restore_copy_ajax btn btn-success btn-xs" restore_url="'+ restore_url +'" ac_no="'+book.deleted_copies[i].book_copy_accession_no+'"><i class="fa fa-undo"></i></button>';
+
+			// copy_options = "";
+
+			deleted_copies += '<td>'+ copy_options + '</td></tr>';
+
+
+			i++;
+		}
+		$('.deleted_copies_table').children('tbody').html(deleted_copies);
+		$('#deleted_copy_box').hide();
+		$('#viewDeletedCopyButton').removeAttr('disabled');
 		$('#addCopyModalButton').attr('book_id', book.book_id);
 	});
+});
+
+$(document).on('click', '#viewDeletedCopyButton', function() {
+	$('#deleted_copy_box').show();
+	$('#viewDeletedCopyButton').attr('disabled', 'disabled');
 });
 
 // Functions for Book Copy View Form
@@ -257,6 +299,36 @@ $(document).on('click', '.delete_copy_ajax', function() {
     				$(this).remove();
 	    		});
     			showFlash('Successfully Deleted', 'success');
+	    	}
+	    	else {
+    			showFlash(data, 'danger');
+		    }
+    	});
+	}
+
+
+	event.preventDefault();
+});
+
+// Function for restore_copy_ajax
+$(document).on('click', '.restore_copy_ajax', function() { 
+	var url = $(this).attr('restore_url');
+	var ac_no = $(this).attr('ac_no');
+
+	if(!confirm("Are you sure to restore Accession No: "+ac_no+"?")) {
+		event.preventDefault();
+		return;
+	}
+
+	// alert(url);
+
+	if(url != '' && url != null) {
+    	$.post(url, function(data) {
+    		if(data == 'success') {
+    			$('#copy_row_'+ac_no).fadeOut(300, function() {
+    				$(this).remove();
+	    		});
+    			showFlash('Successfully Restored', 'success');
 	    	}
 	    	else {
     			showFlash(data, 'danger');
