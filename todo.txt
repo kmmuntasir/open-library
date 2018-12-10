@@ -1,8 +1,7 @@
 ===================================================================
 Current Issues
 ===================================================================
-    
-    
+
 - Create feature for moving book copies from one book to another.
     
 - Allow managers to give discount when receiving fines
@@ -24,8 +23,6 @@ Current Issues
 - Publisher instead of Publication (only in view)
 
 - Remove all delete buttons from software except for superadmin
-
-- Created deleted books page
 
 - Write A Documentation + User Manual
 
@@ -92,3 +89,4 @@ Done
     - May be do something with ajax in sync page? (an extra DB table will be needed though)
 - Create SMS balance indicator in dashboard
 - Enable to undelete deleted Book copies
+- Created deleted books page and allowed to undelete books

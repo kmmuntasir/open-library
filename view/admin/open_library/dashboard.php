@@ -25,7 +25,7 @@
           <button id="sync_page_time" class="pull-right btn btn-primary">Last Sync: <?php echo date('g:i:s A, F d, Y', strtotime(date($this->server->server_last_connection))); ?></button>
           <div id="sync_indicator" style="margin-right: 5px;" class="btn btn-success btn-md pull-right"><i class="fa fa-refresh"></i></div>
         <?php } ?>
-        <?php if($page != 'book_copy' && $page != 'sync') { ?>
+        <?php if($page != 'book_copy' && $page != 'sync' && $page != 'deleted_books') { ?>
           <?php if($page == 'dashboard') { ?>
           <button class="btn btn-md btn-primary"><?php echo (count($issues))?'<span class="badge">'.count($issues).'</span> New Request(s)':'No Issue Requests'; ?> </button>     
 
@@ -42,6 +42,8 @@
           <?php } ?>
 
           <?php if($page == 'books') { ?>
+
+            <a href="<?php echo site_url($module.'/book/deleted_books'); ?>" style="margin-left: 5px;" class="btn btn-warning btn-md pull-right"><i class="fa fa-book"></i> View Deleted Books</a>
 
             <button style="margin-left: 5px;" id="book_copy_details_button" type="button" class="btn btn-primary btn-md pull-right"><i class="fa fa-copy"></i> View Single Copy Details</button>
 

@@ -34,10 +34,6 @@ class Book extends Base_Controller {
         $data = $this->data;
         $data['page'] = 'books';
         $data['page_title'] .= 'Books';
-        //$data['books'] = $this->m_book->all_books();
-        // foreach($data['books'] as $key => $book) {
-        //     $data['books'][$key]->authors = $this->m_book->book_authors($book->book_id);
-        // }
         $data['authors'] = $this->m_author->all_authors();
         $data['categories'] = $this->m_category->all_categories();
         $data['publications'] = $this->m_publication->all_publications();
@@ -49,6 +45,26 @@ class Book extends Base_Controller {
 
     public function all_books_json() {
         $books = $this->m_book->all_books_json();
+        // $this->printer($books, true);
+        ini_set('memory_limit', '-1');
+        echo $this->book_to_datatable($books, 1, 1);
+    }
+
+    public function deleted_books() {
+        $data = $this->data;
+        $data['page'] = 'deleted_books';
+        $data['page_title'] .= 'Deleted Books';
+        $data['authors'] = $this->m_author->all_authors();
+        $data['categories'] = $this->m_category->all_categories();
+        $data['publications'] = $this->m_publication->all_publications();
+        $data['content'] = 'v_books.php';
+        $data['source'] = $this->data['controller'].'/all_deleted_books_json';
+        // $this->printer($data, true);
+        $this->load->view($this->viewpath.'v_main', $data);
+    }
+
+    public function all_deleted_books_json() {
+        $books = $this->m_book->all_books_json(1);
         // $this->printer($books, true);
         ini_set('memory_limit', '-1');
         echo $this->book_to_datatable($books, 1, 1);
@@ -201,6 +217,14 @@ class Book extends Base_Controller {
         $aff = $this->m_book->delete_book($book_id);
         if($aff) $this->redirect_msg('/admin/book', 'Book Deleted Successfully', 'success');
         else $this->redirect_msg('/admin/book', 'Something went wrong!', 'danger');
+    }
+
+    public function restore($book_id=NULL) {
+        if(!$book_id) $this->redirect_msg('/admin/book', 'Invalid Book ID', 'danger');
+        // if($this->m_book->check_book_for_issue($book_id)) $this->redirect_msg('/admin/book', 'This book has incomplete issues with it.', 'danger');
+        $aff = $this->m_book->restore_book($book_id);
+        if($aff) $this->redirect_msg('/admin/book/deleted_books', 'Book Restored Successfully', 'success');
+        else $this->redirect_msg('/admin/book/deleted_books', 'Something went wrong!', 'danger');
     }
 
     public function merge() {
