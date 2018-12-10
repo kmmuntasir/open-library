@@ -563,6 +563,14 @@
           </table>
       </div>
       <div id="view_copy_footer" class="modal-footer">
+          <form id="move_copy_form" action="<?php echo $controller.'/move_copy'; ?>" method="post" class="">
+            <label class="pull-left">Move Copy to Another Book</label>
+            <input type="text" name="book_id" placeholder="Type Target Book ID and hit enter" class="form-control">
+            <input type="hidden" name="book_copy_accession_no">
+            <div class="clearfix"></div>
+          </form>
+          <br>
+
           <a href="#" class="delete btn btn-sm btn-danger pull-right"><i class="fa fa-trash"></i> Delete</a>
           <button book_copy_accession_no="book_copy_accession_no" type="button" class="editCopy btn btn-sm btn-info pull-right"><i class="fa fa-pencil"></i> Modify</button>
           <a href="#" class="history btn btn-sm btn-primary pull-right"><i class="fa fa-book"></i> Issue History</a>
@@ -594,7 +602,7 @@
   </div>
 </div>
 
-<!-- Modal for entering Copy accession no. -->
+<!-- Modal for Merging Books no. -->
 <div id="merge_book_modal" class="modal hide" role="dialog">
   <div class="modal-dialog">
     <form class="lib_form" id="merge_book_form" action="<?php echo $controller.'/merge' ?>" method="post">

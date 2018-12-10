@@ -2,7 +2,7 @@
 Current Issues
 ===================================================================
 
-- Create feature for moving book copies from one book to another.
+- All Books List needed (according to accession number)
     
 - Allow managers to give discount when receiving fines
 
@@ -15,8 +15,6 @@ Current Issues
 - Allow managers to see the user list (both student and teachers)
 
 - Duplicate authors remains for a book when merged several books
-
-- All Books List needed (according to accession number)
 
 - ID needed in authors, categories and publications page in admin section
 
@@ -90,3 +88,4 @@ Done
 - Create SMS balance indicator in dashboard
 - Enable to undelete deleted Book copies
 - Created deleted books page and allowed to undelete books
+- Created feature for moving book copies from one book to another

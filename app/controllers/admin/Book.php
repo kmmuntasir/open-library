@@ -70,6 +70,23 @@ class Book extends Base_Controller {
         echo $this->book_to_datatable($books, 1, 1);
     }
 
+    public function accession_list() {
+        $data = $this->data;
+        $data['page'] = 'accession_list';
+        $data['page_title'] .= 'Accession List';
+        $data['content'] = 'v_accession_list.php';
+        $data['source'] = $this->data['controller'].'/accession_list_json';
+        // $this->printer($data, true);
+        $this->load->view($this->viewpath.'v_main', $data);
+    }
+
+    public function accession_list_json($is_deleted=0) {
+        $book_copies = $this->m_book->accession_list_json($is_deleted);
+        $this->tabular($book_copies, true);
+        ini_set('memory_limit', '-1');
+        echo $this->book_to_datatable($book_copies, 1, 1);
+    }
+
     public function book_by_filter_json($filter=NULL, $id=NULL) {
         if($filter == 1) $books = $this->m_book->all_books_by_author($id);
         else if($filter == 2) $books = $this->m_book->all_books_by_category($id);
@@ -299,6 +316,48 @@ class Book extends Base_Controller {
         $aff = $this->m_book->add_copy($book_copy, $_POST['book_copy_type']);
         if($aff) $this->redirect_msg('/admin/book', 'Copies Added Successfully', 'success');
         else $this->redirect_msg('/admin/book', 'Something went wrong!', 'danger');
+    }
+
+    public function move_copy() {
+        if(!isset($_POST['book_id']) || !isset($_POST['book_copy_accession_no'])) 
+            $this->redirect_msg('/admin/book', 'Book ID and Accession No. Required', 'danger');
+
+        $book_copy = $this->m_book->get_single_book_by_accession_no($_POST['book_copy_accession_no']);
+        if(!$book_copy) $this->redirect_msg('/admin/book', 'Invalid Accession No.', 'danger');
+
+        if($book_copy->book_id == $_POST['book_id'])
+            $this->redirect_msg('/admin/book', 'Cannot move to same book', 'danger');
+
+        $book = $this->m_book->get_single_book($_POST['book_id']);
+        if(!$book) $this->redirect_msg('/admin/book', 'Invalid Book ID', 'danger');
+
+        // $this->printer($book);
+        // $this->printer($book_copy, true);
+
+        $new_copy = array();
+        $new_copy['book_id'] = $_POST['book_id'];
+        $new_copy['book_copy_manager_id'] = $this->session->admin_id;
+
+        $source_book = array();
+        $target_book = array();
+
+        if($book_copy->book_copy_is_deleted == 0) {
+            $source_book['book_stock'] = $book_copy->book_stock - 1;
+            $target_book['book_stock'] = $book->book_stock + 1;
+            if($book_copy->book_copy_type == 1 && $book_copy->book_copy_status == 1) { // Normal Available Copy
+                $source_book['book_available'] = $book_copy->book_available - 1;
+                $target_book['book_available'] = $book->book_available + 1;
+            }
+        }
+
+        // $this->printer($new_copy);
+        // $this->printer($source_book);
+        // $this->printer($target_book, true);
+
+        $status = $this->m_book->move_copy($new_copy, $_POST['book_copy_accession_no'], $source_book, $book_copy->book_id, $target_book, $_POST['book_id'], $book_copy->book_copy_is_deleted);
+        if($status) $this->redirect_msg('/admin/book', 'Copy Moved Successfully', 'success');
+        else $this->redirect_msg('/admin/book', 'Something went wrong!', 'danger');
+
     }
 
     public function update_copy($book_copy_accession_no) {

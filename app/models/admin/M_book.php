@@ -17,6 +17,16 @@ class M_book extends Ci_model {
         return $this->db->get('book')->result();
     }
 
+    public function accession_list_json($is_deleted=0) {
+        $select = "*";
+        $select = "book_copy_accession_no, book_copy_date, book_title, book_edition, publication_name, book_copy_type";
+        $this->db->select($select);
+        $this->db->join('book', 'book.book_id = book_copy.book_id');
+        $this->db->join('publication', 'book.publication_id = publication.publication_id');
+        $this->db->limit(20);
+        return $this->db->where('book_copy_is_deleted', $is_deleted)->get('book_copy')->result();
+    }
+
     public function count_books() {
         return $this->db->select('COUNT(*) as count')->where('is_deleted', 0)->get('book')->row()->count;
     }
@@ -37,6 +47,22 @@ class M_book extends Ci_model {
         $this->db->join('book_copy', 'book.book_id = book_copy.book_id');
         $this->db->where('book_copy_accession_no', $book_copy_accession_no);
         return $this->db->get('book')->row();
+    }
+
+    public function move_copy($book_copy, $book_copy_accession_no, $source_book, $source_book_id, $target_book, $target_book_id, $book_copy_is_deleted) {
+        $this->db->trans_start();
+
+        $this->db->where('book_copy_accession_no', $book_copy_accession_no);
+        $this->db->update('book_copy', $book_copy);
+        if($book_copy_is_deleted == 0) {
+            $this->db->where('book_id', $source_book_id);
+            $this->db->update('book', $source_book);
+            $this->db->where('book_id', $target_book_id);
+            $this->db->update('book', $target_book);
+        }
+
+        $this->db->trans_complete();
+        return $this->db->trans_status();
     }
 
     public function book_authors($book_id) {

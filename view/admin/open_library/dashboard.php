@@ -43,9 +43,11 @@
 
           <?php if($page == 'books') { ?>
 
-            <a href="<?php echo site_url($module.'/book/deleted_books'); ?>" style="margin-left: 5px;" class="btn btn-warning btn-md pull-right"><i class="fa fa-book"></i> View Deleted Books</a>
+            <a href="<?php echo site_url($module.'/book/deleted_books'); ?>" style="margin-left: 5px;" class="btn btn-warning btn-md pull-right"><i class="fa fa-book"></i> Deleted Books</a>
 
-            <button style="margin-left: 5px;" id="book_copy_details_button" type="button" class="btn btn-primary btn-md pull-right"><i class="fa fa-copy"></i> View Single Copy Details</button>
+            <a href="<?php echo site_url($module.'/book/accession_list'); ?>" style="margin-left: 5px;" class="btn btn-default btn-md pull-right"><i class="fa fa-list"></i> Accession List</a>
+
+            <button style="margin-left: 5px;" id="book_copy_details_button" type="button" class="btn btn-primary btn-md pull-right"><i class="fa fa-copy"></i> Single Copy Details</button>
 
             <button style="margin-left: 5px;" id="merge_book_button" type="button" class="btn btn-success btn-md pull-right"><i class="fa fa-compress"></i> Merge Books <span style="display: none;" class="badge badge-xs">3</span></button>
 

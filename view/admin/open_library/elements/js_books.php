@@ -275,8 +275,18 @@ $(document).on('click', '.accession_anchor', function() {
 	    		$('.view_copy_source').html(source[book.book_copy_source]);
 	    		$('.view_add_date').html(book.book_add_date);
 	    		$('.view_copy_remarks').html(book.book_copy_remarks);
+
+	    		$('#move_copy_form').children('input[name=book_copy_accession_no]').val(book.book_copy_accession_no);
+	    		$('#move_copy_form').children('input[name=book_id]').val('');
     		}
     	});
+	}
+});
+
+$(document).on('submit', '#move_copy_form', function() {
+	if(!confirm("Are you sure to move this copy?")) {
+		event.preventDefault();
+		return;
 	}
 });
 
@@ -670,6 +680,10 @@ $( "#get_copy_details" ).submit(function( event ) {
 	    		$('.view_copy_source').html(source[book.book_copy_source]);
 	    		$('.view_add_date').html(book.book_add_date);
 	    		$('.view_copy_remarks').html(book.book_copy_remarks);
+
+
+	    		$('#move_copy_form').children('input[name=book_copy_accession_no]').val(book.book_copy_accession_no);
+	    		$('#move_copy_form').children('input[name=book_id]').val('');
     		}
     		else showFlash('Invalid Accession Number', 'danger');
 
@@ -681,3 +695,4 @@ $( "#get_copy_details" ).submit(function( event ) {
 	}
 	event.preventDefault();
 });
+
