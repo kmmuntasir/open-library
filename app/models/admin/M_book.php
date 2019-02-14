@@ -17,14 +17,15 @@ class M_book extends Ci_model {
         return $this->db->get('book')->result();
     }
 
+    // GROUP_CONCAT(author_name ORDER BY author_name ASC SEPARATOR ', ')
+
     public function accession_list_json($is_deleted=0) {
-        $select = "*";
-        $select = "book_copy_accession_no, book_copy_date, book_title, book_edition, publication_name, book_copy_type";
-        $this->db->select($select);
-        $this->db->join('book', 'book.book_id = book_copy.book_id');
-        $this->db->join('publication', 'book.publication_id = publication.publication_id');
-        $this->db->limit(20);
-        return $this->db->where('book_copy_is_deleted', $is_deleted)->get('book_copy')->result();
+        $inner_query = "SELECT SUBSTR(book_copy_accession_no, 2) AS ac_no, `book_copy_date`, `book_title`, `book_edition`, `publication_name`, `book_copy_type`, `author_name` FROM `book_copy` JOIN `book` ON `book`.`book_id` = `book_copy`.`book_id` JOIN `publication` ON `book`.`publication_id` = `publication`.`publication_id` JOIN `book_author` ON `book`.`book_id` = `book_author`.`book_id` JOIN `author` ON `book_author`.`author_id` = `author`.`author_id` WHERE book_copy_is_deleted=0";
+
+        $outer_select = "`ac_no`, `book_copy_date`, `book_title`, GROUP_CONCAT(DISTINCT author_name SEPARATOR ', ') AS author_name, `book_edition`, `publication_name`, IF(`book_copy_type`=0, 'Reference', '') as copy_type, ac_no as ac2";
+
+        $outer_query = "SELECT $outer_select FROM ( $inner_query ) AS temp_table GROUP BY `ac_no`";
+        return $this->db->query($outer_query)->result();
     }
 
     public function count_books() {

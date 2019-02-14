@@ -43,7 +43,7 @@ var sms_sending_status	= "";
             //"order": [[ 2, "asc" ]],
             //dom: 'lfrtip',
 	        // dom: 'iplBfrt',
-	        dom: 'lifpt',
+	        dom: 'lifptlifp',
             initComplete: function() {
                 //post_process_datatable(datapage);
             }

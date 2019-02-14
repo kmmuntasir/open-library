@@ -82,9 +82,11 @@ class Book extends Base_Controller {
 
     public function accession_list_json($is_deleted=0) {
         $book_copies = $this->m_book->accession_list_json($is_deleted);
-        $this->tabular($book_copies, true);
+        // echo $this->db->last_query();
+        // $this->tabular($book_copies, true);
+
         ini_set('memory_limit', '-1');
-        echo $this->book_to_datatable($book_copies, 1, 1);
+        echo $this->to_datatable_json_format($book_copies, 1, 1);
     }
 
     public function book_by_filter_json($filter=NULL, $id=NULL) {
@@ -155,8 +157,8 @@ class Book extends Base_Controller {
         $book['manager_id'] = $this->session->admin_id;
         $book['book_add_date'] = date('Y-m-d H:i:s');
 
-        $book_duplicate = $this->m_book->check_book_title_edition($book['book_title'], $book['book_edition']);
-        if($book_duplicate) $this->redirect_msg('/admin/book', 'Same edition of this book already exists', 'danger');
+        // $book_duplicate = $this->m_book->check_book_title_edition($book['book_title'], $book['book_edition']);
+        // if($book_duplicate) $this->redirect_msg('/admin/book', 'Same edition of this book already exists', 'danger');
 
         if($book['book_isbn'] != '') {
             $book_duplicate = $this->m_book->check_duplicate_isbn($book['book_isbn']);

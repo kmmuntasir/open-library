@@ -11,31 +11,25 @@
 		<table data-page="books" class="table table-striped datatable " data-source="<?php echo $source; ?>">
 			<thead>
 				<tr>
-          <th class="dt_xs">#</th>
-					<th>Title</th>
+          <th class="dt_xs">Ac. No</th>
+					<th class="dt_xs">Date</th>
+          <th>Title</th>
 					<th>Author(s)</th>
 					<th class="dt_xs">Edition</th>
-          <!-- <th class="dt_xs">ISBN</th> -->
-					<th class="dt_xs">Publisher</th>
-					<th class="dt_xs">Stock</th>
-					<th class="dt_xs">Available</th>
-          <th class="dt_xs">Online Reading</th>
-          <th class="dt_xs">URL Unlocked</th>
+					<th class="">Publisher</th>
+					<th class="dt_xs">Type</th>
 					<th class="opt_column">Options</th>
 				</tr>
 			</thead>
       <tfoot>
         <tr>
-          <td>#</td>
+          <td>Ac. No</td>
+          <td>Date</td>
           <td>Title</td>
           <td>Author(s)</td>
           <td>Edition</td>
-          <!-- <td>ISBN</td> -->
           <td>Publisher</td>
-          <td>Stock</td>
-          <td>Available</td>
-          <td>Online Reading</td>
-          <td>URL Unlocked</td>
+          <td>Type</td>
           <td class="opt_column">Options</td>
         </tr>
       </tfoot>
