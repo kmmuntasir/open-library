@@ -49,6 +49,7 @@ function post_process_books_table() {
 
 		if(id != null && id != '#') {
 			//console.log(id);
+			/* 
 			var title = $(this).children('td:nth-child(3)').html();
 			title = '<a title="View Issue History for this Book" href="'+site_url+'/admin/issue/issue_by_book/'+id+'">'+title+'</a>';
 			$(this).children('td:nth-child(3)').html(title);
@@ -75,22 +76,10 @@ function post_process_books_table() {
 				pub = '<a title="View All Books by this Publisher" href="'+site_url+'/admin/book/book_by_filter/3/'+publications[0]+'">'+publications[1]+'</a>';
 				$(this).children('td:nth-child(5)').html(pub);
 			}
-
-
-			var read = $(this).children('td:nth-child(8)').html();
-			if(read == 1) {
-				button = '<a target="_blank" href="'+site_url+'/admin/book/read_online/'+id+'" title="" class="btn btn-primary btn-xs">Read</a>';
-				$(this).children('td:nth-child(8)').html(button);
-			}
-			else $(this).children('td:nth-child(8)').html('N/A');
-
-
-			var url_unlocked = $(this).children('td:nth-child(9)').html();
-			if(url_unlocked == 1) $(this).children('td:nth-child(9)').html('<code>Yes</code>');
-			else $(this).children('td:nth-child(9)').html('<code>No</code>');
+			*/
 
 			var action_buttons = '<a title="View Book Details" href="#" book_id="'+id+'" class="view_book btn btn-xs btn-primary"><i class="fa fa-eye"></i></a> <a title="Add Copies for this Book" href="#" book_id="'+id+'" class="addCopy btn btn-xs btn-success"><i class="fa fa-copy"></i></a> <a title="Edit Book Details" href="#" book_id="'+id+'" class="edit edit_book btn btn-xs btn-info"><i class="fa fa-pencil"></i></a> <a title="Delete Book" href="'+site_url+'/admin/book/delete/'+id+'" class="delete btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>';
-			$(this).children('td:nth-child(10)').html(action_buttons);
+			$(this).children('td:nth-child(8)').html(action_buttons);
 		}
 
 
