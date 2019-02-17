@@ -15,7 +15,7 @@
 					<th class="dt_xs">Date</th>
           <th>Title</th>
 					<th>Author(s)</th>
-					<th class="dt_xs">Edition</th>
+					<th class="dt_sm">Edition</th>
 					<th class="">Publisher</th>
 					<th class="dt_xs">Type</th>
 					<th class="opt_column">Options</th>
