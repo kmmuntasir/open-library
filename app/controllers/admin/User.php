@@ -176,7 +176,7 @@ class User extends Base_Controller {
                     $single_export['Password'] = $this->__unique_code(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
                     $single_user['user_pass']            = md5($single_export['Password']);
 
-                    $single_user['user_library_code']    = substr(md5($single_user['user_id']), 16);
+                    $single_user['user_library_code']    = substr(md5($single_user['user_id']), 8);
 
 
                     if(!$is_teacher) {
@@ -262,7 +262,7 @@ class User extends Base_Controller {
 
         $flag = true;
         do {
-            $new_code = $this->__unique_code($this->library_code_length);
+            $new_code = $this->__unique_code($this->library_code_length, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
             if(!$this->m_user->check_library_code($new_code)) $flag = false;
         }while($flag);
 

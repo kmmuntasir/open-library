@@ -195,7 +195,7 @@
 	display: none;
 }
 
-/*************** Library Card CSS ******************/
+/*************** Library Card CSS (Landscape) ******************
 .library_card_wrap {
 	width:330px;
 	padding:7px;
@@ -252,8 +252,82 @@ td.colon-td {padding:0;}
 	margin-left: -10px;
 	width: 336px;
 	height: 25px;
-	/* *
 	border: solid 1px #000;
-	/* */
+}
+/***************************************************/
+
+
+/*************** Library Card CSS (Portrait) ******************/
+.library_card_wrap {
+	width:230px;
+	padding:7px;
+	border: solid 1px #333;
+	overflow: hidden;
+	margin:10px auto;
+	box-shadow: 0px 0px 15px #888;
+}
+.library_card_wrap  img.campus_logo {
+	width:130px;
+	display: block;
+	margin: 20px auto 40px auto;
+}
+
+.library_card_wrap > .card_head >  h3 {
+	text-align: center;
+	font-size:0.9rem;
+	margin-top:7px;
+	margin-bottom: 5px;
+	font-family:'arial';
+	font-weight: bold;
+}
+.library_card_wrap > .card_head >  h4 {
+	font-size:0.8rem;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 0;
+	font-family:'arial';
+}
+
+.library_card_wrap  .user_info {
+
+}
+
+.library_card_wrap  .user_info > .card_table {
+	font-size:1rem;
+	font-family: 'arial';
+	width: 100%;
+	/*border: solid 1px #000;*/
+}
+
+.library_card_wrap  .user_info > .card_table th {max-width: 58px; width: 58px;}
+
+.library_card_wrap  .user_info > .card_table td, .library_card_wrap  .user_info > .card_table th {
+	padding: 0px 5px;
+}
+td.colon-td {padding:0 !important; width: 3px;}
+
+.library_card_wrap  .barcode {
+	width: 30px;
+	height: 275px;
+	/*overflow: hidden;*/
+	/*border: solid 1px #f00;*/
+}
+.library_card_wrap  .barcode > img {
+	display: block;
+	position: absolute;
+	margin: 0;
+	width: 30px;
+	height: 315px;
+	margin-top: -21px;
+	/*border: solid 1px #000;*/
+}
+
+.user_info_left {
+	float:left;
+	width: 180px;
+}
+.user_info_right {
+	float:right;
+	width: 30px;
 }
 /***************************************************/

@@ -15,7 +15,7 @@ class Barcode extends Base_Controller {
 	public function generate() {
 		$code = isset($_GET['code'])?$_GET['code']:'No Code Given';
 		$barHeight = isset($_GET['height'])?$_GET['height']:14;
-		$factor = isset($_GET['factor'])?$_GET['factor']:1.98;
+		$factor = isset($_GET['factor'])?$_GET['factor']:2.00;
 		$this->__set_barcode($code, $barHeight, $factor);
 	}
 }
