@@ -4,7 +4,7 @@
 </ul>
 
 <div class="tab-content">
-  <div id="user_details" class="tab-pane fade in">
+  <div id="user_details" class="tab-pane fade in active">
   	<div class="row">
   		<div class="col-sm-6 table-responsive">
   			<!-- Modal content-->
@@ -66,7 +66,7 @@
   			  </div>
   			</div>
   		</div>
-  		<div class="col-sm-6">
+  		<div class="col-sm-3">
   			<form class="lib_form" id="change_pass_form" action="<?php echo $controller.'/change_pass'; ?>" method="post">
   			  <!-- Modal content-->
   			  <div class="modal-content">
@@ -76,7 +76,7 @@
   			    <div class="modal-body">
   			    	<label for="old_pass">Current Password</label>
   			        <input id="old_pass" autofocus="" required type="password" class="form-control" name="old_pass" placeholder="Current Password"/>
-  			    	<label for="pass_1">New Password</label>
+  			    	  <label for="pass_1">New Password</label>
   			        <input id="pass_1" required type="password" class="form-control" name="pass_1" placeholder="New Password"/>
   			        <label for="pass_2">Confirm Password</label>
   			        <input id="pass_2" required type="password" class="form-control" name="pass_2" placeholder="Confirm Password"/>
@@ -88,9 +88,31 @@
   			  </div>
   			</form>
   		</div>
+      <div class="col-sm-3">
+        <form class="lib_form" id="change_pin_form" action="<?php echo $controller.'/change_pin'; ?>" method="post">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Change PIN</h4>
+            </div>
+            <div class="modal-body">
+              <label for="old_pass">Current Password</label>
+                <input id="old_pass" autofocus="" required type="password" class="form-control" name="old_pass" placeholder="Current Password"/>
+                <label for="pin_1">New PIN <span> (Exactly 4 digits)</span></label>
+                <input id="pin_1" required type="password" maxlength="4" autocomplete="off" class="form-control" name="pin_1" placeholder="Example: 1234"/>
+                <label for="pin_2">Confirm PIN</label>
+                <input id="pin_2" required type="password" maxlength="4" autocomplete="off" class="form-control" name="pin_2" placeholder="Confirm New PIN"/>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-success pull-right"><i class="fa fa-check"></i> Submit</button>
+                <div class="clearfix"></div>
+            </div>
+          </div>
+        </form>
+      </div>
   	</div>
   </div>
-  <div id="library_card" class="tab-pane fade in active">
+  <div id="library_card" class="tab-pane fade in">
     <div class="col-sm-6">
     	<div class="modal-content">
 		    <div class="modal-header">

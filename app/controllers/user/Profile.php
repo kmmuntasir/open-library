@@ -49,6 +49,19 @@ class Profile extends Base_Controller {
         else $this->redirect_msg('user/profile', 'Something Went Wrong', 'danger');
     }
 
+    public function change_pin() {
+        $user_id = $this->session->userdata['user_id'];
+        $user = $this->m_profile->details();
+        if($user->user_pass != md5($_POST['old_pass'])) $this->redirect_msg(site_url('user/profile'), 'Incorrent Password', 'danger');
+        if($_POST['pin_1'] != $_POST['pin_2']) $this->redirect_msg(site_url('user/profile'), 'PINs don\'t match', 'danger');
+        if(!is_numeric($_POST['pin_1'])) $this->redirect_msg(site_url('user/profile'), 'PIN must be numeric', 'danger');
+        if(strlen($_POST['pin_1']) != 4) $this->redirect_msg(site_url('user/profile'), 'PIN must be of 4 digits', 'danger');
+
+        $status = $this->m_profile->update(array('user_pin'=>md5($_POST['pin_1'])));
+        if($status) $this->redirect_msg('user/profile', 'Successfully Updated PIN', 'success');
+        else $this->redirect_msg('user/profile', 'Something Went Wrong', 'danger');
+    }
+
     public function new_code() {
         $user_id = $this->session->userdata['user_id'];
         $user = $this->m_profile->details();
