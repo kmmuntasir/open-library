@@ -1,4 +1,0 @@
-Default Admin Login Info
-==========================
-User: superadmin
-Pass: 123456789﻿
