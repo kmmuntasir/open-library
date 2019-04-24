@@ -1,18 +1,23 @@
 <style type="text/css">
 
-	/*@page {
+	@page {
 		size: A4 portrait;
-		margin: 2rem;
-	}*/
+		margin: 0
+	}
 
 	body {
 		padding-top: 0;
 	}
 
-	@page {
-		size: 2.5in 3in;
-		margin: 0;
-		margin-top: 0.03in;
+	.library_card_wrap {
+		zoom: 0.8; 
+		-moz-transform: scale(0.8); 
+		-moz-transform-origin: 0 0;
+		transform: rotate(90deg);
+		/*margin-left: 70px;*/
+		margin-top: -30px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	@media screen {
@@ -24,11 +29,6 @@
 			display: none;
 		}
 
-		.library_card_wrap {
-			zoom: 0.8; 
-			-moz-transform: scale(0.8); 
-			-moz-transform-origin: 0 0;
-		}
 	}
 
 	@media screen, print {
@@ -39,11 +39,13 @@
 <div class="alert alert-lg alert-success" role="alert">
 	<h2>Hit Ctrl+P to Enter Print View</h2>
 </div>
+<?php if($page == 'idprint') { ?>
 <div class="alert alert-lg alert-danger" role="alert">
-	<?php if($page == 'idprint') echo '<h3>You have 60 Seconds</h3>'; ?>
+	<h3>You have 60 Seconds</h3>
 </div>
+<?php } ?>
 
-<div class="modal-body library_card_wrap">
+<div class="library_card_wrap">
 	<div class="card_head">
 		<h3>INSTITUTE OF SCIENCE AND TECHNOLOGY</h3>
 		<h4>LIBRARY CARD</h4>
