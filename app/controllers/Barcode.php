@@ -5,7 +5,7 @@ class Barcode extends Base_Controller {
 	public $module = 'user';	// defines the module
 	function __construct() {
         parent::__construct();
-        $this->__security($this->module);
+        // $this->__security($this->module);
     }
 
 	public function index()

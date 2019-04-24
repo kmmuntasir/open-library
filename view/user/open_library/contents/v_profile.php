@@ -4,7 +4,7 @@
 </ul>
 
 <div class="tab-content">
-  <div id="user_details" class="tab-pane fade in">
+  <div id="user_details" class="tab-pane fade in active">
   	<div class="row">
   		<div class="col-sm-6 table-responsive">
   			<!-- Modal content-->
@@ -90,7 +90,7 @@
   		</div>
   	</div>
   </div>
-  <div id="library_card" class="tab-pane fade in active">
+  <div id="library_card" class="tab-pane fade in">
     <div class="col-sm-6">
     	<div class="modal-content">
 		    <div class="modal-header">

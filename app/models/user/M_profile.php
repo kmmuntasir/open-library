@@ -4,8 +4,9 @@ class M_profile extends Ci_model {
 
     // Basic Functions
 
-    public function details() {
-        return $this->db->where('user_id', $this->session->userdata['user_id'])->get('user')->row();
+    public function details($user_id=NULL) {
+        $user_id = ($user_id) ? $user_id : $this->session->userdata['user_id'];
+        return $this->db->where('user_id', $user_id)->get('user')->row();
     }
 
     public function update($user) {

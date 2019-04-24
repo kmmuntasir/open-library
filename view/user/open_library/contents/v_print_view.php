@@ -1,8 +1,18 @@
 <style type="text/css">
 
-	@page {
+	/*@page {
 		size: A4 portrait;
 		margin: 2rem;
+	}*/
+
+	body {
+		padding-top: 0;
+	}
+
+	@page {
+		size: 2.5in 3in;
+		margin: 0;
+		margin-top: 0.03in;
 	}
 
 	@media screen {
@@ -10,15 +20,28 @@
 	}
 
 	@media print {
+		.alert {
+			display: none;
+		}
 
+		.library_card_wrap {
+			zoom: 0.8; 
+			-moz-transform: scale(0.8); 
+			-moz-transform-origin: 0 0;
+		}
 	}
 
 	@media screen, print {
 
 	}
 
-
 </style>
+<div class="alert alert-lg alert-success" role="alert">
+	<h2>Hit Ctrl+P to Enter Print View</h2>
+</div>
+<div class="alert alert-lg alert-danger" role="alert">
+	<?php if($page == 'idprint') echo '<h3>You have 60 Seconds</h3>'; ?>
+</div>
 
 <div class="modal-body library_card_wrap">
 	<div class="card_head">

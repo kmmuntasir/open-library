@@ -459,6 +459,16 @@
 			});
 		<?php } ?>
 
+	    <?php if($page == 'idprint') { ?> //============= Issue Requests Page JS Functions
+			$(document).ready(function() {
+				var url = site_url + 'user/idprint';
+				var duration = 60; // time in seconds
+				setTimeout(function(){
+					window.location.replace(url);
+				}, duration*1000);
+			});
+		<?php } ?>
+
 		// ----------------------------- Post Process Datatables Functions ----------------------------- //
 
 		function post_process_categories_table() {
