@@ -434,16 +434,6 @@
 	    		if(!confirm("Are you sure to submit?")) return false;
 	    	});
 
-	    	$('#change_pin_form').submit(function() {
-	    		var pin_1 = $('#pin_1').val();
-	    		var pin_2 = $('#pin_2').val();
-	    		if(pin_1 != pin_2) {
-	    			alert("PINs don't match!");
-	    			return false;
-	    		}
-	    		if(!confirm("Are you sure to submit?")) return false;
-	    	});
-
 	    	$('#new_code_form').submit(function() {
 	    		if(!confirm("Are you sure to generate new code?")) return false;
 	    	});

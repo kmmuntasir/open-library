@@ -85,13 +85,5 @@ class M_user extends Ci_model {
         return $this->db->where('user_library_code', $user_library_code)->get('user')->num_rows();
     }
 
-    function create_user_pin_field() {
-        $q = "ALTER TABLE `user` ADD `user_pin` VARCHAR(255) AFTER `user_library_code`";
-        $this->db->trans_start();
-        $this->db->query($q);
-        $this->db->trans_complete();
-        return $this->db->trans_status();
-    }
-
 }
 ?>

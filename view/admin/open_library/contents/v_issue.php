@@ -48,25 +48,12 @@
         <h4 class="modal-title">Issue Book</h4>
       </div>
       <div class="modal-body modal-scroll add_form_inputs">
-          <div class="col-xs-12">
-            <input id="secret_code_method_changer" class="form-input" type="checkbox" name="secret_code_method_changer">
-            <label for="secret_code_method_changer">Use PIN instead of Barcode?</label>
-          </div>
-          <div class="clearfix"></div>
-          <label id="secret_code_input_label" class="col-sm-4" for="secret_code_input">User Library Code</label>
+          <label class="col-sm-4" for="user_roll">User Library Code</label>
           <div class="col-sm-8 library_code_curtain_box">
-            <input id="secret_code_input" required="" oncopy="return false" type="text" class="col-xs-12" name="user_library_code" autocomplete="off" placeholder="User Library Code (use barcode machine)"/>
+            <input required="" oncopy="return false" type="text" class="col-xs-12" name="user_library_code" autocomplete="off" placeholder="User Library Code (use barcode machine)"/>
             <div class="library_code_curtain">****</div>
             <div class="clearfix"></div>
           </div>
-
-          <div id="user_id_box" style="display: none;">
-            <label class="col-sm-4" for="user_id_text_input">User Library ID</label>
-            <div class="col-sm-8">
-              <input id="user_id_text_input" type="text" name="user_id" class="col-xs-12" autocomplete="off" placeholder="User Library ID">
-            </div>
-          </div>
-
           <input type="hidden" name="num_of_books" value="1">
           <div class="book_box">
             <label class="col-sm-4" for="book_1">Acc. No.(s)<button type="button" id="book_plus" class="inline_plus btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i></button><button type="button"  id="book_minus" class="inline_minus btn btn-xs btn-danger pull-right"><i class="fa fa-minus"></i></button></label>

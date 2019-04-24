@@ -524,38 +524,6 @@ $(document).on('input', 'input[name=user_library_code]', function() {
 	$(this).siblings('.library_code_curtain').html(star);
 });
 
-$(document).on('input', 'input[name=user_pin]', function() {
-	var code = $(this).val();
-	var star = '';
-	for(var i=0; i< code.length; i++) star += '*';
-	$(this).siblings('.library_code_curtain').html(star);
-});
-
-$(document).on('change', '#secret_code_method_changer', function() {
-	var method_status = $(this).prop('checked');
-
-	if(method_status) { // Use PIN instead of Barcode
-		$('#secret_code_input_label').html("User PIN");
-		$('#secret_code_input').val('');
-		$('.library_code_curtain').html("");
-		$('#secret_code_input').attr('name', "user_pin");
-		$('#secret_code_input').attr('maxlength', "4");
-		$('#secret_code_input').attr('placeholder', "Type User Pin (Example: 1234)");
-		$('#user_id_box').show();
-		$('#user_id_text_input').attr('required', 'required');
-	}
-	else {
-		$('#secret_code_input_label').html("User Library Code");
-		$('#secret_code_input').val('');
-		$('.library_code_curtain').html("");
-		$('#secret_code_input').attr('name', "user_library_code");
-		$('#secret_code_input').removeAttr('maxlength');
-		$('#secret_code_input').attr('placeholder', "User Library Code (use barcode machine)");
-		$('#user_id_box').hide();
-		$('#user_id_text_input').removeAttr('required');
-	}
-});
-
 $(document).on('click', '#issue_add_super_admin', function(){ 
 	$('#issue_add_super_admin_modal').removeClass('hide');
 	$('#issue_add_super_admin_modal').addClass('show');

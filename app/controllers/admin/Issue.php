@@ -209,28 +209,12 @@ class Issue extends Base_Controller {
     }
 
     public function add_issue() {
-        $user = '';
-        if(isset($_POST['secret_code_method_changer']) && $_POST['secret_code_method_changer'] == 'on') {
-            // Process with PIN
-            // Getting user by user pin
-            $user = $this->m_issue->get_user_by_user_id($_POST['user_id']);
-            if(!$user) $this->redirect_msg('/admin/issue', 'Invalid User ID', 'danger');
-            if($user->user_pin != md5($_POST['user_pin'])) $this->redirect_msg('/admin/issue', 'Invalid PIN', 'danger');
-            
-        }
-        else {
-            // Process with Library Code
-            if(!isset($_POST['user_library_code'])) $this->redirect_msg('/admin/issue', 'Library Code Not Found', 'danger');
-            $user_library_code = $_POST['user_library_code'];
-            // Getting user by user library code
-            $user = $this->m_issue->get_user_by_user_library_code($user_library_code);
-            if(!$user) $this->redirect_msg('/admin/issue', 'Invalid Library Code', 'danger');
-        }
         // $this->printer($_POST, true);
-
-        
+        $user_library_code = $_POST['user_library_code'];
+        // Getting user by user library code
+        $user = $this->m_issue->get_user_by_user_library_code($user_library_code);
+        if(!$user) $this->redirect_msg('/admin/issue', 'Invalid Library Code', 'danger');
         if($user->is_deleted) $this->redirect_msg('/admin/issue', 'This user is deactivated', 'danger');
-
         $msg = array();
         for($i=1; $i<=$_POST['num_of_books']; ++$i) {
             $field = 'book_'.$i;
