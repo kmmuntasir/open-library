@@ -21,7 +21,7 @@
     <?php
       $msg = '';
       $alert_class = '';
-      if($page != 'login' && $this->session->flashdata('number') != '') {
+      if($page != 'login' && $page != 'credential' && $this->session->flashdata('number') != '') {
         $msg = $this->session->flashdata('msg');
         foreach($msg as $key=>$m) {
     ?>
