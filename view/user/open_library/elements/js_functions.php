@@ -466,6 +466,12 @@
 				setTimeout(function(){
 					window.location.replace(url);
 				}, duration*1000);
+				// $('#idprint_countdown').html(duration);
+				setInterval(function() {
+					duration--;
+					$('#idprint_countdown').html(duration);
+
+				}, 1000);
 			});
 		<?php } ?>
 
@@ -801,11 +807,5 @@
 
 
 	});
-
-
-
-
-
-
 
 </script>

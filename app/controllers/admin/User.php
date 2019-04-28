@@ -328,4 +328,10 @@ class User extends Base_Controller {
             $this->redirect_msg('/admin/user'.$subpage, 'User Reactivated Successfully', 'success');
         else $this->redirect_msg('/admin/user'.$subpage, 'Something went wrong!', 'danger');
     }
+
+    public function create_user_pin_field() {
+        $stat = $this->m_user->create_user_pin_field();
+        if($stat) echo 'Yes';
+        else echo 'No';
+    }
 }

@@ -41,7 +41,7 @@
 </div>
 <?php if($page == 'idprint') { ?>
 <div class="alert alert-lg alert-danger" role="alert">
-	<h3>You have 60 Seconds</h3>
+	<h3>You have <span id="idprint_countdown">60</span> Seconds</h3>
 </div>
 <?php } ?>
 

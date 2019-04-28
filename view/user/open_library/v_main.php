@@ -21,7 +21,7 @@
     <?php
       $msg = '';
       $alert_class = '';
-      if(($page != 'login' && $page != 'credential') && $this->session->flashdata('number') != '') {
+      if($page != 'login' && $this->session->flashdata('number') != '') {
         $msg = $this->session->flashdata('msg');
         foreach($msg as $key=>$m) {
     ?>
@@ -35,8 +35,8 @@
         }
       }
     	if($page == 'login') $template = 'login.php';
-      else if($page == 'credential') $template = 'credential.php';
       else if($page == 'set_new_password') $template = 'reset.php';
+      else if($page == 'credential') $template = 'credential.php';
       else $template = 'dashboard.php';
     	require($template);
       require_once('elements/footer.php');
