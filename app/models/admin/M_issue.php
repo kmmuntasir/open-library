@@ -6,7 +6,7 @@ class M_issue extends Ci_model {
 
     public function all_issues() {
         $now = date('Y-m-d H:i:s');
-        $selection = 'issue_id, user.user_id, user.user_name, user.is_teacher, book.book_id, issue_book_copy_accession_no, book.book_title, issue_datetime, issue_auto_expire_datetime, issue_deadline, issue_return_datetime, issue_total_fine, issue_status';
+        $selection = 'issue_id, user.user_id, user.user_name, user.user_dept, user.user_roll, user.is_teacher, book.book_id, issue_book_copy_accession_no, book.book_title, issue_datetime, issue_auto_expire_datetime, issue_deadline, issue_return_datetime, issue_total_fine, issue_status';
         $this->db->select($selection);
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
         //return $this->db->where('issue_auto_expire_datetime >', $now)->or_where('issue_status !=', 8)->get('issue')->result();
@@ -39,7 +39,7 @@ class M_issue extends Ci_model {
 
     public function all_issue_requests() {
         $now = date('Y-m-d H:i:s');
-        $selection = 'issue_id, user.user_id, user.user_name, user.is_teacher, book.book_id, book.book_title, issue_datetime, issue_auto_expire_datetime, issue_id as ID, issue_status';
+        $selection = 'issue_id, user.user_id, user.user_name, user.user_dept, user.user_roll, user.is_teacher, book.book_id, book.book_title, issue_datetime, issue_auto_expire_datetime, issue_id as ID, issue_status';
         $this->db->select($selection);
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
         $this->db->group_start()->where('issue_auto_expire_datetime >', $now)->where('issue_status', 0)->group_end();
@@ -49,7 +49,7 @@ class M_issue extends Ci_model {
 
     public function all_active_issues() {
         $now = date('Y-m-d H:i:s');
-        $selection = 'issue_id, user.user_id, user.user_name, user.is_teacher, book.book_id, issue_book_copy_accession_no, book.book_title, issue_datetime, issue_deadline, issue_id as ID, issue_status';
+        $selection = 'issue_id, user.user_id, user.user_name, user.user_dept, user.user_roll, user.is_teacher, book.book_id, issue_book_copy_accession_no, book.book_title, issue_datetime, issue_deadline, issue_id as ID, issue_status';
         $this->db->select($selection);
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
         return $this->db->where('issue_deadline >', $now)->where('issue_status', 1)->get('issue')->result();
@@ -67,7 +67,7 @@ class M_issue extends Ci_model {
     }
 
     public function all_completed_issues() {
-        $selection = 'issue_id, user.user_id, user.user_name, user.is_teacher, book.book_id, issue_book_copy_accession_no, book.book_title, issue_datetime, issue_return_datetime, issue_id as ID, issue_status';
+        $selection = 'issue_id, user.user_id, user.user_name, user.user_dept, user.user_roll, user.is_teacher, book.book_id, issue_book_copy_accession_no, book.book_title, issue_datetime, issue_return_datetime, issue_id as ID, issue_status';
         $this->db->select($selection);
         $this->db->join('user', 'user.user_id = issue.user_id')->join('book', 'book.book_id = issue.issue_book_id');
         return $this->db->where('issue_status', 3)->get('issue')->result();

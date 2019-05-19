@@ -246,14 +246,14 @@ function post_process_issue_requests_table() {
 			if(user != null) {
 				var user_json = $.parseJSON(user);
 				//console.log(user_json);
-				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+ ' (' + user_json[3] + '-' + user_json[4] + ')</a>';;
 				$(this).children('td:nth-child(2)').html(user);
 			}
 			var book = $(this).children('td:nth-child(3)').html();
 			if(book != null) {
 				var book_json = $.parseJSON(book);
 				//console.log(book_json);
-				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') '+book_json[1]+'</a>';
+				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">'+book_json[1]+'</a>';
 				$(this).children('td:nth-child(3)').html(book);
 			}
 
@@ -283,14 +283,14 @@ function post_process_active_issues_table() {
 			if(user != null) {
 				var user_json = $.parseJSON(user);
 				//console.log(user_json);
-				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+ ' (' + user_json[3] + '-' + user_json[4] + ')</a>';;
 				$(this).children('td:nth-child(2)').html(user);
 			}
 			var book = $(this).children('td:nth-child(3)').html();
 			if(book != null) {
 				var book_json = $.parseJSON(book);
 				//console.log(book_json);
-				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">('+book_json[2]+') '+book_json[1]+'</a>';
 				$(this).children('td:nth-child(3)').html(book);
 			}
 
@@ -316,14 +316,14 @@ function post_process_overdue_issues_table() {
 			if(user != null) {
 				var user_json = $.parseJSON(user);
 				//console.log(user_json);
-				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+ ' (' + user_json[3] + '-' + user_json[4] + ')</a>';;
 				$(this).children('td:nth-child(2)').html(user);
 			}
 			var book = $(this).children('td:nth-child(3)').html();
 			if(book != null) {
 				var book_json = $.parseJSON(book);
 				//console.log(book_json);
-				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">('+book_json[2]+') '+book_json[1]+'</a>';
 				$(this).children('td:nth-child(3)').html(book);
 			}
 
@@ -348,14 +348,14 @@ function post_process_completed_issues_table() {
 			if(user != null) {
 				var user_json = $.parseJSON(user);
 				//console.log(user_json);
-				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+ ' (' + user_json[3] + '-' + user_json[4] + ')</a>';;
 				$(this).children('td:nth-child(2)').html(user);
 			}
 			var book = $(this).children('td:nth-child(3)').html();
 			if(book != null) {
 				var book_json = $.parseJSON(book);
 				//console.log(book_json);
-				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">('+book_json[2]+') '+book_json[1]+'</a>';
 				$(this).children('td:nth-child(3)').html(book);
 			}
 
@@ -402,14 +402,14 @@ function post_process_all_issues_table() {
 			if(user != null) {
 				var user_json = $.parseJSON(user);
 				//console.log(user_json);
-				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+'</a>';;
+				user = '<span class="btn btn-xs btn-'+user_type_class[user_json[2]]+'">'+user_type[user_json[2]]+'</span> <a title="View Issue History for this User" href="'+site_url+'admin/issue/issue_by_user/'+user_json[0]+'">'+user_json[1]+ ' (' + user_json[3] + '-' + user_json[4] + ')</a>';;
 				$(this).children('td:nth-child(2)').html(user);
 			}
 			var book = $(this).children('td:nth-child(3)').html();
 			if(book != null) {
 				var book_json = $.parseJSON(book);
 				//console.log(book_json);
-				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">(#'+book_json[0]+') ('+book_json[2]+') '+book_json[1]+'</a>';
+				book = '<a href="'+site_url+'admin/issue/issue_by_book/'+book_json[0]+'" title="View History for this Book">('+book_json[2]+') '+book_json[1]+'</a>';
 				$(this).children('td:nth-child(3)').html(book);
 			}
 

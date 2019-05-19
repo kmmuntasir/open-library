@@ -69,7 +69,14 @@ class Issue extends Base_Controller {
                 $json_data['data'][$i] = array();
                 
                 array_push($json_data['data'][$i], $issue->issue_id);
-                if($data_page != 'issue_by_user') array_push($json_data['data'][$i], json_encode(array($issue->user_id, $issue->user_name, $issue->is_teacher)));
+
+
+                if($data_page != 'issue_by_user') {
+                    if($issue->is_teacher) array_push($json_data['data'][$i], json_encode(array($issue->user_id, $issue->user_name, $issue->is_teacher)));
+                    else array_push($json_data['data'][$i], json_encode(array($issue->user_id, $issue->user_name, $issue->is_teacher, $issue->user_dept, $issue->user_roll)));
+                }
+
+
                 if($data_page == 'request')
                     array_push($json_data['data'][$i], json_encode(array($issue->book_id, $issue->book_title)));
                 if($data_page == 'active' || $data_page == 'overdue' || $data_page == 'completed' || $data_page == 'all_issues' || $data_page == 'issue_by_user')
