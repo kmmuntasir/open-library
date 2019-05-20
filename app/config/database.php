@@ -119,9 +119,9 @@ $db['development']['save_queries'] = TRUE;
 
 $db['testing']['dsn'] = '';
 $db['testing']['hostname'] = 'localhost';
-$db['testing']['username'] = '';
+$db['testing']['username'] = 'root';
 $db['testing']['password'] = '';
-$db['testing']['database'] = '';
+$db['testing']['database'] = 'istedubd_library_online';
 $db['testing']['dbdriver'] = 'mysqli';
 $db['testing']['dbprefix'] = '';
 $db['testing']['pconnect'] = FALSE;
