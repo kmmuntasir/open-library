@@ -14,8 +14,8 @@ class Dashboard extends Base_Controller {
 
 	function __construct()
     {
-        parent::__construct();
 
+        parent::__construct();
         $this->__security($this->module);
 
         $this->load->model($this->module."/m_admin"); // Loading Model
@@ -33,7 +33,6 @@ class Dashboard extends Base_Controller {
     //====================================//
 
 	public function index() {
-            // $this->printer($_SESSION, true);
 		$data = $this->data;
         $data['page'] = 'dashboard';
     	$data['page_title'] .= 'Dashboard';

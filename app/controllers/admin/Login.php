@@ -25,9 +25,7 @@ class Login extends Base_Controller {
     }
     //====================================//
 
-    public function index()
-    {
-
+    public function index() {
     	if(!isset($_GET['url'])) $url = $this->module.'/dashboard';
   		else $url = $_GET['url'];
 

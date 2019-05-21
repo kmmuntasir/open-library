@@ -11,6 +11,8 @@ class Base_Controller extends CI_Controller
 
         // Setting Timezone
         date_default_timezone_set("Asia/Dhaka");
+        // loading libraries
+        $this->load->library('session');
 
         // loading models (If necessary)
         $this->load->model("admin/m_admin");
@@ -19,8 +21,6 @@ class Base_Controller extends CI_Controller
         // Setting Branch Prefix 'm' for local server, 's' for remote server.
         $_SESSION['branch_prefix'] = $this->settings->application_role ? 's':'m';
 
-        // loading libraries
-        $this->load->library('session');
 	 }
 
      public function __download($file_absolute_path=NULL) {
