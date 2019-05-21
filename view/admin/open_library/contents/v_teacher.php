@@ -99,6 +99,7 @@
 	      		<option id="CSE" value="CSE">CSE</option>
 	      		<option id="ECE" value="ECE">ECE</option>
 	      		<option id="BBA" value="BBA">BBA</option>
+            <option value="Diploma">Diploma</option>
 	      		<option id="CT" value="CT">CT</option>
 	      		<option id="ET" value="ET">ET</option>
 	      		<option id="CMT" value="CMT">CMT</option>
