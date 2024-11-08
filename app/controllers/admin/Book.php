@@ -102,6 +102,17 @@ class Book extends Base_Controller {
         echo $this->book_to_datatable($books, 1, 1);
     }
 
+    public function print_by_category($category_id=NULL) {
+        if(NULL == $category_id) $this->redirect_msg('admin/book', 'Invalid Category ID', 'danger');
+        $data = $this->data;
+        $data['page'] = 'books';
+        $data['page_title'] .= 'Books by Category';
+        $data['books'] = $this->m_book->all_books_by_category_list($category_id);
+        $data['category'] = $this->m_category->get_single_category($category_id);
+//         $this->printer($data, true);
+        $this->load->view($this->viewpath.'v_print_by_category', $data);
+    }
+
 
     public function book_by_filter($filter=NULL, $id=NULL) {
         if(!($filter && $id)) $this->redirect_msg('admin/book', 'No Filter Selected', 'danger');
@@ -127,7 +138,8 @@ class Book extends Base_Controller {
         $data['publications'] = $this->m_publication->all_publications();
         $data['content'] = 'v_books.php';
         $data['source'] = $this->data['controller'].'/book_by_filter_json/'.$filter.'/'.$id;
-        //$this->printer($data['books'], true);
+        $data['category_id'] = $id;
+//        $this->printer($data, true);
         $this->load->view($this->viewpath.'v_main', $data);
     }
 

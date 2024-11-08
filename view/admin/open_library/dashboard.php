@@ -43,6 +43,11 @@
 
           <?php if($page == 'books') { ?>
 
+
+            <?php if('Books by Category' == $page_title) { ?>
+                    <a target="_blank" href="<?php echo site_url($module.'/book/print_by_category/'.$category_id); ?>" style="margin-left: 5px;" class="btn btn-default btn-md pull-right"><i class="fa fa-list"></i> Print Report By Category</a>
+            <?php } ?>
+
             <a href="<?php echo site_url($module.'/book/deleted_books'); ?>" style="margin-left: 5px;" class="btn btn-warning btn-md pull-right"><i class="fa fa-book"></i> Deleted Books</a>
 
             <a href="<?php echo site_url($module.'/book/accession_list'); ?>" style="margin-left: 5px;" class="btn btn-default btn-md pull-right"><i class="fa fa-list"></i> Accession List</a>

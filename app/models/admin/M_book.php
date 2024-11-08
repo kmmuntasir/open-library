@@ -96,6 +96,46 @@ class M_book extends Ci_model {
         return $this->db->get('book')->result();
     }
 
+    public function all_books_by_category_list($category_id) {
+        $query = "SELECT
+    `ac_no`,
+    `book_title`,
+    GROUP_CONCAT(DISTINCT author_name SEPARATOR ', ') AS author_name,
+    `book_edition`,
+    `publication_name`,
+             `book_year_of_pub`,
+             `book_place_of_pub`,
+    IF(`book_copy_type`=0, 'Reference', '') as copy_type,
+             `book_pages`,
+             `book_stock`
+FROM (
+         SELECT
+             CAST(SUBSTR(book_copy_accession_no, 2) AS UNSIGNED ) AS ac_no,
+             `book_copy_date`,
+             `book_title`,
+             `book_edition`,
+             `publication_name`,
+             `book_copy_type`,
+             `author_name`,
+             `category_id`,
+             `book_year_of_pub`,
+             `book_place_of_pub`,
+             `book_pages`,
+             `book_stock`,
+             `book_available`
+         FROM `book_copy`
+                  JOIN `book` ON `book`.`book_id` = `book_copy`.`book_id`
+                  JOIN `publication` ON `book`.`publication_id` = `publication`.`publication_id`
+                  JOIN `book_author` ON `book`.`book_id` = `book_author`.`book_id`
+                  JOIN `author` ON `book_author`.`author_id` = `author`.`author_id`
+                  JOIN `book_category` ON `book_category`.`book_id` = `book_copy`.`book_id`
+         WHERE book_copy_is_deleted=0 && category_id='$category_id'
+) AS temp_table
+GROUP BY `ac_no`
+ORDER BY `ac_no` ASC;";
+        return $this->db->query($query)->result();
+    }
+
     public function all_books_by_category($category_id) {
         $this->db->join('book_category', 'book_category.category_id = category.category_id');
         $this->db->join('book', 'book_category.book_id = book.book_id');

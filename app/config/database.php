@@ -97,10 +97,9 @@ $db['production']['failover'] = array();
 $db['production']['save_queries'] = TRUE;
 
 $db['development']['dsn'] = '';
-$db['development']['hostname'] = 'localhost';
+$db['development']['hostname'] = 'mariadb';
 $db['development']['username'] = 'root';
-$db['development']['password'] = '';
-$db['development']['password'] = '';
+$db['development']['password'] = 'root';
 $db['development']['database'] = 'istedubd_library';
 $db['development']['dbdriver'] = 'mysqli';
 $db['development']['dbprefix'] = '';
